@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Primeros pasos con R y RStudio | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 2 Primeros pasos con R y RStudio | Notas Curso Básico R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Primeros pasos con R y RStudio | Notas Curso Básico R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Primeros pasos con R y RStudio | Notas Curso Básico R" />
+  
+  
+  
+
+<meta name="author" content="Tobías Chavarría" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="objetos-en-r-.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso Básico en R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Primeros pasos con R y RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#instalación"><i class="fa fa-check"></i><b>2.1</b> <strong>Instalación</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#r"><i class="fa fa-check"></i><b>2.1.1</b> <strong>R</strong></a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> <strong>RStudio</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno-de-trabajo-de-rstudio."><i class="fa fa-check"></i><b>2.2</b> <strong>Entorno de trabajo de RStudio.</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#consola-de-r"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Consola de R</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#ayuda-en-r"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Ayuda en R</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#nombres-en-r"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Nombres en R</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts-de-r"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Scripts de R</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Entorno</strong></a></li>
+<li class="chapter" data-level="2.2.6" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.2.6</b> <strong>Directorio de trabajo</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#paquetes"><i class="fa fa-check"></i><b>2.3</b> <strong>Paquetes</strong></a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.4</b> <strong>Scripts</strong></a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#shortcuts"><i class="fa fa-check"></i><b>2.5</b> <strong>Shortcuts</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objetos-en-r-.html"><a href="objetos-en-r-.html"><i class="fa fa-check"></i><b>3</b> <strong>Objetos en R.</strong></a></li>
+<li class="chapter" data-level="4" data-path="operadores.html"><a href="operadores.html"><i class="fa fa-check"></i><b>4</b> <strong>Operadores</strong></a></li>
+<li class="chapter" data-level="5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html"><i class="fa fa-check"></i><b>5</b> <strong>Estructuras de datos.</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#vectores"><i class="fa fa-check"></i><b>5.1</b> <strong>Vectores</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#coerción"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Coerción</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#listas"><i class="fa fa-check"></i><b>5.2</b> <strong>Listas</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#matrices"><i class="fa fa-check"></i><b>5.3</b> <strong>Matrices</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#factores"><i class="fa fa-check"></i><b>5.4</b> <strong>Factores</strong></a></li>
+<li class="chapter" data-level="5.5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#data-frames"><i class="fa fa-check"></i><b>5.5</b> <strong>Data Frames</strong></a></li>
+<li class="chapter" data-level="5.6" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#valores-ausentes"><i class="fa fa-check"></i><b>5.6</b> <strong>Valores ausentes</strong></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas Curso Básico R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="primeros-pasos-con-r-y-rstudio" class="section level1" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> <strong>Primeros pasos con R y RStudio</strong></h1>
+<p>R es un entorno y lenguaje de programación con un enfoque al análisis estadístico</p>
+<p>RStudio es un IDE por sus siglas en ingles Integrated Development Environment o Entorno De Desarrollo Integrado que facilita la interacción con el lenguaje de programación R y los procesos de carga de datos, instalación y administración de paquetes, exportación de gráficos y administración de archivos, entre otros.</p>
+<p>El objetivo de este capítulo es conocer el entorno de trabajo que proporciona R y RStudio, además de aprender a instalar y cargar los paquetes que se necesiten para realizar análisis de datos.</p>
+<div id="instalación" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> <strong>Instalación</strong></h2>
+<div id="r" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> <strong>R</strong></h3>
+<p>Para instalar R en Windows, la forma más simple es descargar la versión más reciente de R base desde el siguiente enlace de CRAN:</p>
+<p><a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a></p>
+<p>El archivo que necesitamos tiene la extensión <strong>.exe</strong> (por ejemplo 4.0.2-win.exe). Una vez descargado, lo ejecutamos como cualquier instalable.</p>
+<p>Después de la instalación, estamos listos para usar R.</p>
+</div>
+<div id="rstudio" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> <strong>RStudio</strong></h3>
+<p>Para instalar RStudio, es necesario descargar y ejecutar alguno de los instaladores disponibles en su sitio oficial. Están disponibles versiones para Windows, OSX y Linux.</p>
+<p><a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></p>
+<p>Si ya hemos instalado R en nuestro equipo, RStudio lo detectará automáticamente y podremos utilizarlo desde este entorno. Si no instalamos RStudio antes que R, no hay problema, cada vez que iniciamos este programa, verificará la instalación de R.</p>
+</div>
+</div>
+<div id="entorno-de-trabajo-de-rstudio." class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> <strong>Entorno de trabajo de RStudio.</strong></h2>
+<p>En general se trabaja con la interfaz de RStudio antes que con la de R porque la primera es mucho “más amigable.”</p>
+<p>Al abrir RStudio veremos algo como esto:</p>
+<p><img src="images/entornoRStudio.PNG" width="100%" style="display: block; margin: auto;" /></p>
+<p>Una vez estamos en RStudio, podemos escribir y ejecutar las órdenes de varias formas:</p>
+<ul>
+<li>Directamente en la consola</li>
+<li>A través de un script (.R)</li>
+<li>Con ficheros Rmarkdown (.Rmd)</li>
+</ul>
+<div id="consola-de-r" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> <strong>Consola de R</strong></h3>
+<p>La consola de RStudio nos permite interactuar con los comandos de R, es decir, ingresamos una instrucción en la consola y esta retornará el resultado de la ejecución de ese comando, aunque esta es una herramienta muy útil no es la mejor opción cuando nuestro código gana complejidad.</p>
+<p>En la consola escribimos <strong>expresiones</strong>, el símbolo “&lt;-” es el operador de asignación, aunque también se puede utilizar el símbolo “=.”</p>
+<p><strong>Asignación de valores.</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span>  <span class="co"># Asignamos el valor 1 a la variable x</span></span>
+<span id="cb1-2"><a href="primeros-pasos-con-r-y-rstudio.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="primeros-pasos-con-r-y-rstudio.html#cb1-3" aria-hidden="true" tabindex="-1"></a>texto <span class="ot">&lt;-</span> <span class="st">&quot;Bienvenidos&quot;</span>  <span class="co"># Asignamos el valor &quot;Bienvenidos&quot; a la variable texto</span></span></code></pre></div>
+<p>En R el símbolo “#” indica que es un comentario, cualquier cosa que esté a su derecha (incluido el “#”) será ignorado a la hora de ejecutar el código. Este es el único símbolo para hacer comentarios en R y además cabe mencionar que R no soporta comentarios en bloques o multilíneas.</p>
+<p><strong>Evaluación.</strong></p>
+<p>Cuando escribimos una expresión en la consola, podemos imprimir su valor sin una orden explícita.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">13</span> <span class="co"># No imprime nada, solo asigna el valor</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="co"># Se imprime el valor</span></span></code></pre></div>
+<pre><code>## [1] 13</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x) <span class="co"># Orden explicita</span></span></code></pre></div>
+<pre><code>## [1] 13</code></pre>
+</div>
+<div id="ayuda-en-r" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> <strong>Ayuda en R</strong></h3>
+<p>Al comenzar a trabajar con R necesitaremos información sobre cada instrucción,
+función y paquete. Toda la documentación se encuentra integrada en RStudio, para accesar a esta información podemos usar la función <strong>help()</strong> o el signo de interrogación <strong>?</strong>, de la siguiente manera</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;funcion&quot;</span>)</span>
+<span id="cb7-2"><a href="primeros-pasos-con-r-y-rstudio.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="primeros-pasos-con-r-y-rstudio.html#cb7-3" aria-hidden="true" tabindex="-1"></a>?funcion</span>
+<span id="cb7-4"><a href="primeros-pasos-con-r-y-rstudio.html#cb7-4" aria-hidden="true" tabindex="-1"></a>??nombre_paquete</span></code></pre></div>
+<p>Al ejecutar estas instrucciones la información aparece en la pestaña de <strong>help</strong>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;read.table&quot;</span>)</span>
+<span id="cb8-2"><a href="primeros-pasos-con-r-y-rstudio.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="primeros-pasos-con-r-y-rstudio.html#cb8-3" aria-hidden="true" tabindex="-1"></a>?read.table</span></code></pre></div>
+</div>
+<div id="nombres-en-r" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> <strong>Nombres en R</strong></h3>
+<p>Al igual que la documentación de nuestro código, es importante el nombre que le demos a nuestros objetos (variables, funciones). En <strong>R</strong> los nombres de los objetos deben comenzar con una letra y solo pueden contener letras, números y los signos : "<em>" , “.” Es bueno que los nombres sean descriptivos, es necesario adoptar una convención, la más común es la del guión bajo (snake_case) en la que los nombres se escriben en minúscula y separados por </em> .</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb9-1" aria-hidden="true" tabindex="-1"></a>yo_uso_guion_bajo  <span class="do">## snake_case</span></span>
+<span id="cb9-2"><a href="primeros-pasos-con-r-y-rstudio.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="primeros-pasos-con-r-y-rstudio.html#cb9-3" aria-hidden="true" tabindex="-1"></a>OtraGenteUsaMayusculas</span>
+<span id="cb9-4"><a href="primeros-pasos-con-r-y-rstudio.html#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="primeros-pasos-con-r-y-rstudio.html#cb9-5" aria-hidden="true" tabindex="-1"></a>algunas.personas.usan.puntos <span class="do">## Esto es peculiar de R, ya que en otros lenguajes el punto no se acepta en los nombres</span></span>
+<span id="cb9-6"><a href="primeros-pasos-con-r-y-rstudio.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## ya que tiene otras funciones</span></span>
+<span id="cb9-7"><a href="primeros-pasos-con-r-y-rstudio.html#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="primeros-pasos-con-r-y-rstudio.html#cb9-8" aria-hidden="true" tabindex="-1"></a>Y_algunasPocas.Personas_RENIEGANdelasconvenciones</span></code></pre></div>
+<p>Generalmente las variables son sustantivos y el nombre de las funciones verbos, se debe procurar que los nombres sean concisos y con significado.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Correcto</span></span>
+<span id="cb10-2"><a href="primeros-pasos-con-r-y-rstudio.html#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="primeros-pasos-con-r-y-rstudio.html#cb10-3" aria-hidden="true" tabindex="-1"></a>dia_uno <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb10-4"><a href="primeros-pasos-con-r-y-rstudio.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="primeros-pasos-con-r-y-rstudio.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Incorrecto</span></span>
+<span id="cb10-6"><a href="primeros-pasos-con-r-y-rstudio.html#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="primeros-pasos-con-r-y-rstudio.html#cb10-7" aria-hidden="true" tabindex="-1"></a>primer_dia_del_mes <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div>
+<p>También se debe evitar utilizar nombres de funciones o variables comunes, esto causa confusión al leer el código.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Incorrecto</span></span>
+<span id="cb11-2"><a href="primeros-pasos-con-r-y-rstudio.html#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="primeros-pasos-con-r-y-rstudio.html#cb11-3" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb11-4"><a href="primeros-pasos-con-r-y-rstudio.html#cb11-4" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb11-5"><a href="primeros-pasos-con-r-y-rstudio.html#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="primeros-pasos-con-r-y-rstudio.html#cb11-6" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb11-7"><a href="primeros-pasos-con-r-y-rstudio.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(x)</span>
+<span id="cb11-8"><a href="primeros-pasos-con-r-y-rstudio.html#cb11-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Existen muchas otras buenas prácticas a la hora de escribir código en <strong>R</strong>, el siguiente link contiene una guía del estilo <em>tidyverse</em>.</p>
+<p><a href="https://style.tidyverse.org/index.html" class="uri">https://style.tidyverse.org/index.html</a></p>
+</div>
+<div id="scripts-de-r" class="section level3" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> <strong>Scripts de R</strong></h3>
+<p>Trabajar en la consola es muy limitado ya que las instrucciones se tienen que escribir una por una. Lo habitual es trabajar con scripts o ficheros de instrucciones. Estos ficheros tienen extensión <strong>.R</strong>.</p>
+<p>Se puede crear una script con cualquier editor de texto, pero nosotros lo haremos desde RStudio. Para hacer esto, seleccionamos la siguiente ruta de menús: File &gt; New File &gt; R script</p>
+<p><img src="images/script.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="entorno" class="section level3" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> <strong>Entorno</strong></h3>
+<p>El panel de entorno esta compuesto de dos pestañas: Environment y History.</p>
+<p>En el entorno se irán registrando los objetos que vayamos creando en la sesión de trabajo: datos, variables, funciones. También tenemos la opción de cargar y guardar una sesión de trabajo, importar datos y limpiar los objetos de la sesión. Estas opciones están accesibles a través de las de opciones de la pestaña.</p>
+<p><img src="images/entorno.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="directorio-de-trabajo" class="section level3" number="2.2.6">
+<h3><span class="header-section-number">2.2.6</span> <strong>Directorio de trabajo</strong></h3>
+<p>El directorio o carpeta de trabajo es el lugar en la computadora en el que se encuentran los archivos con los que se van a trabajar en R. Este es el lugar donde R buscara archivos para importarlos y al que serán exportados, a menos que indiquemos otra cosa.</p>
+<p>Para encontrar cuál es el directorio de trabajo actual se utiliza la función <strong>getwd()</strong>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;/Users/tchavarria/Documents/GitHub/curso-programacion-basico-r-bn&quot;</code></pre>
+<p>Se mostrará en la consola la ruta del directorio que está usando R.</p>
+<p>Se puede cambiar el directorio de trabajo usando la función setwd(), dando como argumento la ruta del directorio que se desea utilizar.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;otra_ruta&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="paquetes" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> <strong>Paquetes</strong></h2>
+<p>Cada paquete es una colección de funciones diseñadas para atender una tarea específica. Por ejemplo, hay paquetes para trabajo visualización, conexiones a bases de datos, minería de datos, interacción con servicios de internet, entre otros.</p>
+<p>Estos paquetes se encuentran alojados en CRAN, así que pasan por un control riguroso antes de estar disponibles para su uso generalizado.</p>
+<p>Se pueden instalar paquetes usando la función <strong>install.packages()</strong>, dando como argumento el nombre del paquete que deseamos instalar, entre comillas.</p>
+<p>Por ejemplo, para instalar el paquete <strong>dplyr</strong>, ejecutamos lo siguiente.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>) <span class="do">## En general se escribe  install.packages(&quot;nombre_paquete&quot;)</span></span></code></pre></div>
+<p>Después de ejecutar esa instrucción, aparecerán algunos mensajes en la consola mostrando el avance de la instalación</p>
+<p>Una vez concluida la instalación de un paquete, para poder utilizar sus funciones debemos ejecutar la función <strong>library()</strong> con el nombre del paquete que se quiere utilizar.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)   <span class="do">## En general se escribe  library(&quot;nombre_paquete&quot;)</span></span></code></pre></div>
+</div>
+<div id="scripts" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> <strong>Scripts</strong></h2>
+<p>Los scripts son documentos de texto con la extensión de archivo .R, por ejemplo mi_script.R.</p>
+<p>Estos archivos son iguales a cualquier documentos de texto, pero R los puede leer y ejecutar el código que contienen.</p>
+<p>Aunque R permite el uso interactivo, es recomendable guardar el código en un archivo .R, de esta manera se puede utilizar después y compartirlo con otras personas. En general, en proyectos complejos, es posible que sean necesarios múltiples scripts para distintos fines.</p>
+<p>Se pueden abrir y ejecutar scripts en R usando la función <strong>source()</strong>, esta recibe como argumento la ruta del archivo .R en nuestra computadora, entre comillas.</p>
+<p>Por ejemplo.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="primeros-pasos-con-r-y-rstudio.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;C:/Proyecto/limpiezaDatos.R&quot;</span>)</span></code></pre></div>
+<p>Cuando usamos RStudio y abrimos un script con extensión .R, este programa abre un panel en el que se puede ver su contenido. De este modo se puede ejecutar todo el código que contiene o sólo partes de él.</p>
+</div>
+<div id="shortcuts" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> <strong>Shortcuts</strong></h2>
+<ul>
+<li>Borrar toda la consola: CTRL + L.</li>
+<li>Ejecutar una línea o lo que se seleccione: CTRL+R</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="objetos-en-r-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r-bn/edit/master/01-primeros-pasos-con-R-y-RStudio.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r-bn/blob/master/01-primeros-pasos-con-R-y-RStudio.Rmd",
+"text": null
+},
+"download": ["Notas-Curso-Basico-R.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

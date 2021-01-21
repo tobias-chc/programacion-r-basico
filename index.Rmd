@@ -1,0 +1,30 @@
+--- 
+title: "Notas Curso Básico R"
+author: "Tobías Chavarría"
+date: "Actualizado el `r format(Sys.time(), '%d %b, %Y')`"
+site: bookdown::bookdown_site
+documentclass: book
+fontsize: 12pt
+monofont: "Source Code Pro"
+colorlinks: true
+bibliography: [bibliografia.bib]
+biblio-style: authoryear
+biblatexoptions: [url=false, doi=false, eprint=false, isbn=false]
+link-citations: yes
+# description: Este documento contiene las bases del lenguaje de programación **R**
+#   para poder empezar a realizar  análisis de datos, se va a iniciar con la instalación
+#   y las configuraciones básicas, y luego avanzaremos a los principios básicos del
+#   lenguaje y las herramientas necesarias que nos permitan realizar un análisis exploratorio
+#   de un conjunto de datos, construir funciones básicas y realizar visualizaciones.
+---
+
+# Introducción
+
+Este documento contiene las bases del lenguaje de programación **R** para poder
+empezar a realizar  análisis de datos, se va a iniciar con la instalación y las
+configuraciones básicas, y luego avanzaremos a los principios básicos del
+lenguaje y las herramientas necesarias que nos permitan realizar un análisis
+exploratorio de un conjunto de datos, construir funciones básicas y realizar visualizaciones.
+
+
+

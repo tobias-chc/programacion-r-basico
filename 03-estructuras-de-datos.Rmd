@@ -1,0 +1,327 @@
+
+# **Estructuras de datos.**
+
+Las estructuras de datos básicas de R se pueden agrupar por su dimensionalidad y según si son homogéneas (todos los elementos son del mismo tipo) o heterogéneas (hay elementos de distintos tipos). En el siguiente cuadro se resumen estas:
+
+|Dimensión |Homogéneas |Heterogéneas |
+|------:|-----:|:---------|
+| 1d | Vector | Lista | 
+| 2d | Matriz | Data Frame | 
+
+
+
+## **Vectores**
+
+Los vectores en R son fundamentales ya que, es una de las estructuras de datos más utilizada, la propiedad más importante de los vectores, es que **solo pueden contener objetos de la misma clase**.
+
+Vectores vacíos pueden crearse con la función **vector()**, por ejemplo:
+
+```{r notas-curso-20}
+vector("numeric", length = 10) ## Tiene los parámetros clase y longitud.
+
+vector("character", 3)
+```
+
+Sin embargo, la forma más común para crear vectores es utilizando la función **c()** que hace referencia a la palabra concatenar.
+
+```{r notas-curso-21}
+
+vector.numerico <- c(1,2,3.5)   ## numeric
+
+vector.logical <- c(TRUE,FALSE,T,T,F) ## logical
+
+vector.char <- c("Azul","Blanco","Verde") ##character
+
+vector.entero <- 1:13   ##integer
+
+```
+
+```{r notas-curso-22}
+vector.numerico
+vector.logical
+vector.char
+vector.entero 
+```
+### **Coerción**
+
+Como dijimos anteriormente los vectores solo contienen una misma clase de datos, sin embargo, cuando mezclamos diferentes clases ocurre automáticamente un proceso que se llama **coerción**, esto básicamente transforma todos los elementos del vector a una misma clase.
+
+```{r notas-curso-23}
+vector.prueba1 <- c(1.3, "Diego") #character
+vector.prueba1
+
+```
+
+```{r notas-curso-24}
+vector.prueba2 <- c(TRUE, 13,FALSE) #numeric  #TRUE =1 , # FALSE =0
+vector.prueba2 
+```
+
+Una función muy útil es **length** ya que nos devuelve el tamaño de nuestro vector.
+
+```{r notas-curso-25}
+
+length(vector.prueba2)
+
+```
+
+**Reglas de coerción**:
+
+- Valores lógicos se convierten en numéricos: TRUE = 1, FALSE=0.
+- El orden de coerción es el siguiente:
+
+    - logical -> integer -> numeric -> character
+
+Es decir todos los elementos del vector se van a transformar a la clase correspondiente siguiendo el orden anterior.
+
+
+```{r notas-curso-26}
+vector.prueba3 <- c(12,TRUE,"Azul")
+
+vector.prueba3
+```
+
+Esto es lo que hace R de forma automática, sin embargo, podemos realizar la coerción de forma explícita utilizando la función **as.***
+
+```{r notas-curso-27}
+# Vector numerico 0,1,2,3,4,5.
+x <- 0:5
+# Se transforma a clase logical
+as.logical(x) # 0 es FALSE, y cualquier otro número es TRUE.
+# Se transforma a clase character
+as.character(x)
+
+```
+
+```{r notas-curso-28}
+x <- as.character(x)
+x
+```
+Al hacer la coerción de forma explícita es común obtener el siguiente warning:
+
+"Nas introduced by coercion"
+
+Esto significa que dentro del vector hay valores que no tiene sentido convertirlos a la clase que queremos, por ejemplo, convertir 
+
+```{r notas-curso-29}
+y <- c("A","B","C")
+as.numeric(y)
+```
+
+
+Tal vez en el ejemplo anterior no tiene mucho sentido, sin embargo puede pasar que haya una variable que debería contener solo números, pero aparece una letra por error.
+```{r notas-curso-30}
+y <- c(1:3,"A",5:7)
+y
+as.numeric(y)
+```
+
+## **Listas**
+
+Las listas son un tipo especial de vectores, cuya principal diferencia es que puede contener diferentes clases de elementos, básicamente es un vector, cuyas entradas son vectores, lo podemos crear con la función **list()**, por ejemplo
+
+```{r notas-curso-31}
+lista1 <- list(1,"A",TRUE) #integer, character, logical
+lista1
+```
+
+
+```{r notas-curso-32}
+lista2 <- list(c(100,200,300),c("A","B","C"),c(T,F,T)) #numeric, character, logical
+lista2
+```
+Como vemos nuestra lista esta conformada por tres vectores, y cada uno de estos son de clases distintas. Cuando creamos listas lo más común es nombrar cada uno de los vectores para luego poder extraer esos datos con el signo "$".
+
+```{r notas-curso-33}
+lista_clientes <- list(saldo = runif(3, min=1000, max=2000), nombres = c("Juan","Luis","Carlos"), tarjeta.credito = c(T,T,F) )
+lista_clientes
+
+# runif(cantidad, min, max) genera números aleatorios.
+```
+
+```{r notas-curso-34}
+lista_clientes$saldo
+```
+
+Otro ejemplo:
+
+
+```{r notas-curso-35}
+datos.lucas <- list(Nombre= "Lucas", Edad = 33, Tarjeta.Credito = FALSE)
+
+datos.lucas
+```
+Una ventaja del objeto lista es que podemos accesar a cada uno de sus argumentos mediante el símbolo "$", por ejemplo si quisieramos ver su Edad y luego si posee tarjeta de crédito o no, podemos escribir
+
+```{r notas-curso-36}
+datos.lucas$Edad
+```
+
+```{r notas-curso-37}
+datos.lucas$Tarjeta.Credito
+```
+
+## **Matrices**
+
+Las matrices son vectores pero con el atributo de dimensión. Este atributo es un vector de longitud 2 que contiene el número de filas y el número de columnas  (nrow,ncol). Las matrices se crean con la función **matrix**
+
+```{r notas-curso-38}
+
+matriz1 <- matrix(nrow = 2, ncol = 3) #No le doy los valores entonces coloca NA en todas las entradas.
+
+matriz1 
+
+```
+
+Esta función nos devuelve la cantidad de filas y columnas de nuestra matriz.
+```{r notas-curso-39}
+
+dim.matriz <- dim(matriz1)
+
+dim.matriz
+
+```
+
+Es muy común utilizar solo uno de estos valores, estos se pueden obtener mediante la siguiente instrucción.
+
+```{r notas-curso-40}
+
+filas <-  dim.matriz[1]
+columnas <- dim.matriz[2]
+
+filas
+columnas
+
+```
+
+
+
+
+Las matrices se construyen por defecto por columnas, empezando por el valor de la entrada $(1,1)$.
+
+```{r notas-curso-41}
+matriz2 <- matrix(1:9, nrow = 3, ncol = 3)
+matriz2
+```
+Sin embargo se puede cambiar a que se construyan por filas asignando el parámetro **byrow** en TRUE.
+
+```{r notas-curso-42}
+matriz2 <- matrix(1:9, nrow = 3, ncol = 3,byrow = T)
+matriz2
+```
+
+Un par de funciones útiles a la hora de crear matrices o conjuntos de datos son **rbind** y **cbind** que permiten concatenar objetos en forma de filas y columnas respectivamente.
+
+```{r notas-curso-43}
+
+x<- 1:5
+
+y<- 11:15
+
+rbind(x,y)
+
+cbind(x,y)
+
+```
+
+## **Factores**
+
+Esta clase de datos se utiliza para representar datos categóricos. Estos pueden ser ordenados y sin orden. Podemos pensar en los factores como un vector de enteros, donde cada número representa una categoría.
+
+- Los factores tienen un tratamiento especial en las funciones de modelación como lm() y glm(). (Regresiones lineales)
+- Es mejor utilizar factores que utilizar enteros, por ejemplo tener la variable Estado civil, con los valores "Casado", "Soltero" es mejor que utilizar los valores 1 y 2.
+
+La función para crear variables categóricas es **factor()**
+
+```{r notas-curso-44}
+estado.deuda <- factor(c("NORMAL","NORMAL","VENCIDA","COBRO JUDICIAL","VENCIDA"))
+estado.deuda
+```
+Como podemos ver, al imprimir nuestra variable categórica tenemos tres niveles : COBRO JUDICIAL NORMAL VENCIDA. Estos representan las categorías en nuestra variable. R automáticamente hace está asignación por orden alfabético, si queremos definir nosotros el orden, podemos hacerlo utilizando el parámetro **levels**.
+
+```{r notas-curso-45}
+estado.deuda <- factor(c("NORMAL","NORMAL","VENCIDA","COBRO JUDICIAL","VENCIDA"),levels=c("NORMAL", "VENCIDA", "COBRO JUDICIAL"))
+estado.deuda
+```
+Una forma de saber cuantos individuos hay en cada categoría es mediante la función **table()**.
+
+```{r notas-curso-46}
+table(estado.deuda)
+```
+
+## **Data Frames**
+
+Los data frames son la estructura de datos que se utiliza con más frecuencia, es la forma de almacenar datos en forma de tabla.
+
+- Se pueden pensar como un tipo especial de lista donde cada elemento de la lista tienen la misma cantidad de elementos.
+
+- Cada elemento de la lista, son las variables y representan las columnas de la tabla, y la cantidad de elementos el numero de filas (individuos).
+
+- A diferencia de las matrices data frames pueden almacenar distintas clases de datos (como las listas).
+
+- Los data frames tienen los atributos **row.names** y **col.names**.
+
+- Usualmente se crean leyendo datos con las funciones **read.table()** y **read.csv()**, pero también podemos utilizar la función **data.frame()**.
+
+- Se pueden convertir a matrices utilizando la función **data.matrix()** o **as.matrix()**.
+
+
+
+```{r notas-curso-47}
+
+# Creamos las variables de nuestro data frame.
+
+emisor = c("BL","BARCL","CSGF","CVS","DBK","G","NOMUR","USTES","BNSFI")
+
+monto.facial = c(5000000,2500000,10000000,40000000,5000000,40000000,10000000,5600000,50000000)
+
+categoria = c("COSTO AMORTIZADO","COSTO AMORTIZADO","COSTO AMORTIZADO","VR CON CAMBIO EN ORI","COSTO AMORTIZADO","VR CON CAMBIO EN P/G","COSTO AMORTIZADO","COSTO AMORTIZADO","COSTO AMORTIZADO")
+
+calificacion.SP = c("BBB+","AA+","B+","B+","B","B","A+","BB-","BB")
+
+isin = c("US06738EAL92","US225433AH43","US126650CK42","XS2127535131","CRG0000B82H3","US404280BJ78","0NRBNCR00465","US9127962Z13","US9128283G32")
+
+
+# Creamos el data frame.
+
+portafolio <- data.frame(ISIN= isin, Emisor =emisor, Monto.Facial =monto.facial,Categoria_NIIF = categoria, Calificacion=calificacion.SP )
+           
+           
+portafolio
+
+```
+
+
+```{r notas-curso-48}
+dim(portafolio)
+```
+
+
+## **Valores ausentes**
+
+Los valores ausentes se denotan por **NA** (not avaiable) o **NaN**(not a number), las siguientes funciones se utilizan para verificar y encontrar valores ausentes.
+
+1. **is.na()**: Se utiliza para verificar y encontrar los valores **NA** en un objeto.
+2. **is.nan()**: Se utiliza para verificar y encontrar los valores **NaN** en un objeto.
+3. Un valor **NaN** es un **NA** pero la otra dirección no es cierta.
+
+```{r notas-curso-49}
+## Creamos un vector que contenga un NA
+x <- c(1,3,NA,10,3)
+
+## Retorna un vector de la misma longitud de x, con TRUE donde hay un NA y FALSE donde no.
+is.na(x)
+```
+```{r notas-curso-50}
+## Creamos un vector que contenga un NA y NaN.
+x <- c(1,3,NA,10,3,NaN)
+
+## Retorna un vector de la misma longitud de x, con TRUE donde hay un NA y FALSE donde no.
+is.na(x)
+
+
+## Retorna un vector de la misma longitud de x, con TRUE donde hay un NA y FALSE donde no.
+is.nan(x)
+```
+con el ejemplo anterior se puede verificar el punto **3.**.
+

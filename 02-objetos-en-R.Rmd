@@ -1,0 +1,123 @@
+# **Objetos en R.**
+
+En R tenemos 5 clases de objeto básicos o atómicos:
+
+- character
+- numeric
+- integer
+- complex
+- logical (TRUE/FALSE)
+
+
+```{r notas-curso-15}
+tipo.bien <- "Vivienda"   ## character
+
+saldo <- 130500.34        ## numeric
+
+meses <- 13               ## numeric
+
+dias.mora <- 10L          ## integer
+
+complejo <- 1+ 3i         ##complex
+
+cobro.judicial <- TRUE    ##logical
+  
+
+```
+
+
+
+**Números.**
+
+- En R los número en general se tratan como objetos numeric (i.e números reales de doble precisión.)
+- Existe el valor **Inf** que representa infinito y se asocia a operaciones como : 1/0.
+
+```{r notas-curso-16}
+1/0
+```
+
+```{r notas-curso-17}
+-1/0
+```
+
+```{r notas-curso-18}
+100/Inf
+```
+- El valor **NaN** significa not a number, este se asocia generalmente a datos ausentes pero también a una operación del tipo 0/0 que no está definida.
+
+
+**Atributos**
+
+Los objetos en R pueden tener los siguientes atributos
+
+- names, dimnames  (matrices, data frames)
+- dimension        (matrices, data frames)
+- class
+- length
+
+más adelante veremos que con detalle el uso de estos.
+
+# **Operadores**
+
+**Operadores aritméticos**
+
+En R tenemos los siguientes operadores aritméticos:
+
+| Operador| Operación |Ejemplo| Resultado |
+|------:|------:|:-----|:-----|:-----|
+| + | Suma | 3+1| 4|
+| - | Resta | 4-6 | -2|
+| * | Multiplicación |4*6 | 24|
+| / | División | 14/5| 2.8|
+| ^ | Potencia | 2^3 | 8|
+| %% | División entera | 5%%2| 1|
+
+
+**Operadores relacionales**
+
+Los operadores relacionales son usados para hacer comparaciones y siempre devuelven como resultado TRUE o FALSE (verdadero o falso, respectivamente).
+
+
+| Operador| Operación| Ejemplo| Resultado |
+|------:|------:|:-----|:-----|:-----|
+| < | Menor estricto  |  10 < 3| FALSE |
+| <= | Menor o igual | 10 <= 3| FALSE |
+| > | Mayor estricto | 10 > 3| TRUE |
+| >= | Mayor o igual  | 10 >= 3| TRUE |
+| == | Igual |         10 == 3| FALSE |
+| != | Distinto |     10 != 3| TRUE |
+
+**Operadores lógicos**
+
+Los operadores lógicos son usados para operaciones de álgebra Booleana, es decir, para describir relaciones lógicas, expresadas como verdadero (TRUE) o falso (FALSO).
+
+| Operador| Operación |
+|------:|------:|:-----|
+| \| | or  |
+| & | and (conjunción) | 
+| ! | negación |
+
+
+Los operadores | y & siguen estas reglas:
+
+- \| devuelve TRUE si alguno de los datos es TRUE
+- & solo devuelve TRUE si ambos datos es TRUE
+- \| solo devuelve FALSE si ambos datos son FALSE
+- & devuelve FALSE si alguno de los datos es FALSE
+
+
+```{r notas-curso-19}
+
+edad <- 16
+notas <- 83
+
+beca1 <- (edad>18 & notas>80)
+
+beca1
+
+beca2 <- (edad>18 | notas>80)
+
+beca2
+
+```
+

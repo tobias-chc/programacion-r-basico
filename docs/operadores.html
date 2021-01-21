@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Operadores | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 4 Operadores | Notas Curso Básico R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Operadores | Notas Curso Básico R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Operadores | Notas Curso Básico R" />
+  
+  
+  
+
+<meta name="author" content="Tobías Chavarría" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="objetos-en-r-.html"/>
+<link rel="next" href="estructuras-de-datos-.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso Básico en R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Primeros pasos con R y RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#instalación"><i class="fa fa-check"></i><b>2.1</b> <strong>Instalación</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#r"><i class="fa fa-check"></i><b>2.1.1</b> <strong>R</strong></a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> <strong>RStudio</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno-de-trabajo-de-rstudio."><i class="fa fa-check"></i><b>2.2</b> <strong>Entorno de trabajo de RStudio.</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#consola-de-r"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Consola de R</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#ayuda-en-r"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Ayuda en R</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#nombres-en-r"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Nombres en R</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts-de-r"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Scripts de R</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Entorno</strong></a></li>
+<li class="chapter" data-level="2.2.6" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.2.6</b> <strong>Directorio de trabajo</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#paquetes"><i class="fa fa-check"></i><b>2.3</b> <strong>Paquetes</strong></a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.4</b> <strong>Scripts</strong></a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#shortcuts"><i class="fa fa-check"></i><b>2.5</b> <strong>Shortcuts</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objetos-en-r-.html"><a href="objetos-en-r-.html"><i class="fa fa-check"></i><b>3</b> <strong>Objetos en R.</strong></a></li>
+<li class="chapter" data-level="4" data-path="operadores.html"><a href="operadores.html"><i class="fa fa-check"></i><b>4</b> <strong>Operadores</strong></a></li>
+<li class="chapter" data-level="5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html"><i class="fa fa-check"></i><b>5</b> <strong>Estructuras de datos.</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#vectores"><i class="fa fa-check"></i><b>5.1</b> <strong>Vectores</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#coerción"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Coerción</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#listas"><i class="fa fa-check"></i><b>5.2</b> <strong>Listas</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#matrices"><i class="fa fa-check"></i><b>5.3</b> <strong>Matrices</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#factores"><i class="fa fa-check"></i><b>5.4</b> <strong>Factores</strong></a></li>
+<li class="chapter" data-level="5.5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#data-frames"><i class="fa fa-check"></i><b>5.5</b> <strong>Data Frames</strong></a></li>
+<li class="chapter" data-level="5.6" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#valores-ausentes"><i class="fa fa-check"></i><b>5.6</b> <strong>Valores ausentes</strong></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas Curso Básico R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="operadores" class="section level1" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> <strong>Operadores</strong></h1>
+<p><strong>Operadores aritméticos</strong></p>
+<p>En R tenemos los siguientes operadores aritméticos:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Operador</th>
+<th align="right">Operación</th>
+<th align="left">Ejemplo</th>
+<th align="left">Resultado</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">+</td>
+<td align="right">Suma</td>
+<td align="left">3+1</td>
+<td align="left">4</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">-</td>
+<td align="right">Resta</td>
+<td align="left">4-6</td>
+<td align="left">-2</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">*</td>
+<td align="right">Multiplicación</td>
+<td align="left">4*6</td>
+<td align="left">24</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">/</td>
+<td align="right">División</td>
+<td align="left">14/5</td>
+<td align="left">2.8</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">^</td>
+<td align="right">Potencia</td>
+<td align="left">2^3</td>
+<td align="left">8</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">%%</td>
+<td align="right">División entera</td>
+<td align="left">5%%2</td>
+<td align="left">1</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operadores relacionales</strong></p>
+<p>Los operadores relacionales son usados para hacer comparaciones y siempre devuelven como resultado TRUE o FALSE (verdadero o falso, respectivamente).</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Operador</th>
+<th align="right">Operación</th>
+<th align="left">Ejemplo</th>
+<th align="left">Resultado</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">&lt;</td>
+<td align="right">Menor estricto</td>
+<td align="left">10 &lt; 3</td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">&lt;=</td>
+<td align="right">Menor o igual</td>
+<td align="left">10 &lt;= 3</td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">&gt;</td>
+<td align="right">Mayor estricto</td>
+<td align="left">10 &gt; 3</td>
+<td align="left">TRUE</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">&gt;=</td>
+<td align="right">Mayor o igual</td>
+<td align="left">10 &gt;= 3</td>
+<td align="left">TRUE</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">==</td>
+<td align="right">Igual</td>
+<td align="left">10 == 3</td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">!=</td>
+<td align="right">Distinto</td>
+<td align="left">10 != 3</td>
+<td align="left">TRUE</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operadores lógicos</strong></p>
+<p>Los operadores lógicos son usados para operaciones de álgebra Booleana, es decir, para describir relaciones lógicas, expresadas como verdadero (TRUE) o falso (FALSO).</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Operador</th>
+<th align="right">Operación</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">|</td>
+<td align="right">or</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">&amp;</td>
+<td align="right">and (conjunción)</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">!</td>
+<td align="right">negación</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Los operadores | y &amp; siguen estas reglas:</p>
+<ul>
+<li>| devuelve TRUE si alguno de los datos es TRUE</li>
+<li>&amp; solo devuelve TRUE si ambos datos es TRUE</li>
+<li>| solo devuelve FALSE si ambos datos son FALSE</li>
+<li>&amp; devuelve FALSE si alguno de los datos es FALSE</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="operadores.html#cb25-1" aria-hidden="true" tabindex="-1"></a>edad <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb25-2"><a href="operadores.html#cb25-2" aria-hidden="true" tabindex="-1"></a>notas <span class="ot">&lt;-</span> <span class="dv">83</span></span>
+<span id="cb25-3"><a href="operadores.html#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="operadores.html#cb25-4" aria-hidden="true" tabindex="-1"></a>beca1 <span class="ot">&lt;-</span> (edad <span class="sc">&gt;</span> <span class="dv">18</span> <span class="sc">&amp;</span> notas <span class="sc">&gt;</span> <span class="dv">80</span>)</span>
+<span id="cb25-5"><a href="operadores.html#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="operadores.html#cb25-6" aria-hidden="true" tabindex="-1"></a>beca1</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="operadores.html#cb27-1" aria-hidden="true" tabindex="-1"></a>beca2 <span class="ot">&lt;-</span> (edad <span class="sc">&gt;</span> <span class="dv">18</span> <span class="sc">|</span> notas <span class="sc">&gt;</span> <span class="dv">80</span>)</span>
+<span id="cb27-2"><a href="operadores.html#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="operadores.html#cb27-3" aria-hidden="true" tabindex="-1"></a>beca2</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="objetos-en-r-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estructuras-de-datos-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r-bn/edit/master/02-objetos-en-R.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r-bn/blob/master/02-objetos-en-R.Rmd",
+"text": null
+},
+"download": ["Notas-Curso-Basico-R.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
