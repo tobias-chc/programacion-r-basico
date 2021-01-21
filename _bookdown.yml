@@ -1,7 +1,7 @@
 book_filename: "Notas-Curso-Basico-R"
 output_dir: "docs"
-view: https://github.com/tobias-chc/curso-programacion-basico-r-bn/blob/master/%s
-edit: https://github.com/tobias-chc/curso-programacion-basico-r-bn/edit/master/%s
+view: https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/%s
+edit: https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/%s
 delete_merged_file: true
 before_chapter_script: ["_common.R"]
 language:
