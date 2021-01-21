@@ -1,8 +1,13 @@
 --- 
 title: "Notas Curso Básico R"
 author: "Tobías Chavarría"
-date: "Actualizado el 16 Jan, 2021"
+date: "Actualizado el 20 Jan, 2021"
 site: bookdown::bookdown_site
+output: 
+  bookdown::gitbook:
+    config:
+      sharing: null
+    info: no
 documentclass: book
 fontsize: 12pt
 monofont: "Source Code Pro"

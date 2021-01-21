@@ -3,6 +3,11 @@ title: "Notas Curso Básico R"
 author: "Tobías Chavarría"
 date: "Actualizado el `r format(Sys.time(), '%d %b, %Y')`"
 site: bookdown::bookdown_site
+output: 
+  bookdown::gitbook:
+    config:
+      sharing: null
+    info: no
 documentclass: book
 fontsize: 12pt
 monofont: "Source Code Pro"
