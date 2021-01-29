@@ -1,7 +1,7 @@
 --- 
 title: "Notas Curso Básico R"
 author: "Tobías Chavarría"
-date: "Actualizado el 20 Jan, 2021"
+date: "Actualizado el 29 Jan, 2021"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -655,119 +655,19 @@ as.numeric(y)
 ## [1]  1  2  3 NA  5  6  7
 ```
 
-## **Listas**
-
-Las listas son un tipo especial de vectores, cuya principal diferencia es que puede contener diferentes clases de elementos, básicamente es un vector, cuyas entradas son vectores, lo podemos crear con la función **list()**, por ejemplo
-
-
-```r
-lista1 <- list(1, "A", TRUE) # integer, character, logical
-lista1
-```
-
-```
-## [[1]]
-## [1] 1
-## 
-## [[2]]
-## [1] "A"
-## 
-## [[3]]
-## [1] TRUE
-```
-
-
-
-```r
-lista2 <- list(c(100, 200, 300), c("A", "B", "C"), c(T, F, T)) # numeric, character, logical
-lista2
-```
-
-```
-## [[1]]
-## [1] 100 200 300
-## 
-## [[2]]
-## [1] "A" "B" "C"
-## 
-## [[3]]
-## [1]  TRUE FALSE  TRUE
-```
-Como vemos nuestra lista esta conformada por tres vectores, y cada uno de estos son de clases distintas. Cuando creamos listas lo más común es nombrar cada uno de los vectores para luego poder extraer esos datos con el signo "$".
-
-
-```r
-lista_clientes <- list(saldo = runif(3, min = 1000, max = 2000), nombres = c("Juan", "Luis", "Carlos"), tarjeta.credito = c(T, T, F))
-lista_clientes
-```
-
-```
-## $saldo
-## [1] 1900.874 1836.383 1050.230
-## 
-## $nombres
-## [1] "Juan"   "Luis"   "Carlos"
-## 
-## $tarjeta.credito
-## [1]  TRUE  TRUE FALSE
-```
-
-```r
-# runif(cantidad, min, max) genera números aleatorios.
-```
-
-
-```r
-lista_clientes$saldo
-```
-
-```
-## [1] 1900.874 1836.383 1050.230
-```
-
-Otro ejemplo:
-
-
-
-```r
-datos.lucas <- list(Nombre = "Lucas", Edad = 33, Tarjeta.Credito = FALSE)
-
-datos.lucas
-```
-
-```
-## $Nombre
-## [1] "Lucas"
-## 
-## $Edad
-## [1] 33
-## 
-## $Tarjeta.Credito
-## [1] FALSE
-```
-Una ventaja del objeto lista es que podemos accesar a cada uno de sus argumentos mediante el símbolo "$", por ejemplo si quisieramos ver su Edad y luego si posee tarjeta de crédito o no, podemos escribir
-
-
-```r
-datos.lucas$Edad
-```
-
-```
-## [1] 33
-```
-
-
-```r
-datos.lucas$Tarjeta.Credito
-```
-
-```
-## [1] FALSE
-```
 
 ## **Matrices**
 
-Las matrices son vectores pero con el atributo de dimensión. Este atributo es un vector de longitud 2 que contiene el número de filas y el número de columnas  (nrow,ncol). Las matrices se crean con la función **matrix**
+Las matrices son vectores pero con el atributo de dimensión. Este atributo es un vector de longitud 2 que contiene el número de filas y el número de columnas  (nrow,ncol). 
+
+
+En R la función para crear matrices es **matrix** recibe cuatro parámetros (dos son opcionales)
+
+- data : vector con los valores que contendrá la matriz.
+- nrow : cantidad de filas de la matriz.
+- ncol : cantidad de columnas de la matriz.
+- byrow : si su valor es TRUE la lectura de los datos se realiza por filas sino se realiza por columnas.
+
 
 
 ```r
@@ -782,30 +682,47 @@ matriz1
 ## [2,]   NA   NA   NA
 ```
 
-Esta función nos devuelve la cantidad de filas y columnas de nuestra matriz.
+
+Las matrices se construyen por defecto por columnas, empezando por el valor de la entrada $(1,1)$.
+
 
 ```r
-dim.matriz <- dim(matriz1)
-
-dim.matriz
+matriz1 <- matrix(1:9, nrow = 3, ncol = 3)
+matriz1
 ```
 
 ```
-## [1] 2 3
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+```
+
+Esta función nos devuelve la cantidad de filas y columnas de nuestra matriz.
+
+
+```r
+dimensiones <- dim(matriz1)
+
+dimensiones
+```
+
+```
+## [1] 3 3
 ```
 
 Es muy común utilizar solo uno de estos valores, estos se pueden obtener mediante la siguiente instrucción.
 
 
 ```r
-filas <-  dim.matriz[1]
-columnas <- dim.matriz[2]
+filas <-  dimensiones[1]
+columnas <- dimensiones[2]
 
 filas
 ```
 
 ```
-## [1] 2
+## [1] 3
 ```
 
 ```r
@@ -816,23 +733,6 @@ columnas
 ## [1] 3
 ```
 
-
-
-
-Las matrices se construyen por defecto por columnas, empezando por el valor de la entrada $(1,1)$.
-
-
-```r
-matriz2 <- matrix(1:9, nrow = 3, ncol = 3)
-matriz2
-```
-
-```
-##      [,1] [,2] [,3]
-## [1,]    1    4    7
-## [2,]    2    5    8
-## [3,]    3    6    9
-```
 Sin embargo se puede cambiar a que se construyan por filas asignando el parámetro **byrow** en TRUE.
 
 
@@ -878,59 +778,13 @@ cbind(x, y)
 ## [5,] 5 15
 ```
 
-## **Factores**
-
-Esta clase de datos se utiliza para representar datos categóricos. Estos pueden ser ordenados y sin orden. Podemos pensar en los factores como un vector de enteros, donde cada número representa una categoría.
-
-- Los factores tienen un tratamiento especial en las funciones de modelación como lm() y glm(). (Regresiones lineales)
-- Es mejor utilizar factores que utilizar enteros, por ejemplo tener la variable Estado civil, con los valores "Casado", "Soltero" es mejor que utilizar los valores 1 y 2.
-
-La función para crear variables categóricas es **factor()**
-
-
-```r
-estado.deuda <- factor(c("NORMAL", "NORMAL", "VENCIDA", "COBRO JUDICIAL", "VENCIDA"))
-estado.deuda
-```
-
-```
-## [1] NORMAL         NORMAL         VENCIDA        COBRO JUDICIAL VENCIDA       
-## Levels: COBRO JUDICIAL NORMAL VENCIDA
-```
-Como podemos ver, al imprimir nuestra variable categórica tenemos tres niveles : COBRO JUDICIAL NORMAL VENCIDA. Estos representan las categorías en nuestra variable. R automáticamente hace está asignación por orden alfabético, si queremos definir nosotros el orden, podemos hacerlo utilizando el parámetro **levels**.
-
-
-```r
-estado.deuda <- factor(c("NORMAL", "NORMAL", "VENCIDA", "COBRO JUDICIAL", "VENCIDA"), levels = c("NORMAL", "VENCIDA", "COBRO JUDICIAL"))
-estado.deuda
-```
-
-```
-## [1] NORMAL         NORMAL         VENCIDA        COBRO JUDICIAL VENCIDA       
-## Levels: NORMAL VENCIDA COBRO JUDICIAL
-```
-Una forma de saber cuantos individuos hay en cada categoría es mediante la función **table()**.
-
-
-```r
-table(estado.deuda)
-```
-
-```
-## estado.deuda
-##         NORMAL        VENCIDA COBRO JUDICIAL 
-##              2              2              1
-```
 
 ## **Data Frames**
 
-Los data frames son la estructura de datos que se utiliza con más frecuencia, es la forma de almacenar datos en forma de tabla.
+Los data frames constituyen la manera más eficiente mediante la cual R puede analizar un conjunto de datos estadísticos. 
 
-- Se pueden pensar como un tipo especial de lista donde cada elemento de la lista tienen la misma cantidad de elementos.
+Habitualmente se configuran de tal manera que **cada fila se refiere a un individuo o unidad estadística, mientras que cada columna hace referencia a una variable estadística**, esa configuración hace que visualmente un data frame parezca una matriz. Sin embargo, como objetos de R, son cosas distintas.
 
-- Cada elemento de la lista, son las variables y representan las columnas de la tabla, y la cantidad de elementos el numero de filas (individuos).
-
-- A diferencia de las matrices data frames pueden almacenar distintas clases de datos (como las listas).
 
 - Los data frames tienen los atributos **row.names** y **col.names**.
 
@@ -987,12 +841,190 @@ dim(portafolio)
 ```
 
 
+## **Listas**
+
+Con los data frames vimos que se pueden guardar diferentes tipos de datos en columnas. 
+
+Ahora queremos ir un poco más allá y guardar diferentes objetos en una misma estructura de datos.
+
+Las listas permiten agrupar o contener cosas como dataframes, matrices y vectores en una misma variable.
+
+Para crear una lista podemos utilizar la función **list()**, por ejemplo
+
+
+```r
+lista1 <- list(1, "A", TRUE) # integer, character, logical
+lista1
+```
+
+```
+## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] "A"
+## 
+## [[3]]
+## [1] TRUE
+```
+
+
+
+```r
+mi_vector <- 1:10
+mi_matriz <- matrix(1:4, nrow = 2)
+
+mi_dataframe <- data.frame("numeros" = 1:3, "letras" = c("a", "b", "c"))
+
+mi_lista <- list("un_vector" = mi_vector, "una_matriz" = mi_matriz, "un_df" = mi_dataframe)
+
+mi_lista
+```
+
+```
+## $un_vector
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## $una_matriz
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## $un_df
+##   numeros letras
+## 1       1      a
+## 2       2      b
+## 3       3      c
+```
+Cuando creamos listas lo más común es nombrar cada una de las entradas para luego poder extraer esos datos con el signo "$".
+
+
+```r
+lista_clientes <- list(saldo = runif(3, min = 1000, max = 2000), nombres = c("Juan", "Luis", "Carlos"), tarjeta.credito = c(T, T, F))
+
+
+lista_clientes
+```
+
+```
+## $saldo
+## [1] 1900.874 1836.383 1050.230
+## 
+## $nombres
+## [1] "Juan"   "Luis"   "Carlos"
+## 
+## $tarjeta.credito
+## [1]  TRUE  TRUE FALSE
+```
+
+```r
+# runif(cantidad, min, max) genera números aleatorios.
+```
+
+
+```r
+lista_clientes$saldo
+```
+
+```
+## [1] 1900.874 1836.383 1050.230
+```
+
+Otro ejemplo:
+
+
+```r
+datos.lucas <- list(Nombre = "Lucas", Edad = 33, Tarjeta.Credito = FALSE)
+
+datos.lucas
+```
+
+```
+## $Nombre
+## [1] "Lucas"
+## 
+## $Edad
+## [1] 33
+## 
+## $Tarjeta.Credito
+## [1] FALSE
+```
+Una ventaja del objeto lista es que podemos accesar a cada uno de sus argumentos mediante el símbolo "$", por ejemplo si quisieramos ver su Edad y luego si posee tarjeta de crédito o no, podemos escribir
+
+
+```r
+datos.lucas$Edad
+```
+
+```
+## [1] 33
+```
+
+
+```r
+datos.lucas$Tarjeta.Credito
+```
+
+```
+## [1] FALSE
+```
+
+## **Factores**
+
+Esta clase de datos se utiliza para representar datos categóricos. Estos pueden ser ordenados y sin orden. Podemos pensar en los factores como un vector de enteros, donde cada número representa una categoría.
+
+- Los factores tienen un tratamiento especial en las funciones de modelación como lm() y glm(). (Regresiones lineales)
+- Es mejor utilizar factores que utilizar enteros, por ejemplo tener la variable Estado civil, con los valores "Casado", "Soltero" es mejor que utilizar los valores 1 y 2.
+
+La función para crear variables categóricas es **factor()**
+
+
+```r
+estado.deuda <- factor(c("NORMAL", "NORMAL", "VENCIDA", "COBRO JUDICIAL", "VENCIDA"))
+estado.deuda
+```
+
+```
+## [1] NORMAL         NORMAL         VENCIDA        COBRO JUDICIAL VENCIDA       
+## Levels: COBRO JUDICIAL NORMAL VENCIDA
+```
+
+Como podemos ver, al imprimir nuestra variable categórica tenemos tres niveles : COBRO JUDICIAL NORMAL VENCIDA. Estos representan las categorías en nuestra variable. R automáticamente hace está asignación por orden alfabético, si queremos definir nosotros el orden, podemos hacerlo utilizando el parámetro **levels**.
+
+
+```r
+estado.deuda <- factor(c("NORMAL", "NORMAL", "VENCIDA", "COBRO JUDICIAL", "VENCIDA"), levels = c("NORMAL", "VENCIDA", "COBRO JUDICIAL"))
+
+estado.deuda
+```
+
+```
+## [1] NORMAL         NORMAL         VENCIDA        COBRO JUDICIAL VENCIDA       
+## Levels: NORMAL VENCIDA COBRO JUDICIAL
+```
+
+Una forma de saber cuantos individuos hay en cada categoría es mediante la función **table()**.
+
+
+```r
+table(estado.deuda)
+```
+
+```
+## estado.deuda
+##         NORMAL        VENCIDA COBRO JUDICIAL 
+##              2              2              1
+```
+
+
 ## **Valores ausentes**
 
 Los valores ausentes se denotan por **NA** (not avaiable) o **NaN**(not a number), las siguientes funciones se utilizan para verificar y encontrar valores ausentes.
 
 1. **is.na()**: Se utiliza para verificar y encontrar los valores **NA** en un objeto.
+
 2. **is.nan()**: Se utiliza para verificar y encontrar los valores **NaN** en un objeto.
+
 3. Un valor **NaN** es un **NA** pero la otra dirección no es cierta.
 
 
@@ -1007,6 +1039,8 @@ is.na(x)
 ```
 ## [1] FALSE FALSE  TRUE FALSE FALSE
 ```
+
+
 
 ```r
 ## Creamos un vector que contenga un NA y NaN.
@@ -1028,6 +1062,7 @@ is.nan(x)
 ```
 ## [1] FALSE FALSE FALSE FALSE FALSE  TRUE
 ```
+
 con el ejemplo anterior se puede verificar el punto **3.**.
 
 

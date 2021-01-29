@@ -189,7 +189,7 @@
 
 \title{Notas Curso Básico R}
 \author{Tobías Chavarría}
-\date{Actualizado el 20 Jan, 2021}
+\date{Actualizado el 29 Jan, 2021}
 
 \begin{document}
 \maketitle
@@ -925,10 +925,216 @@ Tal vez en el ejemplo anterior no tiene mucho sentido, sin embargo puede pasar q
 ## [1]  1  2  3 NA  5  6  7
 \end{verbatim}
 
+\hypertarget{matrices}{%
+\section{\texorpdfstring{\textbf{Matrices}}{Matrices}}\label{matrices}}
+
+Las matrices son vectores pero con el atributo de dimensión. Este atributo es un vector de longitud 2 que contiene el número de filas y el número de columnas (nrow,ncol).
+
+En R la función para crear matrices es \textbf{matrix} recibe cuatro parámetros (dos son opcionales)
+
+\begin{itemize}
+\tightlist
+\item
+  data : vector con los valores que contendrá la matriz.
+\item
+  nrow : cantidad de filas de la matriz.
+\item
+  ncol : cantidad de columnas de la matriz.
+\item
+  byrow : si su valor es TRUE la lectura de los datos se realiza por filas sino se realiza por columnas.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matriz1 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{) }\CommentTok{\# No le doy los valores entonces coloca NA en todas las entradas.}
+
+\NormalTok{matriz1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]   NA   NA   NA
+## [2,]   NA   NA   NA
+\end{verbatim}
+
+Las matrices se construyen por defecto por columnas, empezando por el valor de la entrada \((1,1)\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matriz1 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{matriz1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+Esta función nos devuelve la cantidad de filas y columnas de nuestra matriz.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dimensiones }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(matriz1)}
+
+\NormalTok{dimensiones}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 3
+\end{verbatim}
+
+Es muy común utilizar solo uno de estos valores, estos se pueden obtener mediante la siguiente instrucción.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filas }\OtherTok{\textless{}{-}}\NormalTok{  dimensiones[}\DecValTok{1}\NormalTok{]}
+\NormalTok{columnas }\OtherTok{\textless{}{-}}\NormalTok{ dimensiones[}\DecValTok{2}\NormalTok{]}
+
+\NormalTok{filas}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{columnas}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+Sin embargo se puede cambiar a que se construyan por filas asignando el parámetro \textbf{byrow} en TRUE.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matriz2 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{, }\AttributeTok{byrow =}\NormalTok{ T)}
+\NormalTok{matriz2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9
+\end{verbatim}
+
+Un par de funciones útiles a la hora de crear matrices o conjuntos de datos son \textbf{rbind} y \textbf{cbind} que permiten concatenar objetos en forma de filas y columnas respectivamente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{11}\SpecialCharTok{:}\DecValTok{15}
+
+\FunctionTok{rbind}\NormalTok{(x, y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [,1] [,2] [,3] [,4] [,5]
+## x    1    2    3    4    5
+## y   11   12   13   14   15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cbind}\NormalTok{(x, y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      x  y
+## [1,] 1 11
+## [2,] 2 12
+## [3,] 3 13
+## [4,] 4 14
+## [5,] 5 15
+\end{verbatim}
+
+\hypertarget{data-frames}{%
+\section{\texorpdfstring{\textbf{Data Frames}}{Data Frames}}\label{data-frames}}
+
+Los data frames constituyen la manera más eficiente mediante la cual R puede analizar un conjunto de datos estadísticos.
+
+Habitualmente se configuran de tal manera que \textbf{cada fila se refiere a un individuo o unidad estadística, mientras que cada columna hace referencia a una variable estadística}, esa configuración hace que visualmente un data frame parezca una matriz. Sin embargo, como objetos de R, son cosas distintas.
+
+\begin{itemize}
+\item
+  Los data frames tienen los atributos \textbf{row.names} y \textbf{col.names}.
+\item
+  Usualmente se crean leyendo datos con las funciones \textbf{read.table()} y \textbf{read.csv()}, pero también podemos utilizar la función \textbf{data.frame()}.
+\item
+  Se pueden convertir a matrices utilizando la función \textbf{data.matrix()} o \textbf{as.matrix()}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creamos las variables de nuestro data frame.}
+
+\NormalTok{emisor }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"BL"}\NormalTok{, }\StringTok{"BARCL"}\NormalTok{, }\StringTok{"CSGF"}\NormalTok{, }\StringTok{"CVS"}\NormalTok{, }\StringTok{"DBK"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"NOMUR"}\NormalTok{, }\StringTok{"USTES"}\NormalTok{, }\StringTok{"BNSFI"}\NormalTok{)}
+
+\NormalTok{monto.facial }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5000000}\NormalTok{, }\DecValTok{2500000}\NormalTok{, }\DecValTok{10000000}\NormalTok{, }\DecValTok{40000000}\NormalTok{, }\DecValTok{5000000}\NormalTok{, }\DecValTok{40000000}\NormalTok{, }\DecValTok{10000000}\NormalTok{, }\DecValTok{5600000}\NormalTok{, }\DecValTok{50000000}\NormalTok{)}
+
+\NormalTok{categoria }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"VR CON CAMBIO EN ORI"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"VR CON CAMBIO EN P/G"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{)}
+
+\NormalTok{calificacion.SP }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"BBB+"}\NormalTok{, }\StringTok{"AA+"}\NormalTok{, }\StringTok{"B+"}\NormalTok{, }\StringTok{"B+"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"A+"}\NormalTok{, }\StringTok{"BB{-}"}\NormalTok{, }\StringTok{"BB"}\NormalTok{)}
+
+\NormalTok{isin }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"US06738EAL92"}\NormalTok{, }\StringTok{"US225433AH43"}\NormalTok{, }\StringTok{"US126650CK42"}\NormalTok{, }\StringTok{"XS2127535131"}\NormalTok{, }\StringTok{"CRG0000B82H3"}\NormalTok{, }\StringTok{"US404280BJ78"}\NormalTok{, }\StringTok{"0NRBNCR00465"}\NormalTok{, }\StringTok{"US9127962Z13"}\NormalTok{, }\StringTok{"US9128283G32"}\NormalTok{)}
+
+
+\CommentTok{\# Creamos el data frame.}
+
+\NormalTok{portafolio }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{ISIN =}\NormalTok{ isin, }\AttributeTok{Emisor =}\NormalTok{ emisor, }\AttributeTok{Monto.Facial =}\NormalTok{ monto.facial, }\AttributeTok{Categoria\_NIIF =}\NormalTok{ categoria, }\AttributeTok{Calificacion =}\NormalTok{ calificacion.SP)}
+
+
+\NormalTok{portafolio}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           ISIN Emisor Monto.Facial       Categoria_NIIF Calificacion
+## 1 US06738EAL92     BL      5.0e+06     COSTO AMORTIZADO         BBB+
+## 2 US225433AH43  BARCL      2.5e+06     COSTO AMORTIZADO          AA+
+## 3 US126650CK42   CSGF      1.0e+07     COSTO AMORTIZADO           B+
+## 4 XS2127535131    CVS      4.0e+07 VR CON CAMBIO EN ORI           B+
+## 5 CRG0000B82H3    DBK      5.0e+06     COSTO AMORTIZADO            B
+## 6 US404280BJ78      G      4.0e+07 VR CON CAMBIO EN P/G            B
+## 7 0NRBNCR00465  NOMUR      1.0e+07     COSTO AMORTIZADO           A+
+## 8 US9127962Z13  USTES      5.6e+06     COSTO AMORTIZADO          BB-
+## 9 US9128283G32  BNSFI      5.0e+07     COSTO AMORTIZADO           BB
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(portafolio)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9 5
+\end{verbatim}
+
 \hypertarget{listas}{%
 \section{\texorpdfstring{\textbf{Listas}}{Listas}}\label{listas}}
 
-Las listas son un tipo especial de vectores, cuya principal diferencia es que puede contener diferentes clases de elementos, básicamente es un vector, cuyas entradas son vectores, lo podemos crear con la función \textbf{list()}, por ejemplo
+Con los data frames vimos que se pueden guardar diferentes tipos de datos en columnas.
+
+Ahora queremos ir un poco más allá y guardar diferentes objetos en una misma estructura de datos.
+
+Las listas permiten agrupar o contener cosas como dataframes, matrices y vectores en una misma variable.
+
+Para crear una lista podemos utilizar la función \textbf{list()}, por ejemplo
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -950,27 +1156,40 @@ Las listas son un tipo especial de vectores, cuya principal diferencia es que pu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lista2 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{300}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"C"}\NormalTok{), }\FunctionTok{c}\NormalTok{(T, F, T)) }\CommentTok{\# numeric, character, logical}
-\NormalTok{lista2}
+\NormalTok{mi\_vector }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\NormalTok{mi\_matriz }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}
+
+\NormalTok{mi\_dataframe }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\StringTok{"numeros"} \OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\StringTok{"letras"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{))}
+
+\NormalTok{mi\_lista }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\StringTok{"un\_vector"} \OtherTok{=}\NormalTok{ mi\_vector, }\StringTok{"una\_matriz"} \OtherTok{=}\NormalTok{ mi\_matriz, }\StringTok{"un\_df"} \OtherTok{=}\NormalTok{ mi\_dataframe)}
+
+\NormalTok{mi\_lista}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [[1]]
-## [1] 100 200 300
+## $un_vector
+##  [1]  1  2  3  4  5  6  7  8  9 10
 ## 
-## [[2]]
-## [1] "A" "B" "C"
+## $una_matriz
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
 ## 
-## [[3]]
-## [1]  TRUE FALSE  TRUE
+## $un_df
+##   numeros letras
+## 1       1      a
+## 2       2      b
+## 3       3      c
 \end{verbatim}
 
-Como vemos nuestra lista esta conformada por tres vectores, y cada uno de estos son de clases distintas. Cuando creamos listas lo más común es nombrar cada uno de los vectores para luego poder extraer esos datos con el signo ``\$.''
+Cuando creamos listas lo más común es nombrar cada una de las entradas para luego poder extraer esos datos con el signo ``\$.''
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{lista\_clientes }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{saldo =} \FunctionTok{runif}\NormalTok{(}\DecValTok{3}\NormalTok{, }\AttributeTok{min =} \DecValTok{1000}\NormalTok{, }\AttributeTok{max =} \DecValTok{2000}\NormalTok{), }\AttributeTok{nombres =} \FunctionTok{c}\NormalTok{(}\StringTok{"Juan"}\NormalTok{, }\StringTok{"Luis"}\NormalTok{, }\StringTok{"Carlos"}\NormalTok{), }\AttributeTok{tarjeta.credito =} \FunctionTok{c}\NormalTok{(T, T, F))}
+
+
 \NormalTok{lista\_clientes}
 \end{Highlighting}
 \end{Shaded}
@@ -1045,129 +1264,6 @@ Una ventaja del objeto lista es que podemos accesar a cada uno de sus argumentos
 ## [1] FALSE
 \end{verbatim}
 
-\hypertarget{matrices}{%
-\section{\texorpdfstring{\textbf{Matrices}}{Matrices}}\label{matrices}}
-
-Las matrices son vectores pero con el atributo de dimensión. Este atributo es un vector de longitud 2 que contiene el número de filas y el número de columnas (nrow,ncol). Las matrices se crean con la función \textbf{matrix}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{matriz1 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{) }\CommentTok{\# No le doy los valores entonces coloca NA en todas las entradas.}
-
-\NormalTok{matriz1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3]
-## [1,]   NA   NA   NA
-## [2,]   NA   NA   NA
-\end{verbatim}
-
-Esta función nos devuelve la cantidad de filas y columnas de nuestra matriz.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dim.matriz }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(matriz1)}
-
-\NormalTok{dim.matriz}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2 3
-\end{verbatim}
-
-Es muy común utilizar solo uno de estos valores, estos se pueden obtener mediante la siguiente instrucción.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{filas }\OtherTok{\textless{}{-}}\NormalTok{  dim.matriz[}\DecValTok{1}\NormalTok{]}
-\NormalTok{columnas }\OtherTok{\textless{}{-}}\NormalTok{ dim.matriz[}\DecValTok{2}\NormalTok{]}
-
-\NormalTok{filas}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{columnas}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3
-\end{verbatim}
-
-Las matrices se construyen por defecto por columnas, empezando por el valor de la entrada \((1,1)\).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{matriz2 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
-\NormalTok{matriz2}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3]
-## [1,]    1    4    7
-## [2,]    2    5    8
-## [3,]    3    6    9
-\end{verbatim}
-
-Sin embargo se puede cambiar a que se construyan por filas asignando el parámetro \textbf{byrow} en TRUE.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{matriz2 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{, }\AttributeTok{byrow =}\NormalTok{ T)}
-\NormalTok{matriz2}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3]
-## [1,]    1    2    3
-## [2,]    4    5    6
-## [3,]    7    8    9
-\end{verbatim}
-
-Un par de funciones útiles a la hora de crear matrices o conjuntos de datos son \textbf{rbind} y \textbf{cbind} que permiten concatenar objetos en forma de filas y columnas respectivamente.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
-
-\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{11}\SpecialCharTok{:}\DecValTok{15}
-
-\FunctionTok{rbind}\NormalTok{(x, y)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##   [,1] [,2] [,3] [,4] [,5]
-## x    1    2    3    4    5
-## y   11   12   13   14   15
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{cbind}\NormalTok{(x, y)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      x  y
-## [1,] 1 11
-## [2,] 2 12
-## [3,] 3 13
-## [4,] 4 14
-## [5,] 5 15
-\end{verbatim}
-
 \hypertarget{factores}{%
 \section{\texorpdfstring{\textbf{Factores}}{Factores}}\label{factores}}
 
@@ -1200,6 +1296,7 @@ Como podemos ver, al imprimir nuestra variable categórica tenemos tres niveles 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{estado.deuda }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"NORMAL"}\NormalTok{, }\StringTok{"NORMAL"}\NormalTok{, }\StringTok{"VENCIDA"}\NormalTok{, }\StringTok{"COBRO JUDICIAL"}\NormalTok{, }\StringTok{"VENCIDA"}\NormalTok{), }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"NORMAL"}\NormalTok{, }\StringTok{"VENCIDA"}\NormalTok{, }\StringTok{"COBRO JUDICIAL"}\NormalTok{))}
+
 \NormalTok{estado.deuda}
 \end{Highlighting}
 \end{Shaded}
@@ -1223,73 +1320,6 @@ Una forma de saber cuantos individuos hay en cada categoría es mediante la func
 ##              2              2              1
 \end{verbatim}
 
-\hypertarget{data-frames}{%
-\section{\texorpdfstring{\textbf{Data Frames}}{Data Frames}}\label{data-frames}}
-
-Los data frames son la estructura de datos que se utiliza con más frecuencia, es la forma de almacenar datos en forma de tabla.
-
-\begin{itemize}
-\item
-  Se pueden pensar como un tipo especial de lista donde cada elemento de la lista tienen la misma cantidad de elementos.
-\item
-  Cada elemento de la lista, son las variables y representan las columnas de la tabla, y la cantidad de elementos el numero de filas (individuos).
-\item
-  A diferencia de las matrices data frames pueden almacenar distintas clases de datos (como las listas).
-\item
-  Los data frames tienen los atributos \textbf{row.names} y \textbf{col.names}.
-\item
-  Usualmente se crean leyendo datos con las funciones \textbf{read.table()} y \textbf{read.csv()}, pero también podemos utilizar la función \textbf{data.frame()}.
-\item
-  Se pueden convertir a matrices utilizando la función \textbf{data.matrix()} o \textbf{as.matrix()}.
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Creamos las variables de nuestro data frame.}
-
-\NormalTok{emisor }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"BL"}\NormalTok{, }\StringTok{"BARCL"}\NormalTok{, }\StringTok{"CSGF"}\NormalTok{, }\StringTok{"CVS"}\NormalTok{, }\StringTok{"DBK"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"NOMUR"}\NormalTok{, }\StringTok{"USTES"}\NormalTok{, }\StringTok{"BNSFI"}\NormalTok{)}
-
-\NormalTok{monto.facial }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5000000}\NormalTok{, }\DecValTok{2500000}\NormalTok{, }\DecValTok{10000000}\NormalTok{, }\DecValTok{40000000}\NormalTok{, }\DecValTok{5000000}\NormalTok{, }\DecValTok{40000000}\NormalTok{, }\DecValTok{10000000}\NormalTok{, }\DecValTok{5600000}\NormalTok{, }\DecValTok{50000000}\NormalTok{)}
-
-\NormalTok{categoria }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"VR CON CAMBIO EN ORI"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"VR CON CAMBIO EN P/G"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{, }\StringTok{"COSTO AMORTIZADO"}\NormalTok{)}
-
-\NormalTok{calificacion.SP }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"BBB+"}\NormalTok{, }\StringTok{"AA+"}\NormalTok{, }\StringTok{"B+"}\NormalTok{, }\StringTok{"B+"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"A+"}\NormalTok{, }\StringTok{"BB{-}"}\NormalTok{, }\StringTok{"BB"}\NormalTok{)}
-
-\NormalTok{isin }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"US06738EAL92"}\NormalTok{, }\StringTok{"US225433AH43"}\NormalTok{, }\StringTok{"US126650CK42"}\NormalTok{, }\StringTok{"XS2127535131"}\NormalTok{, }\StringTok{"CRG0000B82H3"}\NormalTok{, }\StringTok{"US404280BJ78"}\NormalTok{, }\StringTok{"0NRBNCR00465"}\NormalTok{, }\StringTok{"US9127962Z13"}\NormalTok{, }\StringTok{"US9128283G32"}\NormalTok{)}
-
-
-\CommentTok{\# Creamos el data frame.}
-
-\NormalTok{portafolio }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{ISIN =}\NormalTok{ isin, }\AttributeTok{Emisor =}\NormalTok{ emisor, }\AttributeTok{Monto.Facial =}\NormalTok{ monto.facial, }\AttributeTok{Categoria\_NIIF =}\NormalTok{ categoria, }\AttributeTok{Calificacion =}\NormalTok{ calificacion.SP)}
-
-
-\NormalTok{portafolio}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##           ISIN Emisor Monto.Facial       Categoria_NIIF Calificacion
-## 1 US06738EAL92     BL      5.0e+06     COSTO AMORTIZADO         BBB+
-## 2 US225433AH43  BARCL      2.5e+06     COSTO AMORTIZADO          AA+
-## 3 US126650CK42   CSGF      1.0e+07     COSTO AMORTIZADO           B+
-## 4 XS2127535131    CVS      4.0e+07 VR CON CAMBIO EN ORI           B+
-## 5 CRG0000B82H3    DBK      5.0e+06     COSTO AMORTIZADO            B
-## 6 US404280BJ78      G      4.0e+07 VR CON CAMBIO EN P/G            B
-## 7 0NRBNCR00465  NOMUR      1.0e+07     COSTO AMORTIZADO           A+
-## 8 US9127962Z13  USTES      5.6e+06     COSTO AMORTIZADO          BB-
-## 9 US9128283G32  BNSFI      5.0e+07     COSTO AMORTIZADO           BB
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{dim}\NormalTok{(portafolio)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 9 5
-\end{verbatim}
-
 \hypertarget{valores-ausentes}{%
 \section{\texorpdfstring{\textbf{Valores ausentes}}{Valores ausentes}}\label{valores-ausentes}}
 
@@ -1297,7 +1327,6 @@ Los valores ausentes se denotan por \textbf{NA} (not avaiable) o \textbf{NaN}(no
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   \textbf{is.na()}: Se utiliza para verificar y encontrar los valores \textbf{NA} en un objeto.
 \item
