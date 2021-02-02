@@ -1,0 +1,88 @@
+
+# **Importación de datos**
+
+Algunas de las funciones base en R para la lectura datos son:
+
+- **read.table** , **read.csv**, se utilizan para leer datos que tienen formato de tabla.
+
+
+### **read.table**
+
+```{r notas-curso-81, eval=FALSE}
+ read.table(file = archivo[, header = TRUE|FALSE,
+sep = separadorDatos, dec = separadorDecimal,
+quote = delimitadorCadenas,
+stringsAsFactors = TRUE|FALSE])
+```
+Esta es la función genérica para leer datos en formato .csv y genera , algunos de sus argumentos son:
+
+- **file**: El nombre del archivo o su ubicación.
+- **header**: Variable lógica que indica si el archivo tiene encabezado.
+- **sep**: String que indica como están separadas las columnas.
+- **dec**: Para datos numéricos, establece cuál es el separador entre parte entera
+y decimal.
+- **colClasses**: Vector con las clases de cada una de las columnas.
+- **stringsAsFactors**: Indica si las variables de tipo character se deben leer como factor.
+
+**Leer documentación de la función read.table**.
+
+### **read.csv**
+
+Es una implementación especializada de read.table() en la que se asume
+que los parámetros header, sep y dec toman los valores TRUE, "," y ".", respectivamente.  
+
+```{r 07-importacion-de-datos-1, include=FALSE}
+setwd('/Users/tchavarria/Documents/GitHub/curso-basico-r-bn')
+```
+
+
+```{r notas-curso-82}
+portafolio.banco <- read.csv("data/ArchivoInsumoBanco20200630.csv",sep= ";", dec=".",na.strings = c("", "NA"))
+
+str(portafolio.banco)
+portafolio.banco <- portafolio.banco %>% rename(FECHA.COMPRA = COMPRA ,FECHA.VENC = VENCIMIENTO)
+
+```
+
+
+### **read_excel**
+
+Esta se utiliza para leer datos de excel, algunos de sus argumentos son:
+
+
+- **path**: Ruta del archivo.
+- **sheet**: Hoja del excel que se desea leer, por defecto es la primera.
+- **range**: Rango de celdas que se desean leer.
+- **col_types**: Vector con las clases de cada una de las columnas.
+- **col_names**: Indica si la primera fila corresponde al nombre de las columnas.
+
+
+```{r notas-curso-83, message=FALSE, warning=FALSE}
+
+library(readxl)
+
+
+portafolio.BNValores <- read_excel("data/Portafolio BN Valores Junio.xlsx")
+
+portafolio.BNValores_top10 <- head(portafolio.BNValores,10) ## head(data,n) retorna las primeras n filas de nuestro data frame
+
+portafolio.BNValores_top10
+
+```
+
+
+### **Calculando requisitos de memoria**.
+
+Si queremos leer un archivo con 1.500.000 filas y 120 columnas, donde todas son de tipo numérico, realizamos el siguiente cálculo
+
+
+\begin{align*}
+1,500,000\times120\times 8 (bytes)\\
+=&1.44\times10^9 (bytes)\\
+=&1.44\times10^9 / 2^{20} (MB)\\
+=&1,373 (MB)\\
+=&1.34 (GB)\\
+\end{align*}
+
+por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB de RAM en nuestra computadora.
+

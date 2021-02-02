@@ -1,0 +1,123 @@
+
+# **Subsetting**
+
+Vamos a ver como podemos obtener subconjuntos de nuestros datos, existen tres tipos de operaciones para extraer subconjuntos de datos en R:
+
+- $[ ]$: Siempre retorna un objeto de la misma clase que el original.
+- $[[ ]]$: Se utiliza para extraer elementos de una lista o un data frame, mediante índices lógicos o numéricos. No necesariamente retorna una lista o data frame.
+- $: Se utiliza para extraer elementos de una lista por su nombre.
+
+## **Subsetting  vectores**
+
+Índices numéricos:
+
+```{r notas-curso-51}
+x <- c("A","BB+","CCC","AA+","B","B+")
+
+x[1]
+
+x[3]
+
+x[1:3]
+```
+
+Algo peculiar y útil en R es que podemos obtener elementos, seleccionando los que **no** queremos
+
+```{r notas-curso-52}
+x[-1]  ## Todos excepto el primer elemento
+
+x[-c(1,3,5)] ## Todos excepto los elementos e la posición 1,3,5.
+```
+
+Índices lógicos.
+
+```{r notas-curso-53}
+#Vector de enteros del 1 al 10.
+y <- sample(30,10);  # sample(x,n) retorna n números aleatorios sin repeticiones menores o iguales a x.
+y
+
+# Retorna un vector con los valores mayores que 4.
+y[y>10]
+```
+
+Esto también es válido pero es más lardo de escribir.
+```{r notas-curso-54}
+#Guardamos un índice lógico que nos devuelve TRUE en las posiciones de y que hay elementos mayores a 4.
+index <- y>20
+index
+
+#Extraemos los elementos utilizando el índice lógico.
+y[index]
+```
+
+
+## **Subsetting listas**
+
+Para acceder a elementos de las listas podemos usar **$** o doble corchete **[[ ]]**, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.
+
+```{r notas-curso-55}
+datos.cliente <- list(Nombre= c("Lucas","Luis","Diego"), Edad = c(33,50,20), Tarjeta.Credito = c(T,F,T))
+
+datos.cliente
+
+```
+
+```{r notas-curso-56}
+datos.cliente$Nombre
+
+datos.cliente$Edad
+
+datos.cliente$Tarjeta.Credito
+```
+
+```{r notas-curso-57}
+datos.cliente[[1]]
+
+datos.cliente[[2]]
+
+```
+Si queremos el valor i del elemento j escribimos $$lista[[j]][i]$$
+```{r notas-curso-58}
+datos.cliente[[3]][1] ##Valor 1 del elemento 3.
+```
+
+
+
+## **Subsetting matrices**
+
+Podemos obtener los elementos de una matriz utilizando los índices usuales, es decir, para obtener de la matriz $M$ el elemento que está en la fila $i$ y en la columna $j$, escribimos
+$$
+M[i,j]
+$$
+
+Si queremos obtener la fila $i$ o la columna $j$ escribimos
+$$
+M[i,] \qquad; \qquad M[,j]
+$$
+
+respectivamente.
+
+```{r notas-curso-59}
+
+M<- matrix(1:9,3,3)
+
+M
+
+##Obtenemos el elemento que está en la fila 1 y la columna 3.
+M[1,3]
+
+## Obtenemos la fila 1 
+M[1,]
+
+##Obtenemos la columna 2
+M[,2]
+
+##La matriz menos la fila 1
+
+M[-1,]
+
+#Con drop igual FALSE obtenemos un objeto de tipo matrix.
+M[3,,drop=F]
+
+```
+

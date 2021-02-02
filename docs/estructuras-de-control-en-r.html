@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 8 Estructuras de control en R | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 8 Estructuras de control en R | Notas Curso Básico R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 8 Estructuras de control en R | Notas Curso Básico R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 8 Estructuras de control en R | Notas Curso Básico R" />
+  
+  
+  
+
+<meta name="author" content="Tobías Chavarría" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="operaciones-vectorizadas-.html"/>
+<link rel="next" href="importación-de-datos.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso Básico en R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Primeros pasos con R y RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#instalación"><i class="fa fa-check"></i><b>2.1</b> <strong>Instalación</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#r"><i class="fa fa-check"></i><b>2.1.1</b> <strong>R</strong></a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> <strong>RStudio</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno-de-trabajo-de-rstudio."><i class="fa fa-check"></i><b>2.2</b> <strong>Entorno de trabajo de RStudio.</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#consola-de-r"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Consola de R</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#ayuda-en-r"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Ayuda en R</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#nombres-en-r"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Nombres en R</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts-de-r"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Scripts de R</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Entorno</strong></a></li>
+<li class="chapter" data-level="2.2.6" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.2.6</b> <strong>Directorio de trabajo</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#paquetes"><i class="fa fa-check"></i><b>2.3</b> <strong>Paquetes</strong></a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.4</b> <strong>Scripts</strong></a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#shortcuts"><i class="fa fa-check"></i><b>2.5</b> <strong>Shortcuts</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objetos-en-r-.html"><a href="objetos-en-r-.html"><i class="fa fa-check"></i><b>3</b> <strong>Objetos en R.</strong></a></li>
+<li class="chapter" data-level="4" data-path="operadores.html"><a href="operadores.html"><i class="fa fa-check"></i><b>4</b> <strong>Operadores</strong></a></li>
+<li class="chapter" data-level="5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html"><i class="fa fa-check"></i><b>5</b> <strong>Estructuras de datos.</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#vectores"><i class="fa fa-check"></i><b>5.1</b> <strong>Vectores</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#coerción"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Coerción</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#matrices"><i class="fa fa-check"></i><b>5.2</b> <strong>Matrices</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#data-frames"><i class="fa fa-check"></i><b>5.3</b> <strong>Data Frames</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#listas"><i class="fa fa-check"></i><b>5.4</b> <strong>Listas</strong></a></li>
+<li class="chapter" data-level="5.5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#factores"><i class="fa fa-check"></i><b>5.5</b> <strong>Factores</strong></a></li>
+<li class="chapter" data-level="5.6" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#valores-ausentes"><i class="fa fa-check"></i><b>5.6</b> <strong>Valores ausentes</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>6</b> <strong>Subsetting</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="subsetting.html"><a href="subsetting.html#subsetting-vectores"><i class="fa fa-check"></i><b>6.1</b> <strong>Subsetting vectores</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting listas</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting matrices</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="operaciones-vectorizadas-.html"><a href="operaciones-vectorizadas-.html"><i class="fa fa-check"></i><b>7</b> <strong>Operaciones vectorizadas.</strong></a></li>
+<li class="chapter" data-level="8" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html"><i class="fa fa-check"></i><b>8</b> <strong>Estructuras de control en R</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#if-else"><i class="fa fa-check"></i><b>8.1</b> <strong>if-else</strong>:</a></li>
+<li class="chapter" data-level="8.2" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#for-loop"><i class="fa fa-check"></i><b>8.2</b> <strong>for loop</strong></a></li>
+<li class="chapter" data-level="8.3" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#while-loop"><i class="fa fa-check"></i><b>8.3</b> <strong>while loop</strong></a></li>
+<li class="chapter" data-level="8.4" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#repeat-next-break"><i class="fa fa-check"></i><b>8.4</b> <strong>repeat, next, break</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>9</b> <strong>Importación de datos</strong></a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>9.0.1</b> <strong>read.table</strong></a></li>
+<li class="chapter" data-level="9.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>9.0.2</b> <strong>read.csv</strong></a></li>
+<li class="chapter" data-level="9.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>9.0.3</b> <strong>read_excel</strong></a></li>
+<li class="chapter" data-level="9.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>9.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas Curso Básico R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="estructuras-de-control-en-r" class="section level1" number="8">
+<h1><span class="header-section-number">Capítulo 8</span> <strong>Estructuras de control en R</strong></h1>
+<p>Las estructuras de control nos permiten controlar el flujo de ejecución de una secuencia de comandos.
+De este modo, podemos poner «lógica» en el código de R y lograr así reutilizar fragmentos de código una y otra vez.</p>
+<p>Las estructuras de control más utilizadas son:</p>
+<ul>
+<li>if, else: permite decidir si ejecutar o no un fragmento de código en función de una condición.</li>
+<li>for: ejecuta un bucle una cantidad fija de veces.</li>
+<li>while: ejecuta un bucle mientras sea verdadera una condición.</li>
+<li>repeat: ejecuta un bucle indefinidamente. (la única forma de detener esta estructura es mediante el comando break).</li>
+<li>break: detiene la ejecución de un bucle.</li>
+<li>next: salta a la siguiente ejecución de un bucle.</li>
+<li>return: permite salir de la función.</li>
+</ul>
+<p>La mayoría de estas no son usadas escribimos código directo en la consola, sino cuando escribimos funciones o expresiones largas. En la próxima clase veremos como trabajar con funcionar en R, pero es necesario tener bases sólidas de estos conceptos pues son necesarias cada vez que queramos producir o leer código.</p>
+<div id="if-else" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> <strong>if-else</strong>:</h2>
+<p>La combinación if-else es muy utilizada a la hora de programar. Esta estructura de control permite actuar en función de una condición.
+La sintaxis es la siguiente</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="estructuras-de-control-en-r.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condicion<span class="sc">&gt;</span>) {</span>
+<span id="cb179-2"><a href="estructuras-de-control-en-r.html#cb179-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
+<span id="cb179-3"><a href="estructuras-de-control-en-r.html#cb179-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="estructuras-de-control-en-r.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condicion<span class="sc">&gt;</span>) {</span>
+<span id="cb180-2"><a href="estructuras-de-control-en-r.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
+<span id="cb180-3"><a href="estructuras-de-control-en-r.html#cb180-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb180-4"><a href="estructuras-de-control-en-r.html#cb180-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
+<span id="cb180-5"><a href="estructuras-de-control-en-r.html#cb180-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="estructuras-de-control-en-r.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condition1<span class="sc">&gt;</span>) {</span>
+<span id="cb181-2"><a href="estructuras-de-control-en-r.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
+<span id="cb181-3"><a href="estructuras-de-control-en-r.html#cb181-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">&lt;</span>condicion2<span class="sc">&gt;</span>) {</span>
+<span id="cb181-4"><a href="estructuras-de-control-en-r.html#cb181-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
+<span id="cb181-5"><a href="estructuras-de-control-en-r.html#cb181-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb181-6"><a href="estructuras-de-control-en-r.html#cb181-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
+<span id="cb181-7"><a href="estructuras-de-control-en-r.html#cb181-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Ejemplo</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="estructuras-de-control-en-r.html#cb182-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb182-2"><a href="estructuras-de-control-en-r.html#cb182-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb182-3"><a href="estructuras-de-control-en-r.html#cb182-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-4"><a href="estructuras-de-control-en-r.html#cb182-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">5</span>) {</span>
+<span id="cb182-5"><a href="estructuras-de-control-en-r.html#cb182-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb182-6"><a href="estructuras-de-control-en-r.html#cb182-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb182-7"><a href="estructuras-de-control-en-r.html#cb182-7" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 2.736674</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="estructuras-de-control-en-r.html#cb184-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="estructuras-de-control-en-r.html#cb186-1" aria-hidden="true" tabindex="-1"></a>tipo.cambio <span class="ot">&lt;-</span> <span class="fl">585.6</span></span>
+<span id="cb186-2"><a href="estructuras-de-control-en-r.html#cb186-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-3"><a href="estructuras-de-control-en-r.html#cb186-3" aria-hidden="true" tabindex="-1"></a>moneda.deuda <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;CRC&quot;</span>, <span class="st">&quot;USD&quot;</span>), <span class="dv">1</span>)</span>
+<span id="cb186-4"><a href="estructuras-de-control-en-r.html#cb186-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-5"><a href="estructuras-de-control-en-r.html#cb186-5" aria-hidden="true" tabindex="-1"></a>saldo.deuda <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1000</span>)</span>
+<span id="cb186-6"><a href="estructuras-de-control-en-r.html#cb186-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-7"><a href="estructuras-de-control-en-r.html#cb186-7" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
+<pre><code>## [1] 730.3006</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="estructuras-de-control-en-r.html#cb188-1" aria-hidden="true" tabindex="-1"></a>moneda.deuda</span></code></pre></div>
+<pre><code>## [1] &quot;USD&quot;</code></pre>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="estructuras-de-control-en-r.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (moneda.deuda <span class="sc">==</span> <span class="st">&quot;USD&quot;</span>) {</span>
+<span id="cb190-2"><a href="estructuras-de-control-en-r.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  saldo.deuda <span class="ot">&lt;-</span> saldo.deuda <span class="sc">*</span> tipo.cambio</span>
+<span id="cb190-3"><a href="estructuras-de-control-en-r.html#cb190-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb190-4"><a href="estructuras-de-control-en-r.html#cb190-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-5"><a href="estructuras-de-control-en-r.html#cb190-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-6"><a href="estructuras-de-control-en-r.html#cb190-6" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
+<pre><code>## [1] 427664.1</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="estructuras-de-control-en-r.html#cb192-1" aria-hidden="true" tabindex="-1"></a>estado.mora <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>)</span>
+<span id="cb192-2"><a href="estructuras-de-control-en-r.html#cb192-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-3"><a href="estructuras-de-control-en-r.html#cb192-3" aria-hidden="true" tabindex="-1"></a>dias.mora <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">85</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span>) <span class="co"># sample(x,m), genera m números aleatorios tomados del objeto x.</span></span>
+<span id="cb192-4"><a href="estructuras-de-control-en-r.html#cb192-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-5"><a href="estructuras-de-control-en-r.html#cb192-5" aria-hidden="true" tabindex="-1"></a>dias.mora</span></code></pre></div>
+<pre><code>## [1] 99</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="estructuras-de-control-en-r.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dias.mora <span class="sc">&gt;</span> <span class="dv">90</span>) {</span>
+<span id="cb194-2"><a href="estructuras-de-control-en-r.html#cb194-2" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Mora 90&quot;</span></span>
+<span id="cb194-3"><a href="estructuras-de-control-en-r.html#cb194-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb194-4"><a href="estructuras-de-control-en-r.html#cb194-4" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Normal&quot;</span></span>
+<span id="cb194-5"><a href="estructuras-de-control-en-r.html#cb194-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb194-6"><a href="estructuras-de-control-en-r.html#cb194-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-7"><a href="estructuras-de-control-en-r.html#cb194-7" aria-hidden="true" tabindex="-1"></a>estado.mora</span></code></pre></div>
+<pre><code>## [1] &quot;Mora 90&quot;</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="estructuras-de-control-en-r.html#cb196-1" aria-hidden="true" tabindex="-1"></a>estado.mora <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>)</span>
+<span id="cb196-2"><a href="estructuras-de-control-en-r.html#cb196-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-3"><a href="estructuras-de-control-en-r.html#cb196-3" aria-hidden="true" tabindex="-1"></a>dias.mora <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">85</span><span class="sc">:</span><span class="dv">145</span>, <span class="dv">1</span>) <span class="co"># sample(x,m), genera m números aleatorios tomados del objeto x.</span></span>
+<span id="cb196-4"><a href="estructuras-de-control-en-r.html#cb196-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-5"><a href="estructuras-de-control-en-r.html#cb196-5" aria-hidden="true" tabindex="-1"></a>dias.mora</span></code></pre></div>
+<pre><code>## [1] 88</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="estructuras-de-control-en-r.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dias.mora <span class="sc">&gt;</span> <span class="dv">120</span>) {</span>
+<span id="cb198-2"><a href="estructuras-de-control-en-r.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Cobro Judicial&quot;</span></span>
+<span id="cb198-3"><a href="estructuras-de-control-en-r.html#cb198-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="dv">90</span> <span class="sc">&gt;</span> dias.mora) {</span>
+<span id="cb198-4"><a href="estructuras-de-control-en-r.html#cb198-4" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Normal&quot;</span></span>
+<span id="cb198-5"><a href="estructuras-de-control-en-r.html#cb198-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb198-6"><a href="estructuras-de-control-en-r.html#cb198-6" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Mora 90&quot;</span></span>
+<span id="cb198-7"><a href="estructuras-de-control-en-r.html#cb198-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb198-8"><a href="estructuras-de-control-en-r.html#cb198-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-9"><a href="estructuras-de-control-en-r.html#cb198-9" aria-hidden="true" tabindex="-1"></a>estado.mora</span></code></pre></div>
+<pre><code>## [1] &quot;Normal&quot;</code></pre>
+<p><strong>ifelse()</strong> es una función que nos permite escribir de forma más compacta la estructura if-else.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="estructuras-de-control-en-r.html#cb200-1" aria-hidden="true" tabindex="-1"></a>saldo.deuda <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(moneda.deuda <span class="sc">==</span> <span class="st">&quot;USD&quot;</span>, saldo.deuda <span class="sc">*</span> tipo.cambio, saldo.deuda)</span>
+<span id="cb200-2"><a href="estructuras-de-control-en-r.html#cb200-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-3"><a href="estructuras-de-control-en-r.html#cb200-3" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
+<pre><code>## [1] 250440071</code></pre>
+</div>
+<div id="for-loop" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> <strong>for loop</strong></h2>
+<p>Los bucles <strong>for</strong> se utilizan para recorrer .</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="estructuras-de-control-en-r.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(<span class="sc">&lt;</span>variable<span class="sc">&gt;</span> <span class="cf">in</span> <span class="sc">&lt;</span>objeto iterable<span class="sc">&gt;</span>) {</span>
+<span id="cb202-2"><a href="estructuras-de-control-en-r.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># código</span></span>
+<span id="cb202-3"><a href="estructuras-de-control-en-r.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb202-4"><a href="estructuras-de-control-en-r.html#cb202-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Recorrer por índice.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="estructuras-de-control-en-r.html#cb203-1" aria-hidden="true" tabindex="-1"></a>meses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Enero&quot;</span>, <span class="st">&quot;Febrero&quot;</span>, <span class="st">&quot;Marzo&quot;</span>, <span class="st">&quot;Abril&quot;</span>, <span class="st">&quot;Mayo&quot;</span>, <span class="st">&quot;Junio&quot;</span>, <span class="st">&quot;Julio&quot;</span>, <span class="st">&quot;Agosto&quot;</span>, <span class="st">&quot;Setiembre&quot;</span>, <span class="st">&quot;Octubre&quot;</span>, <span class="st">&quot;Noviembre&quot;</span>, <span class="st">&quot;Diciembre&quot;</span>)</span>
+<span id="cb203-2"><a href="estructuras-de-control-en-r.html#cb203-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-3"><a href="estructuras-de-control-en-r.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) {</span>
+<span id="cb203-4"><a href="estructuras-de-control-en-r.html#cb203-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(meses[i])</span>
+<span id="cb203-5"><a href="estructuras-de-control-en-r.html#cb203-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Enero&quot;
+## [1] &quot;Febrero&quot;
+## [1] &quot;Marzo&quot;
+## [1] &quot;Abril&quot;
+## [1] &quot;Mayo&quot;
+## [1] &quot;Junio&quot;</code></pre>
+<p>La función <strong>seq_along()</strong> es muy utilizada en los ciclos for, para poder generar una secuencia de enteros basada en el tamaño del objeto sobre el que queremos iterar.</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="estructuras-de-control-en-r.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(meses)) {</span>
+<span id="cb205-2"><a href="estructuras-de-control-en-r.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(meses[i])</span>
+<span id="cb205-3"><a href="estructuras-de-control-en-r.html#cb205-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Enero&quot;
+## [1] &quot;Febrero&quot;
+## [1] &quot;Marzo&quot;
+## [1] &quot;Abril&quot;
+## [1] &quot;Mayo&quot;
+## [1] &quot;Junio&quot;
+## [1] &quot;Julio&quot;
+## [1] &quot;Agosto&quot;
+## [1] &quot;Setiembre&quot;
+## [1] &quot;Octubre&quot;
+## [1] &quot;Noviembre&quot;
+## [1] &quot;Diciembre&quot;</code></pre>
+<p>Recorrer los elementos.</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="estructuras-de-control-en-r.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (mes <span class="cf">in</span> meses) {</span>
+<span id="cb207-2"><a href="estructuras-de-control-en-r.html#cb207-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(mes)</span>
+<span id="cb207-3"><a href="estructuras-de-control-en-r.html#cb207-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Enero&quot;
+## [1] &quot;Febrero&quot;
+## [1] &quot;Marzo&quot;
+## [1] &quot;Abril&quot;
+## [1] &quot;Mayo&quot;
+## [1] &quot;Junio&quot;
+## [1] &quot;Julio&quot;
+## [1] &quot;Agosto&quot;
+## [1] &quot;Setiembre&quot;
+## [1] &quot;Octubre&quot;
+## [1] &quot;Noviembre&quot;
+## [1] &quot;Diciembre&quot;</code></pre>
+</div>
+<div id="while-loop" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> <strong>while loop</strong></h2>
+<p>Los ciclos while comienzan revisando una condición, si se cumple inicia el ciclo y se repite hasta que la condición no se cumpla.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="estructuras-de-control-en-r.html#cb209-1" aria-hidden="true" tabindex="-1"></a>contador <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb209-2"><a href="estructuras-de-control-en-r.html#cb209-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-3"><a href="estructuras-de-control-en-r.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (contador <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
+<span id="cb209-4"><a href="estructuras-de-control-en-r.html#cb209-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(contador)</span>
+<span id="cb209-5"><a href="estructuras-de-control-en-r.html#cb209-5" aria-hidden="true" tabindex="-1"></a>  contador <span class="ot">&lt;-</span> contador <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb209-6"><a href="estructuras-de-control-en-r.html#cb209-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-7"><a href="estructuras-de-control-en-r.html#cb209-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 0
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4</code></pre>
+<p>Caminata aleatoria</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="estructuras-de-control-en-r.html#cb211-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb211-2"><a href="estructuras-de-control-en-r.html#cb211-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-3"><a href="estructuras-de-control-en-r.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb211-4"><a href="estructuras-de-control-en-r.html#cb211-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-5"><a href="estructuras-de-control-en-r.html#cb211-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (z <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">&amp;&amp;</span> z <span class="sc">&lt;=</span> <span class="dv">10</span>) {</span>
+<span id="cb211-6"><a href="estructuras-de-control-en-r.html#cb211-6" aria-hidden="true" tabindex="-1"></a>  moneda <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb211-7"><a href="estructuras-de-control-en-r.html#cb211-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-8"><a href="estructuras-de-control-en-r.html#cb211-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (moneda <span class="sc">==</span> <span class="dv">1</span>) { <span class="do">## Paso hacia la derecha</span></span>
+<span id="cb211-9"><a href="estructuras-de-control-en-r.html#cb211-9" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb211-10"><a href="estructuras-de-control-en-r.html#cb211-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {          <span class="do">## Paso hacia la izquierda</span></span>
+<span id="cb211-11"><a href="estructuras-de-control-en-r.html#cb211-11" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb211-12"><a href="estructuras-de-control-en-r.html#cb211-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb211-13"><a href="estructuras-de-control-en-r.html#cb211-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb211-14"><a href="estructuras-de-control-en-r.html#cb211-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-15"><a href="estructuras-de-control-en-r.html#cb211-15" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="repeat-next-break" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> <strong>repeat, next, break</strong></h2>
+<p><strong>repeat</strong> inicia un ciclo infinito. La única forma de terminar o de salir de un ciclo <strong>repeat</strong> es mediante la instrucción <strong>break</strong>. No son muy comunes a la hora de hacer análisis de datos, pero vale la pena mencionarlos pues se pueden utilizar para algoritmos que busquen una solución con cierto de nivel de tolerancia, ya que en estos casos no se puede saber de ante mano cuantas iteraciones se necesitan.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="estructuras-de-control-en-r.html#cb213-1" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb213-2"><a href="estructuras-de-control-en-r.html#cb213-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-3"><a href="estructuras-de-control-en-r.html#cb213-3" aria-hidden="true" tabindex="-1"></a>tol <span class="ot">&lt;-</span> <span class="fl">1e-10</span></span>
+<span id="cb213-4"><a href="estructuras-de-control-en-r.html#cb213-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-5"><a href="estructuras-de-control-en-r.html#cb213-5" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span>{</span>
+<span id="cb213-6"><a href="estructuras-de-control-en-r.html#cb213-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-7"><a href="estructuras-de-control-en-r.html#cb213-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-8"><a href="estructuras-de-control-en-r.html#cb213-8" aria-hidden="true" tabindex="-1"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">algoritmoEstimacion</span>() <span class="do">## Se calcula el estimado</span></span>
+<span id="cb213-9"><a href="estructuras-de-control-en-r.html#cb213-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-10"><a href="estructuras-de-control-en-r.html#cb213-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(x1 <span class="sc">-</span> x0) <span class="sc">&lt;</span> tol) { <span class="do">## Se hace el test</span></span>
+<span id="cb213-11"><a href="estructuras-de-control-en-r.html#cb213-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb213-12"><a href="estructuras-de-control-en-r.html#cb213-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {   <span class="do">## Continua</span></span>
+<span id="cb213-13"><a href="estructuras-de-control-en-r.html#cb213-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-14"><a href="estructuras-de-control-en-r.html#cb213-14" aria-hidden="true" tabindex="-1"></a>    x0 <span class="ot">&lt;-</span> x1</span>
+<span id="cb213-15"><a href="estructuras-de-control-en-r.html#cb213-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb213-16"><a href="estructuras-de-control-en-r.html#cb213-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-17"><a href="estructuras-de-control-en-r.html#cb213-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>next</strong>: Se utiliza para avanzar a la siguiente iteración del ciclo.
+<strong>break</strong>: Se utiliza para salir del ciclo inmediatamente.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="operaciones-vectorizadas-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="importación-de-datos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/06-estructuras-de-control.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/06-estructuras-de-control.Rmd",
+"text": null
+},
+"download": ["Notas-Curso-Basico-R.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 9 Importación de datos | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 9 Importación de datos | Notas Curso Básico R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 9 Importación de datos | Notas Curso Básico R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 9 Importación de datos | Notas Curso Básico R" />
+  
+  
+  
+
+<meta name="author" content="Tobías Chavarría" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="estructuras-de-control-en-r.html"/>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso Básico en R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Primeros pasos con R y RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#instalación"><i class="fa fa-check"></i><b>2.1</b> <strong>Instalación</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#r"><i class="fa fa-check"></i><b>2.1.1</b> <strong>R</strong></a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> <strong>RStudio</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno-de-trabajo-de-rstudio."><i class="fa fa-check"></i><b>2.2</b> <strong>Entorno de trabajo de RStudio.</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#consola-de-r"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Consola de R</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#ayuda-en-r"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Ayuda en R</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#nombres-en-r"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Nombres en R</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts-de-r"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Scripts de R</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Entorno</strong></a></li>
+<li class="chapter" data-level="2.2.6" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.2.6</b> <strong>Directorio de trabajo</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#paquetes"><i class="fa fa-check"></i><b>2.3</b> <strong>Paquetes</strong></a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.4</b> <strong>Scripts</strong></a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#shortcuts"><i class="fa fa-check"></i><b>2.5</b> <strong>Shortcuts</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objetos-en-r-.html"><a href="objetos-en-r-.html"><i class="fa fa-check"></i><b>3</b> <strong>Objetos en R.</strong></a></li>
+<li class="chapter" data-level="4" data-path="operadores.html"><a href="operadores.html"><i class="fa fa-check"></i><b>4</b> <strong>Operadores</strong></a></li>
+<li class="chapter" data-level="5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html"><i class="fa fa-check"></i><b>5</b> <strong>Estructuras de datos.</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#vectores"><i class="fa fa-check"></i><b>5.1</b> <strong>Vectores</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#coerción"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Coerción</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#matrices"><i class="fa fa-check"></i><b>5.2</b> <strong>Matrices</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#data-frames"><i class="fa fa-check"></i><b>5.3</b> <strong>Data Frames</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#listas"><i class="fa fa-check"></i><b>5.4</b> <strong>Listas</strong></a></li>
+<li class="chapter" data-level="5.5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#factores"><i class="fa fa-check"></i><b>5.5</b> <strong>Factores</strong></a></li>
+<li class="chapter" data-level="5.6" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#valores-ausentes"><i class="fa fa-check"></i><b>5.6</b> <strong>Valores ausentes</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>6</b> <strong>Subsetting</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="subsetting.html"><a href="subsetting.html#subsetting-vectores"><i class="fa fa-check"></i><b>6.1</b> <strong>Subsetting vectores</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting listas</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting matrices</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="operaciones-vectorizadas-.html"><a href="operaciones-vectorizadas-.html"><i class="fa fa-check"></i><b>7</b> <strong>Operaciones vectorizadas.</strong></a></li>
+<li class="chapter" data-level="8" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html"><i class="fa fa-check"></i><b>8</b> <strong>Estructuras de control en R</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#if-else"><i class="fa fa-check"></i><b>8.1</b> <strong>if-else</strong>:</a></li>
+<li class="chapter" data-level="8.2" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#for-loop"><i class="fa fa-check"></i><b>8.2</b> <strong>for loop</strong></a></li>
+<li class="chapter" data-level="8.3" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#while-loop"><i class="fa fa-check"></i><b>8.3</b> <strong>while loop</strong></a></li>
+<li class="chapter" data-level="8.4" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#repeat-next-break"><i class="fa fa-check"></i><b>8.4</b> <strong>repeat, next, break</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>9</b> <strong>Importación de datos</strong></a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>9.0.1</b> <strong>read.table</strong></a></li>
+<li class="chapter" data-level="9.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>9.0.2</b> <strong>read.csv</strong></a></li>
+<li class="chapter" data-level="9.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>9.0.3</b> <strong>read_excel</strong></a></li>
+<li class="chapter" data-level="9.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>9.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas Curso Básico R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="importación-de-datos" class="section level1" number="9">
+<h1><span class="header-section-number">Capítulo 9</span> <strong>Importación de datos</strong></h1>
+<p>Algunas de las funciones base en R para la lectura datos son:</p>
+<ul>
+<li><strong>read.table</strong> , <strong>read.csv</strong>, se utilizan para leer datos que tienen formato de tabla.</li>
+</ul>
+<div id="read.table" class="section level3" number="9.0.1">
+<h3><span class="header-section-number">9.0.1</span> <strong>read.table</strong></h3>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="importación-de-datos.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="at">file =</span> archivo[, <span class="at">header =</span> <span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span>,</span>
+<span id="cb214-2"><a href="importación-de-datos.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> separadorDatos, <span class="at">dec =</span> separadorDecimal,</span>
+<span id="cb214-3"><a href="importación-de-datos.html#cb214-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">quote =</span> delimitadorCadenas,</span>
+<span id="cb214-4"><a href="importación-de-datos.html#cb214-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span>])</span></code></pre></div>
+<p>Esta es la función genérica para leer datos en formato .csv y genera , algunos de sus argumentos son:</p>
+<ul>
+<li><strong>file</strong>: El nombre del archivo o su ubicación.</li>
+<li><strong>header</strong>: Variable lógica que indica si el archivo tiene encabezado.</li>
+<li><strong>sep</strong>: String que indica como están separadas las columnas.</li>
+<li><strong>dec</strong>: Para datos numéricos, establece cuál es el separador entre parte entera
+y decimal.</li>
+<li><strong>colClasses</strong>: Vector con las clases de cada una de las columnas.</li>
+<li><strong>stringsAsFactors</strong>: Indica si las variables de tipo character se deben leer como factor.</li>
+</ul>
+<p><strong>Leer documentación de la función read.table</strong>.</p>
+</div>
+<div id="read.csv" class="section level3" number="9.0.2">
+<h3><span class="header-section-number">9.0.2</span> <strong>read.csv</strong></h3>
+<p>Es una implementación especializada de read.table() en la que se asume
+que los parámetros header, sep y dec toman los valores TRUE, “,” y “.” respectivamente.</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="importación-de-datos.html#cb215-1" aria-hidden="true" tabindex="-1"></a>portafolio.banco <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ArchivoInsumoBanco20200630.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</span>
+<span id="cb215-2"><a href="importación-de-datos.html#cb215-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb215-3"><a href="importación-de-datos.html#cb215-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(portafolio.banco)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    872 obs. of  20 variables:
+##  $ CATEGORIANIIF    : chr  &quot;COSTO AMORTIZADO&quot; &quot;COSTO AMORTIZADO&quot; &quot;COSTO AMORTIZADO&quot; &quot;COSTO AMORTIZADO&quot; ...
+##  $ MONEDA           : chr  &quot;CRC&quot; &quot;CRC&quot; &quot;CRC&quot; &quot;CRC&quot; ...
+##  $ CARTERA          : chr  &quot;BNCR COSTO AMORTIZADO&quot; &quot;BNCR COSTO AMORTIZADO&quot; &quot;BNCR COSTO AMORTIZADO&quot; &quot;BNCR COSTO AMORTIZADO&quot; ...
+##  $ EMISOR           : chr  &quot;BANCO CENTRAL DE COSTA RICA&quot; &quot;BANCO CENTRAL DE COSTA RICA&quot; &quot;BANCO CENTRAL DE COSTA RICA&quot; &quot;BANCO CENTRAL DE COSTA RICA&quot; ...
+##  $ NEMOEMISOR       : chr  &quot;BCCR&quot; &quot;BCCR&quot; &quot;BCCR&quot; &quot;BCCR&quot; ...
+##  $ NEMOTECNICO      : chr  &quot;bem&quot; &quot;bem&quot; &quot;bem&quot; &quot;bem&quot; ...
+##  $ ISIN             : chr  &quot;CRBCCR0B4270&quot; &quot;CRBCCR0B4270&quot; &quot;CRBCCR0B4270&quot; &quot;CRBCCR0B4296&quot; ...
+##  $ COMPRA           : chr  &quot;12/11/2019&quot; &quot;12/13/2019&quot; &quot;12/17/2019&quot; &quot;12/06/2019&quot; ...
+##  $ VENCIMIENTO      : chr  &quot;03/10/2021&quot; &quot;03/10/2021&quot; &quot;03/10/2021&quot; &quot;03/09/2022&quot; ...
+##  $ MONTOFACIAL      : num  5.00e+08 5.55e+08 5.00e+08 5.00e+08 1.50e+07 ...
+##  $ REFERENCIA       : chr  &quot;TV2940-1&quot; &quot;TV2973-1&quot; &quot;TV3003-1&quot; &quot;TV2906-1&quot; ...
+##  $ CODINVENTARIO    : int  11897 11936 11968 11863 11404 12273 12286 11647 11649 11658 ...
+##  $ CALIFICADORASUGEF: chr  &quot;S&amp;P INTER.&quot; &quot;S&amp;P INTER.&quot; &quot;S&amp;P INTER.&quot; &quot;S&amp;P INTER.&quot; ...
+##  $ CALIFICACIONSUGEF: chr  &quot;B&quot; &quot;B&quot; &quot;B&quot; &quot;B&quot; ...
+##  $ MOODYS           : chr  &quot;B2&quot; &quot;B2&quot; &quot;B2&quot; &quot;B2&quot; ...
+##  $ S.P              : chr  &quot;B&quot; &quot;B&quot; &quot;B&quot; &quot;B&quot; ...
+##  $ FITCH.CRI        : chr  NA NA NA NA ...
+##  $ FITCH.INTER.     : chr  &quot;B+&quot; &quot;B+&quot; &quot;B+&quot; &quot;B+&quot; ...
+##  $ SCRC             : chr  NA NA NA NA ...
+##  $ VMKTCRC          : num  5.30e+08 5.89e+08 5.31e+08 5.43e+08 1.55e+07 ...</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="importación-de-datos.html#cb217-1" aria-hidden="true" tabindex="-1"></a>portafolio.banco <span class="ot">&lt;-</span> portafolio.banco <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">FECHA.COMPRA =</span> COMPRA, <span class="at">FECHA.VENC =</span> VENCIMIENTO)</span></code></pre></div>
+</div>
+<div id="read_excel" class="section level3" number="9.0.3">
+<h3><span class="header-section-number">9.0.3</span> <strong>read_excel</strong></h3>
+<p>Esta se utiliza para leer datos de excel, algunos de sus argumentos son:</p>
+<ul>
+<li><strong>path</strong>: Ruta del archivo.</li>
+<li><strong>sheet</strong>: Hoja del excel que se desea leer, por defecto es la primera.</li>
+<li><strong>range</strong>: Rango de celdas que se desean leer.</li>
+<li><strong>col_types</strong>: Vector con las clases de cada una de las columnas.</li>
+<li><strong>col_names</strong>: Indica si la primera fila corresponde al nombre de las columnas.</li>
+</ul>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="importación-de-datos.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb218-2"><a href="importación-de-datos.html#cb218-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-3"><a href="importación-de-datos.html#cb218-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-4"><a href="importación-de-datos.html#cb218-4" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/Portafolio BN Valores Junio.xlsx&quot;</span>)</span>
+<span id="cb218-5"><a href="importación-de-datos.html#cb218-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-6"><a href="importación-de-datos.html#cb218-6" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores_top10 <span class="ot">&lt;-</span> <span class="fu">head</span>(portafolio.BNValores, <span class="dv">10</span>) <span class="do">## head(data,n) retorna las primeras n filas de nuestro data frame</span></span>
+<span id="cb218-7"><a href="importación-de-datos.html#cb218-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-8"><a href="importación-de-datos.html#cb218-8" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores_top10</span></code></pre></div>
+<pre><code>## # A tibble: 10 x 46
+##    Fecha                Boleta Bol.Nueva `Moneda Facial` `Moneda Liquida` ISIN 
+##    &lt;dttm&gt;                &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;
+##  1 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0…
+##  2 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0…
+##  3 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0…
+##  4 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0…
+##  5 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0…
+##  6 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0…
+##  7 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0…
+##  8 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0…
+##  9 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0…
+## 10 2020-06-30 00:00:00 1.80e10   1.80e10 Colones         Colones          CRG0…
+## # … with 40 more variables: Emisor &lt;chr&gt;, Instrumento &lt;chr&gt;, Serie &lt;chr&gt;,
+## #   Tasa &lt;dbl&gt;, Tas.Diaria &lt;dbl&gt;, Mto.Facial &lt;dbl&gt;, Mto.Liquidar &lt;dbl&gt;,
+## #   Mto.Libros &lt;dbl&gt;, Mto.Mercado &lt;dbl&gt;, Mto.Gand.Perd. &lt;dbl&gt;,
+## #   Mto.Ganancia &lt;dbl&gt;, Mto.Perdida &lt;dbl&gt;, Mto.Gan.Imp.Dif. &lt;dbl&gt;,
+## #   Mto.Per.Imp.Dif. &lt;dbl&gt;, `Mto. Deterioro Valor` &lt;lgl&gt;, Mto.Precio &lt;dbl&gt;,
+## #   MTo.Pre.Merc. &lt;dbl&gt;, Mto.Int.Compra &lt;dbl&gt;, Mto.Int.Diario &lt;dbl&gt;,
+## #   Mto.Int.Acum. &lt;dbl&gt;, Diferencial &lt;dbl&gt;, Mto.Desc.Diario &lt;dbl&gt;,
+## #   Mto.Desc.Acum. &lt;dbl&gt;, Mto.Prim.Diario &lt;dbl&gt;, Mto.PrimAcum &lt;dbl&gt;,
+## #   Fec.Liquida &lt;dttm&gt;, Fec.Vencimi. &lt;dttm&gt;, Fec.Ult.Pago &lt;dttm&gt;,
+## #   Fec.Pro.Pago &lt;dttm&gt;, Num.Dia.Acum. &lt;dbl&gt;, Num_Dia.Venc. &lt;dbl&gt;,
+## #   Num.Dia.Oper. &lt;dbl&gt;, `Cód. Modelo Negocio` &lt;chr&gt;, `Nombre Modelo
+## #   Negocio` &lt;chr&gt;, `Prueba SPPI` &lt;chr&gt;, `Tipo Tasa Interes` &lt;chr&gt;, Tipo &lt;chr&gt;,
+## #   Tip.Cambio &lt;dbl&gt;, Grupo &lt;chr&gt;, Sector &lt;chr&gt;</code></pre>
+</div>
+<div id="calculando-requisitos-de-memoria." class="section level3" number="9.0.4">
+<h3><span class="header-section-number">9.0.4</span> <strong>Calculando requisitos de memoria</strong>.</h3>
+<p>Si queremos leer un archivo con 1.500.000 filas y 120 columnas, donde todas son de tipo numérico, realizamos el siguiente cálculo</p>
+<p><span class="math display">\[\begin{align*}
+1,500,000\times120\times 8 (bytes)\\
+=&amp;1.44\times10^9 (bytes)\\
+=&amp;1.44\times10^9 / 2^{20} (MB)\\
+=&amp;1,373 (MB)\\
+=&amp;1.34 (GB)\\
+\end{align*}\]</span></p>
+<p>por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB de RAM en nuestra computadora.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="estructuras-de-control-en-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/07-importacion-de-datos.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/07-importacion-de-datos.Rmd",
+"text": null
+},
+"download": ["Notas-Curso-Basico-R.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

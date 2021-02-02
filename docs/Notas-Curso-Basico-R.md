@@ -1,7 +1,7 @@
 --- 
 title: "Notas Curso Básico R"
 author: "Tobías Chavarría"
-date: "Actualizado el 29 Jan, 2021"
+date: "Actualizado el 02 Feb, 2021"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -234,7 +234,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/tchavarria/Documents/GitHub/curso-programacion-basico-r-bn"
+## [1] "/Users/tchavarria/Documents/GitHub/programacion-r-basico"
 ```
 Se mostrará en la consola la ruta del directorio que está usando R.
 
@@ -908,7 +908,7 @@ lista_clientes
 
 ```
 ## $saldo
-## [1] 1900.874 1836.383 1050.230
+## [1] 1514.047 1169.385 1807.954
 ## 
 ## $nombres
 ## [1] "Juan"   "Luis"   "Carlos"
@@ -927,7 +927,7 @@ lista_clientes$saldo
 ```
 
 ```
-## [1] 1900.874 1836.383 1050.230
+## [1] 1514.047 1169.385 1807.954
 ```
 
 Otro ejemplo:
@@ -1067,4 +1067,903 @@ con el ejemplo anterior se puede verificar el punto **3.**.
 
 
 <!--chapter:end:03-estructuras-de-datos.Rmd-->
+
+
+
+# **Subsetting**
+
+Vamos a ver como podemos obtener subconjuntos de nuestros datos, existen tres tipos de operaciones para extraer subconjuntos de datos en R:
+
+- $[ ]$: Siempre retorna un objeto de la misma clase que el original.
+- $[[ ]]$: Se utiliza para extraer elementos de una lista o un data frame, mediante índices lógicos o numéricos. No necesariamente retorna una lista o data frame.
+- $: Se utiliza para extraer elementos de una lista por su nombre.
+
+## **Subsetting  vectores**
+
+Índices numéricos:
+
+
+```r
+x <- c("A", "BB+", "CCC", "AA+", "B", "B+")
+
+x[1]
+```
+
+```
+## [1] "A"
+```
+
+```r
+x[3]
+```
+
+```
+## [1] "CCC"
+```
+
+```r
+x[1:3]
+```
+
+```
+## [1] "A"   "BB+" "CCC"
+```
+
+Algo peculiar y útil en R es que podemos obtener elementos, seleccionando los que **no** queremos
+
+
+```r
+x[-1]  ## Todos excepto el primer elemento
+```
+
+```
+## [1] "BB+" "CCC" "AA+" "B"   "B+"
+```
+
+```r
+x[-c(1, 3, 5)] ## Todos excepto los elementos e la posición 1,3,5.
+```
+
+```
+## [1] "BB+" "AA+" "B+"
+```
+
+Índices lógicos.
+
+
+```r
+# Vector de enteros del 1 al 10.
+y <- sample(30, 10)
+# sample(x,n) retorna n números aleatorios sin repeticiones menores o iguales a x.
+y
+```
+
+```
+##  [1] 14 27 26 12 29 19 16 10 20 23
+```
+
+```r
+# Retorna un vector con los valores mayores que 4.
+y[y > 10]
+```
+
+```
+## [1] 14 27 26 12 29 19 16 20 23
+```
+
+Esto también es válido pero es más lardo de escribir.
+
+```r
+# Guardamos un índice lógico que nos devuelve TRUE en las posiciones de y que hay elementos mayores a 4.
+index <- y > 20
+index
+```
+
+```
+##  [1] FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+```
+
+```r
+# Extraemos los elementos utilizando el índice lógico.
+y[index]
+```
+
+```
+## [1] 27 26 29 23
+```
+
+
+## **Subsetting listas**
+
+Para acceder a elementos de las listas podemos usar **$** o doble corchete **[[ ]]**, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.
+
+
+```r
+datos.cliente <- list(Nombre = c("Lucas", "Luis", "Diego"), Edad = c(33, 50, 20), Tarjeta.Credito = c(T, F, T))
+
+datos.cliente
+```
+
+```
+## $Nombre
+## [1] "Lucas" "Luis"  "Diego"
+## 
+## $Edad
+## [1] 33 50 20
+## 
+## $Tarjeta.Credito
+## [1]  TRUE FALSE  TRUE
+```
+
+
+```r
+datos.cliente$Nombre
+```
+
+```
+## [1] "Lucas" "Luis"  "Diego"
+```
+
+```r
+datos.cliente$Edad
+```
+
+```
+## [1] 33 50 20
+```
+
+```r
+datos.cliente$Tarjeta.Credito
+```
+
+```
+## [1]  TRUE FALSE  TRUE
+```
+
+
+```r
+datos.cliente[[1]]
+```
+
+```
+## [1] "Lucas" "Luis"  "Diego"
+```
+
+```r
+datos.cliente[[2]]
+```
+
+```
+## [1] 33 50 20
+```
+Si queremos el valor i del elemento j escribimos $$lista[[j]][i]$$
+
+```r
+datos.cliente[[3]][1] ## Valor 1 del elemento 3.
+```
+
+```
+## [1] TRUE
+```
+
+
+
+## **Subsetting matrices**
+
+Podemos obtener los elementos de una matriz utilizando los índices usuales, es decir, para obtener de la matriz $M$ el elemento que está en la fila $i$ y en la columna $j$, escribimos
+$$
+M[i,j]
+$$
+
+Si queremos obtener la fila $i$ o la columna $j$ escribimos
+$$
+M[i,] \qquad; \qquad M[,j]
+$$
+
+respectivamente.
+
+
+```r
+M <- matrix(1:9, 3, 3)
+
+M
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+```
+
+```r
+## Obtenemos el elemento que está en la fila 1 y la columna 3.
+M[1, 3]
+```
+
+```
+## [1] 7
+```
+
+```r
+## Obtenemos la fila 1
+M[1, ]
+```
+
+```
+## [1] 1 4 7
+```
+
+```r
+## Obtenemos la columna 2
+M[, 2]
+```
+
+```
+## [1] 4 5 6
+```
+
+```r
+## La matriz menos la fila 1
+
+M[-1, ]
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    2    5    8
+## [2,]    3    6    9
+```
+
+```r
+# Con drop igual FALSE obtenemos un objeto de tipo matrix.
+M[3, , drop = F]
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    3    6    9
+```
+
+
+<!--chapter:end:04-subsetting.Rmd-->
+
+
+
+
+# **Operaciones vectorizadas.**
+
+La idea de las operaciones vectorizadas es que los cálculos se pueden hacer en paralelo.
+
+Muchas de las operaciones en R son *vectorizadas*, esto hace que el código sea mucho más eficiente, fácil de escribir y leer.
+
+Suma de dos vectores
+
+```r
+x <- 1:4
+y <- 6:9
+x
+```
+
+```
+## [1] 1 2 3 4
+```
+
+```r
+y
+```
+
+```
+## [1] 6 7 8 9
+```
+
+En otros lenguajes
+
+```r
+z <- vector("numeric", length = length(x))
+for (i in 1:length(x)) {
+  z[i] <- x[i] + y[i]
+}
+z
+```
+
+```
+## [1]  7  9 11 13
+```
+
+En R
+
+```r
+x + y
+```
+
+```
+## [1]  7  9 11 13
+```
+
+Otras operaciones
+
+```r
+x > 2
+```
+
+```
+## [1] FALSE FALSE  TRUE  TRUE
+```
+
+```r
+y == 8
+```
+
+```
+## [1] FALSE FALSE  TRUE FALSE
+```
+
+```r
+x * y
+```
+
+```
+## [1]  6 14 24 36
+```
+
+```r
+x / y
+```
+
+```
+## [1] 0.1666667 0.2857143 0.3750000 0.4444444
+```
+
+Similar para matrices
+
+
+```r
+x <- matrix(1:4, 2, 2)
+y <- matrix(rep(10, 4), 2, 2)  ## rep(x, n) repite el objeto x n veces.
+
+x
+```
+
+```
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+```
+
+```r
+y # imprimir las matrices
+```
+
+```
+##      [,1] [,2]
+## [1,]   10   10
+## [2,]   10   10
+```
+
+```r
+x * y ## multiplicación entrada por entrada
+```
+
+```
+##      [,1] [,2]
+## [1,]   10   30
+## [2,]   20   40
+```
+
+```r
+x / y ## división entrada por entrada
+```
+
+```
+##      [,1] [,2]
+## [1,]  0.1  0.3
+## [2,]  0.2  0.4
+```
+
+```r
+x %*% y ## multiplicación matricial
+```
+
+```
+##      [,1] [,2]
+## [1,]   40   40
+## [2,]   60   60
+```
+
+
+
+<!--chapter:end:05-operaciones-vectorizadas.Rmd-->
+
+
+# **Estructuras de control en R**
+
+Las estructuras de control nos permiten controlar el flujo de ejecución de una secuencia de comandos. 
+De este modo, podemos poner «lógica» en el código de R y lograr así reutilizar fragmentos de código una y otra vez.
+
+Las estructuras de control más utilizadas son:
+
+- if, else: permite decidir si ejecutar o no un fragmento de código en función de una condición.
+- for: ejecuta un bucle una cantidad fija de veces.
+- while: ejecuta un bucle mientras sea verdadera una condición.
+- repeat: ejecuta un bucle indefinidamente. (la única forma de detener esta estructura es mediante el comando break).
+- break: detiene la ejecución de un bucle.
+- next: salta a la siguiente ejecución de un bucle.
+- return: permite salir de la función.
+
+La mayoría de estas no son usadas escribimos código directo en la consola, sino cuando escribimos funciones o expresiones largas. En la próxima clase veremos como trabajar con funcionar en R, pero es necesario tener bases sólidas de estos conceptos pues son necesarias cada vez que queramos producir o leer código.
+
+
+## **if-else**:
+
+La combinación if-else es muy utilizada a la hora de programar. Esta estructura de control permite actuar en función de una condición. 
+La sintaxis es la siguiente
+
+
+
+```r
+if(<condicion>) {
+  ## bloque de código
+}
+```
+
+
+
+```r
+if(<condicion>) {
+  ## bloque de código
+} else {
+  ## otro bloque de código
+}
+```
+
+
+```r
+if(<condition1>) {
+  ## bloque de código
+} else if(<condicion2>) {
+  ## otro bloque de código
+} else {
+  ## otro bloque de código
+}
+```
+
+Ejemplo
+
+
+```r
+x <- runif(1, 1, 10)
+y <- 0
+
+if (x > 5) {
+  y <- 10
+}
+x
+```
+
+```
+## [1] 1.679069
+```
+
+```r
+y
+```
+
+```
+## [1] 0
+```
+
+
+
+```r
+tipo.cambio <- 585.6
+
+moneda.deuda <- sample(c("CRC", "USD"), 1)
+
+saldo.deuda <- runif(1, 1, 1000)
+
+saldo.deuda
+```
+
+```
+## [1] 104.3849
+```
+
+```r
+moneda.deuda
+```
+
+```
+## [1] "CRC"
+```
+
+```r
+if (moneda.deuda == "USD") {
+  saldo.deuda <- saldo.deuda * tipo.cambio
+}
+
+
+saldo.deuda
+```
+
+```
+## [1] 104.3849
+```
+
+
+
+```r
+estado.mora <- c("")
+
+dias.mora <- sample(85:100, 1) # sample(x,m), genera m números aleatorios tomados del objeto x.
+
+dias.mora
+```
+
+```
+## [1] 85
+```
+
+```r
+if (dias.mora > 90) {
+  estado.mora <- "Mora 90"
+} else {
+  estado.mora <- "Normal"
+}
+
+estado.mora
+```
+
+```
+## [1] "Normal"
+```
+
+
+
+```r
+estado.mora <- c("")
+
+dias.mora <- sample(85:145, 1) # sample(x,m), genera m números aleatorios tomados del objeto x.
+
+dias.mora
+```
+
+```
+## [1] 119
+```
+
+```r
+if (dias.mora > 120) {
+  estado.mora <- "Cobro Judicial"
+} else if (90 > dias.mora) {
+  estado.mora <- "Normal"
+} else {
+  estado.mora <- "Mora 90"
+}
+
+estado.mora
+```
+
+```
+## [1] "Mora 90"
+```
+
+
+**ifelse()** es una función que nos permite escribir de forma más compacta la estructura if-else.
+
+
+```r
+saldo.deuda <- ifelse(moneda.deuda == "USD", saldo.deuda * tipo.cambio, saldo.deuda)
+
+saldo.deuda
+```
+
+```
+## [1] 104.3849
+```
+
+## **for loop**
+
+Los bucles **for** se utilizan para recorrer .
+
+
+```r
+for(<variable> in <objeto iterable>) {
+  # código
+  ...
+}
+```
+
+Recorrer por índice.
+
+```r
+meses <- c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre")
+
+for (i in 1:6) {
+  print(meses[i])
+}
+```
+
+```
+## [1] "Enero"
+## [1] "Febrero"
+## [1] "Marzo"
+## [1] "Abril"
+## [1] "Mayo"
+## [1] "Junio"
+```
+
+La función **seq_along()** es muy utilizada en los ciclos for, para poder generar una secuencia de enteros basada en el tamaño del objeto sobre el que queremos iterar.
+
+
+```r
+for (i in seq_along(meses)) {
+  print(meses[i])
+}
+```
+
+```
+## [1] "Enero"
+## [1] "Febrero"
+## [1] "Marzo"
+## [1] "Abril"
+## [1] "Mayo"
+## [1] "Junio"
+## [1] "Julio"
+## [1] "Agosto"
+## [1] "Setiembre"
+## [1] "Octubre"
+## [1] "Noviembre"
+## [1] "Diciembre"
+```
+
+Recorrer los elementos.
+
+```r
+for (mes in meses) {
+  print(mes)
+}
+```
+
+```
+## [1] "Enero"
+## [1] "Febrero"
+## [1] "Marzo"
+## [1] "Abril"
+## [1] "Mayo"
+## [1] "Junio"
+## [1] "Julio"
+## [1] "Agosto"
+## [1] "Setiembre"
+## [1] "Octubre"
+## [1] "Noviembre"
+## [1] "Diciembre"
+```
+
+
+## **while loop**
+
+Los ciclos while comienzan revisando una condición, si se cumple inicia el ciclo y se repite hasta que la condición no se cumpla.
+
+
+```r
+contador <- 0
+
+while (contador < 5) {
+  print(contador)
+  contador <- contador + 1
+
+}
+```
+
+```
+## [1] 0
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+```
+
+Caminata aleatoria
+
+
+```r
+z <- 5
+
+set.seed(1)
+
+while (z >= 3 && z <= 10) {
+  moneda <- rbinom(1, 1, 0.5)
+
+  if (moneda == 1) { ## Paso hacia la derecha
+    z <- z + 1
+  } else {          ## Paso hacia la izquierda
+    z <- z - 1
+  }
+}
+
+z
+```
+
+```
+## [1] 2
+```
+
+
+## **repeat, next, break**
+
+**repeat** inicia un ciclo infinito. La única forma de terminar o de salir de un ciclo **repeat** es mediante la instrucción **break**. No son muy comunes a la hora de hacer análisis de datos, pero vale la pena mencionarlos pues se pueden utilizar para algoritmos que busquen una solución con cierto de nivel de tolerancia, ya que en estos casos no se puede saber de ante mano cuantas iteraciones se necesitan.
+
+
+```r
+x0 <- 1
+
+tol <- 1e-10
+
+repeat{
+
+
+  x1 <- algoritmoEstimacion() ## Se calcula el estimado
+
+  if (abs(x1 - x0) < tol) { ## Se hace el test
+    break
+  } else {   ## Continua
+
+    x0 <- x1
+  }
+
+}
+```
+
+**next**: Se utiliza para avanzar a la siguiente iteración del ciclo.
+**break**: Se utiliza para salir del ciclo inmediatamente.
+
+
+<!--chapter:end:06-estructuras-de-control.Rmd-->
+
+
+
+# **Importación de datos**
+
+Algunas de las funciones base en R para la lectura datos son:
+
+- **read.table** , **read.csv**, se utilizan para leer datos que tienen formato de tabla.
+
+
+### **read.table**
+
+
+```r
+read.table(file = archivo[, header = TRUE | FALSE,
+  sep = separadorDatos, dec = separadorDecimal,
+  quote = delimitadorCadenas,
+  stringsAsFactors = TRUE | FALSE])
+```
+Esta es la función genérica para leer datos en formato .csv y genera , algunos de sus argumentos son:
+
+- **file**: El nombre del archivo o su ubicación.
+- **header**: Variable lógica que indica si el archivo tiene encabezado.
+- **sep**: String que indica como están separadas las columnas.
+- **dec**: Para datos numéricos, establece cuál es el separador entre parte entera
+y decimal.
+- **colClasses**: Vector con las clases de cada una de las columnas.
+- **stringsAsFactors**: Indica si las variables de tipo character se deben leer como factor.
+
+**Leer documentación de la función read.table**.
+
+### **read.csv**
+
+Es una implementación especializada de read.table() en la que se asume
+que los parámetros header, sep y dec toman los valores TRUE, "," y ".", respectivamente.  
+
+
+
+
+
+```r
+portafolio.banco <- read.csv("data/ArchivoInsumoBanco20200630.csv", sep = ";", dec = ".", na.strings = c("", "NA"))
+
+str(portafolio.banco)
+```
+
+```
+## 'data.frame':	872 obs. of  20 variables:
+##  $ CATEGORIANIIF    : chr  "COSTO AMORTIZADO" "COSTO AMORTIZADO" "COSTO AMORTIZADO" "COSTO AMORTIZADO" ...
+##  $ MONEDA           : chr  "CRC" "CRC" "CRC" "CRC" ...
+##  $ CARTERA          : chr  "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" ...
+##  $ EMISOR           : chr  "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" ...
+##  $ NEMOEMISOR       : chr  "BCCR" "BCCR" "BCCR" "BCCR" ...
+##  $ NEMOTECNICO      : chr  "bem" "bem" "bem" "bem" ...
+##  $ ISIN             : chr  "CRBCCR0B4270" "CRBCCR0B4270" "CRBCCR0B4270" "CRBCCR0B4296" ...
+##  $ COMPRA           : chr  "12/11/2019" "12/13/2019" "12/17/2019" "12/06/2019" ...
+##  $ VENCIMIENTO      : chr  "03/10/2021" "03/10/2021" "03/10/2021" "03/09/2022" ...
+##  $ MONTOFACIAL      : num  5.00e+08 5.55e+08 5.00e+08 5.00e+08 1.50e+07 ...
+##  $ REFERENCIA       : chr  "TV2940-1" "TV2973-1" "TV3003-1" "TV2906-1" ...
+##  $ CODINVENTARIO    : int  11897 11936 11968 11863 11404 12273 12286 11647 11649 11658 ...
+##  $ CALIFICADORASUGEF: chr  "S&P INTER." "S&P INTER." "S&P INTER." "S&P INTER." ...
+##  $ CALIFICACIONSUGEF: chr  "B" "B" "B" "B" ...
+##  $ MOODYS           : chr  "B2" "B2" "B2" "B2" ...
+##  $ S.P              : chr  "B" "B" "B" "B" ...
+##  $ FITCH.CRI        : chr  NA NA NA NA ...
+##  $ FITCH.INTER.     : chr  "B+" "B+" "B+" "B+" ...
+##  $ SCRC             : chr  NA NA NA NA ...
+##  $ VMKTCRC          : num  5.30e+08 5.89e+08 5.31e+08 5.43e+08 1.55e+07 ...
+```
+
+```r
+portafolio.banco <- portafolio.banco %>% rename(FECHA.COMPRA = COMPRA, FECHA.VENC = VENCIMIENTO)
+```
+
+
+### **read_excel**
+
+Esta se utiliza para leer datos de excel, algunos de sus argumentos son:
+
+
+- **path**: Ruta del archivo.
+- **sheet**: Hoja del excel que se desea leer, por defecto es la primera.
+- **range**: Rango de celdas que se desean leer.
+- **col_types**: Vector con las clases de cada una de las columnas.
+- **col_names**: Indica si la primera fila corresponde al nombre de las columnas.
+
+
+
+```r
+library(readxl)
+
+
+portafolio.BNValores <- read_excel("data/Portafolio BN Valores Junio.xlsx")
+
+portafolio.BNValores_top10 <- head(portafolio.BNValores, 10) ## head(data,n) retorna las primeras n filas de nuestro data frame
+
+portafolio.BNValores_top10
+```
+
+```
+## # A tibble: 10 x 46
+##    Fecha                Boleta Bol.Nueva `Moneda Facial` `Moneda Liquida` ISIN 
+##    <dttm>                <dbl>     <dbl> <chr>           <chr>            <chr>
+##  1 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
+##  2 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
+##  3 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
+##  4 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  5 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  6 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  7 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  8 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  9 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+## 10 2020-06-30 00:00:00 1.80e10   1.80e10 Colones         Colones          CRG0~
+## # ... with 40 more variables: Emisor <chr>, Instrumento <chr>, Serie <chr>,
+## #   Tasa <dbl>, Tas.Diaria <dbl>, Mto.Facial <dbl>, Mto.Liquidar <dbl>,
+## #   Mto.Libros <dbl>, Mto.Mercado <dbl>, Mto.Gand.Perd. <dbl>,
+## #   Mto.Ganancia <dbl>, Mto.Perdida <dbl>, Mto.Gan.Imp.Dif. <dbl>,
+## #   Mto.Per.Imp.Dif. <dbl>, `Mto. Deterioro Valor` <lgl>, Mto.Precio <dbl>,
+## #   MTo.Pre.Merc. <dbl>, Mto.Int.Compra <dbl>, Mto.Int.Diario <dbl>,
+## #   Mto.Int.Acum. <dbl>, Diferencial <dbl>, Mto.Desc.Diario <dbl>,
+## #   Mto.Desc.Acum. <dbl>, Mto.Prim.Diario <dbl>, Mto.PrimAcum <dbl>,
+## #   Fec.Liquida <dttm>, Fec.Vencimi. <dttm>, Fec.Ult.Pago <dttm>,
+## #   Fec.Pro.Pago <dttm>, Num.Dia.Acum. <dbl>, Num_Dia.Venc. <dbl>,
+## #   Num.Dia.Oper. <dbl>, `Cód. Modelo Negocio` <chr>, `Nombre Modelo
+## #   Negocio` <chr>, `Prueba SPPI` <chr>, `Tipo Tasa Interes` <chr>, Tipo <chr>,
+## #   Tip.Cambio <dbl>, Grupo <chr>, Sector <chr>
+```
+
+
+### **Calculando requisitos de memoria**.
+
+Si queremos leer un archivo con 1.500.000 filas y 120 columnas, donde todas son de tipo numérico, realizamos el siguiente cálculo
+
+
+\begin{align*}
+1,500,000\times120\times 8 (bytes)\\
+=&1.44\times10^9 (bytes)\\
+=&1.44\times10^9 / 2^{20} (MB)\\
+=&1,373 (MB)\\
+=&1.34 (GB)\\
+\end{align*}
+
+por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB de RAM en nuestra computadora.
+
+
+<!--chapter:end:07-importacion-de-datos.Rmd-->
 

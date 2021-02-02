@@ -1,0 +1,242 @@
+# **Estructuras de control en R**
+
+Las estructuras de control nos permiten controlar el flujo de ejecución de una secuencia de comandos. 
+De este modo, podemos poner «lógica» en el código de R y lograr así reutilizar fragmentos de código una y otra vez.
+
+Las estructuras de control más utilizadas son:
+
+- if, else: permite decidir si ejecutar o no un fragmento de código en función de una condición.
+- for: ejecuta un bucle una cantidad fija de veces.
+- while: ejecuta un bucle mientras sea verdadera una condición.
+- repeat: ejecuta un bucle indefinidamente. (la única forma de detener esta estructura es mediante el comando break).
+- break: detiene la ejecución de un bucle.
+- next: salta a la siguiente ejecución de un bucle.
+- return: permite salir de la función.
+
+La mayoría de estas no son usadas escribimos código directo en la consola, sino cuando escribimos funciones o expresiones largas. En la próxima clase veremos como trabajar con funcionar en R, pero es necesario tener bases sólidas de estos conceptos pues son necesarias cada vez que queramos producir o leer código.
+
+
+## **if-else**:
+
+La combinación if-else es muy utilizada a la hora de programar. Esta estructura de control permite actuar en función de una condición. 
+La sintaxis es la siguiente
+
+
+```{r notas-curso-66, eval=FALSE}
+if(<condicion>) {
+  ## bloque de código
+}
+```
+
+
+```{r notas-curso-67, eval=FALSE}
+if(<condicion>) {
+  ## bloque de código
+} else {
+  ## otro bloque de código
+}
+```
+
+```{r notas-curso-68, eval=FALSE}
+if(<condition1>) {
+  ## bloque de código
+} else if(<condicion2>) {
+  ## otro bloque de código
+} else {
+  ## otro bloque de código
+}
+
+```
+
+Ejemplo
+
+```{r notas-curso-69}
+x<-runif(1,1,10)
+y<-0
+
+if(x>5){
+  y<-10
+}
+x
+y
+```
+
+
+```{r notas-curso-70}
+tipo.cambio <- 585.6
+
+moneda.deuda <- sample(c("CRC","USD"),1)
+
+saldo.deuda <- runif(1,1,1000)
+
+saldo.deuda
+moneda.deuda
+
+if(moneda.deuda=="USD"){
+  saldo.deuda = saldo.deuda*tipo.cambio
+}
+
+
+saldo.deuda
+
+```
+
+
+```{r notas-curso-71}
+
+estado.mora <- c("")
+
+dias.mora <- sample(85:100,1) # sample(x,m), genera m números aleatorios tomados del objeto x.
+
+dias.mora
+
+if(dias.mora > 90){
+  estado.mora <- "Mora 90"
+} else {
+  estado.mora <- "Normal"
+}
+
+estado.mora
+
+```
+
+
+```{r notas-curso-72}
+
+estado.mora <- c("")
+
+dias.mora <- sample(85:145,1) # sample(x,m), genera m números aleatorios tomados del objeto x.
+
+dias.mora
+
+if(dias.mora > 120){
+  estado.mora <- "Cobro Judicial"
+} else if(90 >dias.mora ) {
+  estado.mora <- "Normal"
+} else{ 
+  estado.mora <- "Mora 90"
+  }
+
+estado.mora
+
+
+```
+
+
+**ifelse()** es una función que nos permite escribir de forma más compacta la estructura if-else.
+
+```{r notas-curso-73}
+saldo.deuda <- ifelse(moneda.deuda=="USD",saldo.deuda*tipo.cambio,saldo.deuda)
+
+saldo.deuda
+
+```
+
+## **for loop**
+
+Los bucles **for** se utilizan para recorrer .
+
+```{r notas-curso-74, eval=FALSE}
+
+for(<variable> in <objeto iterable>) {
+  # código
+  ...
+}
+
+```
+
+Recorrer por índice.
+```{r notas-curso-75}
+meses <- c("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre","Noviembre","Diciembre")
+
+for (i in 1:6) {
+  print(meses[i])
+}
+
+```
+
+La función **seq_along()** es muy utilizada en los ciclos for, para poder generar una secuencia de enteros basada en el tamaño del objeto sobre el que queremos iterar.
+
+```{r notas-curso-76}
+
+for (i in seq_along(meses)) {
+   print(meses[i])
+}
+
+```
+
+Recorrer los elementos.
+```{r notas-curso-77}
+for (mes in meses) {
+  print(mes)
+}
+```
+
+
+## **while loop**
+
+Los ciclos while comienzan revisando una condición, si se cumple inicia el ciclo y se repite hasta que la condición no se cumpla.
+
+```{r notas-curso-78}
+contador <-0
+
+while (contador < 5) {
+  print(contador)
+  contador <- contador +1
+  
+}
+
+```
+
+Caminata aleatoria
+
+```{r notas-curso-79}
+
+z <- 5
+
+set.seed(1)
+
+while(z >= 3 && z <= 10) {
+  moneda <- rbinom(1, 1, 0.5) 
+  
+  if(moneda == 1) { ##Paso hacia la derecha
+    z <- z + 1
+  } else {          ##Paso hacia la izquierda
+    z <- z - 1
+  }
+}
+
+z
+```
+
+
+## **repeat, next, break**
+
+**repeat** inicia un ciclo infinito. La única forma de terminar o de salir de un ciclo **repeat** es mediante la instrucción **break**. No son muy comunes a la hora de hacer análisis de datos, pero vale la pena mencionarlos pues se pueden utilizar para algoritmos que busquen una solución con cierto de nivel de tolerancia, ya que en estos casos no se puede saber de ante mano cuantas iteraciones se necesitan.
+
+```{r notas-curso-80, eval=FALSE}
+x0 <- 1
+
+tol <-1e-10
+
+repeat{
+  
+  
+  x1 <- algoritmoEstimacion() ## Se calcula el estimado
+  
+  if(abs(x1-x0) < tol){ ## Se hace el test
+    break
+  } else{   ## Continua
+    
+  x0<-x1
+  }
+  
+}
+
+
+
+```
+
+**next**: Se utiliza para avanzar a la siguiente iteración del ciclo.
+**break**: Se utiliza para salir del ciclo inmediatamente.
+

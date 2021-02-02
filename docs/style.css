@@ -6,8 +6,10 @@ p code {
   white-space: inherit;
 }
 pre {
-  word-break: normal;
-  word-wrap: normal;
+margin-top: 0;
+max-width: 95%;
+border: 1px solid #ccc;
+white-space: pre-wrap;
 }
 pre code {
   white-space: inherit;

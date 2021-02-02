@@ -1,0 +1,62 @@
+
+
+# **Operaciones vectorizadas.**
+
+La idea de las operaciones vectorizadas es que los cálculos se pueden hacer en paralelo.
+
+Muchas de las operaciones en R son *vectorizadas*, esto hace que el código sea mucho más eficiente, fácil de escribir y leer.
+
+Suma de dos vectores
+```{r notas-curso-60}
+x <- 1:4
+y<- 6:9
+x;y
+
+```
+
+En otros lenguajes
+```{r notas-curso-61}
+z=vector("numeric", length = length(x))
+for (i in 1:length(x)){
+  z[i] = x[i] +y[i]
+}
+z
+```
+
+En R
+```{r notas-curso-62}
+x+y
+```
+
+Otras operaciones
+```{r notas-curso-63}
+x>2
+
+y==8
+
+x*y
+
+x/y
+```
+
+Similar para matrices
+
+```{r notas-curso-64}
+
+x<- matrix(1:4,2,2) 
+y <- matrix(rep(10,4),2,2)  ## rep(x, n) repite el objeto x n veces.
+
+x;y # imprimir las matrices
+
+```
+```{r notas-curso-65}
+x*y ## multiplicación entrada por entrada
+
+x/y ## división entrada por entrada
+
+
+x%*%y ## multiplicación matricial 
+
+```
+
+
