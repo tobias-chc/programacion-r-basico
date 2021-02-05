@@ -190,7 +190,7 @@
 
 \title{Notas Curso Básico R}
 \author{Tobías Chavarría}
-\date{Actualizado el 02 Feb, 2021}
+\date{Actualizado el 05 Feb, 2021}
 
 \begin{document}
 \maketitle
@@ -1502,92 +1502,6 @@ Esto también es válido pero es más lardo de escribir.
 ## [1] 27 26 29 23
 \end{verbatim}
 
-\hypertarget{subsetting-listas}{%
-\section{\texorpdfstring{\textbf{Subsetting listas}}{Subsetting listas}}\label{subsetting-listas}}
-
-Para acceder a elementos de las listas podemos usar \textbf{\$} o doble corchete \textbf{{[}{[} {]}{]}}, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datos.cliente }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{Nombre =} \FunctionTok{c}\NormalTok{(}\StringTok{"Lucas"}\NormalTok{, }\StringTok{"Luis"}\NormalTok{, }\StringTok{"Diego"}\NormalTok{), }\AttributeTok{Edad =} \FunctionTok{c}\NormalTok{(}\DecValTok{33}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{20}\NormalTok{), }\AttributeTok{Tarjeta.Credito =} \FunctionTok{c}\NormalTok{(T, F, T))}
-
-\NormalTok{datos.cliente}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $Nombre
-## [1] "Lucas" "Luis"  "Diego"
-## 
-## $Edad
-## [1] 33 50 20
-## 
-## $Tarjeta.Credito
-## [1]  TRUE FALSE  TRUE
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datos.cliente}\SpecialCharTok{$}\NormalTok{Nombre}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "Lucas" "Luis"  "Diego"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datos.cliente}\SpecialCharTok{$}\NormalTok{Edad}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 33 50 20
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datos.cliente}\SpecialCharTok{$}\NormalTok{Tarjeta.Credito}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1]  TRUE FALSE  TRUE
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datos.cliente[[}\DecValTok{1}\NormalTok{]]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "Lucas" "Luis"  "Diego"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datos.cliente[[}\DecValTok{2}\NormalTok{]]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 33 50 20
-\end{verbatim}
-
-Si queremos el valor i del elemento j escribimos \[lista[[j]][i]\]
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datos.cliente[[}\DecValTok{3}\NormalTok{]][}\DecValTok{1}\NormalTok{] }\DocumentationTok{\#\# Valor 1 del elemento 3.}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] TRUE
-\end{verbatim}
-
 \hypertarget{subsetting-matrices}{%
 \section{\texorpdfstring{\textbf{Subsetting matrices}}{Subsetting matrices}}\label{subsetting-matrices}}
 
@@ -1675,6 +1589,181 @@ respectivamente.
 \begin{verbatim}
 ##      [,1] [,2] [,3]
 ## [1,]    3    6    9
+\end{verbatim}
+
+\hypertarget{subsetting-data-frames}{%
+\section{\texorpdfstring{\textbf{Subsetting data frames}}{Subsetting data frames}}\label{subsetting-data-frames}}
+
+Para extraer ``trozos'' de un data frame por filas y columnas (funciona exactamente igual que en matrices) donde \(n\) y \(m\) pueden definirse como:
+
+\begin{itemize}
+\tightlist
+\item
+  intervalos
+\item
+  condiciones
+\item
+  números naturales
+\item
+  no poner nada
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars[}\DecValTok{1}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           mpg cyl disp  hp drat   wt  qsec vs am gear carb
+## Mazda RX4  21   6  160 110  3.9 2.62 16.46  0  1    4    4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                mpg cyl disp  hp
+## Mazda RX4     21.0   6  160 110
+## Mazda RX4 Wag 21.0   6  160 110
+## Datsun 710    22.8   4  108  93
+\end{verbatim}
+
+Para extraer a solo una variable (columna) del data frame podemos utilizar el simbolo de dólar ``\$.''
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars}\SpecialCharTok{$}\NormalTok{hp}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 110 110  93 110 175 105 245  62  95 123 123 180 180 180 205 215 230  66  52
+## [20]  65  97 150 150 245 175  66  91 113 264 175 335 109
+\end{verbatim}
+
+Para hacer filtros podemos combinar los dos métodos anteriores:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars[mtcars}\SpecialCharTok{$}\NormalTok{hp }\SpecialCharTok{\textgreater{}} \DecValTok{100}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+\end{verbatim}
+
+\hypertarget{subsetting-listas}{%
+\section{\texorpdfstring{\textbf{Subsetting listas}}{Subsetting listas}}\label{subsetting-listas}}
+
+Para acceder a elementos de las listas podemos usar \textbf{\$} o doble corchete \textbf{{[}{[} {]}{]}}, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos.cliente }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{Nombre =} \FunctionTok{c}\NormalTok{(}\StringTok{"Lucas"}\NormalTok{, }\StringTok{"Luis"}\NormalTok{, }\StringTok{"Diego"}\NormalTok{), }\AttributeTok{Edad =} \FunctionTok{c}\NormalTok{(}\DecValTok{33}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{20}\NormalTok{), }\AttributeTok{Tarjeta.Credito =} \FunctionTok{c}\NormalTok{(T, F, T))}
+
+\NormalTok{datos.cliente}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Nombre
+## [1] "Lucas" "Luis"  "Diego"
+## 
+## $Edad
+## [1] 33 50 20
+## 
+## $Tarjeta.Credito
+## [1]  TRUE FALSE  TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos.cliente}\SpecialCharTok{$}\NormalTok{Nombre}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Lucas" "Luis"  "Diego"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos.cliente}\SpecialCharTok{$}\NormalTok{Edad}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 33 50 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos.cliente}\SpecialCharTok{$}\NormalTok{Tarjeta.Credito}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos.cliente[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Lucas" "Luis"  "Diego"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos.cliente[[}\DecValTok{2}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 33 50 20
+\end{verbatim}
+
+Si queremos el valor i del elemento j escribimos \[lista[[j]][i]\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos.cliente[[}\DecValTok{3}\NormalTok{]][}\DecValTok{1}\NormalTok{] }\DocumentationTok{\#\# Valor 1 del elemento 3.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
 \end{verbatim}
 
 \hypertarget{operaciones-vectorizadas.}{%
@@ -2381,5 +2470,151 @@ Si queremos leer un archivo con 1.500.000 filas y 120 columnas, donde todas son 
 \end{align*}
 
 por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB de RAM en nuestra computadora.
+
+\hypertarget{funciones}{%
+\chapter{\texorpdfstring{\textbf{Funciones}}{Funciones}}\label{funciones}}
+
+Como analistas de datos escribir funciones es una de las mejores herramientas, ya que nos permiten automatizar y estandarizar tareas, además de que hace nuestro código más legible y mucho más sencillo de mantener.
+
+La idea de este capítulo es introducir los conceptos básicos de las funciones y buenas prácticas a la hora de escribirlas.
+
+\begin{center}\includegraphics[width=1\linewidth]{images/function2} \end{center}
+
+\begin{center}\includegraphics[width=1\linewidth]{images/function} \end{center}
+
+Sintaxis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nombre.funcion }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\SpecialCharTok{\textless{}}\NormalTok{entradas}\SpecialCharTok{\textgreater{}}\NormalTok{)\{}
+  
+  \DocumentationTok{\#\#Cuerpo de la función}
+  
+\NormalTok{  return }\SpecialCharTok{\textless{}}\NormalTok{resultado}\SpecialCharTok{\textgreater{}}
+  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Ejemplos:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Función que calcula el area de un triángulo dada su base y su altura.}
+
+
+\CommentTok{\# Parámetros}
+\DocumentationTok{\#\# base : Base del triángulo.}
+\DocumentationTok{\#\# altura: Altura del triángulo}
+
+\CommentTok{\# Resultado}
+\DocumentationTok{\#\# area: Área del triángulo.}
+
+\NormalTok{area.triangulo }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(base, altura) \{}
+\NormalTok{  area }\OtherTok{\textless{}{-}}\NormalTok{ (base }\SpecialCharTok{*}\NormalTok{ altura) }\SpecialCharTok{/} \DecValTok{2}
+  \FunctionTok{return}\NormalTok{(area)}
+\NormalTok{\}}
+
+\FunctionTok{area.triangulo}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+Una persona desea sacar un préstamo, de \(P\) colones a una tasa de interés mensual \(i\). El préstamo tiene que ser reembolsado en \(n\) cuotas mensuales de tamaño \(C\), comenzando dentro de un mes. El problema es calcular \(C\). La fórmula \(C\) es:
+
+\[
+C = P\cdot\bigg(\dfrac{i}{1-(1+i)^{-n}}\bigg)
+\]
+
+Supongamos que \(P=150000\), que la tasa de interés es del \(2\%\) y que le número de pagos es \(10\). EL código en \textbf{R} sería:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tasa.interes }\OtherTok{\textless{}{-}} \FloatTok{0.02}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{principal }\OtherTok{\textless{}{-}} \DecValTok{150000}
+\NormalTok{pago }\OtherTok{\textless{}{-}}\NormalTok{ principal }\SpecialCharTok{*}\NormalTok{ tasa.interes }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ tasa.interes)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{n))}
+\NormalTok{pago}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16698.98
+\end{verbatim}
+
+Utilizando una función:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parámetros}
+\DocumentationTok{\#\# tasa.interes : Tasa de interés mensual del préstamo}
+\DocumentationTok{\#\# n: Número de cuotas}
+\DocumentationTok{\#\# principal: Monto del préstamo}
+
+\CommentTok{\# Resultado}
+\DocumentationTok{\#\# pago: Cuota del préstamo.}
+
+
+\NormalTok{calcula.cuota }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(tasa.interes, n, principal) \{}
+\NormalTok{  pago }\OtherTok{\textless{}{-}}\NormalTok{ principal }\SpecialCharTok{*}\NormalTok{ tasa.interes }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ tasa.interes)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{n))}
+  \FunctionTok{return}\NormalTok{(pago)}
+\NormalTok{\}}
+
+
+\FunctionTok{calcula.cuota}\NormalTok{(}\FloatTok{0.02}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{150000}\NormalTok{) }\DocumentationTok{\#\# Orden por defecto}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16698.98
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{calcula.cuota}\NormalTok{(}\AttributeTok{n =} \DecValTok{340}\NormalTok{, }\AttributeTok{tasa.interes =} \FloatTok{0.11}\NormalTok{, }\AttributeTok{principal =} \DecValTok{3500000}\NormalTok{) }\DocumentationTok{\#\# Para cambiar el orden se especifica el nombre del parámetro}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 385000
+\end{verbatim}
+
+Ejemplo de función que retorna una lista.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parámetros}
+\DocumentationTok{\#\# DF : Data frame}
+\DocumentationTok{\#\# NC: Número de columna}
+
+\CommentTok{\# Resultado}
+\DocumentationTok{\#\# lista con nombre de la variable correspondiente al número de columna, la media, la mediana, la desviación estándar,la varianza, el máximo y el mínimo.}
+
+\NormalTok{estadisticas }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(DF, NC) \{}
+
+\NormalTok{  variable }\OtherTok{\textless{}{-}}\NormalTok{ DF[, NC]}
+\NormalTok{  nombre }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(DF)[NC]}
+
+\NormalTok{  media }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(variable)}
+\NormalTok{  mediana }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(variable)}
+\NormalTok{  deviacion }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(variable)}
+\NormalTok{  varianza }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(variable)}
+\NormalTok{  maximo }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(variable)}
+\NormalTok{  minimo }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(variable)}
+
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{Variable =}\NormalTok{ nombre, }\AttributeTok{Media =}\NormalTok{ media, }\AttributeTok{Mediana =}\NormalTok{ mediana, }\AttributeTok{DesEst =}\NormalTok{ deviacion, }\AttributeTok{Varianza =}\NormalTok{ varianza, }\AttributeTok{Maximo =}\NormalTok{ maximo, }\AttributeTok{Minimo =}\NormalTok{ minimo))}
+\NormalTok{\}}
+
+
+\FunctionTok{estadisticas}\NormalTok{(portafolio.banco, }\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in estadisticas(portafolio.banco, 20): object 'portafolio.banco' not found
+\end{verbatim}
 
 \end{document}

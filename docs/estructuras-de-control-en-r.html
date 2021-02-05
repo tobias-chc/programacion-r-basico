@@ -170,8 +170,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>6</b> <strong>Subsetting</strong></a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="subsetting.html"><a href="subsetting.html#subsetting-vectores"><i class="fa fa-check"></i><b>6.1</b> <strong>Subsetting vectores</strong></a></li>
-<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting listas</strong></a></li>
-<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-data-frames"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting data frames</strong></a></li>
+<li class="chapter" data-level="6.4" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.4</b> <strong>Subsetting listas</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="operaciones-vectorizadas-.html"><a href="operaciones-vectorizadas-.html"><i class="fa fa-check"></i><b>7</b> <strong>Operaciones vectorizadas.</strong></a></li>
 <li class="chapter" data-level="8" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html"><i class="fa fa-check"></i><b>8</b> <strong>Estructuras de control en R</strong></a>
@@ -188,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>9.0.3</b> <strong>read_excel</strong></a></li>
 <li class="chapter" data-level="9.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>9.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>10</b> <strong>Funciones</strong></a></li>
 </ul>
 
       </nav>
@@ -224,98 +226,98 @@ De este modo, podemos poner «lógica» en el código de R y lograr así reutili
 <h2><span class="header-section-number">8.1</span> <strong>if-else</strong>:</h2>
 <p>La combinación if-else es muy utilizada a la hora de programar. Esta estructura de control permite actuar en función de una condición.
 La sintaxis es la siguiente</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="estructuras-de-control-en-r.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condicion<span class="sc">&gt;</span>) {</span>
-<span id="cb179-2"><a href="estructuras-de-control-en-r.html#cb179-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
-<span id="cb179-3"><a href="estructuras-de-control-en-r.html#cb179-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="estructuras-de-control-en-r.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condicion<span class="sc">&gt;</span>) {</span>
-<span id="cb180-2"><a href="estructuras-de-control-en-r.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
-<span id="cb180-3"><a href="estructuras-de-control-en-r.html#cb180-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb180-4"><a href="estructuras-de-control-en-r.html#cb180-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
-<span id="cb180-5"><a href="estructuras-de-control-en-r.html#cb180-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="estructuras-de-control-en-r.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condition1<span class="sc">&gt;</span>) {</span>
-<span id="cb181-2"><a href="estructuras-de-control-en-r.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
-<span id="cb181-3"><a href="estructuras-de-control-en-r.html#cb181-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">&lt;</span>condicion2<span class="sc">&gt;</span>) {</span>
-<span id="cb181-4"><a href="estructuras-de-control-en-r.html#cb181-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
-<span id="cb181-5"><a href="estructuras-de-control-en-r.html#cb181-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb181-6"><a href="estructuras-de-control-en-r.html#cb181-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
-<span id="cb181-7"><a href="estructuras-de-control-en-r.html#cb181-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="estructuras-de-control-en-r.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condicion<span class="sc">&gt;</span>) {</span>
+<span id="cb187-2"><a href="estructuras-de-control-en-r.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
+<span id="cb187-3"><a href="estructuras-de-control-en-r.html#cb187-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="estructuras-de-control-en-r.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condicion<span class="sc">&gt;</span>) {</span>
+<span id="cb188-2"><a href="estructuras-de-control-en-r.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
+<span id="cb188-3"><a href="estructuras-de-control-en-r.html#cb188-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb188-4"><a href="estructuras-de-control-en-r.html#cb188-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
+<span id="cb188-5"><a href="estructuras-de-control-en-r.html#cb188-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="estructuras-de-control-en-r.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">&lt;</span>condition1<span class="sc">&gt;</span>) {</span>
+<span id="cb189-2"><a href="estructuras-de-control-en-r.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## bloque de código</span></span>
+<span id="cb189-3"><a href="estructuras-de-control-en-r.html#cb189-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">&lt;</span>condicion2<span class="sc">&gt;</span>) {</span>
+<span id="cb189-4"><a href="estructuras-de-control-en-r.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
+<span id="cb189-5"><a href="estructuras-de-control-en-r.html#cb189-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb189-6"><a href="estructuras-de-control-en-r.html#cb189-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## otro bloque de código</span></span>
+<span id="cb189-7"><a href="estructuras-de-control-en-r.html#cb189-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Ejemplo</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="estructuras-de-control-en-r.html#cb182-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span>
-<span id="cb182-2"><a href="estructuras-de-control-en-r.html#cb182-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb182-3"><a href="estructuras-de-control-en-r.html#cb182-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb182-4"><a href="estructuras-de-control-en-r.html#cb182-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">5</span>) {</span>
-<span id="cb182-5"><a href="estructuras-de-control-en-r.html#cb182-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb182-6"><a href="estructuras-de-control-en-r.html#cb182-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb182-7"><a href="estructuras-de-control-en-r.html#cb182-7" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="estructuras-de-control-en-r.html#cb190-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb190-2"><a href="estructuras-de-control-en-r.html#cb190-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb190-3"><a href="estructuras-de-control-en-r.html#cb190-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-4"><a href="estructuras-de-control-en-r.html#cb190-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">5</span>) {</span>
+<span id="cb190-5"><a href="estructuras-de-control-en-r.html#cb190-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb190-6"><a href="estructuras-de-control-en-r.html#cb190-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb190-7"><a href="estructuras-de-control-en-r.html#cb190-7" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 2.736674</code></pre>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="estructuras-de-control-en-r.html#cb184-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="estructuras-de-control-en-r.html#cb192-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="estructuras-de-control-en-r.html#cb186-1" aria-hidden="true" tabindex="-1"></a>tipo.cambio <span class="ot">&lt;-</span> <span class="fl">585.6</span></span>
-<span id="cb186-2"><a href="estructuras-de-control-en-r.html#cb186-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-3"><a href="estructuras-de-control-en-r.html#cb186-3" aria-hidden="true" tabindex="-1"></a>moneda.deuda <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;CRC&quot;</span>, <span class="st">&quot;USD&quot;</span>), <span class="dv">1</span>)</span>
-<span id="cb186-4"><a href="estructuras-de-control-en-r.html#cb186-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-5"><a href="estructuras-de-control-en-r.html#cb186-5" aria-hidden="true" tabindex="-1"></a>saldo.deuda <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1000</span>)</span>
-<span id="cb186-6"><a href="estructuras-de-control-en-r.html#cb186-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-7"><a href="estructuras-de-control-en-r.html#cb186-7" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
-<pre><code>## [1] 730.3006</code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="estructuras-de-control-en-r.html#cb188-1" aria-hidden="true" tabindex="-1"></a>moneda.deuda</span></code></pre></div>
-<pre><code>## [1] &quot;USD&quot;</code></pre>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="estructuras-de-control-en-r.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (moneda.deuda <span class="sc">==</span> <span class="st">&quot;USD&quot;</span>) {</span>
-<span id="cb190-2"><a href="estructuras-de-control-en-r.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  saldo.deuda <span class="ot">&lt;-</span> saldo.deuda <span class="sc">*</span> tipo.cambio</span>
-<span id="cb190-3"><a href="estructuras-de-control-en-r.html#cb190-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb190-4"><a href="estructuras-de-control-en-r.html#cb190-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-5"><a href="estructuras-de-control-en-r.html#cb190-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-6"><a href="estructuras-de-control-en-r.html#cb190-6" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
-<pre><code>## [1] 427664.1</code></pre>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="estructuras-de-control-en-r.html#cb192-1" aria-hidden="true" tabindex="-1"></a>estado.mora <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>)</span>
-<span id="cb192-2"><a href="estructuras-de-control-en-r.html#cb192-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-3"><a href="estructuras-de-control-en-r.html#cb192-3" aria-hidden="true" tabindex="-1"></a>dias.mora <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">85</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span>) <span class="co"># sample(x,m), genera m números aleatorios tomados del objeto x.</span></span>
-<span id="cb192-4"><a href="estructuras-de-control-en-r.html#cb192-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-5"><a href="estructuras-de-control-en-r.html#cb192-5" aria-hidden="true" tabindex="-1"></a>dias.mora</span></code></pre></div>
-<pre><code>## [1] 99</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="estructuras-de-control-en-r.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dias.mora <span class="sc">&gt;</span> <span class="dv">90</span>) {</span>
-<span id="cb194-2"><a href="estructuras-de-control-en-r.html#cb194-2" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Mora 90&quot;</span></span>
-<span id="cb194-3"><a href="estructuras-de-control-en-r.html#cb194-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb194-4"><a href="estructuras-de-control-en-r.html#cb194-4" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Normal&quot;</span></span>
-<span id="cb194-5"><a href="estructuras-de-control-en-r.html#cb194-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="estructuras-de-control-en-r.html#cb194-1" aria-hidden="true" tabindex="-1"></a>tipo.cambio <span class="ot">&lt;-</span> <span class="fl">585.6</span></span>
+<span id="cb194-2"><a href="estructuras-de-control-en-r.html#cb194-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-3"><a href="estructuras-de-control-en-r.html#cb194-3" aria-hidden="true" tabindex="-1"></a>moneda.deuda <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;CRC&quot;</span>, <span class="st">&quot;USD&quot;</span>), <span class="dv">1</span>)</span>
+<span id="cb194-4"><a href="estructuras-de-control-en-r.html#cb194-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-5"><a href="estructuras-de-control-en-r.html#cb194-5" aria-hidden="true" tabindex="-1"></a>saldo.deuda <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1000</span>)</span>
 <span id="cb194-6"><a href="estructuras-de-control-en-r.html#cb194-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-7"><a href="estructuras-de-control-en-r.html#cb194-7" aria-hidden="true" tabindex="-1"></a>estado.mora</span></code></pre></div>
+<span id="cb194-7"><a href="estructuras-de-control-en-r.html#cb194-7" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
+<pre><code>## [1] 730.3006</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="estructuras-de-control-en-r.html#cb196-1" aria-hidden="true" tabindex="-1"></a>moneda.deuda</span></code></pre></div>
+<pre><code>## [1] &quot;USD&quot;</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="estructuras-de-control-en-r.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (moneda.deuda <span class="sc">==</span> <span class="st">&quot;USD&quot;</span>) {</span>
+<span id="cb198-2"><a href="estructuras-de-control-en-r.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  saldo.deuda <span class="ot">&lt;-</span> saldo.deuda <span class="sc">*</span> tipo.cambio</span>
+<span id="cb198-3"><a href="estructuras-de-control-en-r.html#cb198-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb198-4"><a href="estructuras-de-control-en-r.html#cb198-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-5"><a href="estructuras-de-control-en-r.html#cb198-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-6"><a href="estructuras-de-control-en-r.html#cb198-6" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
+<pre><code>## [1] 427664.1</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="estructuras-de-control-en-r.html#cb200-1" aria-hidden="true" tabindex="-1"></a>estado.mora <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>)</span>
+<span id="cb200-2"><a href="estructuras-de-control-en-r.html#cb200-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-3"><a href="estructuras-de-control-en-r.html#cb200-3" aria-hidden="true" tabindex="-1"></a>dias.mora <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">85</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span>) <span class="co"># sample(x,m), genera m números aleatorios tomados del objeto x.</span></span>
+<span id="cb200-4"><a href="estructuras-de-control-en-r.html#cb200-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-5"><a href="estructuras-de-control-en-r.html#cb200-5" aria-hidden="true" tabindex="-1"></a>dias.mora</span></code></pre></div>
+<pre><code>## [1] 99</code></pre>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="estructuras-de-control-en-r.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dias.mora <span class="sc">&gt;</span> <span class="dv">90</span>) {</span>
+<span id="cb202-2"><a href="estructuras-de-control-en-r.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Mora 90&quot;</span></span>
+<span id="cb202-3"><a href="estructuras-de-control-en-r.html#cb202-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb202-4"><a href="estructuras-de-control-en-r.html#cb202-4" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Normal&quot;</span></span>
+<span id="cb202-5"><a href="estructuras-de-control-en-r.html#cb202-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb202-6"><a href="estructuras-de-control-en-r.html#cb202-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-7"><a href="estructuras-de-control-en-r.html#cb202-7" aria-hidden="true" tabindex="-1"></a>estado.mora</span></code></pre></div>
 <pre><code>## [1] &quot;Mora 90&quot;</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="estructuras-de-control-en-r.html#cb196-1" aria-hidden="true" tabindex="-1"></a>estado.mora <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>)</span>
-<span id="cb196-2"><a href="estructuras-de-control-en-r.html#cb196-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-3"><a href="estructuras-de-control-en-r.html#cb196-3" aria-hidden="true" tabindex="-1"></a>dias.mora <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">85</span><span class="sc">:</span><span class="dv">145</span>, <span class="dv">1</span>) <span class="co"># sample(x,m), genera m números aleatorios tomados del objeto x.</span></span>
-<span id="cb196-4"><a href="estructuras-de-control-en-r.html#cb196-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-5"><a href="estructuras-de-control-en-r.html#cb196-5" aria-hidden="true" tabindex="-1"></a>dias.mora</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="estructuras-de-control-en-r.html#cb204-1" aria-hidden="true" tabindex="-1"></a>estado.mora <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>)</span>
+<span id="cb204-2"><a href="estructuras-de-control-en-r.html#cb204-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-3"><a href="estructuras-de-control-en-r.html#cb204-3" aria-hidden="true" tabindex="-1"></a>dias.mora <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">85</span><span class="sc">:</span><span class="dv">145</span>, <span class="dv">1</span>) <span class="co"># sample(x,m), genera m números aleatorios tomados del objeto x.</span></span>
+<span id="cb204-4"><a href="estructuras-de-control-en-r.html#cb204-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-5"><a href="estructuras-de-control-en-r.html#cb204-5" aria-hidden="true" tabindex="-1"></a>dias.mora</span></code></pre></div>
 <pre><code>## [1] 88</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="estructuras-de-control-en-r.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dias.mora <span class="sc">&gt;</span> <span class="dv">120</span>) {</span>
-<span id="cb198-2"><a href="estructuras-de-control-en-r.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Cobro Judicial&quot;</span></span>
-<span id="cb198-3"><a href="estructuras-de-control-en-r.html#cb198-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="dv">90</span> <span class="sc">&gt;</span> dias.mora) {</span>
-<span id="cb198-4"><a href="estructuras-de-control-en-r.html#cb198-4" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Normal&quot;</span></span>
-<span id="cb198-5"><a href="estructuras-de-control-en-r.html#cb198-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb198-6"><a href="estructuras-de-control-en-r.html#cb198-6" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Mora 90&quot;</span></span>
-<span id="cb198-7"><a href="estructuras-de-control-en-r.html#cb198-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb198-8"><a href="estructuras-de-control-en-r.html#cb198-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-9"><a href="estructuras-de-control-en-r.html#cb198-9" aria-hidden="true" tabindex="-1"></a>estado.mora</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="estructuras-de-control-en-r.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dias.mora <span class="sc">&gt;</span> <span class="dv">120</span>) {</span>
+<span id="cb206-2"><a href="estructuras-de-control-en-r.html#cb206-2" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Cobro Judicial&quot;</span></span>
+<span id="cb206-3"><a href="estructuras-de-control-en-r.html#cb206-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="dv">90</span> <span class="sc">&gt;</span> dias.mora) {</span>
+<span id="cb206-4"><a href="estructuras-de-control-en-r.html#cb206-4" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Normal&quot;</span></span>
+<span id="cb206-5"><a href="estructuras-de-control-en-r.html#cb206-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb206-6"><a href="estructuras-de-control-en-r.html#cb206-6" aria-hidden="true" tabindex="-1"></a>  estado.mora <span class="ot">&lt;-</span> <span class="st">&quot;Mora 90&quot;</span></span>
+<span id="cb206-7"><a href="estructuras-de-control-en-r.html#cb206-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb206-8"><a href="estructuras-de-control-en-r.html#cb206-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-9"><a href="estructuras-de-control-en-r.html#cb206-9" aria-hidden="true" tabindex="-1"></a>estado.mora</span></code></pre></div>
 <pre><code>## [1] &quot;Normal&quot;</code></pre>
 <p><strong>ifelse()</strong> es una función que nos permite escribir de forma más compacta la estructura if-else.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="estructuras-de-control-en-r.html#cb200-1" aria-hidden="true" tabindex="-1"></a>saldo.deuda <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(moneda.deuda <span class="sc">==</span> <span class="st">&quot;USD&quot;</span>, saldo.deuda <span class="sc">*</span> tipo.cambio, saldo.deuda)</span>
-<span id="cb200-2"><a href="estructuras-de-control-en-r.html#cb200-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-3"><a href="estructuras-de-control-en-r.html#cb200-3" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="estructuras-de-control-en-r.html#cb208-1" aria-hidden="true" tabindex="-1"></a>saldo.deuda <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(moneda.deuda <span class="sc">==</span> <span class="st">&quot;USD&quot;</span>, saldo.deuda <span class="sc">*</span> tipo.cambio, saldo.deuda)</span>
+<span id="cb208-2"><a href="estructuras-de-control-en-r.html#cb208-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-3"><a href="estructuras-de-control-en-r.html#cb208-3" aria-hidden="true" tabindex="-1"></a>saldo.deuda</span></code></pre></div>
 <pre><code>## [1] 250440071</code></pre>
 </div>
 <div id="for-loop" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> <strong>for loop</strong></h2>
 <p>Los bucles <strong>for</strong> se utilizan para recorrer .</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="estructuras-de-control-en-r.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(<span class="sc">&lt;</span>variable<span class="sc">&gt;</span> <span class="cf">in</span> <span class="sc">&lt;</span>objeto iterable<span class="sc">&gt;</span>) {</span>
-<span id="cb202-2"><a href="estructuras-de-control-en-r.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># código</span></span>
-<span id="cb202-3"><a href="estructuras-de-control-en-r.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  ...</span>
-<span id="cb202-4"><a href="estructuras-de-control-en-r.html#cb202-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="estructuras-de-control-en-r.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(<span class="sc">&lt;</span>variable<span class="sc">&gt;</span> <span class="cf">in</span> <span class="sc">&lt;</span>objeto iterable<span class="sc">&gt;</span>) {</span>
+<span id="cb210-2"><a href="estructuras-de-control-en-r.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># código</span></span>
+<span id="cb210-3"><a href="estructuras-de-control-en-r.html#cb210-3" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb210-4"><a href="estructuras-de-control-en-r.html#cb210-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Recorrer por índice.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="estructuras-de-control-en-r.html#cb203-1" aria-hidden="true" tabindex="-1"></a>meses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Enero&quot;</span>, <span class="st">&quot;Febrero&quot;</span>, <span class="st">&quot;Marzo&quot;</span>, <span class="st">&quot;Abril&quot;</span>, <span class="st">&quot;Mayo&quot;</span>, <span class="st">&quot;Junio&quot;</span>, <span class="st">&quot;Julio&quot;</span>, <span class="st">&quot;Agosto&quot;</span>, <span class="st">&quot;Setiembre&quot;</span>, <span class="st">&quot;Octubre&quot;</span>, <span class="st">&quot;Noviembre&quot;</span>, <span class="st">&quot;Diciembre&quot;</span>)</span>
-<span id="cb203-2"><a href="estructuras-de-control-en-r.html#cb203-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-3"><a href="estructuras-de-control-en-r.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) {</span>
-<span id="cb203-4"><a href="estructuras-de-control-en-r.html#cb203-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(meses[i])</span>
-<span id="cb203-5"><a href="estructuras-de-control-en-r.html#cb203-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="estructuras-de-control-en-r.html#cb211-1" aria-hidden="true" tabindex="-1"></a>meses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Enero&quot;</span>, <span class="st">&quot;Febrero&quot;</span>, <span class="st">&quot;Marzo&quot;</span>, <span class="st">&quot;Abril&quot;</span>, <span class="st">&quot;Mayo&quot;</span>, <span class="st">&quot;Junio&quot;</span>, <span class="st">&quot;Julio&quot;</span>, <span class="st">&quot;Agosto&quot;</span>, <span class="st">&quot;Setiembre&quot;</span>, <span class="st">&quot;Octubre&quot;</span>, <span class="st">&quot;Noviembre&quot;</span>, <span class="st">&quot;Diciembre&quot;</span>)</span>
+<span id="cb211-2"><a href="estructuras-de-control-en-r.html#cb211-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-3"><a href="estructuras-de-control-en-r.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) {</span>
+<span id="cb211-4"><a href="estructuras-de-control-en-r.html#cb211-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(meses[i])</span>
+<span id="cb211-5"><a href="estructuras-de-control-en-r.html#cb211-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Enero&quot;
 ## [1] &quot;Febrero&quot;
 ## [1] &quot;Marzo&quot;
@@ -323,9 +325,9 @@ La sintaxis es la siguiente</p>
 ## [1] &quot;Mayo&quot;
 ## [1] &quot;Junio&quot;</code></pre>
 <p>La función <strong>seq_along()</strong> es muy utilizada en los ciclos for, para poder generar una secuencia de enteros basada en el tamaño del objeto sobre el que queremos iterar.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="estructuras-de-control-en-r.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(meses)) {</span>
-<span id="cb205-2"><a href="estructuras-de-control-en-r.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(meses[i])</span>
-<span id="cb205-3"><a href="estructuras-de-control-en-r.html#cb205-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="estructuras-de-control-en-r.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(meses)) {</span>
+<span id="cb213-2"><a href="estructuras-de-control-en-r.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(meses[i])</span>
+<span id="cb213-3"><a href="estructuras-de-control-en-r.html#cb213-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Enero&quot;
 ## [1] &quot;Febrero&quot;
 ## [1] &quot;Marzo&quot;
@@ -339,9 +341,9 @@ La sintaxis es la siguiente</p>
 ## [1] &quot;Noviembre&quot;
 ## [1] &quot;Diciembre&quot;</code></pre>
 <p>Recorrer los elementos.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="estructuras-de-control-en-r.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (mes <span class="cf">in</span> meses) {</span>
-<span id="cb207-2"><a href="estructuras-de-control-en-r.html#cb207-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(mes)</span>
-<span id="cb207-3"><a href="estructuras-de-control-en-r.html#cb207-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="estructuras-de-control-en-r.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (mes <span class="cf">in</span> meses) {</span>
+<span id="cb215-2"><a href="estructuras-de-control-en-r.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(mes)</span>
+<span id="cb215-3"><a href="estructuras-de-control-en-r.html#cb215-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Enero&quot;
 ## [1] &quot;Febrero&quot;
 ## [1] &quot;Marzo&quot;
@@ -358,56 +360,56 @@ La sintaxis es la siguiente</p>
 <div id="while-loop" class="section level2" number="8.3">
 <h2><span class="header-section-number">8.3</span> <strong>while loop</strong></h2>
 <p>Los ciclos while comienzan revisando una condición, si se cumple inicia el ciclo y se repite hasta que la condición no se cumpla.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="estructuras-de-control-en-r.html#cb209-1" aria-hidden="true" tabindex="-1"></a>contador <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb209-2"><a href="estructuras-de-control-en-r.html#cb209-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb209-3"><a href="estructuras-de-control-en-r.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (contador <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
-<span id="cb209-4"><a href="estructuras-de-control-en-r.html#cb209-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(contador)</span>
-<span id="cb209-5"><a href="estructuras-de-control-en-r.html#cb209-5" aria-hidden="true" tabindex="-1"></a>  contador <span class="ot">&lt;-</span> contador <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb209-6"><a href="estructuras-de-control-en-r.html#cb209-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb209-7"><a href="estructuras-de-control-en-r.html#cb209-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="estructuras-de-control-en-r.html#cb217-1" aria-hidden="true" tabindex="-1"></a>contador <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb217-2"><a href="estructuras-de-control-en-r.html#cb217-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb217-3"><a href="estructuras-de-control-en-r.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (contador <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
+<span id="cb217-4"><a href="estructuras-de-control-en-r.html#cb217-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(contador)</span>
+<span id="cb217-5"><a href="estructuras-de-control-en-r.html#cb217-5" aria-hidden="true" tabindex="-1"></a>  contador <span class="ot">&lt;-</span> contador <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb217-6"><a href="estructuras-de-control-en-r.html#cb217-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb217-7"><a href="estructuras-de-control-en-r.html#cb217-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] 0
 ## [1] 1
 ## [1] 2
 ## [1] 3
 ## [1] 4</code></pre>
 <p>Caminata aleatoria</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="estructuras-de-control-en-r.html#cb211-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb211-2"><a href="estructuras-de-control-en-r.html#cb211-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb211-3"><a href="estructuras-de-control-en-r.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb211-4"><a href="estructuras-de-control-en-r.html#cb211-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb211-5"><a href="estructuras-de-control-en-r.html#cb211-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (z <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">&amp;&amp;</span> z <span class="sc">&lt;=</span> <span class="dv">10</span>) {</span>
-<span id="cb211-6"><a href="estructuras-de-control-en-r.html#cb211-6" aria-hidden="true" tabindex="-1"></a>  moneda <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span>
-<span id="cb211-7"><a href="estructuras-de-control-en-r.html#cb211-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb211-8"><a href="estructuras-de-control-en-r.html#cb211-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (moneda <span class="sc">==</span> <span class="dv">1</span>) { <span class="do">## Paso hacia la derecha</span></span>
-<span id="cb211-9"><a href="estructuras-de-control-en-r.html#cb211-9" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb211-10"><a href="estructuras-de-control-en-r.html#cb211-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {          <span class="do">## Paso hacia la izquierda</span></span>
-<span id="cb211-11"><a href="estructuras-de-control-en-r.html#cb211-11" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb211-12"><a href="estructuras-de-control-en-r.html#cb211-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb211-13"><a href="estructuras-de-control-en-r.html#cb211-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb211-14"><a href="estructuras-de-control-en-r.html#cb211-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb211-15"><a href="estructuras-de-control-en-r.html#cb211-15" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="estructuras-de-control-en-r.html#cb219-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb219-2"><a href="estructuras-de-control-en-r.html#cb219-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb219-3"><a href="estructuras-de-control-en-r.html#cb219-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb219-4"><a href="estructuras-de-control-en-r.html#cb219-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb219-5"><a href="estructuras-de-control-en-r.html#cb219-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (z <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">&amp;&amp;</span> z <span class="sc">&lt;=</span> <span class="dv">10</span>) {</span>
+<span id="cb219-6"><a href="estructuras-de-control-en-r.html#cb219-6" aria-hidden="true" tabindex="-1"></a>  moneda <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb219-7"><a href="estructuras-de-control-en-r.html#cb219-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb219-8"><a href="estructuras-de-control-en-r.html#cb219-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (moneda <span class="sc">==</span> <span class="dv">1</span>) { <span class="do">## Paso hacia la derecha</span></span>
+<span id="cb219-9"><a href="estructuras-de-control-en-r.html#cb219-9" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb219-10"><a href="estructuras-de-control-en-r.html#cb219-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {          <span class="do">## Paso hacia la izquierda</span></span>
+<span id="cb219-11"><a href="estructuras-de-control-en-r.html#cb219-11" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb219-12"><a href="estructuras-de-control-en-r.html#cb219-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb219-13"><a href="estructuras-de-control-en-r.html#cb219-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb219-14"><a href="estructuras-de-control-en-r.html#cb219-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb219-15"><a href="estructuras-de-control-en-r.html#cb219-15" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 </div>
 <div id="repeat-next-break" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> <strong>repeat, next, break</strong></h2>
 <p><strong>repeat</strong> inicia un ciclo infinito. La única forma de terminar o de salir de un ciclo <strong>repeat</strong> es mediante la instrucción <strong>break</strong>. No son muy comunes a la hora de hacer análisis de datos, pero vale la pena mencionarlos pues se pueden utilizar para algoritmos que busquen una solución con cierto de nivel de tolerancia, ya que en estos casos no se puede saber de ante mano cuantas iteraciones se necesitan.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="estructuras-de-control-en-r.html#cb213-1" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb213-2"><a href="estructuras-de-control-en-r.html#cb213-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-3"><a href="estructuras-de-control-en-r.html#cb213-3" aria-hidden="true" tabindex="-1"></a>tol <span class="ot">&lt;-</span> <span class="fl">1e-10</span></span>
-<span id="cb213-4"><a href="estructuras-de-control-en-r.html#cb213-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-5"><a href="estructuras-de-control-en-r.html#cb213-5" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span>{</span>
-<span id="cb213-6"><a href="estructuras-de-control-en-r.html#cb213-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-7"><a href="estructuras-de-control-en-r.html#cb213-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-8"><a href="estructuras-de-control-en-r.html#cb213-8" aria-hidden="true" tabindex="-1"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">algoritmoEstimacion</span>() <span class="do">## Se calcula el estimado</span></span>
-<span id="cb213-9"><a href="estructuras-de-control-en-r.html#cb213-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-10"><a href="estructuras-de-control-en-r.html#cb213-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(x1 <span class="sc">-</span> x0) <span class="sc">&lt;</span> tol) { <span class="do">## Se hace el test</span></span>
-<span id="cb213-11"><a href="estructuras-de-control-en-r.html#cb213-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb213-12"><a href="estructuras-de-control-en-r.html#cb213-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {   <span class="do">## Continua</span></span>
-<span id="cb213-13"><a href="estructuras-de-control-en-r.html#cb213-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-14"><a href="estructuras-de-control-en-r.html#cb213-14" aria-hidden="true" tabindex="-1"></a>    x0 <span class="ot">&lt;-</span> x1</span>
-<span id="cb213-15"><a href="estructuras-de-control-en-r.html#cb213-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb213-16"><a href="estructuras-de-control-en-r.html#cb213-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-17"><a href="estructuras-de-control-en-r.html#cb213-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="estructuras-de-control-en-r.html#cb221-1" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb221-2"><a href="estructuras-de-control-en-r.html#cb221-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-3"><a href="estructuras-de-control-en-r.html#cb221-3" aria-hidden="true" tabindex="-1"></a>tol <span class="ot">&lt;-</span> <span class="fl">1e-10</span></span>
+<span id="cb221-4"><a href="estructuras-de-control-en-r.html#cb221-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-5"><a href="estructuras-de-control-en-r.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span>{</span>
+<span id="cb221-6"><a href="estructuras-de-control-en-r.html#cb221-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-7"><a href="estructuras-de-control-en-r.html#cb221-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-8"><a href="estructuras-de-control-en-r.html#cb221-8" aria-hidden="true" tabindex="-1"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">algoritmoEstimacion</span>() <span class="do">## Se calcula el estimado</span></span>
+<span id="cb221-9"><a href="estructuras-de-control-en-r.html#cb221-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-10"><a href="estructuras-de-control-en-r.html#cb221-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(x1 <span class="sc">-</span> x0) <span class="sc">&lt;</span> tol) { <span class="do">## Se hace el test</span></span>
+<span id="cb221-11"><a href="estructuras-de-control-en-r.html#cb221-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb221-12"><a href="estructuras-de-control-en-r.html#cb221-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {   <span class="do">## Continua</span></span>
+<span id="cb221-13"><a href="estructuras-de-control-en-r.html#cb221-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-14"><a href="estructuras-de-control-en-r.html#cb221-14" aria-hidden="true" tabindex="-1"></a>    x0 <span class="ot">&lt;-</span> x1</span>
+<span id="cb221-15"><a href="estructuras-de-control-en-r.html#cb221-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb221-16"><a href="estructuras-de-control-en-r.html#cb221-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-17"><a href="estructuras-de-control-en-r.html#cb221-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>next</strong>: Se utiliza para avanzar a la siguiente iteración del ciclo.
 <strong>break</strong>: Se utiliza para salir del ciclo inmediatamente.</p>
 

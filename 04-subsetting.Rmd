@@ -51,37 +51,6 @@ y[index]
 ```
 
 
-## **Subsetting listas**
-
-Para acceder a elementos de las listas podemos usar **$** o doble corchete **[[ ]]**, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.
-
-```{r notas-curso-55}
-datos.cliente <- list(Nombre= c("Lucas","Luis","Diego"), Edad = c(33,50,20), Tarjeta.Credito = c(T,F,T))
-
-datos.cliente
-
-```
-
-```{r notas-curso-56}
-datos.cliente$Nombre
-
-datos.cliente$Edad
-
-datos.cliente$Tarjeta.Credito
-```
-
-```{r notas-curso-57}
-datos.cliente[[1]]
-
-datos.cliente[[2]]
-
-```
-Si queremos el valor i del elemento j escribimos $$lista[[j]][i]$$
-```{r notas-curso-58}
-datos.cliente[[3]][1] ##Valor 1 del elemento 3.
-```
-
-
 
 ## **Subsetting matrices**
 
@@ -119,5 +88,73 @@ M[-1,]
 #Con drop igual FALSE obtenemos un objeto de tipo matrix.
 M[3,,drop=F]
 
+```
+
+
+## **Subsetting data frames**
+
+Para extraer “trozos” de un data frame por filas y columnas (funciona exactamente igual que en matrices) donde $n$ y $m$ pueden definirse como:
+
+- intervalos
+- condiciones
+- números naturales
+- no poner nada
+
+
+```{r 04-subsetting-1, include=FALSE}
+data("mtcars")
+```
+
+```{r 04-subsetting-2}
+mtcars[1, ]
+
+mtcars[1:3, 1:4]
+```
+Para extraer a solo una variable (columna) del data frame podemos utilizar el simbolo de dólar "$".
+
+```{r 04-subsetting-3}
+mtcars$hp
+```
+
+Para hacer filtros podemos combinar los dos métodos anteriores:
+
+```{r 04-subsetting-4}
+mtcars[mtcars$hp >100, ]
+```
+
+
+
+
+
+
+
+## **Subsetting listas**
+
+Para acceder a elementos de las listas podemos usar **$** o doble corchete **[[ ]]**, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.
+
+```{r notas-curso-55}
+datos.cliente <- list(Nombre= c("Lucas","Luis","Diego"), Edad = c(33,50,20), Tarjeta.Credito = c(T,F,T))
+
+datos.cliente
+
+```
+
+```{r notas-curso-56}
+datos.cliente$Nombre
+
+datos.cliente$Edad
+
+datos.cliente$Tarjeta.Credito
+```
+
+```{r notas-curso-57}
+datos.cliente[[1]]
+
+datos.cliente[[2]]
+
+```
+Si queremos el valor i del elemento j escribimos $$lista[[j]][i]$$
+```{r notas-curso-58}
+datos.cliente[[3]][1] ##Valor 1 del elemento 3.
 ```
 

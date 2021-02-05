@@ -170,8 +170,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>6</b> <strong>Subsetting</strong></a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="subsetting.html"><a href="subsetting.html#subsetting-vectores"><i class="fa fa-check"></i><b>6.1</b> <strong>Subsetting vectores</strong></a></li>
-<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting listas</strong></a></li>
-<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-data-frames"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting data frames</strong></a></li>
+<li class="chapter" data-level="6.4" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.4</b> <strong>Subsetting listas</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="operaciones-vectorizadas-.html"><a href="operaciones-vectorizadas-.html"><i class="fa fa-check"></i><b>7</b> <strong>Operaciones vectorizadas.</strong></a></li>
 <li class="chapter" data-level="8" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html"><i class="fa fa-check"></i><b>8</b> <strong>Estructuras de control en R</strong></a>
@@ -188,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>9.0.3</b> <strong>read_excel</strong></a></li>
 <li class="chapter" data-level="9.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>9.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>10</b> <strong>Funciones</strong></a></li>
 </ul>
 
       </nav>
@@ -210,52 +212,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>La idea de las operaciones vectorizadas es que los cálculos se pueden hacer en paralelo.</p>
 <p>Muchas de las operaciones en R son <em>vectorizadas</em>, esto hace que el código sea mucho más eficiente, fácil de escribir y leer.</p>
 <p>Suma de dos vectores</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="operaciones-vectorizadas-.html#cb153-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
-<span id="cb153-2"><a href="operaciones-vectorizadas-.html#cb153-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span></span>
-<span id="cb153-3"><a href="operaciones-vectorizadas-.html#cb153-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="operaciones-vectorizadas-.html#cb161-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb161-2"><a href="operaciones-vectorizadas-.html#cb161-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span></span>
+<span id="cb161-3"><a href="operaciones-vectorizadas-.html#cb161-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="operaciones-vectorizadas-.html#cb155-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="operaciones-vectorizadas-.html#cb163-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
 <pre><code>## [1] 6 7 8 9</code></pre>
 <p>En otros lenguajes</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="operaciones-vectorizadas-.html#cb157-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">&quot;numeric&quot;</span>, <span class="at">length =</span> <span class="fu">length</span>(x))</span>
-<span id="cb157-2"><a href="operaciones-vectorizadas-.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)) {</span>
-<span id="cb157-3"><a href="operaciones-vectorizadas-.html#cb157-3" aria-hidden="true" tabindex="-1"></a>  z[i] <span class="ot">&lt;-</span> x[i] <span class="sc">+</span> y[i]</span>
-<span id="cb157-4"><a href="operaciones-vectorizadas-.html#cb157-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb157-5"><a href="operaciones-vectorizadas-.html#cb157-5" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="operaciones-vectorizadas-.html#cb165-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">&quot;numeric&quot;</span>, <span class="at">length =</span> <span class="fu">length</span>(x))</span>
+<span id="cb165-2"><a href="operaciones-vectorizadas-.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)) {</span>
+<span id="cb165-3"><a href="operaciones-vectorizadas-.html#cb165-3" aria-hidden="true" tabindex="-1"></a>  z[i] <span class="ot">&lt;-</span> x[i] <span class="sc">+</span> y[i]</span>
+<span id="cb165-4"><a href="operaciones-vectorizadas-.html#cb165-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb165-5"><a href="operaciones-vectorizadas-.html#cb165-5" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
 <pre><code>## [1]  7  9 11 13</code></pre>
 <p>En R</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="operaciones-vectorizadas-.html#cb159-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="operaciones-vectorizadas-.html#cb167-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span></code></pre></div>
 <pre><code>## [1]  7  9 11 13</code></pre>
 <p>Otras operaciones</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="operaciones-vectorizadas-.html#cb161-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="operaciones-vectorizadas-.html#cb169-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE  TRUE</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="operaciones-vectorizadas-.html#cb163-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">==</span> <span class="dv">8</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="operaciones-vectorizadas-.html#cb171-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">==</span> <span class="dv">8</span></span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="operaciones-vectorizadas-.html#cb165-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> y</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="operaciones-vectorizadas-.html#cb173-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> y</span></code></pre></div>
 <pre><code>## [1]  6 14 24 36</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="operaciones-vectorizadas-.html#cb167-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">/</span> y</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="operaciones-vectorizadas-.html#cb175-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">/</span> y</span></code></pre></div>
 <pre><code>## [1] 0.1666667 0.2857143 0.3750000 0.4444444</code></pre>
 <p>Similar para matrices</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="operaciones-vectorizadas-.html#cb169-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb169-2"><a href="operaciones-vectorizadas-.html#cb169-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">10</span>, <span class="dv">4</span>), <span class="dv">2</span>, <span class="dv">2</span>)  <span class="do">## rep(x, n) repite el objeto x n veces.</span></span>
-<span id="cb169-3"><a href="operaciones-vectorizadas-.html#cb169-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb169-4"><a href="operaciones-vectorizadas-.html#cb169-4" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="operaciones-vectorizadas-.html#cb177-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb177-2"><a href="operaciones-vectorizadas-.html#cb177-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">10</span>, <span class="dv">4</span>), <span class="dv">2</span>, <span class="dv">2</span>)  <span class="do">## rep(x, n) repite el objeto x n veces.</span></span>
+<span id="cb177-3"><a href="operaciones-vectorizadas-.html#cb177-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-4"><a href="operaciones-vectorizadas-.html#cb177-4" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    3
 ## [2,]    2    4</code></pre>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="operaciones-vectorizadas-.html#cb171-1" aria-hidden="true" tabindex="-1"></a>y <span class="co"># imprimir las matrices</span></span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="operaciones-vectorizadas-.html#cb179-1" aria-hidden="true" tabindex="-1"></a>y <span class="co"># imprimir las matrices</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   10   10
 ## [2,]   10   10</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="operaciones-vectorizadas-.html#cb173-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> y <span class="do">## multiplicación entrada por entrada</span></span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="operaciones-vectorizadas-.html#cb181-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> y <span class="do">## multiplicación entrada por entrada</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   10   30
 ## [2,]   20   40</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="operaciones-vectorizadas-.html#cb175-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">/</span> y <span class="do">## división entrada por entrada</span></span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="operaciones-vectorizadas-.html#cb183-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">/</span> y <span class="do">## división entrada por entrada</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  0.1  0.3
 ## [2,]  0.2  0.4</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="operaciones-vectorizadas-.html#cb177-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%*%</span> y <span class="do">## multiplicación matricial</span></span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="operaciones-vectorizadas-.html#cb185-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%*%</span> y <span class="do">## multiplicación matricial</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   40   40
 ## [2,]   60   60</code></pre>

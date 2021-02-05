@@ -1,0 +1,122 @@
+
+# **Funciones**
+
+Como analistas de datos escribir funciones es una de las mejores herramientas, ya que nos permiten automatizar y estandarizar tareas, además de que hace nuestro código más legible y mucho más sencillo de mantener.
+
+La idea de este capítulo es introducir los conceptos básicos de las funciones y buenas prácticas a la hora de escribirlas.
+
+
+```{r 09-funciones-1, include=FALSE}
+setwd('/Users/tchavarria/Documents/GitHub/programacion-r-basico')
+```
+
+```{r figurename, echo=FALSE, out.width = "100%"}
+knitr::include_graphics("images/function2.png")
+knitr::include_graphics("images/function.png")
+
+```
+
+
+Sintaxis
+```{r notas-curso-98, eval=FALSE}
+
+nombre.funcion <- function(<entradas>){
+  
+  ##Cuerpo de la función
+  
+  return <resultado>
+  
+}
+```
+
+**Ejemplos:**
+
+```{r notas-curso-99}
+##Función que calcula el area de un triángulo dada su base y su altura.
+
+
+# Parámetros
+## base : Base del triángulo.
+## altura: Altura del triángulo
+
+#Resultado
+## area: Área del triángulo.
+
+area.triangulo <- function(base,altura) {
+  area<-(base*altura)/2
+  return(area)
+}
+
+area.triangulo(2,5)
+
+```
+Una persona desea sacar un préstamo, de $P$ colones a una tasa de interés mensual $i$. El préstamo tiene que ser reembolsado en $n$ cuotas mensuales de tamaño $C$, comenzando dentro de un mes. El problema es calcular $C$. La fórmula $C$ es:
+
+$$
+C = P\cdot\bigg(\dfrac{i}{1-(1+i)^{-n}}\bigg)
+$$
+
+Supongamos que $P=150000$, que la tasa de interés es del $2\%$ y que le número de pagos es $10$. EL código en **R** sería:
+
+```{r notas-curso-100}
+tasa.interes <- 0.02
+n <- 10
+principal <- 150000
+pago <- principal * tasa.interes / (1 - (1 + tasa.interes)^(-n))
+pago
+```
+
+Utilizando una función:
+
+```{r notas-curso-101}
+
+# Parámetros
+## tasa.interes : Tasa de interés mensual del préstamo
+## n: Número de cuotas
+## principal: Monto del préstamo
+
+#Resultado
+## pago: Cuota del préstamo.
+
+
+calcula.cuota <- function(tasa.interes,n,principal) {
+   pago <- principal * tasa.interes / (1 - (1 + tasa.interes)^(-n))
+   return(pago)
+}
+
+
+calcula.cuota(0.02,10,150000) ## Orden por defecto
+
+calcula.cuota(n=340,tasa.interes = 0.11,principal=3500000) ## Para cambiar el orden se especifica el nombre del parámetro
+
+```
+
+Ejemplo de función que retorna una lista.
+
+```{r notas-curso-102}
+
+# Parámetros
+## DF : Data frame
+## NC: Número de columna
+
+#Resultado
+## lista con nombre de la variable correspondiente al número de columna, la media, la mediana, la desviación estándar,la varianza, el máximo y el mínimo.
+
+estadisticas <- function(DF,NC) {
+  
+  variable <- DF[,NC]
+  nombre <- colnames(DF)[NC]
+  
+  media <- mean(variable)
+  mediana <- median(variable)
+  deviacion <- sd(variable)
+  varianza <- var(variable)
+  maximo <- max(variable)
+  minimo <- min(variable)
+  
+  return(list(Variable=nombre,Media=media,Mediana=mediana,DesEst=deviacion,Varianza=varianza,Maximo=maximo,Minimo=minimo))
+}  
+
+
+estadisticas(portafolio.banco,20)
+```

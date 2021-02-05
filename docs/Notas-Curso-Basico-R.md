@@ -1,7 +1,7 @@
 --- 
 title: "Notas Curso Básico R"
 author: "Tobías Chavarría"
-date: "Actualizado el 02 Feb, 2021"
+date: "Actualizado el 05 Feb, 2021"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -1173,80 +1173,6 @@ y[index]
 ```
 
 
-## **Subsetting listas**
-
-Para acceder a elementos de las listas podemos usar **$** o doble corchete **[[ ]]**, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.
-
-
-```r
-datos.cliente <- list(Nombre = c("Lucas", "Luis", "Diego"), Edad = c(33, 50, 20), Tarjeta.Credito = c(T, F, T))
-
-datos.cliente
-```
-
-```
-## $Nombre
-## [1] "Lucas" "Luis"  "Diego"
-## 
-## $Edad
-## [1] 33 50 20
-## 
-## $Tarjeta.Credito
-## [1]  TRUE FALSE  TRUE
-```
-
-
-```r
-datos.cliente$Nombre
-```
-
-```
-## [1] "Lucas" "Luis"  "Diego"
-```
-
-```r
-datos.cliente$Edad
-```
-
-```
-## [1] 33 50 20
-```
-
-```r
-datos.cliente$Tarjeta.Credito
-```
-
-```
-## [1]  TRUE FALSE  TRUE
-```
-
-
-```r
-datos.cliente[[1]]
-```
-
-```
-## [1] "Lucas" "Luis"  "Diego"
-```
-
-```r
-datos.cliente[[2]]
-```
-
-```
-## [1] 33 50 20
-```
-Si queremos el valor i del elemento j escribimos $$lista[[j]][i]$$
-
-```r
-datos.cliente[[3]][1] ## Valor 1 del elemento 3.
-```
-
-```
-## [1] TRUE
-```
-
-
 
 ## **Subsetting matrices**
 
@@ -1323,6 +1249,164 @@ M[3, , drop = F]
 ```
 ##      [,1] [,2] [,3]
 ## [1,]    3    6    9
+```
+
+
+## **Subsetting data frames**
+
+Para extraer “trozos” de un data frame por filas y columnas (funciona exactamente igual que en matrices) donde $n$ y $m$ pueden definirse como:
+
+- intervalos
+- condiciones
+- números naturales
+- no poner nada
+
+
+
+
+
+```r
+mtcars[1, ]
+```
+
+```
+##           mpg cyl disp  hp drat   wt  qsec vs am gear carb
+## Mazda RX4  21   6  160 110  3.9 2.62 16.46  0  1    4    4
+```
+
+```r
+mtcars[1:3, 1:4]
+```
+
+```
+##                mpg cyl disp  hp
+## Mazda RX4     21.0   6  160 110
+## Mazda RX4 Wag 21.0   6  160 110
+## Datsun 710    22.8   4  108  93
+```
+Para extraer a solo una variable (columna) del data frame podemos utilizar el simbolo de dólar "$".
+
+
+```r
+mtcars$hp
+```
+
+```
+##  [1] 110 110  93 110 175 105 245  62  95 123 123 180 180 180 205 215 230  66  52
+## [20]  65  97 150 150 245 175  66  91 113 264 175 335 109
+```
+
+Para hacer filtros podemos combinar los dos métodos anteriores:
+
+
+```r
+mtcars[mtcars$hp > 100, ]
+```
+
+```
+##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+
+
+
+
+
+
+## **Subsetting listas**
+
+Para acceder a elementos de las listas podemos usar **$** o doble corchete **[[ ]]**, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.
+
+
+```r
+datos.cliente <- list(Nombre = c("Lucas", "Luis", "Diego"), Edad = c(33, 50, 20), Tarjeta.Credito = c(T, F, T))
+
+datos.cliente
+```
+
+```
+## $Nombre
+## [1] "Lucas" "Luis"  "Diego"
+## 
+## $Edad
+## [1] 33 50 20
+## 
+## $Tarjeta.Credito
+## [1]  TRUE FALSE  TRUE
+```
+
+
+```r
+datos.cliente$Nombre
+```
+
+```
+## [1] "Lucas" "Luis"  "Diego"
+```
+
+```r
+datos.cliente$Edad
+```
+
+```
+## [1] 33 50 20
+```
+
+```r
+datos.cliente$Tarjeta.Credito
+```
+
+```
+## [1]  TRUE FALSE  TRUE
+```
+
+
+```r
+datos.cliente[[1]]
+```
+
+```
+## [1] "Lucas" "Luis"  "Diego"
+```
+
+```r
+datos.cliente[[2]]
+```
+
+```
+## [1] 33 50 20
+```
+Si queremos el valor i del elemento j escribimos $$lista[[j]][i]$$
+
+```r
+datos.cliente[[3]][1] ## Valor 1 del elemento 3.
+```
+
+```
+## [1] TRUE
 ```
 
 
@@ -1966,4 +2050,151 @@ por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB
 
 
 <!--chapter:end:07-importacion-de-datos.Rmd-->
+
+
+
+# **Funciones**
+
+Como analistas de datos escribir funciones es una de las mejores herramientas, ya que nos permiten automatizar y estandarizar tareas, además de que hace nuestro código más legible y mucho más sencillo de mantener.
+
+La idea de este capítulo es introducir los conceptos básicos de las funciones y buenas prácticas a la hora de escribirlas.
+
+
+
+
+
+\begin{center}\includegraphics[width=1\linewidth]{images/function2} \end{center}
+
+
+
+\begin{center}\includegraphics[width=1\linewidth]{images/function} \end{center}
+
+
+Sintaxis
+
+```r
+nombre.funcion <- function(<entradas>){
+  
+  ##Cuerpo de la función
+  
+  return <resultado>
+  
+}
+```
+
+**Ejemplos:**
+
+
+```r
+## Función que calcula el area de un triángulo dada su base y su altura.
+
+
+# Parámetros
+## base : Base del triángulo.
+## altura: Altura del triángulo
+
+# Resultado
+## area: Área del triángulo.
+
+area.triangulo <- function(base, altura) {
+  area <- (base * altura) / 2
+  return(area)
+}
+
+area.triangulo(2, 5)
+```
+
+```
+## [1] 5
+```
+Una persona desea sacar un préstamo, de $P$ colones a una tasa de interés mensual $i$. El préstamo tiene que ser reembolsado en $n$ cuotas mensuales de tamaño $C$, comenzando dentro de un mes. El problema es calcular $C$. La fórmula $C$ es:
+
+$$
+C = P\cdot\bigg(\dfrac{i}{1-(1+i)^{-n}}\bigg)
+$$
+
+Supongamos que $P=150000$, que la tasa de interés es del $2\%$ y que le número de pagos es $10$. EL código en **R** sería:
+
+
+```r
+tasa.interes <- 0.02
+n <- 10
+principal <- 150000
+pago <- principal * tasa.interes / (1 - (1 + tasa.interes)^(-n))
+pago
+```
+
+```
+## [1] 16698.98
+```
+
+Utilizando una función:
+
+
+```r
+# Parámetros
+## tasa.interes : Tasa de interés mensual del préstamo
+## n: Número de cuotas
+## principal: Monto del préstamo
+
+# Resultado
+## pago: Cuota del préstamo.
+
+
+calcula.cuota <- function(tasa.interes, n, principal) {
+  pago <- principal * tasa.interes / (1 - (1 + tasa.interes)^(-n))
+  return(pago)
+}
+
+
+calcula.cuota(0.02, 10, 150000) ## Orden por defecto
+```
+
+```
+## [1] 16698.98
+```
+
+```r
+calcula.cuota(n = 340, tasa.interes = 0.11, principal = 3500000) ## Para cambiar el orden se especifica el nombre del parámetro
+```
+
+```
+## [1] 385000
+```
+
+Ejemplo de función que retorna una lista.
+
+
+```r
+# Parámetros
+## DF : Data frame
+## NC: Número de columna
+
+# Resultado
+## lista con nombre de la variable correspondiente al número de columna, la media, la mediana, la desviación estándar,la varianza, el máximo y el mínimo.
+
+estadisticas <- function(DF, NC) {
+
+  variable <- DF[, NC]
+  nombre <- colnames(DF)[NC]
+
+  media <- mean(variable)
+  mediana <- median(variable)
+  deviacion <- sd(variable)
+  varianza <- var(variable)
+  maximo <- max(variable)
+  minimo <- min(variable)
+
+  return(list(Variable = nombre, Media = media, Mediana = mediana, DesEst = deviacion, Varianza = varianza, Maximo = maximo, Minimo = minimo))
+}
+
+
+estadisticas(portafolio.banco, 20)
+```
+
+```
+## Error in estadisticas(portafolio.banco, 20): object 'portafolio.banco' not found
+```
+
+<!--chapter:end:09-funciones.Rmd-->
 

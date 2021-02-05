@@ -170,8 +170,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>6</b> <strong>Subsetting</strong></a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="subsetting.html"><a href="subsetting.html#subsetting-vectores"><i class="fa fa-check"></i><b>6.1</b> <strong>Subsetting vectores</strong></a></li>
-<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting listas</strong></a></li>
-<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-data-frames"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting data frames</strong></a></li>
+<li class="chapter" data-level="6.4" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.4</b> <strong>Subsetting listas</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="operaciones-vectorizadas-.html"><a href="operaciones-vectorizadas-.html"><i class="fa fa-check"></i><b>7</b> <strong>Operaciones vectorizadas.</strong></a></li>
 <li class="chapter" data-level="8" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html"><i class="fa fa-check"></i><b>8</b> <strong>Estructuras de control en R</strong></a>
@@ -188,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>9.0.3</b> <strong>read_excel</strong></a></li>
 <li class="chapter" data-level="9.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>9.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>10</b> <strong>Funciones</strong></a></li>
 </ul>
 
       </nav>
@@ -247,36 +249,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb125-2"><a href="subsetting.html#cb125-2" aria-hidden="true" tabindex="-1"></a>y[index]</span></code></pre></div>
 <pre><code>## [1] 25 29 23</code></pre>
 </div>
-<div id="subsetting-listas" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> <strong>Subsetting listas</strong></h2>
-<p>Para acceder a elementos de las listas podemos usar <strong>$</strong> o doble corchete <strong>[[ ]]</strong>, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="subsetting.html#cb127-1" aria-hidden="true" tabindex="-1"></a>datos.cliente <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Nombre =</span> <span class="fu">c</span>(<span class="st">&quot;Lucas&quot;</span>, <span class="st">&quot;Luis&quot;</span>, <span class="st">&quot;Diego&quot;</span>), <span class="at">Edad =</span> <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">50</span>, <span class="dv">20</span>), <span class="at">Tarjeta.Credito =</span> <span class="fu">c</span>(T, F, T))</span>
-<span id="cb127-2"><a href="subsetting.html#cb127-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb127-3"><a href="subsetting.html#cb127-3" aria-hidden="true" tabindex="-1"></a>datos.cliente</span></code></pre></div>
-<pre><code>## $Nombre
-## [1] &quot;Lucas&quot; &quot;Luis&quot;  &quot;Diego&quot;
-## 
-## $Edad
-## [1] 33 50 20
-## 
-## $Tarjeta.Credito
-## [1]  TRUE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="subsetting.html#cb129-1" aria-hidden="true" tabindex="-1"></a>datos.cliente<span class="sc">$</span>Nombre</span></code></pre></div>
-<pre><code>## [1] &quot;Lucas&quot; &quot;Luis&quot;  &quot;Diego&quot;</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="subsetting.html#cb131-1" aria-hidden="true" tabindex="-1"></a>datos.cliente<span class="sc">$</span>Edad</span></code></pre></div>
-<pre><code>## [1] 33 50 20</code></pre>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="subsetting.html#cb133-1" aria-hidden="true" tabindex="-1"></a>datos.cliente<span class="sc">$</span>Tarjeta.Credito</span></code></pre></div>
-<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="subsetting.html#cb135-1" aria-hidden="true" tabindex="-1"></a>datos.cliente[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] &quot;Lucas&quot; &quot;Luis&quot;  &quot;Diego&quot;</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="subsetting.html#cb137-1" aria-hidden="true" tabindex="-1"></a>datos.cliente[[<span class="dv">2</span>]]</span></code></pre></div>
-<pre><code>## [1] 33 50 20</code></pre>
-<p>Si queremos el valor i del elemento j escribimos <span class="math display">\[lista[[j]][i]\]</span></p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="subsetting.html#cb139-1" aria-hidden="true" tabindex="-1"></a>datos.cliente[[<span class="dv">3</span>]][<span class="dv">1</span>] <span class="do">## Valor 1 del elemento 3.</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-</div>
-<div id="subsetting-matrices" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> <strong>Subsetting matrices</strong></h2>
+<div id="subsetting-matrices" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> <strong>Subsetting matrices</strong></h2>
 <p>Podemos obtener los elementos de una matriz utilizando los índices usuales, es decir, para obtener de la matriz <span class="math inline">\(M\)</span> el elemento que está en la fila <span class="math inline">\(i\)</span> y en la columna <span class="math inline">\(j\)</span>, escribimos
 <span class="math display">\[
 M[i,j]
@@ -286,32 +260,108 @@ M[i,j]
 M[i,] \qquad; \qquad M[,j]
 \]</span></p>
 <p>respectivamente.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="subsetting.html#cb141-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb141-2"><a href="subsetting.html#cb141-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-3"><a href="subsetting.html#cb141-3" aria-hidden="true" tabindex="-1"></a>M</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="subsetting.html#cb127-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb127-2"><a href="subsetting.html#cb127-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-3"><a href="subsetting.html#cb127-3" aria-hidden="true" tabindex="-1"></a>M</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    4    7
 ## [2,]    2    5    8
 ## [3,]    3    6    9</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="subsetting.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtenemos el elemento que está en la fila 1 y la columna 3.</span></span>
-<span id="cb143-2"><a href="subsetting.html#cb143-2" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">1</span>, <span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="subsetting.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtenemos el elemento que está en la fila 1 y la columna 3.</span></span>
+<span id="cb129-2"><a href="subsetting.html#cb129-2" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">1</span>, <span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="subsetting.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtenemos la fila 1</span></span>
-<span id="cb145-2"><a href="subsetting.html#cb145-2" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">1</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="subsetting.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtenemos la fila 1</span></span>
+<span id="cb131-2"><a href="subsetting.html#cb131-2" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>## [1] 1 4 7</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="subsetting.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtenemos la columna 2</span></span>
-<span id="cb147-2"><a href="subsetting.html#cb147-2" aria-hidden="true" tabindex="-1"></a>M[, <span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="subsetting.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtenemos la columna 2</span></span>
+<span id="cb133-2"><a href="subsetting.html#cb133-2" aria-hidden="true" tabindex="-1"></a>M[, <span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] 4 5 6</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="subsetting.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="do">## La matriz menos la fila 1</span></span>
-<span id="cb149-2"><a href="subsetting.html#cb149-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb149-3"><a href="subsetting.html#cb149-3" aria-hidden="true" tabindex="-1"></a>M[<span class="sc">-</span><span class="dv">1</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="subsetting.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="do">## La matriz menos la fila 1</span></span>
+<span id="cb135-2"><a href="subsetting.html#cb135-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-3"><a href="subsetting.html#cb135-3" aria-hidden="true" tabindex="-1"></a>M[<span class="sc">-</span><span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    2    5    8
 ## [2,]    3    6    9</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="subsetting.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Con drop igual FALSE obtenemos un objeto de tipo matrix.</span></span>
-<span id="cb151-2"><a href="subsetting.html#cb151-2" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">3</span>, , drop <span class="ot">=</span> F]</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="subsetting.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Con drop igual FALSE obtenemos un objeto de tipo matrix.</span></span>
+<span id="cb137-2"><a href="subsetting.html#cb137-2" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">3</span>, , drop <span class="ot">=</span> F]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    3    6    9</code></pre>
+</div>
+<div id="subsetting-data-frames" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> <strong>Subsetting data frames</strong></h2>
+<p>Para extraer “trozos” de un data frame por filas y columnas (funciona exactamente igual que en matrices) donde <span class="math inline">\(n\)</span> y <span class="math inline">\(m\)</span> pueden definirse como:</p>
+<ul>
+<li>intervalos</li>
+<li>condiciones</li>
+<li>números naturales</li>
+<li>no poner nada</li>
+</ul>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="subsetting.html#cb139-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span>, ]</span></code></pre></div>
+<pre><code>##           mpg cyl disp  hp drat   wt  qsec vs am gear carb
+## Mazda RX4  21   6  160 110  3.9 2.62 16.46  0  1    4    4</code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="subsetting.html#cb141-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>##                mpg cyl disp  hp
+## Mazda RX4     21.0   6  160 110
+## Mazda RX4 Wag 21.0   6  160 110
+## Datsun 710    22.8   4  108  93</code></pre>
+<p>Para extraer a solo una variable (columna) del data frame podemos utilizar el simbolo de dólar “$.”</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="subsetting.html#cb143-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>hp</span></code></pre></div>
+<pre><code>##  [1] 110 110  93 110 175 105 245  62  95 123 123 180 180 180 205 215 230  66  52
+## [20]  65  97 150 150 245 175  66  91 113 264 175 335 109</code></pre>
+<p>Para hacer filtros podemos combinar los dos métodos anteriores:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="subsetting.html#cb145-1" aria-hidden="true" tabindex="-1"></a>mtcars[mtcars<span class="sc">$</span>hp <span class="sc">&gt;</span> <span class="dv">100</span>, ]</span></code></pre></div>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+</div>
+<div id="subsetting-listas" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> <strong>Subsetting listas</strong></h2>
+<p>Para acceder a elementos de las listas podemos usar <strong>$</strong> o doble corchete <strong>[[ ]]</strong>, ambos realizan la misma operación in embargo una usa índice y el otro el nombre del elemento.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="subsetting.html#cb147-1" aria-hidden="true" tabindex="-1"></a>datos.cliente <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Nombre =</span> <span class="fu">c</span>(<span class="st">&quot;Lucas&quot;</span>, <span class="st">&quot;Luis&quot;</span>, <span class="st">&quot;Diego&quot;</span>), <span class="at">Edad =</span> <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">50</span>, <span class="dv">20</span>), <span class="at">Tarjeta.Credito =</span> <span class="fu">c</span>(T, F, T))</span>
+<span id="cb147-2"><a href="subsetting.html#cb147-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb147-3"><a href="subsetting.html#cb147-3" aria-hidden="true" tabindex="-1"></a>datos.cliente</span></code></pre></div>
+<pre><code>## $Nombre
+## [1] &quot;Lucas&quot; &quot;Luis&quot;  &quot;Diego&quot;
+## 
+## $Edad
+## [1] 33 50 20
+## 
+## $Tarjeta.Credito
+## [1]  TRUE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="subsetting.html#cb149-1" aria-hidden="true" tabindex="-1"></a>datos.cliente<span class="sc">$</span>Nombre</span></code></pre></div>
+<pre><code>## [1] &quot;Lucas&quot; &quot;Luis&quot;  &quot;Diego&quot;</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="subsetting.html#cb151-1" aria-hidden="true" tabindex="-1"></a>datos.cliente<span class="sc">$</span>Edad</span></code></pre></div>
+<pre><code>## [1] 33 50 20</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="subsetting.html#cb153-1" aria-hidden="true" tabindex="-1"></a>datos.cliente<span class="sc">$</span>Tarjeta.Credito</span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="subsetting.html#cb155-1" aria-hidden="true" tabindex="-1"></a>datos.cliente[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## [1] &quot;Lucas&quot; &quot;Luis&quot;  &quot;Diego&quot;</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="subsetting.html#cb157-1" aria-hidden="true" tabindex="-1"></a>datos.cliente[[<span class="dv">2</span>]]</span></code></pre></div>
+<pre><code>## [1] 33 50 20</code></pre>
+<p>Si queremos el valor i del elemento j escribimos <span class="math display">\[lista[[j]][i]\]</span></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="subsetting.html#cb159-1" aria-hidden="true" tabindex="-1"></a>datos.cliente[[<span class="dv">3</span>]][<span class="dv">1</span>] <span class="do">## Valor 1 del elemento 3.</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 
 </div>
 </div>
