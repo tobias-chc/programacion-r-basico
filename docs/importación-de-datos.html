@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 9 Importación de datos | Notas Curso Básico R</title>
-  <meta name="description" content="Capítulo 9 Importación de datos | Notas Curso Básico R" />
+  <title>Capítulo 10 Importación de datos | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 10 Importación de datos | Notas Curso Básico R" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 9 Importación de datos | Notas Curso Básico R" />
+  <meta property="og:title" content="Capítulo 10 Importación de datos | Notas Curso Básico R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 9 Importación de datos | Notas Curso Básico R" />
+  <meta name="twitter:title" content="Capítulo 10 Importación de datos | Notas Curso Básico R" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="estructuras-de-control-en-r.html"/>
-<link rel="next" href="funciones.html"/>
+<link rel="prev" href="funciones.html"/>
+
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -182,14 +182,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#while-loop"><i class="fa fa-check"></i><b>8.3</b> <strong>while loop</strong></a></li>
 <li class="chapter" data-level="8.4" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#repeat-next-break"><i class="fa fa-check"></i><b>8.4</b> <strong>repeat, next, break</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>9</b> <strong>Importación de datos</strong></a>
+<li class="chapter" data-level="9" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>9</b> <strong>Funciones</strong></a></li>
+<li class="chapter" data-level="10" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>10</b> <strong>Importación de datos</strong></a>
 <ul>
-<li class="chapter" data-level="9.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>9.0.1</b> <strong>read.table</strong></a></li>
-<li class="chapter" data-level="9.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>9.0.2</b> <strong>read.csv</strong></a></li>
-<li class="chapter" data-level="9.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>9.0.3</b> <strong>read_excel</strong></a></li>
-<li class="chapter" data-level="9.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>9.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
+<li class="chapter" data-level="10.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>10.0.1</b> <strong>read.table</strong></a></li>
+<li class="chapter" data-level="10.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>10.0.2</b> <strong>read.csv</strong></a></li>
+<li class="chapter" data-level="10.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>10.0.3</b> <strong>read_excel</strong></a></li>
+<li class="chapter" data-level="10.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>10.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>10</b> <strong>Funciones</strong></a></li>
 </ul>
 
       </nav>
@@ -207,18 +207,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="importación-de-datos" class="section level1" number="9">
-<h1><span class="header-section-number">Capítulo 9</span> <strong>Importación de datos</strong></h1>
+<div id="importación-de-datos" class="section level1" number="10">
+<h1><span class="header-section-number">Capítulo 10</span> <strong>Importación de datos</strong></h1>
 <p>Algunas de las funciones base en R para la lectura datos son:</p>
 <ul>
 <li><strong>read.table</strong> , <strong>read.csv</strong>, se utilizan para leer datos que tienen formato de tabla.</li>
 </ul>
-<div id="read.table" class="section level3" number="9.0.1">
-<h3><span class="header-section-number">9.0.1</span> <strong>read.table</strong></h3>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="importación-de-datos.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="at">file =</span> archivo[, <span class="at">header =</span> <span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span>,</span>
-<span id="cb222-2"><a href="importación-de-datos.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> separadorDatos, <span class="at">dec =</span> separadorDecimal,</span>
-<span id="cb222-3"><a href="importación-de-datos.html#cb222-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">quote =</span> delimitadorCadenas,</span>
-<span id="cb222-4"><a href="importación-de-datos.html#cb222-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span>])</span></code></pre></div>
+<div id="read.table" class="section level3" number="10.0.1">
+<h3><span class="header-section-number">10.0.1</span> <strong>read.table</strong></h3>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="importación-de-datos.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="at">file =</span> archivo[, <span class="at">header =</span> <span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span>,</span>
+<span id="cb233-2"><a href="importación-de-datos.html#cb233-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> separadorDatos, <span class="at">dec =</span> separadorDecimal,</span>
+<span id="cb233-3"><a href="importación-de-datos.html#cb233-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">quote =</span> delimitadorCadenas,</span>
+<span id="cb233-4"><a href="importación-de-datos.html#cb233-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span>])</span></code></pre></div>
 <p>Esta es la función genérica para leer datos en formato .csv y genera , algunos de sus argumentos son:</p>
 <ul>
 <li><strong>file</strong>: El nombre del archivo o su ubicación.</li>
@@ -231,13 +231,13 @@ y decimal.</li>
 </ul>
 <p><strong>Leer documentación de la función read.table</strong>.</p>
 </div>
-<div id="read.csv" class="section level3" number="9.0.2">
-<h3><span class="header-section-number">9.0.2</span> <strong>read.csv</strong></h3>
+<div id="read.csv" class="section level3" number="10.0.2">
+<h3><span class="header-section-number">10.0.2</span> <strong>read.csv</strong></h3>
 <p>Es una implementación especializada de read.table() en la que se asume
 que los parámetros header, sep y dec toman los valores TRUE, “,” y “.” respectivamente.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="importación-de-datos.html#cb223-1" aria-hidden="true" tabindex="-1"></a>portafolio.banco <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ArchivoInsumoBanco20200630.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</span>
-<span id="cb223-2"><a href="importación-de-datos.html#cb223-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb223-3"><a href="importación-de-datos.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(portafolio.banco)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="importación-de-datos.html#cb234-1" aria-hidden="true" tabindex="-1"></a>portafolio.banco <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ArchivoInsumoBanco20200630.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</span>
+<span id="cb234-2"><a href="importación-de-datos.html#cb234-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb234-3"><a href="importación-de-datos.html#cb234-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(portafolio.banco)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    872 obs. of  20 variables:
 ##  $ CATEGORIANIIF    : chr  &quot;COSTO AMORTIZADO&quot; &quot;COSTO AMORTIZADO&quot; &quot;COSTO AMORTIZADO&quot; &quot;COSTO AMORTIZADO&quot; ...
 ##  $ MONEDA           : chr  &quot;CRC&quot; &quot;CRC&quot; &quot;CRC&quot; &quot;CRC&quot; ...
@@ -259,10 +259,10 @@ que los parámetros header, sep y dec toman los valores TRUE, “,” y “.” 
 ##  $ FITCH.INTER.     : chr  &quot;B+&quot; &quot;B+&quot; &quot;B+&quot; &quot;B+&quot; ...
 ##  $ SCRC             : chr  NA NA NA NA ...
 ##  $ VMKTCRC          : num  5.30e+08 5.89e+08 5.31e+08 5.43e+08 1.55e+07 ...</code></pre>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="importación-de-datos.html#cb225-1" aria-hidden="true" tabindex="-1"></a>portafolio.banco <span class="ot">&lt;-</span> portafolio.banco <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">FECHA.COMPRA =</span> COMPRA, <span class="at">FECHA.VENC =</span> VENCIMIENTO)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="importación-de-datos.html#cb236-1" aria-hidden="true" tabindex="-1"></a>portafolio.banco <span class="ot">&lt;-</span> portafolio.banco <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">FECHA.COMPRA =</span> COMPRA, <span class="at">FECHA.VENC =</span> VENCIMIENTO)</span></code></pre></div>
 </div>
-<div id="read_excel" class="section level3" number="9.0.3">
-<h3><span class="header-section-number">9.0.3</span> <strong>read_excel</strong></h3>
+<div id="read_excel" class="section level3" number="10.0.3">
+<h3><span class="header-section-number">10.0.3</span> <strong>read_excel</strong></h3>
 <p>Esta se utiliza para leer datos de excel, algunos de sus argumentos son:</p>
 <ul>
 <li><strong>path</strong>: Ruta del archivo.</li>
@@ -271,14 +271,14 @@ que los parámetros header, sep y dec toman los valores TRUE, “,” y “.” 
 <li><strong>col_types</strong>: Vector con las clases de cada una de las columnas.</li>
 <li><strong>col_names</strong>: Indica si la primera fila corresponde al nombre de las columnas.</li>
 </ul>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="importación-de-datos.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb226-2"><a href="importación-de-datos.html#cb226-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-3"><a href="importación-de-datos.html#cb226-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-4"><a href="importación-de-datos.html#cb226-4" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/Portafolio BN Valores Junio.xlsx&quot;</span>)</span>
-<span id="cb226-5"><a href="importación-de-datos.html#cb226-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-6"><a href="importación-de-datos.html#cb226-6" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores_top10 <span class="ot">&lt;-</span> <span class="fu">head</span>(portafolio.BNValores, <span class="dv">10</span>) <span class="do">## head(data,n) retorna las primeras n filas de nuestro data frame</span></span>
-<span id="cb226-7"><a href="importación-de-datos.html#cb226-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-8"><a href="importación-de-datos.html#cb226-8" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores_top10</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="importación-de-datos.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb237-2"><a href="importación-de-datos.html#cb237-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb237-3"><a href="importación-de-datos.html#cb237-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb237-4"><a href="importación-de-datos.html#cb237-4" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/Portafolio BN Valores Junio.xlsx&quot;</span>)</span>
+<span id="cb237-5"><a href="importación-de-datos.html#cb237-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb237-6"><a href="importación-de-datos.html#cb237-6" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores_top10 <span class="ot">&lt;-</span> <span class="fu">head</span>(portafolio.BNValores, <span class="dv">10</span>) <span class="do">## head(data,n) retorna las primeras n filas de nuestro data frame</span></span>
+<span id="cb237-7"><a href="importación-de-datos.html#cb237-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb237-8"><a href="importación-de-datos.html#cb237-8" aria-hidden="true" tabindex="-1"></a>portafolio.BNValores_top10</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 46
 ##    Fecha                Boleta Bol.Nueva `Moneda Facial` `Moneda Liquida` ISIN 
 ##    &lt;dttm&gt;                &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;
@@ -306,8 +306,8 @@ que los parámetros header, sep y dec toman los valores TRUE, “,” y “.” 
 ## #   Negocio` &lt;chr&gt;, `Prueba SPPI` &lt;chr&gt;, `Tipo Tasa Interes` &lt;chr&gt;, Tipo &lt;chr&gt;,
 ## #   Tip.Cambio &lt;dbl&gt;, Grupo &lt;chr&gt;, Sector &lt;chr&gt;</code></pre>
 </div>
-<div id="calculando-requisitos-de-memoria." class="section level3" number="9.0.4">
-<h3><span class="header-section-number">9.0.4</span> <strong>Calculando requisitos de memoria</strong>.</h3>
+<div id="calculando-requisitos-de-memoria." class="section level3" number="10.0.4">
+<h3><span class="header-section-number">10.0.4</span> <strong>Calculando requisitos de memoria</strong>.</h3>
 <p>Si queremos leer un archivo con 1.500.000 filas y 120 columnas, donde todas son de tipo numérico, realizamos el siguiente cálculo</p>
 <p><span class="math display">\[\begin{align*}
 1,500,000\times120\times 8 (bytes)\\
@@ -325,8 +325,8 @@ que los parámetros header, sep y dec toman los valores TRUE, “,” y “.” 
           </div>
         </div>
       </div>
-<a href="estructuras-de-control-en-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="funciones.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="funciones.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -348,7 +348,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/07-importacion-de-datos.Rmd",
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/08-importacion-de-datos.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -356,7 +356,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/07-importacion-de-datos.Rmd",
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/08-importacion-de-datos.Rmd",
 "text": null
 },
 "download": ["Notas-Curso-Basico-R.pdf"],

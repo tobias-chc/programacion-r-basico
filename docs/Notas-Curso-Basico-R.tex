@@ -190,7 +190,7 @@
 
 \title{Notas Curso Básico R}
 \author{Tobías Chavarría}
-\date{Actualizado el 05 Feb, 2021}
+\date{Actualizado el 16 Feb, 2021}
 
 \begin{document}
 \maketitle
@@ -2307,6 +2307,152 @@ Caminata aleatoria
 \textbf{next}: Se utiliza para avanzar a la siguiente iteración del ciclo.
 \textbf{break}: Se utiliza para salir del ciclo inmediatamente.
 
+\hypertarget{funciones}{%
+\chapter{\texorpdfstring{\textbf{Funciones}}{Funciones}}\label{funciones}}
+
+Como analistas de datos escribir funciones es una de las mejores herramientas, ya que nos permiten automatizar y estandarizar tareas, además de que hace nuestro código más legible y mucho más sencillo de mantener.
+
+La idea de este capítulo es introducir los conceptos básicos de las funciones y buenas prácticas a la hora de escribirlas.
+
+\begin{center}\includegraphics[width=1\linewidth]{images/function2} \end{center}
+
+\begin{center}\includegraphics[width=1\linewidth]{images/function} \end{center}
+
+Sintaxis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nombre.funcion }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\SpecialCharTok{\textless{}}\NormalTok{entradas}\SpecialCharTok{\textgreater{}}\NormalTok{)\{}
+  
+  \DocumentationTok{\#\#Cuerpo de la función}
+  
+\NormalTok{  return }\SpecialCharTok{\textless{}}\NormalTok{resultado}\SpecialCharTok{\textgreater{}}
+  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Ejemplos:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Función que calcula el area de un triángulo dada su base y su altura.}
+
+
+\CommentTok{\# Parámetros}
+\DocumentationTok{\#\# base : Base del triángulo.}
+\DocumentationTok{\#\# altura: Altura del triángulo}
+
+\CommentTok{\# Resultado}
+\DocumentationTok{\#\# area: Área del triángulo.}
+
+\NormalTok{area.triangulo }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(base, altura) \{}
+\NormalTok{  area }\OtherTok{\textless{}{-}}\NormalTok{ (base }\SpecialCharTok{*}\NormalTok{ altura) }\SpecialCharTok{/} \DecValTok{2}
+  \FunctionTok{return}\NormalTok{(area)}
+\NormalTok{\}}
+
+\FunctionTok{area.triangulo}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+Una persona desea sacar un préstamo, de \(P\) colones a una tasa de interés mensual \(i\). El préstamo tiene que ser reembolsado en \(n\) cuotas mensuales de tamaño \(C\), comenzando dentro de un mes. El problema es calcular \(C\). La fórmula \(C\) es:
+
+\[
+C = P\cdot\bigg(\dfrac{i}{1-(1+i)^{-n}}\bigg)
+\]
+
+Supongamos que \(P=150000\), que la tasa de interés es del \(2\%\) y que le número de pagos es \(10\). EL código en \textbf{R} sería:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tasa.interes }\OtherTok{\textless{}{-}} \FloatTok{0.02}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{principal }\OtherTok{\textless{}{-}} \DecValTok{150000}
+\NormalTok{pago }\OtherTok{\textless{}{-}}\NormalTok{ principal }\SpecialCharTok{*}\NormalTok{ tasa.interes }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ tasa.interes)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{n))}
+\NormalTok{pago}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16698.98
+\end{verbatim}
+
+Utilizando una función:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parámetros}
+\DocumentationTok{\#\# tasa.interes : Tasa de interés mensual del préstamo}
+\DocumentationTok{\#\# n: Número de cuotas}
+\DocumentationTok{\#\# principal: Monto del préstamo}
+
+\CommentTok{\# Resultado}
+\DocumentationTok{\#\# pago: Cuota del préstamo.}
+
+
+\NormalTok{calcula.cuota }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(tasa.interes, n, principal) \{}
+\NormalTok{  pago }\OtherTok{\textless{}{-}}\NormalTok{ principal }\SpecialCharTok{*}\NormalTok{ tasa.interes }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ tasa.interes)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{n))}
+  \FunctionTok{return}\NormalTok{(pago)}
+\NormalTok{\}}
+
+
+\FunctionTok{calcula.cuota}\NormalTok{(}\FloatTok{0.02}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{150000}\NormalTok{) }\DocumentationTok{\#\# Orden por defecto}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16698.98
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{calcula.cuota}\NormalTok{(}\AttributeTok{n =} \DecValTok{340}\NormalTok{, }\AttributeTok{tasa.interes =} \FloatTok{0.11}\NormalTok{, }\AttributeTok{principal =} \DecValTok{3500000}\NormalTok{) }\DocumentationTok{\#\# Para cambiar el orden se especifica el nombre del parámetro}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 385000
+\end{verbatim}
+
+Ejemplo de función que retorna una lista.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parámetros}
+\DocumentationTok{\#\# DF : Data frame}
+\DocumentationTok{\#\# NC: Número de columna}
+
+\CommentTok{\# Resultado}
+\DocumentationTok{\#\# lista con nombre de la variable correspondiente al número de columna, la media, la mediana, la desviación estándar,la varianza, el máximo y el mínimo.}
+
+\NormalTok{estadisticas }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(DF, NC) \{}
+
+\NormalTok{  variable }\OtherTok{\textless{}{-}}\NormalTok{ DF[, NC]}
+\NormalTok{  nombre }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(DF)[NC]}
+
+\NormalTok{  media }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(variable)}
+\NormalTok{  mediana }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(variable)}
+\NormalTok{  deviacion }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(variable)}
+\NormalTok{  varianza }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(variable)}
+\NormalTok{  maximo }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(variable)}
+\NormalTok{  minimo }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(variable)}
+
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{Variable =}\NormalTok{ nombre, }\AttributeTok{Media =}\NormalTok{ media, }\AttributeTok{Mediana =}\NormalTok{ mediana, }\AttributeTok{DesEst =}\NormalTok{ deviacion, }\AttributeTok{Varianza =}\NormalTok{ varianza, }\AttributeTok{Maximo =}\NormalTok{ maximo, }\AttributeTok{Minimo =}\NormalTok{ minimo))}
+\NormalTok{\}}
+
+
+\FunctionTok{estadisticas}\NormalTok{(portafolio.banco, }\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in estadisticas(portafolio.banco, 20): object 'portafolio.banco' not found
+\end{verbatim}
+
 \hypertarget{importaciuxf3n-de-datos}{%
 \chapter{\texorpdfstring{\textbf{Importación de datos}}{Importación de datos}}\label{importaciuxf3n-de-datos}}
 
@@ -2470,151 +2616,5 @@ Si queremos leer un archivo con 1.500.000 filas y 120 columnas, donde todas son 
 \end{align*}
 
 por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB de RAM en nuestra computadora.
-
-\hypertarget{funciones}{%
-\chapter{\texorpdfstring{\textbf{Funciones}}{Funciones}}\label{funciones}}
-
-Como analistas de datos escribir funciones es una de las mejores herramientas, ya que nos permiten automatizar y estandarizar tareas, además de que hace nuestro código más legible y mucho más sencillo de mantener.
-
-La idea de este capítulo es introducir los conceptos básicos de las funciones y buenas prácticas a la hora de escribirlas.
-
-\begin{center}\includegraphics[width=1\linewidth]{images/function2} \end{center}
-
-\begin{center}\includegraphics[width=1\linewidth]{images/function} \end{center}
-
-Sintaxis
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{nombre.funcion }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\SpecialCharTok{\textless{}}\NormalTok{entradas}\SpecialCharTok{\textgreater{}}\NormalTok{)\{}
-  
-  \DocumentationTok{\#\#Cuerpo de la función}
-  
-\NormalTok{  return }\SpecialCharTok{\textless{}}\NormalTok{resultado}\SpecialCharTok{\textgreater{}}
-  
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-\textbf{Ejemplos:}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\# Función que calcula el area de un triángulo dada su base y su altura.}
-
-
-\CommentTok{\# Parámetros}
-\DocumentationTok{\#\# base : Base del triángulo.}
-\DocumentationTok{\#\# altura: Altura del triángulo}
-
-\CommentTok{\# Resultado}
-\DocumentationTok{\#\# area: Área del triángulo.}
-
-\NormalTok{area.triangulo }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(base, altura) \{}
-\NormalTok{  area }\OtherTok{\textless{}{-}}\NormalTok{ (base }\SpecialCharTok{*}\NormalTok{ altura) }\SpecialCharTok{/} \DecValTok{2}
-  \FunctionTok{return}\NormalTok{(area)}
-\NormalTok{\}}
-
-\FunctionTok{area.triangulo}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 5
-\end{verbatim}
-
-Una persona desea sacar un préstamo, de \(P\) colones a una tasa de interés mensual \(i\). El préstamo tiene que ser reembolsado en \(n\) cuotas mensuales de tamaño \(C\), comenzando dentro de un mes. El problema es calcular \(C\). La fórmula \(C\) es:
-
-\[
-C = P\cdot\bigg(\dfrac{i}{1-(1+i)^{-n}}\bigg)
-\]
-
-Supongamos que \(P=150000\), que la tasa de interés es del \(2\%\) y que le número de pagos es \(10\). EL código en \textbf{R} sería:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{tasa.interes }\OtherTok{\textless{}{-}} \FloatTok{0.02}
-\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{10}
-\NormalTok{principal }\OtherTok{\textless{}{-}} \DecValTok{150000}
-\NormalTok{pago }\OtherTok{\textless{}{-}}\NormalTok{ principal }\SpecialCharTok{*}\NormalTok{ tasa.interes }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ tasa.interes)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{n))}
-\NormalTok{pago}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 16698.98
-\end{verbatim}
-
-Utilizando una función:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Parámetros}
-\DocumentationTok{\#\# tasa.interes : Tasa de interés mensual del préstamo}
-\DocumentationTok{\#\# n: Número de cuotas}
-\DocumentationTok{\#\# principal: Monto del préstamo}
-
-\CommentTok{\# Resultado}
-\DocumentationTok{\#\# pago: Cuota del préstamo.}
-
-
-\NormalTok{calcula.cuota }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(tasa.interes, n, principal) \{}
-\NormalTok{  pago }\OtherTok{\textless{}{-}}\NormalTok{ principal }\SpecialCharTok{*}\NormalTok{ tasa.interes }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ tasa.interes)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{n))}
-  \FunctionTok{return}\NormalTok{(pago)}
-\NormalTok{\}}
-
-
-\FunctionTok{calcula.cuota}\NormalTok{(}\FloatTok{0.02}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{150000}\NormalTok{) }\DocumentationTok{\#\# Orden por defecto}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 16698.98
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{calcula.cuota}\NormalTok{(}\AttributeTok{n =} \DecValTok{340}\NormalTok{, }\AttributeTok{tasa.interes =} \FloatTok{0.11}\NormalTok{, }\AttributeTok{principal =} \DecValTok{3500000}\NormalTok{) }\DocumentationTok{\#\# Para cambiar el orden se especifica el nombre del parámetro}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 385000
-\end{verbatim}
-
-Ejemplo de función que retorna una lista.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Parámetros}
-\DocumentationTok{\#\# DF : Data frame}
-\DocumentationTok{\#\# NC: Número de columna}
-
-\CommentTok{\# Resultado}
-\DocumentationTok{\#\# lista con nombre de la variable correspondiente al número de columna, la media, la mediana, la desviación estándar,la varianza, el máximo y el mínimo.}
-
-\NormalTok{estadisticas }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(DF, NC) \{}
-
-\NormalTok{  variable }\OtherTok{\textless{}{-}}\NormalTok{ DF[, NC]}
-\NormalTok{  nombre }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(DF)[NC]}
-
-\NormalTok{  media }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(variable)}
-\NormalTok{  mediana }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(variable)}
-\NormalTok{  deviacion }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(variable)}
-\NormalTok{  varianza }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(variable)}
-\NormalTok{  maximo }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(variable)}
-\NormalTok{  minimo }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(variable)}
-
-  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{Variable =}\NormalTok{ nombre, }\AttributeTok{Media =}\NormalTok{ media, }\AttributeTok{Mediana =}\NormalTok{ mediana, }\AttributeTok{DesEst =}\NormalTok{ deviacion, }\AttributeTok{Varianza =}\NormalTok{ varianza, }\AttributeTok{Maximo =}\NormalTok{ maximo, }\AttributeTok{Minimo =}\NormalTok{ minimo))}
-\NormalTok{\}}
-
-
-\FunctionTok{estadisticas}\NormalTok{(portafolio.banco, }\DecValTok{20}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Error in estadisticas(portafolio.banco, 20): object 'portafolio.banco' not found
-\end{verbatim}
 
 \end{document}

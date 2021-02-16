@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 10 Funciones | Notas Curso Básico R</title>
-  <meta name="description" content="Capítulo 10 Funciones | Notas Curso Básico R" />
+  <title>Capítulo 9 Funciones | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 9 Funciones | Notas Curso Básico R" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 10 Funciones | Notas Curso Básico R" />
+  <meta property="og:title" content="Capítulo 9 Funciones | Notas Curso Básico R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 10 Funciones | Notas Curso Básico R" />
+  <meta name="twitter:title" content="Capítulo 9 Funciones | Notas Curso Básico R" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="importación-de-datos.html"/>
-
+<link rel="prev" href="estructuras-de-control-en-r.html"/>
+<link rel="next" href="importación-de-datos.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -182,14 +182,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#while-loop"><i class="fa fa-check"></i><b>8.3</b> <strong>while loop</strong></a></li>
 <li class="chapter" data-level="8.4" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#repeat-next-break"><i class="fa fa-check"></i><b>8.4</b> <strong>repeat, next, break</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>9</b> <strong>Importación de datos</strong></a>
+<li class="chapter" data-level="9" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>9</b> <strong>Funciones</strong></a></li>
+<li class="chapter" data-level="10" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>10</b> <strong>Importación de datos</strong></a>
 <ul>
-<li class="chapter" data-level="9.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>9.0.1</b> <strong>read.table</strong></a></li>
-<li class="chapter" data-level="9.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>9.0.2</b> <strong>read.csv</strong></a></li>
-<li class="chapter" data-level="9.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>9.0.3</b> <strong>read_excel</strong></a></li>
-<li class="chapter" data-level="9.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>9.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
+<li class="chapter" data-level="10.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>10.0.1</b> <strong>read.table</strong></a></li>
+<li class="chapter" data-level="10.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>10.0.2</b> <strong>read.csv</strong></a></li>
+<li class="chapter" data-level="10.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>10.0.3</b> <strong>read_excel</strong></a></li>
+<li class="chapter" data-level="10.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>10.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>10</b> <strong>Funciones</strong></a></li>
 </ul>
 
       </nav>
@@ -207,93 +207,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="funciones" class="section level1" number="10">
-<h1><span class="header-section-number">Capítulo 10</span> <strong>Funciones</strong></h1>
+<div id="funciones" class="section level1" number="9">
+<h1><span class="header-section-number">Capítulo 9</span> <strong>Funciones</strong></h1>
 <p>Como analistas de datos escribir funciones es una de las mejores herramientas, ya que nos permiten automatizar y estandarizar tareas, además de que hace nuestro código más legible y mucho más sencillo de mantener.</p>
 <p>La idea de este capítulo es introducir los conceptos básicos de las funciones y buenas prácticas a la hora de escribirlas.</p>
 <p><img src="images/function2.png" width="100%" style="display: block; margin: auto;" /><img src="images/function.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Sintaxis</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="funciones.html#cb228-1" aria-hidden="true" tabindex="-1"></a>nombre.funcion <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="sc">&lt;</span>entradas<span class="sc">&gt;</span>){</span>
-<span id="cb228-2"><a href="funciones.html#cb228-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb228-3"><a href="funciones.html#cb228-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">##Cuerpo de la función</span></span>
-<span id="cb228-4"><a href="funciones.html#cb228-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb228-5"><a href="funciones.html#cb228-5" aria-hidden="true" tabindex="-1"></a>  return <span class="sc">&lt;</span>resultado<span class="sc">&gt;</span></span>
-<span id="cb228-6"><a href="funciones.html#cb228-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb228-7"><a href="funciones.html#cb228-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="funciones.html#cb222-1" aria-hidden="true" tabindex="-1"></a>nombre.funcion <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="sc">&lt;</span>entradas<span class="sc">&gt;</span>){</span>
+<span id="cb222-2"><a href="funciones.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb222-3"><a href="funciones.html#cb222-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">##Cuerpo de la función</span></span>
+<span id="cb222-4"><a href="funciones.html#cb222-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb222-5"><a href="funciones.html#cb222-5" aria-hidden="true" tabindex="-1"></a>  return <span class="sc">&lt;</span>resultado<span class="sc">&gt;</span></span>
+<span id="cb222-6"><a href="funciones.html#cb222-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb222-7"><a href="funciones.html#cb222-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>Ejemplos:</strong></p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="funciones.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Función que calcula el area de un triángulo dada su base y su altura.</span></span>
-<span id="cb229-2"><a href="funciones.html#cb229-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-3"><a href="funciones.html#cb229-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-4"><a href="funciones.html#cb229-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros</span></span>
-<span id="cb229-5"><a href="funciones.html#cb229-5" aria-hidden="true" tabindex="-1"></a><span class="do">## base : Base del triángulo.</span></span>
-<span id="cb229-6"><a href="funciones.html#cb229-6" aria-hidden="true" tabindex="-1"></a><span class="do">## altura: Altura del triángulo</span></span>
-<span id="cb229-7"><a href="funciones.html#cb229-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-8"><a href="funciones.html#cb229-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
-<span id="cb229-9"><a href="funciones.html#cb229-9" aria-hidden="true" tabindex="-1"></a><span class="do">## area: Área del triángulo.</span></span>
-<span id="cb229-10"><a href="funciones.html#cb229-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-11"><a href="funciones.html#cb229-11" aria-hidden="true" tabindex="-1"></a>area.triangulo <span class="ot">&lt;-</span> <span class="cf">function</span>(base, altura) {</span>
-<span id="cb229-12"><a href="funciones.html#cb229-12" aria-hidden="true" tabindex="-1"></a>  area <span class="ot">&lt;-</span> (base <span class="sc">*</span> altura) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb229-13"><a href="funciones.html#cb229-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(area)</span>
-<span id="cb229-14"><a href="funciones.html#cb229-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb229-15"><a href="funciones.html#cb229-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-16"><a href="funciones.html#cb229-16" aria-hidden="true" tabindex="-1"></a><span class="fu">area.triangulo</span>(<span class="dv">2</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="funciones.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Función que calcula el area de un triángulo dada su base y su altura.</span></span>
+<span id="cb223-2"><a href="funciones.html#cb223-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-3"><a href="funciones.html#cb223-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-4"><a href="funciones.html#cb223-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros</span></span>
+<span id="cb223-5"><a href="funciones.html#cb223-5" aria-hidden="true" tabindex="-1"></a><span class="do">## base : Base del triángulo.</span></span>
+<span id="cb223-6"><a href="funciones.html#cb223-6" aria-hidden="true" tabindex="-1"></a><span class="do">## altura: Altura del triángulo</span></span>
+<span id="cb223-7"><a href="funciones.html#cb223-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-8"><a href="funciones.html#cb223-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
+<span id="cb223-9"><a href="funciones.html#cb223-9" aria-hidden="true" tabindex="-1"></a><span class="do">## area: Área del triángulo.</span></span>
+<span id="cb223-10"><a href="funciones.html#cb223-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-11"><a href="funciones.html#cb223-11" aria-hidden="true" tabindex="-1"></a>area.triangulo <span class="ot">&lt;-</span> <span class="cf">function</span>(base, altura) {</span>
+<span id="cb223-12"><a href="funciones.html#cb223-12" aria-hidden="true" tabindex="-1"></a>  area <span class="ot">&lt;-</span> (base <span class="sc">*</span> altura) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb223-13"><a href="funciones.html#cb223-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(area)</span>
+<span id="cb223-14"><a href="funciones.html#cb223-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb223-15"><a href="funciones.html#cb223-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-16"><a href="funciones.html#cb223-16" aria-hidden="true" tabindex="-1"></a><span class="fu">area.triangulo</span>(<span class="dv">2</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>Una persona desea sacar un préstamo, de <span class="math inline">\(P\)</span> colones a una tasa de interés mensual <span class="math inline">\(i\)</span>. El préstamo tiene que ser reembolsado en <span class="math inline">\(n\)</span> cuotas mensuales de tamaño <span class="math inline">\(C\)</span>, comenzando dentro de un mes. El problema es calcular <span class="math inline">\(C\)</span>. La fórmula <span class="math inline">\(C\)</span> es:</p>
 <p><span class="math display">\[
 C = P\cdot\bigg(\dfrac{i}{1-(1+i)^{-n}}\bigg)
 \]</span></p>
 <p>Supongamos que <span class="math inline">\(P=150000\)</span>, que la tasa de interés es del <span class="math inline">\(2\%\)</span> y que le número de pagos es <span class="math inline">\(10\)</span>. EL código en <strong>R</strong> sería:</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="funciones.html#cb231-1" aria-hidden="true" tabindex="-1"></a>tasa.interes <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
-<span id="cb231-2"><a href="funciones.html#cb231-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb231-3"><a href="funciones.html#cb231-3" aria-hidden="true" tabindex="-1"></a>principal <span class="ot">&lt;-</span> <span class="dv">150000</span></span>
-<span id="cb231-4"><a href="funciones.html#cb231-4" aria-hidden="true" tabindex="-1"></a>pago <span class="ot">&lt;-</span> principal <span class="sc">*</span> tasa.interes <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> tasa.interes)<span class="sc">^</span>(<span class="sc">-</span>n))</span>
-<span id="cb231-5"><a href="funciones.html#cb231-5" aria-hidden="true" tabindex="-1"></a>pago</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="funciones.html#cb225-1" aria-hidden="true" tabindex="-1"></a>tasa.interes <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb225-2"><a href="funciones.html#cb225-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb225-3"><a href="funciones.html#cb225-3" aria-hidden="true" tabindex="-1"></a>principal <span class="ot">&lt;-</span> <span class="dv">150000</span></span>
+<span id="cb225-4"><a href="funciones.html#cb225-4" aria-hidden="true" tabindex="-1"></a>pago <span class="ot">&lt;-</span> principal <span class="sc">*</span> tasa.interes <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> tasa.interes)<span class="sc">^</span>(<span class="sc">-</span>n))</span>
+<span id="cb225-5"><a href="funciones.html#cb225-5" aria-hidden="true" tabindex="-1"></a>pago</span></code></pre></div>
 <pre><code>## [1] 16698.98</code></pre>
 <p>Utilizando una función:</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="funciones.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros</span></span>
-<span id="cb233-2"><a href="funciones.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="do">## tasa.interes : Tasa de interés mensual del préstamo</span></span>
-<span id="cb233-3"><a href="funciones.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="do">## n: Número de cuotas</span></span>
-<span id="cb233-4"><a href="funciones.html#cb233-4" aria-hidden="true" tabindex="-1"></a><span class="do">## principal: Monto del préstamo</span></span>
-<span id="cb233-5"><a href="funciones.html#cb233-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb233-6"><a href="funciones.html#cb233-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
-<span id="cb233-7"><a href="funciones.html#cb233-7" aria-hidden="true" tabindex="-1"></a><span class="do">## pago: Cuota del préstamo.</span></span>
-<span id="cb233-8"><a href="funciones.html#cb233-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb233-9"><a href="funciones.html#cb233-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb233-10"><a href="funciones.html#cb233-10" aria-hidden="true" tabindex="-1"></a>calcula.cuota <span class="ot">&lt;-</span> <span class="cf">function</span>(tasa.interes, n, principal) {</span>
-<span id="cb233-11"><a href="funciones.html#cb233-11" aria-hidden="true" tabindex="-1"></a>  pago <span class="ot">&lt;-</span> principal <span class="sc">*</span> tasa.interes <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> tasa.interes)<span class="sc">^</span>(<span class="sc">-</span>n))</span>
-<span id="cb233-12"><a href="funciones.html#cb233-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pago)</span>
-<span id="cb233-13"><a href="funciones.html#cb233-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb233-14"><a href="funciones.html#cb233-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb233-15"><a href="funciones.html#cb233-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb233-16"><a href="funciones.html#cb233-16" aria-hidden="true" tabindex="-1"></a><span class="fu">calcula.cuota</span>(<span class="fl">0.02</span>, <span class="dv">10</span>, <span class="dv">150000</span>) <span class="do">## Orden por defecto</span></span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="funciones.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros</span></span>
+<span id="cb227-2"><a href="funciones.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="do">## tasa.interes : Tasa de interés mensual del préstamo</span></span>
+<span id="cb227-3"><a href="funciones.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="do">## n: Número de cuotas</span></span>
+<span id="cb227-4"><a href="funciones.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="do">## principal: Monto del préstamo</span></span>
+<span id="cb227-5"><a href="funciones.html#cb227-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-6"><a href="funciones.html#cb227-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
+<span id="cb227-7"><a href="funciones.html#cb227-7" aria-hidden="true" tabindex="-1"></a><span class="do">## pago: Cuota del préstamo.</span></span>
+<span id="cb227-8"><a href="funciones.html#cb227-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-9"><a href="funciones.html#cb227-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-10"><a href="funciones.html#cb227-10" aria-hidden="true" tabindex="-1"></a>calcula.cuota <span class="ot">&lt;-</span> <span class="cf">function</span>(tasa.interes, n, principal) {</span>
+<span id="cb227-11"><a href="funciones.html#cb227-11" aria-hidden="true" tabindex="-1"></a>  pago <span class="ot">&lt;-</span> principal <span class="sc">*</span> tasa.interes <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> tasa.interes)<span class="sc">^</span>(<span class="sc">-</span>n))</span>
+<span id="cb227-12"><a href="funciones.html#cb227-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pago)</span>
+<span id="cb227-13"><a href="funciones.html#cb227-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb227-14"><a href="funciones.html#cb227-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-15"><a href="funciones.html#cb227-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-16"><a href="funciones.html#cb227-16" aria-hidden="true" tabindex="-1"></a><span class="fu">calcula.cuota</span>(<span class="fl">0.02</span>, <span class="dv">10</span>, <span class="dv">150000</span>) <span class="do">## Orden por defecto</span></span></code></pre></div>
 <pre><code>## [1] 16698.98</code></pre>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="funciones.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calcula.cuota</span>(<span class="at">n =</span> <span class="dv">340</span>, <span class="at">tasa.interes =</span> <span class="fl">0.11</span>, <span class="at">principal =</span> <span class="dv">3500000</span>) <span class="do">## Para cambiar el orden se especifica el nombre del parámetro</span></span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="funciones.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calcula.cuota</span>(<span class="at">n =</span> <span class="dv">340</span>, <span class="at">tasa.interes =</span> <span class="fl">0.11</span>, <span class="at">principal =</span> <span class="dv">3500000</span>) <span class="do">## Para cambiar el orden se especifica el nombre del parámetro</span></span></code></pre></div>
 <pre><code>## [1] 385000</code></pre>
 <p>Ejemplo de función que retorna una lista.</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="funciones.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros</span></span>
-<span id="cb237-2"><a href="funciones.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="do">## DF : Data frame</span></span>
-<span id="cb237-3"><a href="funciones.html#cb237-3" aria-hidden="true" tabindex="-1"></a><span class="do">## NC: Número de columna</span></span>
-<span id="cb237-4"><a href="funciones.html#cb237-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-5"><a href="funciones.html#cb237-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
-<span id="cb237-6"><a href="funciones.html#cb237-6" aria-hidden="true" tabindex="-1"></a><span class="do">## lista con nombre de la variable correspondiente al número de columna, la media, la mediana, la desviación estándar,la varianza, el máximo y el mínimo.</span></span>
-<span id="cb237-7"><a href="funciones.html#cb237-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-8"><a href="funciones.html#cb237-8" aria-hidden="true" tabindex="-1"></a>estadisticas <span class="ot">&lt;-</span> <span class="cf">function</span>(DF, NC) {</span>
-<span id="cb237-9"><a href="funciones.html#cb237-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-10"><a href="funciones.html#cb237-10" aria-hidden="true" tabindex="-1"></a>  variable <span class="ot">&lt;-</span> DF[, NC]</span>
-<span id="cb237-11"><a href="funciones.html#cb237-11" aria-hidden="true" tabindex="-1"></a>  nombre <span class="ot">&lt;-</span> <span class="fu">colnames</span>(DF)[NC]</span>
-<span id="cb237-12"><a href="funciones.html#cb237-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-13"><a href="funciones.html#cb237-13" aria-hidden="true" tabindex="-1"></a>  media <span class="ot">&lt;-</span> <span class="fu">mean</span>(variable)</span>
-<span id="cb237-14"><a href="funciones.html#cb237-14" aria-hidden="true" tabindex="-1"></a>  mediana <span class="ot">&lt;-</span> <span class="fu">median</span>(variable)</span>
-<span id="cb237-15"><a href="funciones.html#cb237-15" aria-hidden="true" tabindex="-1"></a>  deviacion <span class="ot">&lt;-</span> <span class="fu">sd</span>(variable)</span>
-<span id="cb237-16"><a href="funciones.html#cb237-16" aria-hidden="true" tabindex="-1"></a>  varianza <span class="ot">&lt;-</span> <span class="fu">var</span>(variable)</span>
-<span id="cb237-17"><a href="funciones.html#cb237-17" aria-hidden="true" tabindex="-1"></a>  maximo <span class="ot">&lt;-</span> <span class="fu">max</span>(variable)</span>
-<span id="cb237-18"><a href="funciones.html#cb237-18" aria-hidden="true" tabindex="-1"></a>  minimo <span class="ot">&lt;-</span> <span class="fu">min</span>(variable)</span>
-<span id="cb237-19"><a href="funciones.html#cb237-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-20"><a href="funciones.html#cb237-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">Variable =</span> nombre, <span class="at">Media =</span> media, <span class="at">Mediana =</span> mediana, <span class="at">DesEst =</span> deviacion, <span class="at">Varianza =</span> varianza, <span class="at">Maximo =</span> maximo, <span class="at">Minimo =</span> minimo))</span>
-<span id="cb237-21"><a href="funciones.html#cb237-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb237-22"><a href="funciones.html#cb237-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-23"><a href="funciones.html#cb237-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-24"><a href="funciones.html#cb237-24" aria-hidden="true" tabindex="-1"></a><span class="fu">estadisticas</span>(portafolio.banco, <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="funciones.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros</span></span>
+<span id="cb231-2"><a href="funciones.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="do">## DF : Data frame</span></span>
+<span id="cb231-3"><a href="funciones.html#cb231-3" aria-hidden="true" tabindex="-1"></a><span class="do">## NC: Número de columna</span></span>
+<span id="cb231-4"><a href="funciones.html#cb231-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-5"><a href="funciones.html#cb231-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
+<span id="cb231-6"><a href="funciones.html#cb231-6" aria-hidden="true" tabindex="-1"></a><span class="do">## lista con nombre de la variable correspondiente al número de columna, la media, la mediana, la desviación estándar,la varianza, el máximo y el mínimo.</span></span>
+<span id="cb231-7"><a href="funciones.html#cb231-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-8"><a href="funciones.html#cb231-8" aria-hidden="true" tabindex="-1"></a>estadisticas <span class="ot">&lt;-</span> <span class="cf">function</span>(DF, NC) {</span>
+<span id="cb231-9"><a href="funciones.html#cb231-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-10"><a href="funciones.html#cb231-10" aria-hidden="true" tabindex="-1"></a>  variable <span class="ot">&lt;-</span> DF[, NC]</span>
+<span id="cb231-11"><a href="funciones.html#cb231-11" aria-hidden="true" tabindex="-1"></a>  nombre <span class="ot">&lt;-</span> <span class="fu">colnames</span>(DF)[NC]</span>
+<span id="cb231-12"><a href="funciones.html#cb231-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-13"><a href="funciones.html#cb231-13" aria-hidden="true" tabindex="-1"></a>  media <span class="ot">&lt;-</span> <span class="fu">mean</span>(variable)</span>
+<span id="cb231-14"><a href="funciones.html#cb231-14" aria-hidden="true" tabindex="-1"></a>  mediana <span class="ot">&lt;-</span> <span class="fu">median</span>(variable)</span>
+<span id="cb231-15"><a href="funciones.html#cb231-15" aria-hidden="true" tabindex="-1"></a>  deviacion <span class="ot">&lt;-</span> <span class="fu">sd</span>(variable)</span>
+<span id="cb231-16"><a href="funciones.html#cb231-16" aria-hidden="true" tabindex="-1"></a>  varianza <span class="ot">&lt;-</span> <span class="fu">var</span>(variable)</span>
+<span id="cb231-17"><a href="funciones.html#cb231-17" aria-hidden="true" tabindex="-1"></a>  maximo <span class="ot">&lt;-</span> <span class="fu">max</span>(variable)</span>
+<span id="cb231-18"><a href="funciones.html#cb231-18" aria-hidden="true" tabindex="-1"></a>  minimo <span class="ot">&lt;-</span> <span class="fu">min</span>(variable)</span>
+<span id="cb231-19"><a href="funciones.html#cb231-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-20"><a href="funciones.html#cb231-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">Variable =</span> nombre, <span class="at">Media =</span> media, <span class="at">Mediana =</span> mediana, <span class="at">DesEst =</span> deviacion, <span class="at">Varianza =</span> varianza, <span class="at">Maximo =</span> maximo, <span class="at">Minimo =</span> minimo))</span>
+<span id="cb231-21"><a href="funciones.html#cb231-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb231-22"><a href="funciones.html#cb231-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-23"><a href="funciones.html#cb231-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-24"><a href="funciones.html#cb231-24" aria-hidden="true" tabindex="-1"></a><span class="fu">estadisticas</span>(portafolio.banco, <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## Error in estadisticas(portafolio.banco, 20): object &#39;portafolio.banco&#39; not found</code></pre>
 
 </div>
@@ -302,8 +302,8 @@ C = P\cdot\bigg(\dfrac{i}{1-(1+i)^{-n}}\bigg)
           </div>
         </div>
       </div>
-<a href="importación-de-datos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="estructuras-de-control-en-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="importación-de-datos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -325,7 +325,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/09-funciones.Rmd",
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/07-funciones.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -333,7 +333,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/09-funciones.Rmd",
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/07-funciones.Rmd",
 "text": null
 },
 "download": ["Notas-Curso-Basico-R.pdf"],

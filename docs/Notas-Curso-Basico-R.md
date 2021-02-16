@@ -1,7 +1,7 @@
 --- 
 title: "Notas Curso Básico R"
 author: "Tobías Chavarría"
-date: "Actualizado el 05 Feb, 2021"
+date: "Actualizado el 16 Feb, 2021"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -1907,152 +1907,6 @@ repeat{
 
 
 
-# **Importación de datos**
-
-Algunas de las funciones base en R para la lectura datos son:
-
-- **read.table** , **read.csv**, se utilizan para leer datos que tienen formato de tabla.
-
-
-### **read.table**
-
-
-```r
-read.table(file = archivo[, header = TRUE | FALSE,
-  sep = separadorDatos, dec = separadorDecimal,
-  quote = delimitadorCadenas,
-  stringsAsFactors = TRUE | FALSE])
-```
-Esta es la función genérica para leer datos en formato .csv y genera , algunos de sus argumentos son:
-
-- **file**: El nombre del archivo o su ubicación.
-- **header**: Variable lógica que indica si el archivo tiene encabezado.
-- **sep**: String que indica como están separadas las columnas.
-- **dec**: Para datos numéricos, establece cuál es el separador entre parte entera
-y decimal.
-- **colClasses**: Vector con las clases de cada una de las columnas.
-- **stringsAsFactors**: Indica si las variables de tipo character se deben leer como factor.
-
-**Leer documentación de la función read.table**.
-
-### **read.csv**
-
-Es una implementación especializada de read.table() en la que se asume
-que los parámetros header, sep y dec toman los valores TRUE, "," y ".", respectivamente.  
-
-
-
-
-
-```r
-portafolio.banco <- read.csv("data/ArchivoInsumoBanco20200630.csv", sep = ";", dec = ".", na.strings = c("", "NA"))
-
-str(portafolio.banco)
-```
-
-```
-## 'data.frame':	872 obs. of  20 variables:
-##  $ CATEGORIANIIF    : chr  "COSTO AMORTIZADO" "COSTO AMORTIZADO" "COSTO AMORTIZADO" "COSTO AMORTIZADO" ...
-##  $ MONEDA           : chr  "CRC" "CRC" "CRC" "CRC" ...
-##  $ CARTERA          : chr  "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" ...
-##  $ EMISOR           : chr  "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" ...
-##  $ NEMOEMISOR       : chr  "BCCR" "BCCR" "BCCR" "BCCR" ...
-##  $ NEMOTECNICO      : chr  "bem" "bem" "bem" "bem" ...
-##  $ ISIN             : chr  "CRBCCR0B4270" "CRBCCR0B4270" "CRBCCR0B4270" "CRBCCR0B4296" ...
-##  $ COMPRA           : chr  "12/11/2019" "12/13/2019" "12/17/2019" "12/06/2019" ...
-##  $ VENCIMIENTO      : chr  "03/10/2021" "03/10/2021" "03/10/2021" "03/09/2022" ...
-##  $ MONTOFACIAL      : num  5.00e+08 5.55e+08 5.00e+08 5.00e+08 1.50e+07 ...
-##  $ REFERENCIA       : chr  "TV2940-1" "TV2973-1" "TV3003-1" "TV2906-1" ...
-##  $ CODINVENTARIO    : int  11897 11936 11968 11863 11404 12273 12286 11647 11649 11658 ...
-##  $ CALIFICADORASUGEF: chr  "S&P INTER." "S&P INTER." "S&P INTER." "S&P INTER." ...
-##  $ CALIFICACIONSUGEF: chr  "B" "B" "B" "B" ...
-##  $ MOODYS           : chr  "B2" "B2" "B2" "B2" ...
-##  $ S.P              : chr  "B" "B" "B" "B" ...
-##  $ FITCH.CRI        : chr  NA NA NA NA ...
-##  $ FITCH.INTER.     : chr  "B+" "B+" "B+" "B+" ...
-##  $ SCRC             : chr  NA NA NA NA ...
-##  $ VMKTCRC          : num  5.30e+08 5.89e+08 5.31e+08 5.43e+08 1.55e+07 ...
-```
-
-```r
-portafolio.banco <- portafolio.banco %>% rename(FECHA.COMPRA = COMPRA, FECHA.VENC = VENCIMIENTO)
-```
-
-
-### **read_excel**
-
-Esta se utiliza para leer datos de excel, algunos de sus argumentos son:
-
-
-- **path**: Ruta del archivo.
-- **sheet**: Hoja del excel que se desea leer, por defecto es la primera.
-- **range**: Rango de celdas que se desean leer.
-- **col_types**: Vector con las clases de cada una de las columnas.
-- **col_names**: Indica si la primera fila corresponde al nombre de las columnas.
-
-
-
-```r
-library(readxl)
-
-
-portafolio.BNValores <- read_excel("data/Portafolio BN Valores Junio.xlsx")
-
-portafolio.BNValores_top10 <- head(portafolio.BNValores, 10) ## head(data,n) retorna las primeras n filas de nuestro data frame
-
-portafolio.BNValores_top10
-```
-
-```
-## # A tibble: 10 x 46
-##    Fecha                Boleta Bol.Nueva `Moneda Facial` `Moneda Liquida` ISIN 
-##    <dttm>                <dbl>     <dbl> <chr>           <chr>            <chr>
-##  1 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
-##  2 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
-##  3 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
-##  4 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  5 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  6 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  7 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  8 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  9 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-## 10 2020-06-30 00:00:00 1.80e10   1.80e10 Colones         Colones          CRG0~
-## # ... with 40 more variables: Emisor <chr>, Instrumento <chr>, Serie <chr>,
-## #   Tasa <dbl>, Tas.Diaria <dbl>, Mto.Facial <dbl>, Mto.Liquidar <dbl>,
-## #   Mto.Libros <dbl>, Mto.Mercado <dbl>, Mto.Gand.Perd. <dbl>,
-## #   Mto.Ganancia <dbl>, Mto.Perdida <dbl>, Mto.Gan.Imp.Dif. <dbl>,
-## #   Mto.Per.Imp.Dif. <dbl>, `Mto. Deterioro Valor` <lgl>, Mto.Precio <dbl>,
-## #   MTo.Pre.Merc. <dbl>, Mto.Int.Compra <dbl>, Mto.Int.Diario <dbl>,
-## #   Mto.Int.Acum. <dbl>, Diferencial <dbl>, Mto.Desc.Diario <dbl>,
-## #   Mto.Desc.Acum. <dbl>, Mto.Prim.Diario <dbl>, Mto.PrimAcum <dbl>,
-## #   Fec.Liquida <dttm>, Fec.Vencimi. <dttm>, Fec.Ult.Pago <dttm>,
-## #   Fec.Pro.Pago <dttm>, Num.Dia.Acum. <dbl>, Num_Dia.Venc. <dbl>,
-## #   Num.Dia.Oper. <dbl>, `Cód. Modelo Negocio` <chr>, `Nombre Modelo
-## #   Negocio` <chr>, `Prueba SPPI` <chr>, `Tipo Tasa Interes` <chr>, Tipo <chr>,
-## #   Tip.Cambio <dbl>, Grupo <chr>, Sector <chr>
-```
-
-
-### **Calculando requisitos de memoria**.
-
-Si queremos leer un archivo con 1.500.000 filas y 120 columnas, donde todas son de tipo numérico, realizamos el siguiente cálculo
-
-
-\begin{align*}
-1,500,000\times120\times 8 (bytes)\\
-=&1.44\times10^9 (bytes)\\
-=&1.44\times10^9 / 2^{20} (MB)\\
-=&1,373 (MB)\\
-=&1.34 (GB)\\
-\end{align*}
-
-por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB de RAM en nuestra computadora.
-
-
-<!--chapter:end:07-importacion-de-datos.Rmd-->
-
-
-
 # **Funciones**
 
 Como analistas de datos escribir funciones es una de las mejores herramientas, ya que nos permiten automatizar y estandarizar tareas, además de que hace nuestro código más legible y mucho más sencillo de mantener.
@@ -2196,5 +2050,151 @@ estadisticas(portafolio.banco, 20)
 ## Error in estadisticas(portafolio.banco, 20): object 'portafolio.banco' not found
 ```
 
-<!--chapter:end:09-funciones.Rmd-->
+<!--chapter:end:07-funciones.Rmd-->
+
+
+
+# **Importación de datos**
+
+Algunas de las funciones base en R para la lectura datos son:
+
+- **read.table** , **read.csv**, se utilizan para leer datos que tienen formato de tabla.
+
+
+### **read.table**
+
+
+```r
+read.table(file = archivo[, header = TRUE | FALSE,
+  sep = separadorDatos, dec = separadorDecimal,
+  quote = delimitadorCadenas,
+  stringsAsFactors = TRUE | FALSE])
+```
+Esta es la función genérica para leer datos en formato .csv y genera , algunos de sus argumentos son:
+
+- **file**: El nombre del archivo o su ubicación.
+- **header**: Variable lógica que indica si el archivo tiene encabezado.
+- **sep**: String que indica como están separadas las columnas.
+- **dec**: Para datos numéricos, establece cuál es el separador entre parte entera
+y decimal.
+- **colClasses**: Vector con las clases de cada una de las columnas.
+- **stringsAsFactors**: Indica si las variables de tipo character se deben leer como factor.
+
+**Leer documentación de la función read.table**.
+
+### **read.csv**
+
+Es una implementación especializada de read.table() en la que se asume
+que los parámetros header, sep y dec toman los valores TRUE, "," y ".", respectivamente.  
+
+
+
+
+
+```r
+portafolio.banco <- read.csv("data/ArchivoInsumoBanco20200630.csv", sep = ";", dec = ".", na.strings = c("", "NA"))
+
+str(portafolio.banco)
+```
+
+```
+## 'data.frame':	872 obs. of  20 variables:
+##  $ CATEGORIANIIF    : chr  "COSTO AMORTIZADO" "COSTO AMORTIZADO" "COSTO AMORTIZADO" "COSTO AMORTIZADO" ...
+##  $ MONEDA           : chr  "CRC" "CRC" "CRC" "CRC" ...
+##  $ CARTERA          : chr  "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" ...
+##  $ EMISOR           : chr  "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" ...
+##  $ NEMOEMISOR       : chr  "BCCR" "BCCR" "BCCR" "BCCR" ...
+##  $ NEMOTECNICO      : chr  "bem" "bem" "bem" "bem" ...
+##  $ ISIN             : chr  "CRBCCR0B4270" "CRBCCR0B4270" "CRBCCR0B4270" "CRBCCR0B4296" ...
+##  $ COMPRA           : chr  "12/11/2019" "12/13/2019" "12/17/2019" "12/06/2019" ...
+##  $ VENCIMIENTO      : chr  "03/10/2021" "03/10/2021" "03/10/2021" "03/09/2022" ...
+##  $ MONTOFACIAL      : num  5.00e+08 5.55e+08 5.00e+08 5.00e+08 1.50e+07 ...
+##  $ REFERENCIA       : chr  "TV2940-1" "TV2973-1" "TV3003-1" "TV2906-1" ...
+##  $ CODINVENTARIO    : int  11897 11936 11968 11863 11404 12273 12286 11647 11649 11658 ...
+##  $ CALIFICADORASUGEF: chr  "S&P INTER." "S&P INTER." "S&P INTER." "S&P INTER." ...
+##  $ CALIFICACIONSUGEF: chr  "B" "B" "B" "B" ...
+##  $ MOODYS           : chr  "B2" "B2" "B2" "B2" ...
+##  $ S.P              : chr  "B" "B" "B" "B" ...
+##  $ FITCH.CRI        : chr  NA NA NA NA ...
+##  $ FITCH.INTER.     : chr  "B+" "B+" "B+" "B+" ...
+##  $ SCRC             : chr  NA NA NA NA ...
+##  $ VMKTCRC          : num  5.30e+08 5.89e+08 5.31e+08 5.43e+08 1.55e+07 ...
+```
+
+```r
+portafolio.banco <- portafolio.banco %>% rename(FECHA.COMPRA = COMPRA, FECHA.VENC = VENCIMIENTO)
+```
+
+
+### **read_excel**
+
+Esta se utiliza para leer datos de excel, algunos de sus argumentos son:
+
+
+- **path**: Ruta del archivo.
+- **sheet**: Hoja del excel que se desea leer, por defecto es la primera.
+- **range**: Rango de celdas que se desean leer.
+- **col_types**: Vector con las clases de cada una de las columnas.
+- **col_names**: Indica si la primera fila corresponde al nombre de las columnas.
+
+
+
+```r
+library(readxl)
+
+
+portafolio.BNValores <- read_excel("data/Portafolio BN Valores Junio.xlsx")
+
+portafolio.BNValores_top10 <- head(portafolio.BNValores, 10) ## head(data,n) retorna las primeras n filas de nuestro data frame
+
+portafolio.BNValores_top10
+```
+
+```
+## # A tibble: 10 x 46
+##    Fecha                Boleta Bol.Nueva `Moneda Facial` `Moneda Liquida` ISIN 
+##    <dttm>                <dbl>     <dbl> <chr>           <chr>            <chr>
+##  1 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
+##  2 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
+##  3 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
+##  4 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  5 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  6 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  7 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  8 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+##  9 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
+## 10 2020-06-30 00:00:00 1.80e10   1.80e10 Colones         Colones          CRG0~
+## # ... with 40 more variables: Emisor <chr>, Instrumento <chr>, Serie <chr>,
+## #   Tasa <dbl>, Tas.Diaria <dbl>, Mto.Facial <dbl>, Mto.Liquidar <dbl>,
+## #   Mto.Libros <dbl>, Mto.Mercado <dbl>, Mto.Gand.Perd. <dbl>,
+## #   Mto.Ganancia <dbl>, Mto.Perdida <dbl>, Mto.Gan.Imp.Dif. <dbl>,
+## #   Mto.Per.Imp.Dif. <dbl>, `Mto. Deterioro Valor` <lgl>, Mto.Precio <dbl>,
+## #   MTo.Pre.Merc. <dbl>, Mto.Int.Compra <dbl>, Mto.Int.Diario <dbl>,
+## #   Mto.Int.Acum. <dbl>, Diferencial <dbl>, Mto.Desc.Diario <dbl>,
+## #   Mto.Desc.Acum. <dbl>, Mto.Prim.Diario <dbl>, Mto.PrimAcum <dbl>,
+## #   Fec.Liquida <dttm>, Fec.Vencimi. <dttm>, Fec.Ult.Pago <dttm>,
+## #   Fec.Pro.Pago <dttm>, Num.Dia.Acum. <dbl>, Num_Dia.Venc. <dbl>,
+## #   Num.Dia.Oper. <dbl>, `Cód. Modelo Negocio` <chr>, `Nombre Modelo
+## #   Negocio` <chr>, `Prueba SPPI` <chr>, `Tipo Tasa Interes` <chr>, Tipo <chr>,
+## #   Tip.Cambio <dbl>, Grupo <chr>, Sector <chr>
+```
+
+
+### **Calculando requisitos de memoria**.
+
+Si queremos leer un archivo con 1.500.000 filas y 120 columnas, donde todas son de tipo numérico, realizamos el siguiente cálculo
+
+
+\begin{align*}
+1,500,000\times120\times 8 (bytes)\\
+=&1.44\times10^9 (bytes)\\
+=&1.44\times10^9 / 2^{20} (MB)\\
+=&1,373 (MB)\\
+=&1.34 (GB)\\
+\end{align*}
+
+por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB de RAM en nuestra computadora.
+
+
+<!--chapter:end:08-importacion-de-datos.Rmd-->
 
