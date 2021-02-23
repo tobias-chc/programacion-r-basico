@@ -1,0 +1,260 @@
+# **Data Frames con el paquete dplyr.**
+
+Como vimos en la clase anterior los data frames son las estructuras más importantes en R, recordemos que básicamente un data frame es una tabla, donde cada fila representa una observación o individuo, y cada columna una variable o característica de esta observación. 
+
+Dada la importancia de estas estructuras, es muy importante conocer las mejores herramientas para trabajar con ellas, en la sección de 
+subsetting vimos como obtener subconjuntos de nuestros datos, sin embargo cuando tenemos que hacer varios filtros o agrupaciones el uso de "[]", "$", no es tan recomendable, pues es más fácil equivocarse y el código es más complicado de leer.
+
+El paquete **dplyr** está diseñado para mitigar estas complicaciones y optimizado para realizar estas tareas.
+
+## **Paquete dplyr**:
+
+El paquete **dplyr** fue desarrollado por Hadley Wickham de RStudio y us una versión mejorada del paquete **plyr**. Una de las ventajas de este paquete es que tiene cierta gramática en sus funciones, lo que facilita escribir y leer código. Además sus funciones son muy rápidas y algunas de sus operaciones están programadas en C++.
+
+**Gramática de dplyr**
+
+Algunos de los "verbos" que tiene el paquete **dplyr** son los siguientes:
+
+- **select**: Retorna un subconjunto de columnas.
+- **filter**: Extrae subconjuntos de filas basado en condiciones lógicas.
+- **arrange**: Reordena las filas de un data frame.
+- **rename**: Renombra las variables del data frame.
+- **mutate**: Agrega columnas o transforma las existentes.
+- **summarise / summarize**: Genera un resumen estadístico de las variables del data frame.
+- **%>%**: El operador “pipe” es usado para conectar varios "verbos" en una sola ejecución.
+
+Es importante notar que, el primer argumento de todas estas funciones es un data frame y su resultado también es un data frame, por eso es fácil y útil combinarlas.
+
+**Instalación**
+
+```{r notas-curso-113, eval=FALSE}
+## Para instalarlo basta ejecutar lo siguiente en la consola
+install.packages("dplyr") 
+
+## Para utilizar las funciones se debe cargar la librería mediante la instrucción
+library(dplyr)
+```
+
+
+```{r 10-data-frames-con-el-paquete-dplyr-1, include=FALSE}
+setwd('/Users/tchavarria/Documents/GitHub/curso-basico-r-bn')
+```
+Cargamos el archivo de datos
+
+```{r carga_port_banco}
+datos.credito <- read.csv("data/DeudaCredito.csv",sep= ";", dec=".", stringsAsFactors = T)
+
+datos.credito$Casado <- factor(datos.credito$Casado, levels = c(1,0), labels = c("si","no"))
+
+datos.credito$fecha_ini <- as.Date(datos.credito$fecha_ini, format = "%m/%d/%Y")
+```
+
+## **select()**:
+
+Normalmente trabajamos con data frames que tienen muchas variables y necesitamos enfocarnos en solo algunas de estas, la función **select()** como su nombre lo sugiere, sirve para obtener las columnas deseadas de nuestro conjunto de datos.
+
+
+Primero vamos a ver de forma general la estructura de nuestros datos, utilizando las funciones **dim()
+** y **str()**.
+
+
+```{r notas-curso-114}
+dim(datos.credito) ## Obtenemos la dimensiones de nuestro data frame [filas, columnas].
+```
+
+```{r notas-curso-115}
+str(datos.credito) ## Presenta un resumen las variables del data frame y su clase.
+```
+
+
+Suponga que queremos las columnas Edad, Educación, Género, Estudiante, Casado
+
+```{r notas-curso-116}
+
+datos.credito.info_personal <- select(datos.credito, c("Edad", "Educacion", "Genero", "Estudiante", "Casado", "Etnicidad"))
+
+head(datos.credito.info_personal)
+
+```
+
+También podemos utilizar el **select()** eligiendo las columnas que no queremos.
+
+```{r notas-curso-117}
+
+datos.credito.info_personal.sinEtnia <- select(datos.credito.info_personal, -Etnicidad)  ##para quitar varias columnas utilizamos un vector, por ejemplo: -c("Etnicidad", "Casado) 
+
+head(datos.credito.info_personal.sinEtnia)
+
+```
+
+Otra forma es seleccionar las columnas que tengan inicien o terminen con ciertos caracteres, por ejemplo si queremos todas las columnas que tienen el prefijo "monto".
+
+```{r notas-curso-118}
+
+datos.credito_montos <- select(datos.credito,starts_with("monto")) ##Podemos usar ends_with("sufijo") para elegir las que terminen con cierto sufijo.
+
+head(datos.credito_montos)
+
+
+```
+
+## **filter()**:
+
+Esta función se utiliza para extraer filas de nuestro data frame utilizando condiciones.
+
+```{r notas-curso-119}
+
+datos.credito_enero <- filter(datos.credito, months(fecha_ini) == "January")
+
+dim(datos.credito_enero)
+
+head(datos.credito_enero)
+```
+
+
+```{r notas-curso-120}
+
+datos.credito_enero_fem <- filter(datos.credito, months(fecha_ini) == "January" & Genero == "Femenino" )
+
+dim(datos.credito_enero_fem)
+
+head(datos.credito_enero_fem)
+```
+
+## **arrange()**:
+
+Esta función se utiliza para ordenar las filas de un data frame de acuerdo a una de sus variables.
+
+
+Ordenamos de acuerdo la columna que contiene las fechas de inicio.
+
+```{r notas-curso-122}
+datos.credito_ordenado <- arrange(datos.credito, fecha_ini) ## De forma ascendente por defecto
+
+head(select(datos.credito_ordenado, fecha_ini, monto_balance))
+```
+
+
+```{r notas-curso-123}
+datos.credito_ordenado <- arrange(datos.credito, desc(fecha_ini)) ## De forma descendente.
+
+head(select(datos.credito_ordenado, fecha_ini, monto_balance))
+```
+
+## **rename()**:
+
+Renombrar variables puede ser de mucha utilidad para poder escribir código y hacerlo más legible. Sin la función **rename()** esta tarea puede ser bastante tediosa.
+
+```{r notas-curso-124}
+datos.credito <- rename(datos.credito, cant_tarjetas = "Tarjetas" , calif_credit = CalifCredit, id = X)
+
+head(datos.credito) 
+```
+
+
+## **mutate()**:
+
+Esta función nos permite crear variables a partir de las que ya existen, de una forma muy sencilla.
+
+```{r notas-curso-126}
+
+datos.credito <- mutate(datos.credito, razon = monto_limite/monto_ingreso)
+
+head(select(datos.credito, monto_ingreso, monto_limite, razon))
+```
+
+También funciona para agregar variables de forma manual
+
+```{r 10-data-frames-con-el-paquete-dplyr-1-bis}
+datos.credito <- mutate(datos.credito, fecha_actual = Sys.Date(), dif_fechas = fecha_actual - fecha_ini)
+
+head(select(datos.credito, fecha_ini, fecha_actual, dif_fechas))
+```
+
+
+## **group_by()**:
+
+
+Esta función se utiliza para generar subconjuntos de los datos a partir de ciertas propiedades, luego de hacer esto podemos generar resúmenes estadísticos de esos subconjuntos.
+
+La estrategia en general es separar el data frame en partes de acuerdo a una o más variables y luego aplicar un summary en cada una de esas partes.
+
+
+```{r notas-curso-127}
+
+datos.credito_genero <- group_by(datos.credito , Genero) ## Agrupamos por genero
+
+summarize(datos.credito_genero, mean(Edad))
+
+summarize(datos.credito_genero, "Media Ingreso (CRC)"=mean(monto_ingreso)*619) ## Pasamos a colones
+
+
+summarize(datos.credito_genero, "Media Ingreso (CRC)"=mean(monto_ingreso)*619, "Media edad" = mean(Edad)) ## Pasamos a colones
+```
+
+
+```{r notas-curso-128}
+
+datos.credito_gen_casado <- group_by(datos.credito, Genero, Estudiante) ## Agrupamos por genero y por casado.
+
+resumen_gen_casado <- summarize(datos.credito_gen_casado, "Cantidad de individuos"=n()) ## n() nos da la cantidad de elementos por grupo.
+
+resumen_gen_casado
+
+```
+
+```{r notas-curso-129}
+
+library(lubridate) ## Se utiliza la función year()
+
+datos.credito_anho <- group_by(datos.credito, "Fecha inicio"= year(fecha_ini), Genero) ## Agrupamos por fecha inicio
+
+resumen.anho <- summarize(datos.credito_anho, "Media balance" = mean(monto_balance) ,"Cantidad de individuos"= n()) ## n() nos da la cantidad de elementos por grupo.
+
+resumen.anho
+
+resumen.anho <- arrange(resumen.anho,desc(`Fecha inicio`))  ## Ordenamos por año de forma descendente
+
+resumen.anho
+
+```
+
+
+## **Operador pipe %>%**:
+
+El operador **%>%** es muy útil a la hora de utilizar funciones del paquete **dplyr** de forma consecutiva, primero recordemos que el resultado de un función de este paquete siempre es un data frame, por lo que es posible ( y muy usual) aplicar varias funciones, pero si lo hacemos de forma anidada es un poco confuso de leer, pues se vería de esta forma
+
+
+```{r notas-curso-130, eval=FALSE}
+> tercera(segunda(primera(dataframe)))
+```
+
+Esta lógica anidada no es la forma más natural de pensar, por lo el operador **%>%** no es permite escribir las operaciones en forma de secuencia de izquierda a derecha, es decir
+
+```{r notas-curso-131,  eval=FALSE}
+> primera(dataframe) %>% segunda %>% tercera
+```
+
+
+```{r notas-curso-132}
+datos.credito %>% select(monto_balance, monto_ingreso, monto_limite, calif_credit)  %>% arrange(desc(monto_limite)) %>% head(3)  
+
+
+##También se pueden ver los últimos usando tail(n)
+datos.credito %>% select(monto_balance, monto_ingreso, monto_limite, calif_credit)  %>% arrange(desc(monto_limite)) %>% tail(3)   
+```
+
+
+El último ejemplo que hicimos en la sección de **group_by()** se puede reescribir de forma más sencilla utilizando **%>%** de la siguiente forma:
+
+```{r notas-curso-133, warning=FALSE}
+
+group_by(datos.credito, "Fecha inicio"= year(fecha_ini), Genero) %>% summarize("Media balance" = mean(monto_balance) ,"Cantidad de individuos"= n()) %>% arrange(desc(`Fecha inicio`)) 
+
+```
+
+Es bueno aclarar que este operador **no** es exclusivo para funciones del paquete **dplyr** se puede usar siempre que escribamos código siempre y cuando tenga sentido, es decir, que el resultado de la operación anterior sea compatible con el insumo de la función siguiente.
+
+Para escribir este operador de forma rápida utilizamos el shortcut: **CTRL+SHIFT+M**.
+
+

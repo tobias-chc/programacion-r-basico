@@ -37,11 +37,19 @@ setwd('/Users/tchavarria/Documents/GitHub/curso-basico-r-bn')
 
 
 ```{r notas-curso-82}
-portafolio.banco <- read.csv("data/ArchivoInsumoBanco20200630.csv",sep= ";", dec=".",na.strings = c("", "NA"))
+datos.credito <- read.csv("data/DeudaCredito.csv",sep= ";", dec=".")
 
-str(portafolio.banco)
-portafolio.banco <- portafolio.banco %>% rename(FECHA.COMPRA = COMPRA ,FECHA.VENC = VENCIMIENTO)
+str(datos.credito)
+```
 
+
+
+Podemos ver que varias variables que deberían ser categóricas se leyeron como strings, para corregir esto podemos colocar el parámetro **stringsAsFactors** igual a TRUE de la función read_excel(), para leer los caracteres como factores.
+
+```{r 08-importacion-de-datos-1}
+datos.credito <- read.csv("data/DeudaCredito.csv",sep= ",", dec=".", stringsAsFactors = T)
+
+str(datos.credito)
 ```
 
 
@@ -62,13 +70,24 @@ Esta se utiliza para leer datos de excel, algunos de sus argumentos son:
 library(readxl)
 
 
-portafolio.BNValores <- read_excel("data/Portafolio BN Valores Junio.xlsx")
+tipo_cambio <- read_excel("data/tipo_cambio.xls")
 
-portafolio.BNValores_top10 <- head(portafolio.BNValores,10) ## head(data,n) retorna las primeras n filas de nuestro data frame
+tipo_cambio_top10 <- head(tipo_cambio,10) ## head(data,n) retorna las primeras n filas de nuestro data frame
 
-portafolio.BNValores_top10
+tipo_cambio_top10
 
 ```
+
+Aplicando el head(), podemos ver que la lectura del archivo no es correcta, para hacerlo de forma correcta podemos utilizar el parámetro range de la función read_excel(), para decirle que celdas queremos leer, la notación es la mimsa que se utiliza en MS Excel.
+
+```{r notas-curso-84, message=FALSE, warning=FALSE}
+
+tipo_cambio <- read_excel("data/tipo_cambio.xls", range = "A6:C787", col_names = c("fecha", "compra", "venta"))
+
+ head(tipo_cambio)
+
+```
+
 
 
 ### **Calculando requisitos de memoria**.

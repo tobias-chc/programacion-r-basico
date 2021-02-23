@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 11 Análisis exploratorio | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 11 Análisis exploratorio | Notas Curso Básico R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 11 Análisis exploratorio | Notas Curso Básico R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 11 Análisis exploratorio | Notas Curso Básico R" />
+  
+  
+  
+
+<meta name="author" content="Tobías Chavarría" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importación-de-datos.html"/>
+<link rel="next" href="data-frames-con-el-paquete-dplyr-.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso Básico en R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Primeros pasos con R y RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#instalación"><i class="fa fa-check"></i><b>2.1</b> <strong>Instalación</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#r"><i class="fa fa-check"></i><b>2.1.1</b> <strong>R</strong></a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> <strong>RStudio</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno-de-trabajo-de-rstudio."><i class="fa fa-check"></i><b>2.2</b> <strong>Entorno de trabajo de RStudio.</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#consola-de-r"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Consola de R</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#ayuda-en-r"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Ayuda en R</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#nombres-en-r"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Nombres en R</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts-de-r"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Scripts de R</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Entorno</strong></a></li>
+<li class="chapter" data-level="2.2.6" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.2.6</b> <strong>Directorio de trabajo</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#paquetes"><i class="fa fa-check"></i><b>2.3</b> <strong>Paquetes</strong></a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.4</b> <strong>Scripts</strong></a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#shortcuts"><i class="fa fa-check"></i><b>2.5</b> <strong>Shortcuts</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objetos-en-r-.html"><a href="objetos-en-r-.html"><i class="fa fa-check"></i><b>3</b> <strong>Objetos en R.</strong></a></li>
+<li class="chapter" data-level="4" data-path="operadores.html"><a href="operadores.html"><i class="fa fa-check"></i><b>4</b> <strong>Operadores</strong></a></li>
+<li class="chapter" data-level="5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html"><i class="fa fa-check"></i><b>5</b> <strong>Estructuras de datos.</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#vectores"><i class="fa fa-check"></i><b>5.1</b> <strong>Vectores</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#coerción"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Coerción</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#matrices"><i class="fa fa-check"></i><b>5.2</b> <strong>Matrices</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#data-frames"><i class="fa fa-check"></i><b>5.3</b> <strong>Data Frames</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#listas"><i class="fa fa-check"></i><b>5.4</b> <strong>Listas</strong></a></li>
+<li class="chapter" data-level="5.5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#factores"><i class="fa fa-check"></i><b>5.5</b> <strong>Factores</strong></a></li>
+<li class="chapter" data-level="5.6" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#valores-ausentes"><i class="fa fa-check"></i><b>5.6</b> <strong>Valores ausentes</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>6</b> <strong>Subsetting</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="subsetting.html"><a href="subsetting.html#subsetting-vectores"><i class="fa fa-check"></i><b>6.1</b> <strong>Subsetting vectores</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-data-frames"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting data frames</strong></a></li>
+<li class="chapter" data-level="6.4" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.4</b> <strong>Subsetting listas</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="operaciones-vectorizadas-.html"><a href="operaciones-vectorizadas-.html"><i class="fa fa-check"></i><b>7</b> <strong>Operaciones vectorizadas.</strong></a></li>
+<li class="chapter" data-level="8" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html"><i class="fa fa-check"></i><b>8</b> <strong>Estructuras de control en R</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#if-else"><i class="fa fa-check"></i><b>8.1</b> <strong>if-else</strong>:</a></li>
+<li class="chapter" data-level="8.2" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#for-loop"><i class="fa fa-check"></i><b>8.2</b> <strong>for loop</strong></a></li>
+<li class="chapter" data-level="8.3" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#while-loop"><i class="fa fa-check"></i><b>8.3</b> <strong>while loop</strong></a></li>
+<li class="chapter" data-level="8.4" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#repeat-next-break"><i class="fa fa-check"></i><b>8.4</b> <strong>repeat, next, break</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>9</b> <strong>Funciones</strong></a></li>
+<li class="chapter" data-level="10" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>10</b> <strong>Importación de datos</strong></a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>10.0.1</b> <strong>read.table</strong></a></li>
+<li class="chapter" data-level="10.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>10.0.2</b> <strong>read.csv</strong></a></li>
+<li class="chapter" data-level="10.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>10.0.3</b> <strong>read_excel</strong></a></li>
+<li class="chapter" data-level="10.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>10.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html"><i class="fa fa-check"></i><b>11</b> <strong>Análisis exploratorio</strong></a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#información-general."><i class="fa fa-check"></i><b>11.0.1</b> <strong>Información general</strong>.</a></li>
+<li class="chapter" data-level="11.0.2" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#exploración-del-contenido-33."><i class="fa fa-check"></i><b>11.0.2</b> <strong>Exploración del contenido 33</strong>.</a></li>
+<li class="chapter" data-level="11.0.3" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#funciones-básicas."><i class="fa fa-check"></i><b>11.0.3</b> <strong>Funciones básicas</strong>.</a></li>
+<li class="chapter" data-level="11.0.4" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#aplicación-a-estructuras-complejas."><i class="fa fa-check"></i><b>11.0.4</b> <strong>Aplicación a estructuras complejas</strong>.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html"><i class="fa fa-check"></i><b>12</b> <strong>Data Frames con el paquete dplyr.</strong></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#paquete-dplyr"><i class="fa fa-check"></i><b>12.1</b> <strong>Paquete dplyr</strong>:</a></li>
+<li class="chapter" data-level="12.2" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#select"><i class="fa fa-check"></i><b>12.2</b> <strong>select()</strong>:</a></li>
+<li class="chapter" data-level="12.3" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#filter"><i class="fa fa-check"></i><b>12.3</b> <strong>filter()</strong>:</a></li>
+<li class="chapter" data-level="12.4" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#arrange"><i class="fa fa-check"></i><b>12.4</b> <strong>arrange()</strong>:</a></li>
+<li class="chapter" data-level="12.5" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#rename"><i class="fa fa-check"></i><b>12.5</b> <strong>rename()</strong>:</a></li>
+<li class="chapter" data-level="12.6" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#mutate"><i class="fa fa-check"></i><b>12.6</b> <strong>mutate()</strong>:</a></li>
+<li class="chapter" data-level="12.7" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#group_by"><i class="fa fa-check"></i><b>12.7</b> <strong>group_by()</strong>:</a></li>
+<li class="chapter" data-level="12.8" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#operador-pipe"><i class="fa fa-check"></i><b>12.8</b> <strong>Operador pipe %&gt;%</strong>:</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas Curso Básico R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="análisis-exploratorio" class="section level1" number="11">
+<h1><span class="header-section-number">Capítulo 11</span> <strong>Análisis exploratorio</strong></h1>
+<p>Salvo que lo hayamos creado nosotros mismos o estemos familiarizados con el conjunto de datos que carguemos a <strong>R</strong>
+generalmente estamos interesados en obtener una idea general sobre su contenido.
+Con este fin se aplican funciones de estadística descriptiva, conservando la estructura de los datos (columnas
+que lo forman y su tipo, número de observaciones, etc.), para tener una idea general
+sobre cada variable.</p>
+<div id="información-general." class="section level3" number="11.0.1">
+<h3><span class="header-section-number">11.0.1</span> <strong>Información general</strong>.</h3>
+<p>Asumiendo que comenzamos a trabajar con un conjunto de datos desconocido, lo primero que
+nos interesa es sera saber qué atributos contiene, cuántas observaciones hay, etc.</p>
+<p>En secciones anteriores se definieron funciones como class() y typeof(), con las
+que podemos conocer la clase de un objeto y su tipo.</p>
+<p>La función <strong>str()</strong> aporta más información, incluyendo el número de variables y observaciones y algunos detalles
+sobre cada una de las variables (columnas).</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="análisis-exploratorio.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(datos.credito) <span class="co"># Clase del objeto</span></span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="análisis-exploratorio.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Información sobre su estructura</span></span>
+<span id="cb244-2"><a href="análisis-exploratorio.html#cb244-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb244-3"><a href="análisis-exploratorio.html#cb244-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos.credito)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    400 obs. of  12 variables:
+##  $ X          : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Ingreso    : num  14.9 106 104.6 148.9 55.9 ...
+##  $ Limite     : int  3606 6645 7075 9504 4897 8047 3388 7114 3300 6819 ...
+##  $ CalifCredit: int  283 483 514 681 357 569 259 512 266 491 ...
+##  $ Tarjetas   : int  2 3 4 3 2 4 2 2 5 3 ...
+##  $ Edad       : int  34 82 71 36 68 77 37 87 66 41 ...
+##  $ Educacion  : int  11 15 11 11 16 10 12 9 13 19 ...
+##  $ Genero     : Factor w/ 2 levels &quot;Femenino&quot;,&quot;Masculino&quot;: 2 1 2 1 2 2 1 2 1 1 ...
+##  $ Estudiante : Factor w/ 2 levels &quot;No&quot;,&quot;Si&quot;: 1 2 1 1 1 1 1 1 1 2 ...
+##  $ Casado     : int  1 1 0 0 1 0 0 0 0 1 ...
+##  $ Etnicidad  : Factor w/ 3 levels &quot;Afrodescendiente&quot;,..: 3 2 2 2 3 3 1 2 3 1 ...
+##  $ Balance    : int  333 903 580 964 331 1151 203 872 279 1350 ...</code></pre>
+</div>
+<div id="exploración-del-contenido-33." class="section level3" number="11.0.2">
+<h3><span class="header-section-number">11.0.2</span> <strong>Exploración del contenido 33</strong>.</h3>
+<p>Aunque la función <strong>str()</strong> facilita una muestra del contenido de cada variable, en
+general dicha información es insuficiente. Podemos recurrir a funciones
+como <strong>head()</strong> y <strong>tail()</strong> para obtener los primeros y últimos elementos, respectivamente, de un objeto en <strong>R</strong>. Asimismo, la función <strong>summary()</strong> ofrece un resumen global del contenido de cada variable: su valor mínimo, máximo y medio, mediana, cuartiles
+y, en el caso de las variables qualitativas, el número de elementos por categoría.</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="análisis-exploratorio.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos.credito) <span class="do">## head(X,n) muestra los primeros n elementos del objeto X, por defecto n=6.</span></span></code></pre></div>
+<pre><code>##   X Ingreso Limite CalifCredit Tarjetas Edad Educacion    Genero Estudiante
+## 1 1  14.891   3606         283        2   34        11 Masculino         No
+## 2 2 106.025   6645         483        3   82        15  Femenino         Si
+## 3 3 104.593   7075         514        4   71        11 Masculino         No
+## 4 4 148.924   9504         681        3   36        11  Femenino         No
+## 5 5  55.882   4897         357        2   68        16 Masculino         No
+## 6 6  80.180   8047         569        4   77        10 Masculino         No
+##   Casado Etnicidad Balance
+## 1      1 Caucasico     333
+## 2      1  Asiatico     903
+## 3      0  Asiatico     580
+## 4      0  Asiatico     964
+## 5      1 Caucasico     331
+## 6      0 Caucasico    1151</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="análisis-exploratorio.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos.credito, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   X Ingreso Limite CalifCredit Tarjetas Edad Educacion    Genero Estudiante
+## 1 1  14.891   3606         283        2   34        11 Masculino         No
+## 2 2 106.025   6645         483        3   82        15  Femenino         Si
+## 3 3 104.593   7075         514        4   71        11 Masculino         No
+##   Casado Etnicidad Balance
+## 1      1 Caucasico     333
+## 2      1  Asiatico     903
+## 3      0  Asiatico     580</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="análisis-exploratorio.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(datos.credito)</span></code></pre></div>
+<pre><code>##       X Ingreso Limite CalifCredit Tarjetas Edad Educacion    Genero Estudiante
+## 395 395  49.794   5758         410        4   40         8 Masculino         No
+## 396 396  12.096   4100         307        3   32        13 Masculino         No
+## 397 397  13.364   3838         296        5   65        17 Masculino         No
+## 398 398  57.872   4171         321        5   67        12  Femenino         No
+## 399 399  37.728   2525         192        1   44        13 Masculino         No
+## 400 400  18.701   5524         415        5   64         7  Femenino         No
+##     Casado        Etnicidad Balance
+## 395      0        Caucasico     734
+## 396      1        Caucasico     560
+## 397      0 Afrodescendiente     480
+## 398      1        Caucasico     138
+## 399      1        Caucasico       0
+## 400      0         Asiatico     966</code></pre>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="análisis-exploratorio.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(datos.credito, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##       X Ingreso Limite CalifCredit Tarjetas Edad Educacion    Genero Estudiante
+## 398 398  57.872   4171         321        5   67        12  Femenino         No
+## 399 399  37.728   2525         192        1   44        13 Masculino         No
+## 400 400  18.701   5524         415        5   64         7  Femenino         No
+##     Casado Etnicidad Balance
+## 398      1 Caucasico     138
+## 399      1 Caucasico       0
+## 400      0  Asiatico     966</code></pre>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="análisis-exploratorio.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos.credito)</span></code></pre></div>
+<pre><code>##        X            Ingreso           Limite       CalifCredit   
+##  Min.   :  1.0   Min.   : 10.35   Min.   :  855   Min.   : 93.0  
+##  1st Qu.:100.8   1st Qu.: 21.01   1st Qu.: 3088   1st Qu.:247.2  
+##  Median :200.5   Median : 33.12   Median : 4622   Median :344.0  
+##  Mean   :200.5   Mean   : 45.22   Mean   : 4736   Mean   :354.9  
+##  3rd Qu.:300.2   3rd Qu.: 57.47   3rd Qu.: 5873   3rd Qu.:437.2  
+##  Max.   :400.0   Max.   :186.63   Max.   :13913   Max.   :982.0  
+##     Tarjetas          Edad         Educacion           Genero    Estudiante
+##  Min.   :1.000   Min.   :23.00   Min.   : 5.00   Femenino :207   No:360    
+##  1st Qu.:2.000   1st Qu.:41.75   1st Qu.:11.00   Masculino:193   Si: 40    
+##  Median :3.000   Median :56.00   Median :14.00                             
+##  Mean   :2.958   Mean   :55.67   Mean   :13.45                             
+##  3rd Qu.:4.000   3rd Qu.:70.00   3rd Qu.:16.00                             
+##  Max.   :9.000   Max.   :98.00   Max.   :20.00                             
+##      Casado                  Etnicidad      Balance       
+##  Min.   :0.0000   Afrodescendiente: 99   Min.   :   0.00  
+##  1st Qu.:0.0000   Asiatico        :102   1st Qu.:  68.75  
+##  Median :1.0000   Caucasico       :199   Median : 459.50  
+##  Mean   :0.6125                          Mean   : 520.01  
+##  3rd Qu.:1.0000                          3rd Qu.: 863.00  
+##  Max.   :1.0000                          Max.   :1999.00</code></pre>
+<p>Como podemos observar la variable <strong>Casado</strong> se leyó como numérica, esto no tienen mucho sentido, para transformarla a categórica utilizamos la función factor().</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="análisis-exploratorio.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Transformamos la variable Casado a categorica</span></span>
+<span id="cb256-2"><a href="análisis-exploratorio.html#cb256-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-3"><a href="análisis-exploratorio.html#cb256-3" aria-hidden="true" tabindex="-1"></a>datos.credito<span class="sc">$</span>Casado <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.credito<span class="sc">$</span>Casado, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;si&quot;</span>, <span class="st">&quot;no&quot;</span>))</span>
+<span id="cb256-4"><a href="análisis-exploratorio.html#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos.credito)</span></code></pre></div>
+<pre><code>##        X            Ingreso           Limite       CalifCredit   
+##  Min.   :  1.0   Min.   : 10.35   Min.   :  855   Min.   : 93.0  
+##  1st Qu.:100.8   1st Qu.: 21.01   1st Qu.: 3088   1st Qu.:247.2  
+##  Median :200.5   Median : 33.12   Median : 4622   Median :344.0  
+##  Mean   :200.5   Mean   : 45.22   Mean   : 4736   Mean   :354.9  
+##  3rd Qu.:300.2   3rd Qu.: 57.47   3rd Qu.: 5873   3rd Qu.:437.2  
+##  Max.   :400.0   Max.   :186.63   Max.   :13913   Max.   :982.0  
+##     Tarjetas          Edad         Educacion           Genero    Estudiante
+##  Min.   :1.000   Min.   :23.00   Min.   : 5.00   Femenino :207   No:360    
+##  1st Qu.:2.000   1st Qu.:41.75   1st Qu.:11.00   Masculino:193   Si: 40    
+##  Median :3.000   Median :56.00   Median :14.00                             
+##  Mean   :2.958   Mean   :55.67   Mean   :13.45                             
+##  3rd Qu.:4.000   3rd Qu.:70.00   3rd Qu.:16.00                             
+##  Max.   :9.000   Max.   :98.00   Max.   :20.00                             
+##  Casado              Etnicidad      Balance       
+##  si:245   Afrodescendiente: 99   Min.   :   0.00  
+##  no:155   Asiatico        :102   1st Qu.:  68.75  
+##           Caucasico       :199   Median : 459.50  
+##                                  Mean   : 520.01  
+##                                  3rd Qu.: 863.00  
+##                                  Max.   :1999.00</code></pre>
+<p>Por otro lado la variable fecha_ini se leyó como factor, en lugar de como fecha, para corregir esto usamos la función as.Date().</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="análisis-exploratorio.html#cb258-1" aria-hidden="true" tabindex="-1"></a>datos.credito<span class="sc">$</span>fecha_ini <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(datos.credito<span class="sc">$</span>fecha_ini, <span class="at">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</span></code></pre></div>
+<pre><code>## Error in `$&lt;-.data.frame`(`*tmp*`, fecha_ini, value = structure(numeric(0), class = &quot;Date&quot;)): replacement has 0 rows, data has 400</code></pre>
+</div>
+<div id="funciones-básicas." class="section level3" number="11.0.3">
+<h3><span class="header-section-number">11.0.3</span> <strong>Funciones básicas</strong>.</h3>
+<p>Recordemos que <strong>R</strong> cuenta con multitud de funciones de tipo estadístico, entre ellas las que permiten
+obtener información descriptiva sobre la distribución de valores en un vector. Estas
+funciones pueden también aplicarse a objetos más complejos, como comprobaremos
+después.
+La sintaxis de las funciones de estadística descriptiva más comunes se presentan a continuación.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="análisis-exploratorio.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(vector, <span class="at">na.rm =</span> T <span class="sc">/</span> F) <span class="co"># Devuelve el valor mínimo existente en el vector facilitado como parámetro.</span></span>
+<span id="cb260-2"><a href="análisis-exploratorio.html#cb260-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-3"><a href="análisis-exploratorio.html#cb260-3" aria-hidden="true" tabindex="-1"></a><span class="co"># El resultado será NA si el vector contiene algún valor ausente, a menos que se</span></span>
+<span id="cb260-4"><a href="análisis-exploratorio.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="co"># entregue el parámetro na.rm con el valor TRUE.</span></span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="análisis-exploratorio.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(vector, <span class="at">na.rm =</span> T <span class="sc">/</span> F) <span class="co"># Devuelve el valor máximo existente en el vector facilitado como parámetro.</span></span>
+<span id="cb261-2"><a href="análisis-exploratorio.html#cb261-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-3"><a href="análisis-exploratorio.html#cb261-3" aria-hidden="true" tabindex="-1"></a><span class="co"># El resultado será NA si el vector contiene algún valor ausente, a menos que se</span></span>
+<span id="cb261-4"><a href="análisis-exploratorio.html#cb261-4" aria-hidden="true" tabindex="-1"></a><span class="co"># entregue el parámetro na.rm con el valor TRUE.</span></span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="análisis-exploratorio.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(vector, <span class="at">na.rm =</span> T <span class="sc">/</span> F) <span class="co"># Devuelve un vector de dos elementos con el valor mínimo y máximo de los</span></span>
+<span id="cb262-2"><a href="análisis-exploratorio.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="co"># existentes en el vector facilitado como parámetro</span></span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="análisis-exploratorio.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(vector, <span class="at">na.rm =</span> T <span class="sc">/</span> F) <span class="co"># Devuelve un vector de dos elementos con el valor mínimo y máximo de los</span></span>
+<span id="cb263-2"><a href="análisis-exploratorio.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="co"># existentes en el vector facilitado como parámetro</span></span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="análisis-exploratorio.html#cb264-1" aria-hidden="true" tabindex="-1"></a>saldo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">4500</span>)</span>
+<span id="cb264-2"><a href="análisis-exploratorio.html#cb264-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-3"><a href="análisis-exploratorio.html#cb264-3" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(saldo)</span></code></pre></div>
+<pre><code>## [1] 1000</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="análisis-exploratorio.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(saldo)</span></code></pre></div>
+<pre><code>## [1] 4500</code></pre>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="análisis-exploratorio.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(saldo)</span></code></pre></div>
+<pre><code>## [1] 1000 4500</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="análisis-exploratorio.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(saldo)</span></code></pre></div>
+<pre><code>## [1] 2625</code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="análisis-exploratorio.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(saldo)</span></code></pre></div>
+<pre><code>## [1] 2229167</code></pre>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="análisis-exploratorio.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(saldo)</span></code></pre></div>
+<pre><code>## [1] 1493.039</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="análisis-exploratorio.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(saldo)</span></code></pre></div>
+<pre><code>## [1] 2500</code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="análisis-exploratorio.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(saldo)</span></code></pre></div>
+<pre><code>##   0%  25%  50%  75% 100% 
+## 1000 1750 2500 3375 4500</code></pre>
+<p>A fin de obtener un resultado más compacto,
+se crea una lista con el valor devuelto por cada operación y, finalmente, se usa la
+función <strong>unlist()</strong> para generar un vector con la información a mostrar:</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="análisis-exploratorio.html#cb280-1" aria-hidden="true" tabindex="-1"></a>valores <span class="ot">&lt;-</span> saldo</span>
+<span id="cb280-2"><a href="análisis-exploratorio.html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">list</span>(<span class="at">media =</span> <span class="fu">mean</span>(valores), <span class="at">desviacion =</span> <span class="fu">sd</span>(valores), <span class="at">varianza =</span> <span class="fu">var</span>(valores), <span class="at">minimo =</span> <span class="fu">min</span>(valores), <span class="at">maximo =</span> <span class="fu">max</span>(valores), <span class="at">mediana =</span> <span class="fu">median</span>(valores), <span class="at">rango =</span> <span class="fu">range</span>(valores), <span class="at">quartiles =</span> <span class="fu">quantile</span>(valores)))</span></code></pre></div>
+<pre><code>##          media     desviacion       varianza         minimo         maximo 
+##       2625.000       1493.039    2229166.667       1000.000       4500.000 
+##        mediana         rango1         rango2   quartiles.0%  quartiles.25% 
+##       2500.000       1000.000       4500.000       1000.000       1750.000 
+##  quartiles.50%  quartiles.75% quartiles.100% 
+##       2500.000       3375.000       4500.000</code></pre>
+</div>
+<div id="aplicación-a-estructuras-complejas." class="section level3" number="11.0.4">
+<h3><span class="header-section-number">11.0.4</span> <strong>Aplicación a estructuras complejas</strong>.</h3>
+<p>Las anteriores funciones pueden aplicarse sobre estructuras más complejas que
+los vectores, como matrices y data frames. En la mayoría de los casos no nos interesan las medidas estadísticas de todo el conjunto de datos, sino de cada una de las variables (columnas) por separado.</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="análisis-exploratorio.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(datos.credito<span class="sc">$</span>Ingreso)</span></code></pre></div>
+<pre><code>## [1] 45.21889</code></pre>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="análisis-exploratorio.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(datos.credito<span class="sc">$</span>Limite)</span></code></pre></div>
+<pre><code>## [1] 13913</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importación-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-frames-con-el-paquete-dplyr-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/09-analisis-exploratorio.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/09-analisis-exploratorio.Rmd",
+"text": null
+},
+"download": ["Notas-Curso-Basico-R.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

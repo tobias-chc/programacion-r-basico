@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 12 Data Frames con el paquete dplyr. | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 12 Data Frames con el paquete dplyr. | Notas Curso Básico R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 12 Data Frames con el paquete dplyr. | Notas Curso Básico R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 12 Data Frames con el paquete dplyr. | Notas Curso Básico R" />
+  
+  
+  
+
+<meta name="author" content="Tobías Chavarría" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="análisis-exploratorio.html"/>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso Básico en R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Primeros pasos con R y RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#instalación"><i class="fa fa-check"></i><b>2.1</b> <strong>Instalación</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#r"><i class="fa fa-check"></i><b>2.1.1</b> <strong>R</strong></a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> <strong>RStudio</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno-de-trabajo-de-rstudio."><i class="fa fa-check"></i><b>2.2</b> <strong>Entorno de trabajo de RStudio.</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#consola-de-r"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Consola de R</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#ayuda-en-r"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Ayuda en R</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#nombres-en-r"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Nombres en R</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts-de-r"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Scripts de R</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Entorno</strong></a></li>
+<li class="chapter" data-level="2.2.6" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.2.6</b> <strong>Directorio de trabajo</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#paquetes"><i class="fa fa-check"></i><b>2.3</b> <strong>Paquetes</strong></a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.4</b> <strong>Scripts</strong></a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#shortcuts"><i class="fa fa-check"></i><b>2.5</b> <strong>Shortcuts</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objetos-en-r-.html"><a href="objetos-en-r-.html"><i class="fa fa-check"></i><b>3</b> <strong>Objetos en R.</strong></a></li>
+<li class="chapter" data-level="4" data-path="operadores.html"><a href="operadores.html"><i class="fa fa-check"></i><b>4</b> <strong>Operadores</strong></a></li>
+<li class="chapter" data-level="5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html"><i class="fa fa-check"></i><b>5</b> <strong>Estructuras de datos.</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#vectores"><i class="fa fa-check"></i><b>5.1</b> <strong>Vectores</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#coerción"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Coerción</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#matrices"><i class="fa fa-check"></i><b>5.2</b> <strong>Matrices</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#data-frames"><i class="fa fa-check"></i><b>5.3</b> <strong>Data Frames</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#listas"><i class="fa fa-check"></i><b>5.4</b> <strong>Listas</strong></a></li>
+<li class="chapter" data-level="5.5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#factores"><i class="fa fa-check"></i><b>5.5</b> <strong>Factores</strong></a></li>
+<li class="chapter" data-level="5.6" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#valores-ausentes"><i class="fa fa-check"></i><b>5.6</b> <strong>Valores ausentes</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>6</b> <strong>Subsetting</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="subsetting.html"><a href="subsetting.html#subsetting-vectores"><i class="fa fa-check"></i><b>6.1</b> <strong>Subsetting vectores</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-data-frames"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting data frames</strong></a></li>
+<li class="chapter" data-level="6.4" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.4</b> <strong>Subsetting listas</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="operaciones-vectorizadas-.html"><a href="operaciones-vectorizadas-.html"><i class="fa fa-check"></i><b>7</b> <strong>Operaciones vectorizadas.</strong></a></li>
+<li class="chapter" data-level="8" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html"><i class="fa fa-check"></i><b>8</b> <strong>Estructuras de control en R</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#if-else"><i class="fa fa-check"></i><b>8.1</b> <strong>if-else</strong>:</a></li>
+<li class="chapter" data-level="8.2" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#for-loop"><i class="fa fa-check"></i><b>8.2</b> <strong>for loop</strong></a></li>
+<li class="chapter" data-level="8.3" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#while-loop"><i class="fa fa-check"></i><b>8.3</b> <strong>while loop</strong></a></li>
+<li class="chapter" data-level="8.4" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#repeat-next-break"><i class="fa fa-check"></i><b>8.4</b> <strong>repeat, next, break</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>9</b> <strong>Funciones</strong></a></li>
+<li class="chapter" data-level="10" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>10</b> <strong>Importación de datos</strong></a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>10.0.1</b> <strong>read.table</strong></a></li>
+<li class="chapter" data-level="10.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>10.0.2</b> <strong>read.csv</strong></a></li>
+<li class="chapter" data-level="10.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>10.0.3</b> <strong>read_excel</strong></a></li>
+<li class="chapter" data-level="10.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>10.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html"><i class="fa fa-check"></i><b>11</b> <strong>Análisis exploratorio</strong></a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#información-general."><i class="fa fa-check"></i><b>11.0.1</b> <strong>Información general</strong>.</a></li>
+<li class="chapter" data-level="11.0.2" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#exploración-del-contenido-33."><i class="fa fa-check"></i><b>11.0.2</b> <strong>Exploración del contenido 33</strong>.</a></li>
+<li class="chapter" data-level="11.0.3" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#funciones-básicas."><i class="fa fa-check"></i><b>11.0.3</b> <strong>Funciones básicas</strong>.</a></li>
+<li class="chapter" data-level="11.0.4" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#aplicación-a-estructuras-complejas."><i class="fa fa-check"></i><b>11.0.4</b> <strong>Aplicación a estructuras complejas</strong>.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html"><i class="fa fa-check"></i><b>12</b> <strong>Data Frames con el paquete dplyr.</strong></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#paquete-dplyr"><i class="fa fa-check"></i><b>12.1</b> <strong>Paquete dplyr</strong>:</a></li>
+<li class="chapter" data-level="12.2" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#select"><i class="fa fa-check"></i><b>12.2</b> <strong>select()</strong>:</a></li>
+<li class="chapter" data-level="12.3" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#filter"><i class="fa fa-check"></i><b>12.3</b> <strong>filter()</strong>:</a></li>
+<li class="chapter" data-level="12.4" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#arrange"><i class="fa fa-check"></i><b>12.4</b> <strong>arrange()</strong>:</a></li>
+<li class="chapter" data-level="12.5" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#rename"><i class="fa fa-check"></i><b>12.5</b> <strong>rename()</strong>:</a></li>
+<li class="chapter" data-level="12.6" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#mutate"><i class="fa fa-check"></i><b>12.6</b> <strong>mutate()</strong>:</a></li>
+<li class="chapter" data-level="12.7" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#group_by"><i class="fa fa-check"></i><b>12.7</b> <strong>group_by()</strong>:</a></li>
+<li class="chapter" data-level="12.8" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#operador-pipe"><i class="fa fa-check"></i><b>12.8</b> <strong>Operador pipe %&gt;%</strong>:</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas Curso Básico R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-frames-con-el-paquete-dplyr." class="section level1" number="12">
+<h1><span class="header-section-number">Capítulo 12</span> <strong>Data Frames con el paquete dplyr.</strong></h1>
+<p>Como vimos en la clase anterior los data frames son las estructuras más importantes en R, recordemos que básicamente un data frame es una tabla, donde cada fila representa una observación o individuo, y cada columna una variable o característica de esta observación.</p>
+<p>Dada la importancia de estas estructuras, es muy importante conocer las mejores herramientas para trabajar con ellas, en la sección de
+subsetting vimos como obtener subconjuntos de nuestros datos, sin embargo cuando tenemos que hacer varios filtros o agrupaciones el uso de “[],” “$,” no es tan recomendable, pues es más fácil equivocarse y el código es más complicado de leer.</p>
+<p>El paquete <strong>dplyr</strong> está diseñado para mitigar estas complicaciones y optimizado para realizar estas tareas.</p>
+<div id="paquete-dplyr" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> <strong>Paquete dplyr</strong>:</h2>
+<p>El paquete <strong>dplyr</strong> fue desarrollado por Hadley Wickham de RStudio y us una versión mejorada del paquete <strong>plyr</strong>. Una de las ventajas de este paquete es que tiene cierta gramática en sus funciones, lo que facilita escribir y leer código. Además sus funciones son muy rápidas y algunas de sus operaciones están programadas en C++.</p>
+<p><strong>Gramática de dplyr</strong></p>
+<p>Algunos de los “verbos” que tiene el paquete <strong>dplyr</strong> son los siguientes:</p>
+<ul>
+<li><strong>select</strong>: Retorna un subconjunto de columnas.</li>
+<li><strong>filter</strong>: Extrae subconjuntos de filas basado en condiciones lógicas.</li>
+<li><strong>arrange</strong>: Reordena las filas de un data frame.</li>
+<li><strong>rename</strong>: Renombra las variables del data frame.</li>
+<li><strong>mutate</strong>: Agrega columnas o transforma las existentes.</li>
+<li><strong>summarise / summarize</strong>: Genera un resumen estadístico de las variables del data frame.</li>
+<li><strong>%&gt;%</strong>: El operador “pipe” es usado para conectar varios “verbos” en una sola ejecución.</li>
+</ul>
+<p>Es importante notar que, el primer argumento de todas estas funciones es un data frame y su resultado también es un data frame, por eso es fácil y útil combinarlas.</p>
+<p><strong>Instalación</strong></p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Para instalarlo basta ejecutar lo siguiente en la consola</span></span>
+<span id="cb286-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb286-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb286-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb286-4"><a href="data-frames-con-el-paquete-dplyr-.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Para utilizar las funciones se debe cargar la librería mediante la instrucción</span></span>
+<span id="cb286-5"><a href="data-frames-con-el-paquete-dplyr-.html#cb286-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>Cargamos el archivo de datos</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb287-1" aria-hidden="true" tabindex="-1"></a>datos.credito <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/DeudaCredito.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="at">stringsAsFactors =</span> T)</span>
+<span id="cb287-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb287-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb287-3" aria-hidden="true" tabindex="-1"></a>datos.credito<span class="sc">$</span>Casado <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos.credito<span class="sc">$</span>Casado, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;si&quot;</span>, <span class="st">&quot;no&quot;</span>))</span>
+<span id="cb287-4"><a href="data-frames-con-el-paquete-dplyr-.html#cb287-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-5"><a href="data-frames-con-el-paquete-dplyr-.html#cb287-5" aria-hidden="true" tabindex="-1"></a>datos.credito<span class="sc">$</span>fecha_ini <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(datos.credito<span class="sc">$</span>fecha_ini, <span class="at">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</span></code></pre></div>
+</div>
+<div id="select" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> <strong>select()</strong>:</h2>
+<p>Normalmente trabajamos con data frames que tienen muchas variables y necesitamos enfocarnos en solo algunas de estas, la función <strong>select()</strong> como su nombre lo sugiere, sirve para obtener las columnas deseadas de nuestro conjunto de datos.</p>
+<p>Primero vamos a ver de forma general la estructura de nuestros datos, utilizando las funciones <strong>dim()
+</strong> y <strong>str()</strong>.</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(datos.credito) <span class="do">## Obtenemos la dimensiones de nuestro data frame [filas, columnas].</span></span></code></pre></div>
+<pre><code>## [1] 400  13</code></pre>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datos.credito) <span class="do">## Presenta un resumen las variables del data frame y su clase.</span></span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    400 obs. of  13 variables:
+##  $ X            : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ monto_ingreso: num  14891 106025 104593 148924 55882 ...
+##  $ monto_limite : int  3606 6645 7075 9504 4897 8047 3388 7114 3300 6819 ...
+##  $ CalifCredit  : int  283 483 514 681 357 569 259 512 266 491 ...
+##  $ Tarjetas     : int  2 3 4 3 2 4 2 2 5 3 ...
+##  $ Edad         : int  34 82 71 36 68 77 37 87 66 41 ...
+##  $ Educacion    : int  11 15 11 11 16 10 12 9 13 19 ...
+##  $ Genero       : Factor w/ 2 levels &quot;Femenino&quot;,&quot;Masculino&quot;: 2 1 2 1 2 2 1 2 1 1 ...
+##  $ Estudiante   : Factor w/ 2 levels &quot;No&quot;,&quot;Si&quot;: 1 2 1 1 1 1 1 1 1 2 ...
+##  $ Casado       : Factor w/ 2 levels &quot;si&quot;,&quot;no&quot;: 1 1 2 2 1 2 2 2 2 1 ...
+##  $ Etnicidad    : Factor w/ 3 levels &quot;Afrodescendiente&quot;,..: 3 2 2 2 3 3 1 2 3 1 ...
+##  $ monto_balance: int  333 903 580 964 331 1151 203 872 279 1350 ...
+##  $ fecha_ini    : Date, format: &quot;2019-12-11&quot; &quot;2019-12-13&quot; ...</code></pre>
+<p>Suponga que queremos las columnas Edad, Educación, Género, Estudiante, Casado</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb292-1" aria-hidden="true" tabindex="-1"></a>datos.credito.info_personal <span class="ot">&lt;-</span> <span class="fu">select</span>(datos.credito, <span class="fu">c</span>(<span class="st">&quot;Edad&quot;</span>, <span class="st">&quot;Educacion&quot;</span>, <span class="st">&quot;Genero&quot;</span>, <span class="st">&quot;Estudiante&quot;</span>, <span class="st">&quot;Casado&quot;</span>, <span class="st">&quot;Etnicidad&quot;</span>))</span>
+<span id="cb292-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb292-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb292-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb292-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos.credito.info_personal)</span></code></pre></div>
+<pre><code>##   Edad Educacion    Genero Estudiante Casado Etnicidad
+## 1   34        11 Masculino         No     si Caucasico
+## 2   82        15  Femenino         Si     si  Asiatico
+## 3   71        11 Masculino         No     no  Asiatico
+## 4   36        11  Femenino         No     no  Asiatico
+## 5   68        16 Masculino         No     si Caucasico
+## 6   77        10 Masculino         No     no Caucasico</code></pre>
+<p>También podemos utilizar el <strong>select()</strong> eligiendo las columnas que no queremos.</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb294-1" aria-hidden="true" tabindex="-1"></a>datos.credito.info_personal.sinEtnia <span class="ot">&lt;-</span> <span class="fu">select</span>(datos.credito.info_personal, <span class="sc">-</span>Etnicidad)  <span class="do">## para quitar varias columnas utilizamos un vector, por ejemplo: -c(&quot;Etnicidad&quot;, &quot;Casado)</span></span>
+<span id="cb294-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb294-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb294-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos.credito.info_personal.sinEtnia)</span></code></pre></div>
+<pre><code>##   Edad Educacion    Genero Estudiante Casado
+## 1   34        11 Masculino         No     si
+## 2   82        15  Femenino         Si     si
+## 3   71        11 Masculino         No     no
+## 4   36        11  Femenino         No     no
+## 5   68        16 Masculino         No     si
+## 6   77        10 Masculino         No     no</code></pre>
+<p>Otra forma es seleccionar las columnas que tengan inicien o terminen con ciertos caracteres, por ejemplo si queremos todas las columnas que tienen el prefijo “monto.”</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb296-1" aria-hidden="true" tabindex="-1"></a>datos.credito_montos <span class="ot">&lt;-</span> <span class="fu">select</span>(datos.credito, <span class="fu">starts_with</span>(<span class="st">&quot;monto&quot;</span>)) <span class="do">## Podemos usar ends_with(&quot;sufijo&quot;) para elegir las que terminen con cierto sufijo.</span></span>
+<span id="cb296-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb296-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb296-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb296-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos.credito_montos)</span></code></pre></div>
+<pre><code>##   monto_ingreso monto_limite monto_balance
+## 1      14891.00         3606           333
+## 2     106025.00         6645           903
+## 3     104593.00         7075           580
+## 4     148924.00         9504           964
+## 5      55882.00         4897           331
+## 6         80.18         8047          1151</code></pre>
+</div>
+<div id="filter" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> <strong>filter()</strong>:</h2>
+<p>Esta función se utiliza para extraer filas de nuestro data frame utilizando condiciones.</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb298-1" aria-hidden="true" tabindex="-1"></a>datos.credito_enero <span class="ot">&lt;-</span> <span class="fu">filter</span>(datos.credito, <span class="fu">months</span>(fecha_ini) <span class="sc">==</span> <span class="st">&quot;January&quot;</span>)</span>
+<span id="cb298-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb298-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb298-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(datos.credito_enero)</span></code></pre></div>
+<pre><code>## [1]  0 13</code></pre>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos.credito_enero)</span></code></pre></div>
+<pre><code>##  [1] X             monto_ingreso monto_limite  CalifCredit   Tarjetas     
+##  [6] Edad          Educacion     Genero        Estudiante    Casado       
+## [11] Etnicidad     monto_balance fecha_ini    
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb302-1" aria-hidden="true" tabindex="-1"></a>datos.credito_enero_fem <span class="ot">&lt;-</span> <span class="fu">filter</span>(datos.credito, <span class="fu">months</span>(fecha_ini) <span class="sc">==</span> <span class="st">&quot;January&quot;</span> <span class="sc">&amp;</span> Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>)</span>
+<span id="cb302-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb302-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb302-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb302-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(datos.credito_enero_fem)</span></code></pre></div>
+<pre><code>## [1]  0 13</code></pre>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos.credito_enero_fem)</span></code></pre></div>
+<pre><code>##  [1] X             monto_ingreso monto_limite  CalifCredit   Tarjetas     
+##  [6] Edad          Educacion     Genero        Estudiante    Casado       
+## [11] Etnicidad     monto_balance fecha_ini    
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<div id="arrange" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> <strong>arrange()</strong>:</h2>
+<p>Esta función se utiliza para ordenar las filas de un data frame de acuerdo a una de sus variables.</p>
+<p>Ordenamos de acuerdo la columna que contiene las fechas de inicio.</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb306-1" aria-hidden="true" tabindex="-1"></a>datos.credito_ordenado <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos.credito, fecha_ini) <span class="do">## De forma ascendente por defecto</span></span>
+<span id="cb306-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb306-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb306-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(datos.credito_ordenado, fecha_ini, monto_balance))</span></code></pre></div>
+<pre><code>##    fecha_ini monto_balance
+## 1 2011-01-17          1448
+## 2 2016-06-01             0
+## 3 2016-10-21           962
+## 4 2016-10-21           345
+## 5 2016-10-21             0
+## 6 2016-10-21           480</code></pre>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb308-1" aria-hidden="true" tabindex="-1"></a>datos.credito_ordenado <span class="ot">&lt;-</span> <span class="fu">arrange</span>(datos.credito, <span class="fu">desc</span>(fecha_ini)) <span class="do">## De forma descendente.</span></span>
+<span id="cb308-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb308-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb308-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb308-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(datos.credito_ordenado, fecha_ini, monto_balance))</span></code></pre></div>
+<pre><code>##    fecha_ini monto_balance
+## 1 2020-06-30           250
+## 2 2020-06-30           295
+## 3 2020-06-29           637
+## 4 2020-06-29           209
+## 5 2020-06-29           531
+## 6 2020-06-26             0</code></pre>
+</div>
+<div id="rename" class="section level2" number="12.5">
+<h2><span class="header-section-number">12.5</span> <strong>rename()</strong>:</h2>
+<p>Renombrar variables puede ser de mucha utilidad para poder escribir código y hacerlo más legible. Sin la función <strong>rename()</strong> esta tarea puede ser bastante tediosa.</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb310-1" aria-hidden="true" tabindex="-1"></a>datos.credito <span class="ot">&lt;-</span> <span class="fu">rename</span>(datos.credito, <span class="at">cant_tarjetas =</span> <span class="st">&quot;Tarjetas&quot;</span>, <span class="at">calif_credit =</span> CalifCredit, <span class="at">id =</span> X)</span>
+<span id="cb310-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb310-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb310-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb310-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos.credito)</span></code></pre></div>
+<pre><code>##   id monto_ingreso monto_limite calif_credit cant_tarjetas Edad Educacion
+## 1  1      14891.00         3606          283             2   34        11
+## 2  2     106025.00         6645          483             3   82        15
+## 3  3     104593.00         7075          514             4   71        11
+## 4  4     148924.00         9504          681             3   36        11
+## 5  5      55882.00         4897          357             2   68        16
+## 6  6         80.18         8047          569             4   77        10
+##      Genero Estudiante Casado Etnicidad monto_balance  fecha_ini
+## 1 Masculino         No     si Caucasico           333 2019-12-11
+## 2  Femenino         Si     si  Asiatico           903 2019-12-13
+## 3 Masculino         No     no  Asiatico           580 2019-12-17
+## 4  Femenino         No     no  Asiatico           964 2019-12-06
+## 5 Masculino         No     si Caucasico           331 2019-10-17
+## 6 Masculino         No     no Caucasico          1151 2020-02-07</code></pre>
+</div>
+<div id="mutate" class="section level2" number="12.6">
+<h2><span class="header-section-number">12.6</span> <strong>mutate()</strong>:</h2>
+<p>Esta función nos permite crear variables a partir de las que ya existen, de una forma muy sencilla.</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb312-1" aria-hidden="true" tabindex="-1"></a>datos.credito <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos.credito, <span class="at">razon =</span> monto_limite <span class="sc">/</span> monto_ingreso)</span>
+<span id="cb312-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb312-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb312-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(datos.credito, monto_ingreso, monto_limite, razon))</span></code></pre></div>
+<pre><code>##   monto_ingreso monto_limite        razon
+## 1      14891.00         3606   0.24215969
+## 2     106025.00         6645   0.06267390
+## 3     104593.00         7075   0.06764315
+## 4     148924.00         9504   0.06381779
+## 5      55882.00         4897   0.08763108
+## 6         80.18         8047 100.36168621</code></pre>
+<p>También funciona para agregar variables de forma manual</p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb314-1" aria-hidden="true" tabindex="-1"></a>datos.credito <span class="ot">&lt;-</span> <span class="fu">mutate</span>(datos.credito, <span class="at">fecha_actual =</span> <span class="fu">Sys.Date</span>(), <span class="at">dif_fechas =</span> fecha_actual <span class="sc">-</span> fecha_ini)</span>
+<span id="cb314-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb314-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb314-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(datos.credito, fecha_ini, fecha_actual, dif_fechas))</span></code></pre></div>
+<pre><code>##    fecha_ini fecha_actual dif_fechas
+## 1 2019-12-11   2021-02-23   440 days
+## 2 2019-12-13   2021-02-23   438 days
+## 3 2019-12-17   2021-02-23   434 days
+## 4 2019-12-06   2021-02-23   445 days
+## 5 2019-10-17   2021-02-23   495 days
+## 6 2020-02-07   2021-02-23   382 days</code></pre>
+</div>
+<div id="group_by" class="section level2" number="12.7">
+<h2><span class="header-section-number">12.7</span> <strong>group_by()</strong>:</h2>
+<p>Esta función se utiliza para generar subconjuntos de los datos a partir de ciertas propiedades, luego de hacer esto podemos generar resúmenes estadísticos de esos subconjuntos.</p>
+<p>La estrategia en general es separar el data frame en partes de acuerdo a una o más variables y luego aplicar un summary en cada una de esas partes.</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb316-1" aria-hidden="true" tabindex="-1"></a>datos.credito_genero <span class="ot">&lt;-</span> <span class="fu">group_by</span>(datos.credito, Genero) <span class="do">## Agrupamos por genero</span></span>
+<span id="cb316-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb316-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb316-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb316-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(datos.credito_genero, <span class="fu">mean</span>(Edad))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   Genero    `mean(Edad)`
+## * &lt;fct&gt;            &lt;dbl&gt;
+## 1 Femenino          55.7
+## 2 Masculino         55.6</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(datos.credito_genero, <span class="st">&quot;Media Ingreso (CRC)&quot;</span> <span class="ot">=</span> <span class="fu">mean</span>(monto_ingreso) <span class="sc">*</span> <span class="dv">619</span>) <span class="do">## Pasamos a colones</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   Genero    `Media Ingreso (CRC)`
+## * &lt;fct&gt;                     &lt;dbl&gt;
+## 1 Femenino              24622638.
+## 2 Masculino             25218931.</code></pre>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(datos.credito_genero, <span class="st">&quot;Media Ingreso (CRC)&quot;</span> <span class="ot">=</span> <span class="fu">mean</span>(monto_ingreso) <span class="sc">*</span> <span class="dv">619</span>, <span class="st">&quot;Media edad&quot;</span> <span class="ot">=</span> <span class="fu">mean</span>(Edad)) <span class="do">## Pasamos a colones</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   Genero    `Media Ingreso (CRC)` `Media edad`
+## * &lt;fct&gt;                     &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Femenino              24622638.         55.7
+## 2 Masculino             25218931.         55.6</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb322-1" aria-hidden="true" tabindex="-1"></a>datos.credito_gen_casado <span class="ot">&lt;-</span> <span class="fu">group_by</span>(datos.credito, Genero, Estudiante) <span class="do">## Agrupamos por genero y por casado.</span></span>
+<span id="cb322-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb322-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb322-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb322-3" aria-hidden="true" tabindex="-1"></a>resumen_gen_casado <span class="ot">&lt;-</span> <span class="fu">summarize</span>(datos.credito_gen_casado, <span class="st">&quot;Cantidad de individuos&quot;</span> <span class="ot">=</span> <span class="fu">n</span>()) <span class="do">## n() nos da la cantidad de elementos por grupo.</span></span>
+<span id="cb322-4"><a href="data-frames-con-el-paquete-dplyr-.html#cb322-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb322-5"><a href="data-frames-con-el-paquete-dplyr-.html#cb322-5" aria-hidden="true" tabindex="-1"></a>resumen_gen_casado</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+## # Groups:   Genero [2]
+##   Genero    Estudiante `Cantidad de individuos`
+##   &lt;fct&gt;     &lt;fct&gt;                         &lt;int&gt;
+## 1 Femenino  No                              183
+## 2 Femenino  Si                               24
+## 3 Masculino No                              177
+## 4 Masculino Si                               16</code></pre>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="do">## Se utiliza la función year()</span></span>
+<span id="cb324-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb324-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb324-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb324-3" aria-hidden="true" tabindex="-1"></a>datos.credito_anho <span class="ot">&lt;-</span> <span class="fu">group_by</span>(datos.credito, <span class="st">&quot;Fecha inicio&quot;</span> <span class="ot">=</span> <span class="fu">year</span>(fecha_ini), Genero) <span class="do">## Agrupamos por fecha inicio</span></span>
+<span id="cb324-4"><a href="data-frames-con-el-paquete-dplyr-.html#cb324-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb324-5"><a href="data-frames-con-el-paquete-dplyr-.html#cb324-5" aria-hidden="true" tabindex="-1"></a>resumen.anho <span class="ot">&lt;-</span> <span class="fu">summarize</span>(datos.credito_anho, <span class="st">&quot;Media balance&quot;</span> <span class="ot">=</span> <span class="fu">mean</span>(monto_balance), <span class="st">&quot;Cantidad de individuos&quot;</span> <span class="ot">=</span> <span class="fu">n</span>()) <span class="do">## n() nos da la cantidad de elementos por grupo.</span></span>
+<span id="cb324-6"><a href="data-frames-con-el-paquete-dplyr-.html#cb324-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb324-7"><a href="data-frames-con-el-paquete-dplyr-.html#cb324-7" aria-hidden="true" tabindex="-1"></a>resumen.anho</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 4
+## # Groups:   Fecha inicio [6]
+##    `Fecha inicio` Genero    `Media balance` `Cantidad de individuos`
+##             &lt;dbl&gt; &lt;fct&gt;               &lt;dbl&gt;                    &lt;int&gt;
+##  1           2011 Femenino            1448                         1
+##  2           2016 Femenino             666.                        5
+##  3           2016 Masculino            371.                       16
+##  4           2017 Femenino             501.                       18
+##  5           2017 Masculino            456.                       17
+##  6           2018 Femenino             630.                       25
+##  7           2018 Masculino            564.                       16
+##  8           2019 Femenino             591.                       83
+##  9           2019 Masculino            459.                       70
+## 10           2020 Femenino             414.                       75
+## 11           2020 Masculino            588.                       74</code></pre>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb326-1" aria-hidden="true" tabindex="-1"></a>resumen.anho <span class="ot">&lt;-</span> <span class="fu">arrange</span>(resumen.anho, <span class="fu">desc</span>(<span class="st">`</span><span class="at">Fecha inicio</span><span class="st">`</span>))  <span class="do">## Ordenamos por año de forma descendente</span></span>
+<span id="cb326-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb326-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-3"><a href="data-frames-con-el-paquete-dplyr-.html#cb326-3" aria-hidden="true" tabindex="-1"></a>resumen.anho</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 4
+## # Groups:   Fecha inicio [6]
+##    `Fecha inicio` Genero    `Media balance` `Cantidad de individuos`
+##             &lt;dbl&gt; &lt;fct&gt;               &lt;dbl&gt;                    &lt;int&gt;
+##  1           2020 Femenino             414.                       75
+##  2           2020 Masculino            588.                       74
+##  3           2019 Femenino             591.                       83
+##  4           2019 Masculino            459.                       70
+##  5           2018 Femenino             630.                       25
+##  6           2018 Masculino            564.                       16
+##  7           2017 Femenino             501.                       18
+##  8           2017 Masculino            456.                       17
+##  9           2016 Femenino             666.                        5
+## 10           2016 Masculino            371.                       16
+## 11           2011 Femenino            1448                         1</code></pre>
+</div>
+<div id="operador-pipe" class="section level2" number="12.8">
+<h2><span class="header-section-number">12.8</span> <strong>Operador pipe %&gt;%</strong>:</h2>
+<p>El operador <strong>%&gt;%</strong> es muy útil a la hora de utilizar funciones del paquete <strong>dplyr</strong> de forma consecutiva, primero recordemos que el resultado de un función de este paquete siempre es un data frame, por lo que es posible ( y muy usual) aplicar varias funciones, pero si lo hacemos de forma anidada es un poco confuso de leer, pues se vería de esta forma</p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">tercera</span>(<span class="fu">segunda</span>(<span class="fu">primera</span>(dataframe)))</span></code></pre></div>
+<p>Esta lógica anidada no es la forma más natural de pensar, por lo el operador <strong>%&gt;%</strong> no es permite escribir las operaciones en forma de secuencia de izquierda a derecha, es decir</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">primera</span>(dataframe) <span class="sc">%&gt;%</span> segunda <span class="sc">%&gt;%</span> tercera</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb330-1" aria-hidden="true" tabindex="-1"></a>datos.credito <span class="sc">%&gt;%</span> <span class="fu">select</span>(monto_balance, monto_ingreso, monto_limite, calif_credit)  <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(monto_limite)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   monto_balance monto_ingreso monto_limite calif_credit
+## 1          1999        182728        13913          982
+## 2          1809        186634        13414          949
+## 3          1779        152298        12066          828</code></pre>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="do">## También se pueden ver los últimos usando tail(n)</span></span>
+<span id="cb332-2"><a href="data-frames-con-el-paquete-dplyr-.html#cb332-2" aria-hidden="true" tabindex="-1"></a>datos.credito <span class="sc">%&gt;%</span> <span class="fu">select</span>(monto_balance, monto_ingreso, monto_limite, calif_credit)  <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(monto_limite)) <span class="sc">%&gt;%</span> <span class="fu">tail</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##     monto_balance monto_ingreso monto_limite calif_credit
+## 398             0         13444          886          121
+## 399             0         14084          855          120
+## 400             0         12414          855          119</code></pre>
+<p>El último ejemplo que hicimos en la sección de <strong>group_by()</strong> se puede reescribir de forma más sencilla utilizando <strong>%&gt;%</strong> de la siguiente forma:</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="data-frames-con-el-paquete-dplyr-.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(datos.credito, <span class="st">&quot;Fecha inicio&quot;</span> <span class="ot">=</span> <span class="fu">year</span>(fecha_ini), Genero) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="st">&quot;Media balance&quot;</span> <span class="ot">=</span> <span class="fu">mean</span>(monto_balance), <span class="st">&quot;Cantidad de individuos&quot;</span> <span class="ot">=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Fecha inicio</span><span class="st">`</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 4
+## # Groups:   Fecha inicio [6]
+##    `Fecha inicio` Genero    `Media balance` `Cantidad de individuos`
+##             &lt;dbl&gt; &lt;fct&gt;               &lt;dbl&gt;                    &lt;int&gt;
+##  1           2020 Femenino             414.                       75
+##  2           2020 Masculino            588.                       74
+##  3           2019 Femenino             591.                       83
+##  4           2019 Masculino            459.                       70
+##  5           2018 Femenino             630.                       25
+##  6           2018 Masculino            564.                       16
+##  7           2017 Femenino             501.                       18
+##  8           2017 Masculino            456.                       17
+##  9           2016 Femenino             666.                        5
+## 10           2016 Masculino            371.                       16
+## 11           2011 Femenino            1448                         1</code></pre>
+<p>Es bueno aclarar que este operador <strong>no</strong> es exclusivo para funciones del paquete <strong>dplyr</strong> se puede usar siempre que escribamos código siempre y cuando tenga sentido, es decir, que el resultado de la operación anterior sea compatible con el insumo de la función siguiente.</p>
+<p>Para escribir este operador de forma rápida utilizamos el shortcut: <strong>CTRL+SHIFT+M</strong>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="análisis-exploratorio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/10-data-frames-con-el-paquete-dplyr.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/10-data-frames-con-el-paquete-dplyr.Rmd",
+"text": null
+},
+"download": ["Notas-Curso-Basico-R.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

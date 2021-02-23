@@ -1,0 +1,153 @@
+# **Análisis exploratorio**
+
+Salvo que lo hayamos creado nosotros mismos o estemos familiarizados con el conjunto de datos que carguemos a **R**
+generalmente estamos interesados en obtener una idea general sobre su contenido.
+Con este fin se aplican funciones de estadística descriptiva, conservando la estructura de los datos (columnas
+que lo forman y su tipo, número de observaciones, etc.), para tener una idea general
+sobre cada variable.
+
+### **Información general**.
+
+Asumiendo que comenzamos a trabajar con un conjunto de datos desconocido, lo primero que
+nos interesa es sera saber qué atributos contiene, cuántas observaciones hay, etc.
+
+En secciones anteriores se definieron funciones como class() y typeof(), con las
+que podemos conocer la clase de un objeto y su tipo.
+
+La función **str()** aporta más información, incluyendo el número de variables y observaciones y algunos detalles
+sobre cada una de las variables (columnas).
+
+
+```{r 08-analisis-exploratorio-1, include=FALSE}
+setwd('/Users/tchavarria/Documents/GitHub/curso-basico-r-bn')
+```
+
+
+```{r notas-curso, include=FALSE}
+datos.credito <- read.csv("data/DeudaCredito.csv",sep= ";", dec=",", stringsAsFactors = T)
+```
+
+
+```{r notas-curso-85}
+class(datos.credito) # Clase del objeto
+
+# Información sobre su estructura
+
+str(datos.credito)
+
+```
+
+### **Exploración del contenido 33**.
+
+Aunque la función **str()** facilita una muestra del contenido de cada variable, en
+general dicha información es insuficiente. Podemos recurrir a funciones
+como **head()** y **tail()** para obtener los primeros y últimos elementos, respectivamente, de un objeto en **R**. Asimismo, la función **summary()** ofrece un resumen global del contenido de cada variable: su valor mínimo, máximo y medio, mediana, cuartiles
+y, en el caso de las variables qualitativas, el número de elementos por categoría.
+
+
+```{r notas-curso-86}
+head(datos.credito) ## head(X,n) muestra los primeros n elementos del objeto X, por defecto n=6.
+head(datos.credito,3)
+
+```
+
+```{r notas-curso-87}
+tail(datos.credito)
+tail(datos.credito,3)
+```
+
+```{r notas-curso-88}
+summary(datos.credito)
+```
+
+Como podemos observar la variable **Casado** se leyó como numérica, esto no tienen mucho sentido, para transformarla a categórica utilizamos la función factor().
+
+```{r notas-curso-89}
+
+## Transformamos la variable Casado a categorica
+
+datos.credito$Casado <- factor(datos.credito$Casado, levels = c(1,0), labels = c("si","no"))
+summary(datos.credito)
+```
+
+Por otro lado la variable fecha_ini se leyó como factor, en lugar de como fecha, para corregir esto usamos la función as.Date().
+
+```{r 09-analisis-exploratorio-1}
+datos.credito$fecha_ini <- as.Date(datos.credito$fecha_ini, format = "%m/%d/%Y")
+```
+
+
+
+### **Funciones básicas**.
+
+Recordemos que **R** cuenta con multitud de funciones de tipo estadístico, entre ellas las que permiten
+obtener información descriptiva sobre la distribución de valores en un vector. Estas
+funciones pueden también aplicarse a objetos más complejos, como comprobaremos
+después.
+La sintaxis de las funciones de estadística descriptiva más comunes se presentan a continuación.
+
+```{r notas-curso-91, eval=FALSE}
+min(vector, na.rm =T/F) # Devuelve el valor mínimo existente en el vector facilitado como parámetro.
+
+#El resultado será NA si el vector contiene algún valor ausente, a menos que se
+#entregue el parámetro na.rm con el valor TRUE.
+```
+
+
+```{r notas-curso-92, eval=FALSE}
+max(vector, na.rm =T/F) # Devuelve el valor máximo existente en el vector facilitado como parámetro.
+
+#El resultado será NA si el vector contiene algún valor ausente, a menos que se
+#entregue el parámetro na.rm con el valor TRUE.
+```
+
+
+```{r notas-curso-93, eval=FALSE}
+range(vector, na.rm =T/F) # Devuelve un vector de dos elementos con el valor mínimo y máximo de los
+#existentes en el vector facilitado como parámetro
+
+```
+
+
+```{r notas-curso-94, eval=FALSE}
+range(vector, na.rm =T/F) # Devuelve un vector de dos elementos con el valor mínimo y máximo de los
+#existentes en el vector facilitado como parámetro
+
+```
+
+
+```{r notas-curso-95}
+saldo <- c(1000,2000,3000,4500)
+
+min(saldo)
+max(saldo)
+range(saldo)
+mean(saldo)
+var(saldo)
+sd(saldo)
+median(saldo)
+quantile(saldo)
+
+```
+
+A fin de obtener un resultado más compacto,
+se crea una lista con el valor devuelto por cada operación y, finalmente, se usa la
+función **unlist()** para generar un vector con la información a mostrar:
+
+```{r notas-curso-96}
+valores <- saldo
+unlist(list(media = mean(valores), desviacion = sd(valores), varianza = var(valores), minimo = min(valores), maximo = max(valores), mediana = median(valores), rango = range(valores), quartiles = quantile(valores)))
+```
+
+### **Aplicación a estructuras complejas**.
+
+Las anteriores funciones pueden aplicarse sobre estructuras más complejas que
+los vectores, como matrices y data frames. En la mayoría de los casos no nos interesan las medidas estadísticas de todo el conjunto de datos, sino de cada una de las variables (columnas) por separado.
+
+
+```{r notas-curso-97}
+mean(datos.credito$Ingreso)
+
+max(datos.credito$Limite)
+```
+

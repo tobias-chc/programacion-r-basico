@@ -1,7 +1,7 @@
 --- 
 title: "Notas Curso Básico R"
 author: "Tobías Chavarría"
-date: "Actualizado el 16 Feb, 2021"
+date: "Actualizado el 23 Feb, 2021"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -2092,37 +2092,53 @@ que los parámetros header, sep y dec toman los valores TRUE, "," y ".", respect
 
 
 ```r
-portafolio.banco <- read.csv("data/ArchivoInsumoBanco20200630.csv", sep = ";", dec = ".", na.strings = c("", "NA"))
+datos.credito <- read.csv("data/DeudaCredito.csv", sep = ";", dec = ".")
 
-str(portafolio.banco)
+str(datos.credito)
 ```
 
 ```
-## 'data.frame':	872 obs. of  20 variables:
-##  $ CATEGORIANIIF    : chr  "COSTO AMORTIZADO" "COSTO AMORTIZADO" "COSTO AMORTIZADO" "COSTO AMORTIZADO" ...
-##  $ MONEDA           : chr  "CRC" "CRC" "CRC" "CRC" ...
-##  $ CARTERA          : chr  "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" "BNCR COSTO AMORTIZADO" ...
-##  $ EMISOR           : chr  "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" "BANCO CENTRAL DE COSTA RICA" ...
-##  $ NEMOEMISOR       : chr  "BCCR" "BCCR" "BCCR" "BCCR" ...
-##  $ NEMOTECNICO      : chr  "bem" "bem" "bem" "bem" ...
-##  $ ISIN             : chr  "CRBCCR0B4270" "CRBCCR0B4270" "CRBCCR0B4270" "CRBCCR0B4296" ...
-##  $ COMPRA           : chr  "12/11/2019" "12/13/2019" "12/17/2019" "12/06/2019" ...
-##  $ VENCIMIENTO      : chr  "03/10/2021" "03/10/2021" "03/10/2021" "03/09/2022" ...
-##  $ MONTOFACIAL      : num  5.00e+08 5.55e+08 5.00e+08 5.00e+08 1.50e+07 ...
-##  $ REFERENCIA       : chr  "TV2940-1" "TV2973-1" "TV3003-1" "TV2906-1" ...
-##  $ CODINVENTARIO    : int  11897 11936 11968 11863 11404 12273 12286 11647 11649 11658 ...
-##  $ CALIFICADORASUGEF: chr  "S&P INTER." "S&P INTER." "S&P INTER." "S&P INTER." ...
-##  $ CALIFICACIONSUGEF: chr  "B" "B" "B" "B" ...
-##  $ MOODYS           : chr  "B2" "B2" "B2" "B2" ...
-##  $ S.P              : chr  "B" "B" "B" "B" ...
-##  $ FITCH.CRI        : chr  NA NA NA NA ...
-##  $ FITCH.INTER.     : chr  "B+" "B+" "B+" "B+" ...
-##  $ SCRC             : chr  NA NA NA NA ...
-##  $ VMKTCRC          : num  5.30e+08 5.89e+08 5.31e+08 5.43e+08 1.55e+07 ...
+## 'data.frame':	400 obs. of  13 variables:
+##  $ X            : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ monto_ingreso: num  14891 106025 104593 148924 55882 ...
+##  $ monto_limite : int  3606 6645 7075 9504 4897 8047 3388 7114 3300 6819 ...
+##  $ CalifCredit  : int  283 483 514 681 357 569 259 512 266 491 ...
+##  $ Tarjetas     : int  2 3 4 3 2 4 2 2 5 3 ...
+##  $ Edad         : int  34 82 71 36 68 77 37 87 66 41 ...
+##  $ Educacion    : int  11 15 11 11 16 10 12 9 13 19 ...
+##  $ Genero       : chr  "Masculino" "Femenino" "Masculino" "Femenino" ...
+##  $ Estudiante   : chr  "No" "Si" "No" "No" ...
+##  $ Casado       : int  1 1 0 0 1 0 0 0 0 1 ...
+##  $ Etnicidad    : chr  "Caucasico" "Asiatico" "Asiatico" "Asiatico" ...
+##  $ monto_balance: int  333 903 580 964 331 1151 203 872 279 1350 ...
+##  $ fecha_ini    : chr  "12/11/2019" "12/13/2019" "12/17/2019" "12/06/2019" ...
 ```
+
+
+
+Podemos ver que varias variables que deberían ser categóricas se leyeron como strings, para corregir esto podemos colocar el parámetro **stringsAsFactors** igual a TRUE de la función read_excel(), para leer los caracteres como factores.
+
 
 ```r
-portafolio.banco <- portafolio.banco %>% rename(FECHA.COMPRA = COMPRA, FECHA.VENC = VENCIMIENTO)
+datos.credito <- read.csv("data/DeudaCredito.csv", sep = ",", dec = ".", stringsAsFactors = T)
+
+str(datos.credito)
+```
+
+```
+## 'data.frame':	400 obs. of  12 variables:
+##  $ X          : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Ingreso    : num  14.9 106 104.6 148.9 55.9 ...
+##  $ Limite     : int  3606 6645 7075 9504 4897 8047 3388 7114 3300 6819 ...
+##  $ CalifCredit: int  283 483 514 681 357 569 259 512 266 491 ...
+##  $ Tarjetas   : int  2 3 4 3 2 4 2 2 5 3 ...
+##  $ Edad       : int  34 82 71 36 68 77 37 87 66 41 ...
+##  $ Educacion  : int  11 15 11 11 16 10 12 9 13 19 ...
+##  $ Genero     : Factor w/ 2 levels "Femenino","Masculino": 2 1 2 1 2 2 1 2 1 1 ...
+##  $ Estudiante : Factor w/ 2 levels "No","Si": 1 2 1 1 1 1 1 1 1 2 ...
+##  $ Casado     : int  1 1 0 0 1 0 0 0 0 1 ...
+##  $ Etnicidad  : Factor w/ 3 levels "Afrodescendiente",..: 3 2 2 2 3 3 1 2 3 1 ...
+##  $ Balance    : int  333 903 580 964 331 1151 203 872 279 1350 ...
 ```
 
 
@@ -2143,41 +2159,50 @@ Esta se utiliza para leer datos de excel, algunos de sus argumentos son:
 library(readxl)
 
 
-portafolio.BNValores <- read_excel("data/Portafolio BN Valores Junio.xlsx")
+tipo_cambio <- read_excel("data/tipo_cambio.xls")
 
-portafolio.BNValores_top10 <- head(portafolio.BNValores, 10) ## head(data,n) retorna las primeras n filas de nuestro data frame
+tipo_cambio_top10 <- head(tipo_cambio, 10) ## head(data,n) retorna las primeras n filas de nuestro data frame
 
-portafolio.BNValores_top10
+tipo_cambio_top10
 ```
 
 ```
-## # A tibble: 10 x 46
-##    Fecha                Boleta Bol.Nueva `Moneda Facial` `Moneda Liquida` ISIN 
-##    <dttm>                <dbl>     <dbl> <chr>           <chr>            <chr>
-##  1 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
-##  2 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
-##  3 2020-06-30 00:00:00 1.70e10   1.70e10 Colones         Colones          CRG0~
-##  4 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  5 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  6 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  7 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  8 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-##  9 2020-06-30 00:00:00 1.71e10   1.71e10 Colones         Colones          CRG0~
-## 10 2020-06-30 00:00:00 1.80e10   1.80e10 Colones         Colones          CRG0~
-## # ... with 40 more variables: Emisor <chr>, Instrumento <chr>, Serie <chr>,
-## #   Tasa <dbl>, Tas.Diaria <dbl>, Mto.Facial <dbl>, Mto.Liquidar <dbl>,
-## #   Mto.Libros <dbl>, Mto.Mercado <dbl>, Mto.Gand.Perd. <dbl>,
-## #   Mto.Ganancia <dbl>, Mto.Perdida <dbl>, Mto.Gan.Imp.Dif. <dbl>,
-## #   Mto.Per.Imp.Dif. <dbl>, `Mto. Deterioro Valor` <lgl>, Mto.Precio <dbl>,
-## #   MTo.Pre.Merc. <dbl>, Mto.Int.Compra <dbl>, Mto.Int.Diario <dbl>,
-## #   Mto.Int.Acum. <dbl>, Diferencial <dbl>, Mto.Desc.Diario <dbl>,
-## #   Mto.Desc.Acum. <dbl>, Mto.Prim.Diario <dbl>, Mto.PrimAcum <dbl>,
-## #   Fec.Liquida <dttm>, Fec.Vencimi. <dttm>, Fec.Ult.Pago <dttm>,
-## #   Fec.Pro.Pago <dttm>, Num.Dia.Acum. <dbl>, Num_Dia.Venc. <dbl>,
-## #   Num.Dia.Oper. <dbl>, `Cód. Modelo Negocio` <chr>, `Nombre Modelo
-## #   Negocio` <chr>, `Prueba SPPI` <chr>, `Tipo Tasa Interes` <chr>, Tipo <chr>,
-## #   Tip.Cambio <dbl>, Grupo <chr>, Sector <chr>
+## # A tibble: 10 x 3
+##    `Tipo cambio de compra y de venta del dólar de lo~ ...2         ...3         
+##    <chr>                                              <chr>        <chr>        
+##  1 Referencia del Banco Central de Costa Rica         <NA>         <NA>         
+##  2 En colones costarricenses                          <NA>         <NA>         
+##  3 <NA>                                               <NA>         <NA>         
+##  4 <NA>                                               TIPO CAMBIO~ TIPO DE CAMB~
+##  5 1 Ene 2019                                         604.3899999~ 611.75       
+##  6 2 Ene 2019                                         604.3899999~ 611.75       
+##  7 3 Ene 2019                                         603.0099999~ 611.54999999~
+##  8 4 Ene 2019                                         604.7699999~ 611.67999999~
+##  9 5 Ene 2019                                         602.3999999~ 611.54999999~
+## 10 6 Ene 2019                                         602.3999999~ 611.54999999~
 ```
+
+Aplicando el head(), podemos ver que la lectura del archivo no es correcta, para hacerlo de forma correcta podemos utilizar el parámetro range de la función read_excel(), para decirle que celdas queremos leer, la notación es la mimsa que se utiliza en MS Excel.
+
+
+```r
+tipo_cambio <- read_excel("data/tipo_cambio.xls", range = "A6:C787", col_names = c("fecha", "compra", "venta"))
+
+head(tipo_cambio)
+```
+
+```
+## # A tibble: 6 x 3
+##   fecha      compra venta
+##   <chr>       <dbl> <dbl>
+## 1 1 Ene 2019   604.  612.
+## 2 2 Ene 2019   604.  612.
+## 3 3 Ene 2019   603.  612.
+## 4 4 Ene 2019   605.  612.
+## 5 5 Ene 2019   602.  612.
+## 6 6 Ene 2019   602.  612.
+```
+
 
 
 ### **Calculando requisitos de memoria**.
@@ -2197,4 +2222,882 @@ por lo general se necesita el doble de esto, por lo que necesitamos al menos 4GB
 
 
 <!--chapter:end:08-importacion-de-datos.Rmd-->
+
+
+# **Análisis exploratorio**
+
+Salvo que lo hayamos creado nosotros mismos o estemos familiarizados con el conjunto de datos que carguemos a **R**
+generalmente estamos interesados en obtener una idea general sobre su contenido.
+Con este fin se aplican funciones de estadística descriptiva, conservando la estructura de los datos (columnas
+que lo forman y su tipo, número de observaciones, etc.), para tener una idea general
+sobre cada variable.
+
+### **Información general**.
+
+Asumiendo que comenzamos a trabajar con un conjunto de datos desconocido, lo primero que
+nos interesa es sera saber qué atributos contiene, cuántas observaciones hay, etc.
+
+En secciones anteriores se definieron funciones como class() y typeof(), con las
+que podemos conocer la clase de un objeto y su tipo.
+
+La función **str()** aporta más información, incluyendo el número de variables y observaciones y algunos detalles
+sobre cada una de las variables (columnas).
+
+
+
+
+
+
+
+
+
+```r
+class(datos.credito) # Clase del objeto
+```
+
+```
+## [1] "data.frame"
+```
+
+```r
+# Información sobre su estructura
+
+str(datos.credito)
+```
+
+```
+## 'data.frame':	400 obs. of  12 variables:
+##  $ X          : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Ingreso    : num  14.9 106 104.6 148.9 55.9 ...
+##  $ Limite     : int  3606 6645 7075 9504 4897 8047 3388 7114 3300 6819 ...
+##  $ CalifCredit: int  283 483 514 681 357 569 259 512 266 491 ...
+##  $ Tarjetas   : int  2 3 4 3 2 4 2 2 5 3 ...
+##  $ Edad       : int  34 82 71 36 68 77 37 87 66 41 ...
+##  $ Educacion  : int  11 15 11 11 16 10 12 9 13 19 ...
+##  $ Genero     : Factor w/ 2 levels "Femenino","Masculino": 2 1 2 1 2 2 1 2 1 1 ...
+##  $ Estudiante : Factor w/ 2 levels "No","Si": 1 2 1 1 1 1 1 1 1 2 ...
+##  $ Casado     : int  1 1 0 0 1 0 0 0 0 1 ...
+##  $ Etnicidad  : Factor w/ 3 levels "Afrodescendiente",..: 3 2 2 2 3 3 1 2 3 1 ...
+##  $ Balance    : int  333 903 580 964 331 1151 203 872 279 1350 ...
+```
+
+### **Exploración del contenido 33**.
+
+Aunque la función **str()** facilita una muestra del contenido de cada variable, en
+general dicha información es insuficiente. Podemos recurrir a funciones
+como **head()** y **tail()** para obtener los primeros y últimos elementos, respectivamente, de un objeto en **R**. Asimismo, la función **summary()** ofrece un resumen global del contenido de cada variable: su valor mínimo, máximo y medio, mediana, cuartiles
+y, en el caso de las variables qualitativas, el número de elementos por categoría.
+
+
+
+```r
+head(datos.credito) ## head(X,n) muestra los primeros n elementos del objeto X, por defecto n=6.
+```
+
+```
+##   X Ingreso Limite CalifCredit Tarjetas Edad Educacion    Genero Estudiante
+## 1 1  14.891   3606         283        2   34        11 Masculino         No
+## 2 2 106.025   6645         483        3   82        15  Femenino         Si
+## 3 3 104.593   7075         514        4   71        11 Masculino         No
+## 4 4 148.924   9504         681        3   36        11  Femenino         No
+## 5 5  55.882   4897         357        2   68        16 Masculino         No
+## 6 6  80.180   8047         569        4   77        10 Masculino         No
+##   Casado Etnicidad Balance
+## 1      1 Caucasico     333
+## 2      1  Asiatico     903
+## 3      0  Asiatico     580
+## 4      0  Asiatico     964
+## 5      1 Caucasico     331
+## 6      0 Caucasico    1151
+```
+
+```r
+head(datos.credito, 3)
+```
+
+```
+##   X Ingreso Limite CalifCredit Tarjetas Edad Educacion    Genero Estudiante
+## 1 1  14.891   3606         283        2   34        11 Masculino         No
+## 2 2 106.025   6645         483        3   82        15  Femenino         Si
+## 3 3 104.593   7075         514        4   71        11 Masculino         No
+##   Casado Etnicidad Balance
+## 1      1 Caucasico     333
+## 2      1  Asiatico     903
+## 3      0  Asiatico     580
+```
+
+
+```r
+tail(datos.credito)
+```
+
+```
+##       X Ingreso Limite CalifCredit Tarjetas Edad Educacion    Genero Estudiante
+## 395 395  49.794   5758         410        4   40         8 Masculino         No
+## 396 396  12.096   4100         307        3   32        13 Masculino         No
+## 397 397  13.364   3838         296        5   65        17 Masculino         No
+## 398 398  57.872   4171         321        5   67        12  Femenino         No
+## 399 399  37.728   2525         192        1   44        13 Masculino         No
+## 400 400  18.701   5524         415        5   64         7  Femenino         No
+##     Casado        Etnicidad Balance
+## 395      0        Caucasico     734
+## 396      1        Caucasico     560
+## 397      0 Afrodescendiente     480
+## 398      1        Caucasico     138
+## 399      1        Caucasico       0
+## 400      0         Asiatico     966
+```
+
+```r
+tail(datos.credito, 3)
+```
+
+```
+##       X Ingreso Limite CalifCredit Tarjetas Edad Educacion    Genero Estudiante
+## 398 398  57.872   4171         321        5   67        12  Femenino         No
+## 399 399  37.728   2525         192        1   44        13 Masculino         No
+## 400 400  18.701   5524         415        5   64         7  Femenino         No
+##     Casado Etnicidad Balance
+## 398      1 Caucasico     138
+## 399      1 Caucasico       0
+## 400      0  Asiatico     966
+```
+
+
+```r
+summary(datos.credito)
+```
+
+```
+##        X            Ingreso           Limite       CalifCredit   
+##  Min.   :  1.0   Min.   : 10.35   Min.   :  855   Min.   : 93.0  
+##  1st Qu.:100.8   1st Qu.: 21.01   1st Qu.: 3088   1st Qu.:247.2  
+##  Median :200.5   Median : 33.12   Median : 4622   Median :344.0  
+##  Mean   :200.5   Mean   : 45.22   Mean   : 4736   Mean   :354.9  
+##  3rd Qu.:300.2   3rd Qu.: 57.47   3rd Qu.: 5873   3rd Qu.:437.2  
+##  Max.   :400.0   Max.   :186.63   Max.   :13913   Max.   :982.0  
+##     Tarjetas          Edad         Educacion           Genero    Estudiante
+##  Min.   :1.000   Min.   :23.00   Min.   : 5.00   Femenino :207   No:360    
+##  1st Qu.:2.000   1st Qu.:41.75   1st Qu.:11.00   Masculino:193   Si: 40    
+##  Median :3.000   Median :56.00   Median :14.00                             
+##  Mean   :2.958   Mean   :55.67   Mean   :13.45                             
+##  3rd Qu.:4.000   3rd Qu.:70.00   3rd Qu.:16.00                             
+##  Max.   :9.000   Max.   :98.00   Max.   :20.00                             
+##      Casado                  Etnicidad      Balance       
+##  Min.   :0.0000   Afrodescendiente: 99   Min.   :   0.00  
+##  1st Qu.:0.0000   Asiatico        :102   1st Qu.:  68.75  
+##  Median :1.0000   Caucasico       :199   Median : 459.50  
+##  Mean   :0.6125                          Mean   : 520.01  
+##  3rd Qu.:1.0000                          3rd Qu.: 863.00  
+##  Max.   :1.0000                          Max.   :1999.00
+```
+
+Como podemos observar la variable **Casado** se leyó como numérica, esto no tienen mucho sentido, para transformarla a categórica utilizamos la función factor().
+
+
+```r
+## Transformamos la variable Casado a categorica
+
+datos.credito$Casado <- factor(datos.credito$Casado, levels = c(1, 0), labels = c("si", "no"))
+summary(datos.credito)
+```
+
+```
+##        X            Ingreso           Limite       CalifCredit   
+##  Min.   :  1.0   Min.   : 10.35   Min.   :  855   Min.   : 93.0  
+##  1st Qu.:100.8   1st Qu.: 21.01   1st Qu.: 3088   1st Qu.:247.2  
+##  Median :200.5   Median : 33.12   Median : 4622   Median :344.0  
+##  Mean   :200.5   Mean   : 45.22   Mean   : 4736   Mean   :354.9  
+##  3rd Qu.:300.2   3rd Qu.: 57.47   3rd Qu.: 5873   3rd Qu.:437.2  
+##  Max.   :400.0   Max.   :186.63   Max.   :13913   Max.   :982.0  
+##     Tarjetas          Edad         Educacion           Genero    Estudiante
+##  Min.   :1.000   Min.   :23.00   Min.   : 5.00   Femenino :207   No:360    
+##  1st Qu.:2.000   1st Qu.:41.75   1st Qu.:11.00   Masculino:193   Si: 40    
+##  Median :3.000   Median :56.00   Median :14.00                             
+##  Mean   :2.958   Mean   :55.67   Mean   :13.45                             
+##  3rd Qu.:4.000   3rd Qu.:70.00   3rd Qu.:16.00                             
+##  Max.   :9.000   Max.   :98.00   Max.   :20.00                             
+##  Casado              Etnicidad      Balance       
+##  si:245   Afrodescendiente: 99   Min.   :   0.00  
+##  no:155   Asiatico        :102   1st Qu.:  68.75  
+##           Caucasico       :199   Median : 459.50  
+##                                  Mean   : 520.01  
+##                                  3rd Qu.: 863.00  
+##                                  Max.   :1999.00
+```
+
+Por otro lado la variable fecha_ini se leyó como factor, en lugar de como fecha, para corregir esto usamos la función as.Date().
+
+
+```r
+datos.credito$fecha_ini <- as.Date(datos.credito$fecha_ini, format = "%m/%d/%Y")
+```
+
+```
+## Error in `$<-.data.frame`(`*tmp*`, fecha_ini, value = structure(numeric(0), class = "Date")): replacement has 0 rows, data has 400
+```
+
+
+
+### **Funciones básicas**.
+
+Recordemos que **R** cuenta con multitud de funciones de tipo estadístico, entre ellas las que permiten
+obtener información descriptiva sobre la distribución de valores en un vector. Estas
+funciones pueden también aplicarse a objetos más complejos, como comprobaremos
+después.
+La sintaxis de las funciones de estadística descriptiva más comunes se presentan a continuación.
+
+
+```r
+min(vector, na.rm = T / F) # Devuelve el valor mínimo existente en el vector facilitado como parámetro.
+
+# El resultado será NA si el vector contiene algún valor ausente, a menos que se
+# entregue el parámetro na.rm con el valor TRUE.
+```
+
+
+
+```r
+max(vector, na.rm = T / F) # Devuelve el valor máximo existente en el vector facilitado como parámetro.
+
+# El resultado será NA si el vector contiene algún valor ausente, a menos que se
+# entregue el parámetro na.rm con el valor TRUE.
+```
+
+
+
+```r
+range(vector, na.rm = T / F) # Devuelve un vector de dos elementos con el valor mínimo y máximo de los
+# existentes en el vector facilitado como parámetro
+```
+
+
+
+```r
+range(vector, na.rm = T / F) # Devuelve un vector de dos elementos con el valor mínimo y máximo de los
+# existentes en el vector facilitado como parámetro
+```
+
+
+
+```r
+saldo <- c(1000, 2000, 3000, 4500)
+
+min(saldo)
+```
+
+```
+## [1] 1000
+```
+
+```r
+max(saldo)
+```
+
+```
+## [1] 4500
+```
+
+```r
+range(saldo)
+```
+
+```
+## [1] 1000 4500
+```
+
+```r
+mean(saldo)
+```
+
+```
+## [1] 2625
+```
+
+```r
+var(saldo)
+```
+
+```
+## [1] 2229167
+```
+
+```r
+sd(saldo)
+```
+
+```
+## [1] 1493.039
+```
+
+```r
+median(saldo)
+```
+
+```
+## [1] 2500
+```
+
+```r
+quantile(saldo)
+```
+
+```
+##   0%  25%  50%  75% 100% 
+## 1000 1750 2500 3375 4500
+```
+
+A fin de obtener un resultado más compacto,
+se crea una lista con el valor devuelto por cada operación y, finalmente, se usa la
+función **unlist()** para generar un vector con la información a mostrar:
+
+
+```r
+valores <- saldo
+unlist(list(media = mean(valores), desviacion = sd(valores), varianza = var(valores), minimo = min(valores), maximo = max(valores), mediana = median(valores), rango = range(valores), quartiles = quantile(valores)))
+```
+
+```
+##          media     desviacion       varianza         minimo         maximo 
+##       2625.000       1493.039    2229166.667       1000.000       4500.000 
+##        mediana         rango1         rango2   quartiles.0%  quartiles.25% 
+##       2500.000       1000.000       4500.000       1000.000       1750.000 
+##  quartiles.50%  quartiles.75% quartiles.100% 
+##       2500.000       3375.000       4500.000
+```
+
+### **Aplicación a estructuras complejas**.
+
+Las anteriores funciones pueden aplicarse sobre estructuras más complejas que
+los vectores, como matrices y data frames. En la mayoría de los casos no nos interesan las medidas estadísticas de todo el conjunto de datos, sino de cada una de las variables (columnas) por separado.
+
+
+
+```r
+mean(datos.credito$Ingreso)
+```
+
+```
+## [1] 45.21889
+```
+
+```r
+max(datos.credito$Limite)
+```
+
+```
+## [1] 13913
+```
+
+
+<!--chapter:end:09-analisis-exploratorio.Rmd-->
+
+
+# **Data Frames con el paquete dplyr.**
+
+Como vimos en la clase anterior los data frames son las estructuras más importantes en R, recordemos que básicamente un data frame es una tabla, donde cada fila representa una observación o individuo, y cada columna una variable o característica de esta observación. 
+
+Dada la importancia de estas estructuras, es muy importante conocer las mejores herramientas para trabajar con ellas, en la sección de 
+subsetting vimos como obtener subconjuntos de nuestros datos, sin embargo cuando tenemos que hacer varios filtros o agrupaciones el uso de "[]", "$", no es tan recomendable, pues es más fácil equivocarse y el código es más complicado de leer.
+
+El paquete **dplyr** está diseñado para mitigar estas complicaciones y optimizado para realizar estas tareas.
+
+## **Paquete dplyr**:
+
+El paquete **dplyr** fue desarrollado por Hadley Wickham de RStudio y us una versión mejorada del paquete **plyr**. Una de las ventajas de este paquete es que tiene cierta gramática en sus funciones, lo que facilita escribir y leer código. Además sus funciones son muy rápidas y algunas de sus operaciones están programadas en C++.
+
+**Gramática de dplyr**
+
+Algunos de los "verbos" que tiene el paquete **dplyr** son los siguientes:
+
+- **select**: Retorna un subconjunto de columnas.
+- **filter**: Extrae subconjuntos de filas basado en condiciones lógicas.
+- **arrange**: Reordena las filas de un data frame.
+- **rename**: Renombra las variables del data frame.
+- **mutate**: Agrega columnas o transforma las existentes.
+- **summarise / summarize**: Genera un resumen estadístico de las variables del data frame.
+- **%>%**: El operador “pipe” es usado para conectar varios "verbos" en una sola ejecución.
+
+Es importante notar que, el primer argumento de todas estas funciones es un data frame y su resultado también es un data frame, por eso es fácil y útil combinarlas.
+
+**Instalación**
+
+
+```r
+## Para instalarlo basta ejecutar lo siguiente en la consola
+install.packages("dplyr")
+
+## Para utilizar las funciones se debe cargar la librería mediante la instrucción
+library(dplyr)
+```
+
+
+
+Cargamos el archivo de datos
+
+
+```r
+datos.credito <- read.csv("data/DeudaCredito.csv", sep = ";", dec = ".", stringsAsFactors = T)
+
+datos.credito$Casado <- factor(datos.credito$Casado, levels = c(1, 0), labels = c("si", "no"))
+
+datos.credito$fecha_ini <- as.Date(datos.credito$fecha_ini, format = "%m/%d/%Y")
+```
+
+## **select()**:
+
+Normalmente trabajamos con data frames que tienen muchas variables y necesitamos enfocarnos en solo algunas de estas, la función **select()** como su nombre lo sugiere, sirve para obtener las columnas deseadas de nuestro conjunto de datos.
+
+
+Primero vamos a ver de forma general la estructura de nuestros datos, utilizando las funciones **dim()
+** y **str()**.
+
+
+
+```r
+dim(datos.credito) ## Obtenemos la dimensiones de nuestro data frame [filas, columnas].
+```
+
+```
+## [1] 400  13
+```
+
+
+```r
+str(datos.credito) ## Presenta un resumen las variables del data frame y su clase.
+```
+
+```
+## 'data.frame':	400 obs. of  13 variables:
+##  $ X            : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ monto_ingreso: num  14891 106025 104593 148924 55882 ...
+##  $ monto_limite : int  3606 6645 7075 9504 4897 8047 3388 7114 3300 6819 ...
+##  $ CalifCredit  : int  283 483 514 681 357 569 259 512 266 491 ...
+##  $ Tarjetas     : int  2 3 4 3 2 4 2 2 5 3 ...
+##  $ Edad         : int  34 82 71 36 68 77 37 87 66 41 ...
+##  $ Educacion    : int  11 15 11 11 16 10 12 9 13 19 ...
+##  $ Genero       : Factor w/ 2 levels "Femenino","Masculino": 2 1 2 1 2 2 1 2 1 1 ...
+##  $ Estudiante   : Factor w/ 2 levels "No","Si": 1 2 1 1 1 1 1 1 1 2 ...
+##  $ Casado       : Factor w/ 2 levels "si","no": 1 1 2 2 1 2 2 2 2 1 ...
+##  $ Etnicidad    : Factor w/ 3 levels "Afrodescendiente",..: 3 2 2 2 3 3 1 2 3 1 ...
+##  $ monto_balance: int  333 903 580 964 331 1151 203 872 279 1350 ...
+##  $ fecha_ini    : Date, format: "2019-12-11" "2019-12-13" ...
+```
+
+
+Suponga que queremos las columnas Edad, Educación, Género, Estudiante, Casado
+
+
+```r
+datos.credito.info_personal <- select(datos.credito, c("Edad", "Educacion", "Genero", "Estudiante", "Casado", "Etnicidad"))
+
+head(datos.credito.info_personal)
+```
+
+```
+##   Edad Educacion    Genero Estudiante Casado Etnicidad
+## 1   34        11 Masculino         No     si Caucasico
+## 2   82        15  Femenino         Si     si  Asiatico
+## 3   71        11 Masculino         No     no  Asiatico
+## 4   36        11  Femenino         No     no  Asiatico
+## 5   68        16 Masculino         No     si Caucasico
+## 6   77        10 Masculino         No     no Caucasico
+```
+
+También podemos utilizar el **select()** eligiendo las columnas que no queremos.
+
+
+```r
+datos.credito.info_personal.sinEtnia <- select(datos.credito.info_personal, -Etnicidad)  ## para quitar varias columnas utilizamos un vector, por ejemplo: -c("Etnicidad", "Casado)
+
+head(datos.credito.info_personal.sinEtnia)
+```
+
+```
+##   Edad Educacion    Genero Estudiante Casado
+## 1   34        11 Masculino         No     si
+## 2   82        15  Femenino         Si     si
+## 3   71        11 Masculino         No     no
+## 4   36        11  Femenino         No     no
+## 5   68        16 Masculino         No     si
+## 6   77        10 Masculino         No     no
+```
+
+Otra forma es seleccionar las columnas que tengan inicien o terminen con ciertos caracteres, por ejemplo si queremos todas las columnas que tienen el prefijo "monto".
+
+
+```r
+datos.credito_montos <- select(datos.credito, starts_with("monto")) ## Podemos usar ends_with("sufijo") para elegir las que terminen con cierto sufijo.
+
+head(datos.credito_montos)
+```
+
+```
+##   monto_ingreso monto_limite monto_balance
+## 1      14891.00         3606           333
+## 2     106025.00         6645           903
+## 3     104593.00         7075           580
+## 4     148924.00         9504           964
+## 5      55882.00         4897           331
+## 6         80.18         8047          1151
+```
+
+## **filter()**:
+
+Esta función se utiliza para extraer filas de nuestro data frame utilizando condiciones.
+
+
+```r
+datos.credito_enero <- filter(datos.credito, months(fecha_ini) == "January")
+
+dim(datos.credito_enero)
+```
+
+```
+## [1]  0 13
+```
+
+```r
+head(datos.credito_enero)
+```
+
+```
+##  [1] X             monto_ingreso monto_limite  CalifCredit   Tarjetas     
+##  [6] Edad          Educacion     Genero        Estudiante    Casado       
+## [11] Etnicidad     monto_balance fecha_ini    
+## <0 rows> (or 0-length row.names)
+```
+
+
+
+```r
+datos.credito_enero_fem <- filter(datos.credito, months(fecha_ini) == "January" & Genero == "Femenino")
+
+dim(datos.credito_enero_fem)
+```
+
+```
+## [1]  0 13
+```
+
+```r
+head(datos.credito_enero_fem)
+```
+
+```
+##  [1] X             monto_ingreso monto_limite  CalifCredit   Tarjetas     
+##  [6] Edad          Educacion     Genero        Estudiante    Casado       
+## [11] Etnicidad     monto_balance fecha_ini    
+## <0 rows> (or 0-length row.names)
+```
+
+## **arrange()**:
+
+Esta función se utiliza para ordenar las filas de un data frame de acuerdo a una de sus variables.
+
+
+Ordenamos de acuerdo la columna que contiene las fechas de inicio.
+
+
+```r
+datos.credito_ordenado <- arrange(datos.credito, fecha_ini) ## De forma ascendente por defecto
+
+head(select(datos.credito_ordenado, fecha_ini, monto_balance))
+```
+
+```
+##    fecha_ini monto_balance
+## 1 2011-01-17          1448
+## 2 2016-06-01             0
+## 3 2016-10-21           962
+## 4 2016-10-21           345
+## 5 2016-10-21             0
+## 6 2016-10-21           480
+```
+
+
+
+```r
+datos.credito_ordenado <- arrange(datos.credito, desc(fecha_ini)) ## De forma descendente.
+
+head(select(datos.credito_ordenado, fecha_ini, monto_balance))
+```
+
+```
+##    fecha_ini monto_balance
+## 1 2020-06-30           250
+## 2 2020-06-30           295
+## 3 2020-06-29           637
+## 4 2020-06-29           209
+## 5 2020-06-29           531
+## 6 2020-06-26             0
+```
+
+## **rename()**:
+
+Renombrar variables puede ser de mucha utilidad para poder escribir código y hacerlo más legible. Sin la función **rename()** esta tarea puede ser bastante tediosa.
+
+
+```r
+datos.credito <- rename(datos.credito, cant_tarjetas = "Tarjetas", calif_credit = CalifCredit, id = X)
+
+head(datos.credito)
+```
+
+```
+##   id monto_ingreso monto_limite calif_credit cant_tarjetas Edad Educacion
+## 1  1      14891.00         3606          283             2   34        11
+## 2  2     106025.00         6645          483             3   82        15
+## 3  3     104593.00         7075          514             4   71        11
+## 4  4     148924.00         9504          681             3   36        11
+## 5  5      55882.00         4897          357             2   68        16
+## 6  6         80.18         8047          569             4   77        10
+##      Genero Estudiante Casado Etnicidad monto_balance  fecha_ini
+## 1 Masculino         No     si Caucasico           333 2019-12-11
+## 2  Femenino         Si     si  Asiatico           903 2019-12-13
+## 3 Masculino         No     no  Asiatico           580 2019-12-17
+## 4  Femenino         No     no  Asiatico           964 2019-12-06
+## 5 Masculino         No     si Caucasico           331 2019-10-17
+## 6 Masculino         No     no Caucasico          1151 2020-02-07
+```
+
+
+## **mutate()**:
+
+Esta función nos permite crear variables a partir de las que ya existen, de una forma muy sencilla.
+
+
+```r
+datos.credito <- mutate(datos.credito, razon = monto_limite / monto_ingreso)
+
+head(select(datos.credito, monto_ingreso, monto_limite, razon))
+```
+
+```
+##   monto_ingreso monto_limite        razon
+## 1      14891.00         3606   0.24215969
+## 2     106025.00         6645   0.06267390
+## 3     104593.00         7075   0.06764315
+## 4     148924.00         9504   0.06381779
+## 5      55882.00         4897   0.08763108
+## 6         80.18         8047 100.36168621
+```
+
+También funciona para agregar variables de forma manual
+
+
+```r
+datos.credito <- mutate(datos.credito, fecha_actual = Sys.Date(), dif_fechas = fecha_actual - fecha_ini)
+
+head(select(datos.credito, fecha_ini, fecha_actual, dif_fechas))
+```
+
+```
+##    fecha_ini fecha_actual dif_fechas
+## 1 2019-12-11   2021-02-23   440 days
+## 2 2019-12-13   2021-02-23   438 days
+## 3 2019-12-17   2021-02-23   434 days
+## 4 2019-12-06   2021-02-23   445 days
+## 5 2019-10-17   2021-02-23   495 days
+## 6 2020-02-07   2021-02-23   382 days
+```
+
+
+## **group_by()**:
+
+
+Esta función se utiliza para generar subconjuntos de los datos a partir de ciertas propiedades, luego de hacer esto podemos generar resúmenes estadísticos de esos subconjuntos.
+
+La estrategia en general es separar el data frame en partes de acuerdo a una o más variables y luego aplicar un summary en cada una de esas partes.
+
+
+
+```r
+datos.credito_genero <- group_by(datos.credito, Genero) ## Agrupamos por genero
+
+summarize(datos.credito_genero, mean(Edad))
+```
+
+```
+## # A tibble: 2 x 2
+##   Genero    `mean(Edad)`
+## * <fct>            <dbl>
+## 1 Femenino          55.7
+## 2 Masculino         55.6
+```
+
+```r
+summarize(datos.credito_genero, "Media Ingreso (CRC)" = mean(monto_ingreso) * 619) ## Pasamos a colones
+```
+
+```
+## # A tibble: 2 x 2
+##   Genero    `Media Ingreso (CRC)`
+## * <fct>                     <dbl>
+## 1 Femenino              24622638.
+## 2 Masculino             25218931.
+```
+
+```r
+summarize(datos.credito_genero, "Media Ingreso (CRC)" = mean(monto_ingreso) * 619, "Media edad" = mean(Edad)) ## Pasamos a colones
+```
+
+```
+## # A tibble: 2 x 3
+##   Genero    `Media Ingreso (CRC)` `Media edad`
+## * <fct>                     <dbl>        <dbl>
+## 1 Femenino              24622638.         55.7
+## 2 Masculino             25218931.         55.6
+```
+
+
+
+```r
+datos.credito_gen_casado <- group_by(datos.credito, Genero, Estudiante) ## Agrupamos por genero y por casado.
+
+resumen_gen_casado <- summarize(datos.credito_gen_casado, "Cantidad de individuos" = n()) ## n() nos da la cantidad de elementos por grupo.
+
+resumen_gen_casado
+```
+
+```
+## # A tibble: 4 x 3
+## # Groups:   Genero [2]
+##   Genero    Estudiante `Cantidad de individuos`
+##   <fct>     <fct>                         <int>
+## 1 Femenino  No                              183
+## 2 Femenino  Si                               24
+## 3 Masculino No                              177
+## 4 Masculino Si                               16
+```
+
+
+```r
+library(lubridate) ## Se utiliza la función year()
+
+datos.credito_anho <- group_by(datos.credito, "Fecha inicio" = year(fecha_ini), Genero) ## Agrupamos por fecha inicio
+
+resumen.anho <- summarize(datos.credito_anho, "Media balance" = mean(monto_balance), "Cantidad de individuos" = n()) ## n() nos da la cantidad de elementos por grupo.
+
+resumen.anho
+```
+
+```
+## # A tibble: 11 x 4
+## # Groups:   Fecha inicio [6]
+##    `Fecha inicio` Genero    `Media balance` `Cantidad de individuos`
+##             <dbl> <fct>               <dbl>                    <int>
+##  1           2011 Femenino            1448                         1
+##  2           2016 Femenino             666.                        5
+##  3           2016 Masculino            371.                       16
+##  4           2017 Femenino             501.                       18
+##  5           2017 Masculino            456.                       17
+##  6           2018 Femenino             630.                       25
+##  7           2018 Masculino            564.                       16
+##  8           2019 Femenino             591.                       83
+##  9           2019 Masculino            459.                       70
+## 10           2020 Femenino             414.                       75
+## 11           2020 Masculino            588.                       74
+```
+
+```r
+resumen.anho <- arrange(resumen.anho, desc(`Fecha inicio`))  ## Ordenamos por año de forma descendente
+
+resumen.anho
+```
+
+```
+## # A tibble: 11 x 4
+## # Groups:   Fecha inicio [6]
+##    `Fecha inicio` Genero    `Media balance` `Cantidad de individuos`
+##             <dbl> <fct>               <dbl>                    <int>
+##  1           2020 Femenino             414.                       75
+##  2           2020 Masculino            588.                       74
+##  3           2019 Femenino             591.                       83
+##  4           2019 Masculino            459.                       70
+##  5           2018 Femenino             630.                       25
+##  6           2018 Masculino            564.                       16
+##  7           2017 Femenino             501.                       18
+##  8           2017 Masculino            456.                       17
+##  9           2016 Femenino             666.                        5
+## 10           2016 Masculino            371.                       16
+## 11           2011 Femenino            1448                         1
+```
+
+
+## **Operador pipe %>%**:
+
+El operador **%>%** es muy útil a la hora de utilizar funciones del paquete **dplyr** de forma consecutiva, primero recordemos que el resultado de un función de este paquete siempre es un data frame, por lo que es posible ( y muy usual) aplicar varias funciones, pero si lo hacemos de forma anidada es un poco confuso de leer, pues se vería de esta forma
+
+
+
+```r
+> tercera(segunda(primera(dataframe)))
+```
+
+Esta lógica anidada no es la forma más natural de pensar, por lo el operador **%>%** no es permite escribir las operaciones en forma de secuencia de izquierda a derecha, es decir
+
+
+```r
+> primera(dataframe) %>% segunda %>% tercera
+```
+
+
+
+```r
+datos.credito %>% select(monto_balance, monto_ingreso, monto_limite, calif_credit)  %>% arrange(desc(monto_limite)) %>% head(3)
+```
+
+```
+##   monto_balance monto_ingreso monto_limite calif_credit
+## 1          1999        182728        13913          982
+## 2          1809        186634        13414          949
+## 3          1779        152298        12066          828
+```
+
+```r
+## También se pueden ver los últimos usando tail(n)
+datos.credito %>% select(monto_balance, monto_ingreso, monto_limite, calif_credit)  %>% arrange(desc(monto_limite)) %>% tail(3)
+```
+
+```
+##     monto_balance monto_ingreso monto_limite calif_credit
+## 398             0         13444          886          121
+## 399             0         14084          855          120
+## 400             0         12414          855          119
+```
+
+
+El último ejemplo que hicimos en la sección de **group_by()** se puede reescribir de forma más sencilla utilizando **%>%** de la siguiente forma:
+
+
+```r
+group_by(datos.credito, "Fecha inicio" = year(fecha_ini), Genero) %>% summarize("Media balance" = mean(monto_balance), "Cantidad de individuos" = n()) %>% arrange(desc(`Fecha inicio`))
+```
+
+```
+## # A tibble: 11 x 4
+## # Groups:   Fecha inicio [6]
+##    `Fecha inicio` Genero    `Media balance` `Cantidad de individuos`
+##             <dbl> <fct>               <dbl>                    <int>
+##  1           2020 Femenino             414.                       75
+##  2           2020 Masculino            588.                       74
+##  3           2019 Femenino             591.                       83
+##  4           2019 Masculino            459.                       70
+##  5           2018 Femenino             630.                       25
+##  6           2018 Masculino            564.                       16
+##  7           2017 Femenino             501.                       18
+##  8           2017 Masculino            456.                       17
+##  9           2016 Femenino             666.                        5
+## 10           2016 Masculino            371.                       16
+## 11           2011 Femenino            1448                         1
+```
+
+Es bueno aclarar que este operador **no** es exclusivo para funciones del paquete **dplyr** se puede usar siempre que escribamos código siempre y cuando tenga sentido, es decir, que el resultado de la operación anterior sea compatible con el insumo de la función siguiente.
+
+Para escribir este operador de forma rápida utilizamos el shortcut: **CTRL+SHIFT+M**.
+
+
+
+<!--chapter:end:10-data-frames-con-el-paquete-dplyr.Rmd-->
 
