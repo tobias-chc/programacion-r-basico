@@ -190,7 +190,7 @@
 
 \title{Notas Curso Básico R}
 \author{Tobías Chavarría}
-\date{Actualizado el 23 Feb, 2021}
+\date{Actualizado el 01 Mar, 2021}
 
 \begin{document}
 \maketitle
@@ -2694,8 +2694,8 @@ sobre cada una de las variables (columnas).
 ##  $ Balance    : int  333 903 580 964 331 1151 203 872 279 1350 ...
 \end{verbatim}
 
-\hypertarget{exploraciuxf3n-del-contenido-33.}{%
-\subsection{\texorpdfstring{\textbf{Exploración del contenido 33}.}{Exploración del contenido 33.}}\label{exploraciuxf3n-del-contenido-33.}}
+\hypertarget{exploraciuxf3n-del-contenido.}{%
+\subsection{\texorpdfstring{\textbf{Exploración del contenido}.}{Exploración del contenido.}}\label{exploraciuxf3n-del-contenido.}}
 
 Aunque la función \textbf{str()} facilita una muestra del contenido de cada variable, en
 general dicha información es insuficiente. Podemos recurrir a funciones
@@ -3567,5 +3567,469 @@ El último ejemplo que hicimos en la sección de \textbf{group\_by()} se puede r
 Es bueno aclarar que este operador \textbf{no} es exclusivo para funciones del paquete \textbf{dplyr} se puede usar siempre que escribamos código siempre y cuando tenga sentido, es decir, que el resultado de la operación anterior sea compatible con el insumo de la función siguiente.
 
 Para escribir este operador de forma rápida utilizamos el shortcut: \textbf{CTRL+SHIFT+M}.
+
+\hypertarget{visualizaciuxf3n-paquete-ggplot2}{%
+\chapter{\texorpdfstring{\textbf{Visualización: Paquete ggplot2}}{Visualización: Paquete ggplot2}}\label{visualizaciuxf3n-paquete-ggplot2}}
+
+En el proceso de análisis de datos la visualización de datos está presente en varias de sus etapas entre las principales están: la exploración de los datos y la presentación de los resultados, los gráficos permiten, de forma intuitiva, encontrar y entender patrones, grupos o valores atípicos que puedan existir en los datos, una vez terminado el proceso de exploración o predicción los gráficos nos permiten comunicar los resultados a nuestra audiencia sin importar si esta tiene o no conocimientos en técnicos.
+
+\hypertarget{gramuxe1tica-de-los-gruxe1ficos}{%
+\section{\texorpdfstring{\textbf{Gramática de los gráficos}}{Gramática de los gráficos}}\label{gramuxe1tica-de-los-gruxe1ficos}}
+
+Un gráfico realizado con ggplot2 presenta, al menos, tres elementos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Datos (Data) que queremos representar (que serán un data frame).
+\item
+  Características estéticas (aesthetic mappings) que describen cómo queremos que los datos se vean en el gráfico. Como se ve más adelante, se introducen con la función aes() y se refieren a:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  posición (en los ejes)
+\item
+  color exterior (color) y de relleno (fill)
+\item
+  forma de puntos (shape)
+\item
+  tipo de línea (linetype)
+\item
+  tamaño (size)
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Objetos geométricos (Geom) representan lo que vemos en un gráficos (puntos, líneas, etc.). Todo gráfico tiene, como mínimo, una geometría. La geometría determina el tipo de gráfico:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  geom\_point (para puntos)
+\item
+  geom\_lines (para lineas)
+\item
+  geom\_histogram (para histograma)
+\item
+  geom\_boxplot (para boxplot)
+\item
+  geom\_bar (para barras)
+\item
+  geom\_smooth (líneas suavizadas)
+\item
+  geom\_polygons (para polígonos en un mapa)
+\end{itemize}
+
+Por tanto, para construir un gráfico con ggplot2 comenzamos con la siguiente estructura de código:
+
+** ggplot(datos, aes()) + geom\_tipo() **
+
+A partir de esta estructura básica puede mejorarse la presentación de los gráficos introduciendo, por ejemplo, características estéticas en los objetos geométricos, agregando títulos a los gráficos, etc.
+
+Otros elementos que conviene tener presente en un gráfico de ggplot2 son:
+
+\begin{itemize}
+\item
+  Stat (Stat), transformaciones estadísticas para, generalmente, resumir datos (por ejemplo: contar frecuencias, número de intervalos en los histogramas, etc.).
+\item
+  Escalas (Scale). Las escalas, por ejemplo, convierten datos en características estéticas (colores, etc.), crean leyendas\ldots{} . - Coordenadas (coord): sistema de coordenadas cartesianas, polares, proyecciones, etc.
+\item
+  Faceting (Faceting), permite representar gráficos separados para subconjuntos de los datos originales.
+\end{itemize}
+
+Para a realizar algunos gráficos con ggplot primero cargamos la librería ggplot2. Si no está instalado el paquete lo instalamos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("ggplot2")}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+En los ejemplos que siguen tratamos de ir introduciendo poco a poco distintos elementos y argumentos para mejorar la apariencia de los gráficos.
+
+\hypertarget{histogramas}{%
+\section{\texorpdfstring{\textbf{Histogramas}}{Histogramas}}\label{histogramas}}
+
+Vamos a comenzar haciendo un histograma muy sencillo de os instrumentos del portafolio del banco. Para esto, recordemos que la instrucción comienza con la función ggplot(), en la que incluimos los datos y la estética con la que queremos que se presenten en el gráfico. Seguidamente le añadimos (+) la geometría (tipo histograma) con la función geom\_histogram().
+
+Muy importante: con ggplot2 añadimos capas (layers) con el símbolo +.
+
+El histograma es el siguiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-138-1} \end{center}
+
+Dos cosas a considerar del histograma anterior:
+
+\begin{itemize}
+\tightlist
+\item
+  Por defecto, el número de intervalos es de 30. Es posible establecer el número de intervalos (bins), la amplitud del intervalo (binwidth) o fijar los puntos de corte de los intervalos (breaks).
+\item
+  El eje Y corresponde al número de observaciones (frecuencias absolutas). Si estamos interesados en representar un histogramas de forma que el área del mismo sume 1, entonces tenemos que cambiar la estética de la siguiente forma:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ ..density..))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-139-1} \end{center}
+
+A partir de esta estructura básica, podemos ir añadiendo elementos para mejorar la presentación.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histograma con 20 intervalos}
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{20}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-140-1} \end{center}
+
+Ahora vamos a insertar un título al gráfico y también rotularemos los ejes. Para modificar las etiquetas de los ejes se utilizan las funciones xlab() y ylab(). Si, por ejemplo, quisiéramos omitir la etiqueta del eje Y agregamos: ylab(NULL).
+
+También se pueden modificar los límites de los ejes, para esto se utilizan las funciones xlim() y ylim().
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{20}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Distribución del ingreso neto "}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Salario"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Número de clientes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-141-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Una alternativa al anterior sería:}
+
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{20}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribución del ingreso neto"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Ingreso"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Número de clientes"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{250}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-142-1} \end{center}
+
+Para tratar de observar las diferencias en la distribución del salario según distintos grupo, por ejemplo, el género podemos:
+
+Visualizar cada subconjunto de datos (ingreso neto para asalariados e independientes ) en distintos paneles. Para ello, utilizamos el elemento facet.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{20}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(tipo\_empleado }\SpecialCharTok{\textasciitilde{}}\NormalTok{ .)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-143-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{20}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{tipo\_empleado)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-144-1} \end{center}
+
+Hacemos el histograma pero usamos el tipo\_empleado de cliente para colorear las partes que de cada intervalo corresponden a asalariados, independientes y a pensionados.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc, }\AttributeTok{fill =}\NormalTok{ tipo\_empleado)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{20}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{250}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-145-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{10}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ tipo\_empleado), }\AttributeTok{position =} \StringTok{"fill"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Ingreso neto"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Clientes"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"tipo\_empleado"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# títulos de ejes y leyenda}
+  \FunctionTok{scale\_fill\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{))     }\CommentTok{\# títulos claves leyenda}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-146-1} \end{center}
+
+\hypertarget{gruxe1ficos-de-dispersiuxf3n}{%
+\section{\texorpdfstring{\textbf{Gráficos de dispersión}}{Gráficos de dispersión}}\label{gruxe1ficos-de-dispersiuxf3n}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Opción 1}
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(monto\_ingreso\_bruto\_crc, monto\_ingreso\_neto\_crc, }\AttributeTok{color =}\NormalTok{ tipo\_empleado)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Gráfico de dispersión"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"ScatterPlot"}\NormalTok{,}
+    \AttributeTok{caption =} \StringTok{"Fuente: DGR"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Ingreso bruto"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Ingreso neto"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_discrete}\NormalTok{(}\AttributeTok{name =} \StringTok{"tipo\_empleado"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-147-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(monto\_ingreso\_bruto\_crc, monto\_ingreso\_neto\_crc, }\AttributeTok{color =}\NormalTok{ tipo\_empleado)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Gráfico de dispersión"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"ScatterPlot"}\NormalTok{,}
+    \AttributeTok{caption =} \StringTok{"Fuente: DGR"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Ingreso bruto"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Ingreso neto"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_discrete}\NormalTok{(}\AttributeTok{name =} \StringTok{"tipo\_empleado"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-148-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(monto\_ingreso\_bruto\_crc, monto\_ingreso\_neto\_crc, }\AttributeTok{color =}\NormalTok{ tipo\_empleado)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Gráfico de dispersión"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"ScatterPlot"}\NormalTok{,}
+    \AttributeTok{caption =} \StringTok{"Fuente: DGR"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Ingreso bruto"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Ingreso neto"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_discrete}\NormalTok{(}\AttributeTok{name =} \StringTok{"tipo\_empleado"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-149-1} \end{center}
+
+\hypertarget{gruxe1ficos-de-cajas}{%
+\section{\texorpdfstring{\textbf{Gráficos de cajas}}{Gráficos de cajas}}\label{gruxe1ficos-de-cajas}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{y =}\NormalTok{ monto\_ingreso\_neto\_crc)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-150-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Diagrama de caja con color de relleno}
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{y =}\NormalTok{ monto\_ingreso\_neto\_crc, }\AttributeTok{fill =}\NormalTok{ tipo\_empleado))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tipo de cliente"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Ingreso"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"tipo\_empleado"}\NormalTok{) }\SpecialCharTok{+}   \CommentTok{\# titulo ejes y leyenda}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}   \CommentTok{\# etiquetas del eje x}
+  \FunctionTok{scale\_fill\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{))  }\CommentTok{\# etiquetas claves leyenda}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-151-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Diagrama de caja sin leyenda por considerar redundante la información}
+
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{y =}\NormalTok{ monto\_ingreso\_neto\_crc, }\AttributeTok{fill =}\NormalTok{ tipo\_empleado))   }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{outlier.colour =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}             \CommentTok{\# color de los outliers}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Ingreso"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-152-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# eliminamos la leyenda}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{y =}\NormalTok{ monto\_ingreso\_neto\_crc, }\AttributeTok{fill =}\NormalTok{ tipo\_empleado))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{outlier.colour =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Ingreso"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()                       }\CommentTok{\# cambio dirección de las cajas}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-153-1} \end{center}
+
+Puede resultar interesante localizar la media de cada grupo en los diagramas de caja. Para ello, hacemos uso del elemento stat (transformación estadística). Se puede añadir stat, básicamente, de dos formas:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Añadir directamente una función stat\_() y de esa forma anular su valor por defecto en la geometría.
+\item
+  Añadir una función geom\_() e introducir el elemento stat para anular el valor por defecto.
+\end{enumerate}
+
+Veamos las dos formas comentadas de añadir.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Añadimos la media utilizando la función geom\_() y modificando el elemento stat}
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{y =}\NormalTok{ monto\_ingreso\_neto\_crc, }\AttributeTok{fill =}\NormalTok{ tipo\_empleado)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{outlier.colour =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Género"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Salario"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{stat =} \StringTok{"summary"}\NormalTok{, }\AttributeTok{fun.y =}\NormalTok{ mean, }\AttributeTok{shape =} \DecValTok{16}\NormalTok{, }\AttributeTok{size =} \DecValTok{2}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-154-1} \end{center}
+
+\hypertarget{gruxe1ficos-de-barras}{%
+\section{\texorpdfstring{\textbf{Gráficos de barras}}{Gráficos de barras}}\label{gruxe1ficos-de-barras}}
+
+Los gráficos de barras, se utilizan comúnmente para representar variables categóricas (atributos u ordinales) y variables cuantitativas discretas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(tipo\_empleado)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-155-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(tipo\_empleado)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Gráfico de barras"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Cantidad"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-156-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(tipo\_empleado, }\AttributeTok{fill =}\NormalTok{ sector\_empleo)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Gráfico de barras"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Cantidad"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-157-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{fill =}\NormalTok{ sector\_empleo))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Cantidad"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_discrete}\NormalTok{(}\StringTok{"Tipo empleado"}\NormalTok{,}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Público"}\NormalTok{, }\StringTok{"Privado"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-158-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{fill =}\NormalTok{ sector\_empleo))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Cantidad"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_discrete}\NormalTok{(}\StringTok{"Tipo empleado"}\NormalTok{,}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Público"}\NormalTok{, }\StringTok{"Privado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{stat =} \StringTok{"count"}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ ..count..),}
+    \AttributeTok{position =} \StringTok{"stack"}\NormalTok{,}
+    \AttributeTok{vjust =} \DecValTok{1}\NormalTok{,}
+    \AttributeTok{size =} \DecValTok{2}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-159-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{fill =}\NormalTok{ sector\_empleo))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Cantidad"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_discrete}\NormalTok{(}\StringTok{"Tipo empleado"}\NormalTok{,}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Público"}\NormalTok{, }\StringTok{"Privado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{stat =} \StringTok{"count"}\NormalTok{,}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{paste}\NormalTok{(}\FunctionTok{round}\NormalTok{((..count..) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(..count..) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{), }\StringTok{"\%"}\NormalTok{)),}
+    \AttributeTok{position =} \StringTok{"stack"}\NormalTok{,}
+    \AttributeTok{vjust =} \DecValTok{1}\NormalTok{,}
+    \AttributeTok{size =} \DecValTok{2}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-160-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{fill =}\NormalTok{ sector\_empleo))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"fill"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Cantidad"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_discrete}\NormalTok{(}\StringTok{"Tipo empleado"}\NormalTok{,}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Público"}\NormalTok{, }\StringTok{"Privado"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-161-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datos.ingresos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tipo\_empleado, }\AttributeTok{fill =}\NormalTok{ sector\_empleo))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Tipo cliente"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Cantidad"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asalariado"}\NormalTok{, }\StringTok{"Independiente"}\NormalTok{, }\StringTok{"Pensionado"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_discrete}\NormalTok{(}\StringTok{"Tipo empleado"}\NormalTok{,}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Público"}\NormalTok{, }\StringTok{"Privado"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{Notas-Curso-Basico-R_files/figure-latex/notas-curso-162-1} \end{center}
 
 \end{document}

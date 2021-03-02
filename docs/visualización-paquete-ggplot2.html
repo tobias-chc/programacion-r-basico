@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 13 Visualización: Paquete ggplot2 | Notas Curso Básico R</title>
+  <meta name="description" content="Capítulo 13 Visualización: Paquete ggplot2 | Notas Curso Básico R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 13 Visualización: Paquete ggplot2 | Notas Curso Básico R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 13 Visualización: Paquete ggplot2 | Notas Curso Básico R" />
+  
+  
+  
+
+<meta name="author" content="Tobías Chavarría" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-frames-con-el-paquete-dplyr-.html"/>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Curso Básico en R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Primeros pasos con R y RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#instalación"><i class="fa fa-check"></i><b>2.1</b> <strong>Instalación</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#r"><i class="fa fa-check"></i><b>2.1.1</b> <strong>R</strong></a></li>
+<li class="chapter" data-level="2.1.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> <strong>RStudio</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno-de-trabajo-de-rstudio."><i class="fa fa-check"></i><b>2.2</b> <strong>Entorno de trabajo de RStudio.</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#consola-de-r"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Consola de R</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#ayuda-en-r"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Ayuda en R</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#nombres-en-r"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Nombres en R</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts-de-r"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Scripts de R</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#entorno"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Entorno</strong></a></li>
+<li class="chapter" data-level="2.2.6" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.2.6</b> <strong>Directorio de trabajo</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#paquetes"><i class="fa fa-check"></i><b>2.3</b> <strong>Paquetes</strong></a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.4</b> <strong>Scripts</strong></a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos-con-r-y-rstudio.html"><a href="primeros-pasos-con-r-y-rstudio.html#shortcuts"><i class="fa fa-check"></i><b>2.5</b> <strong>Shortcuts</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objetos-en-r-.html"><a href="objetos-en-r-.html"><i class="fa fa-check"></i><b>3</b> <strong>Objetos en R.</strong></a></li>
+<li class="chapter" data-level="4" data-path="operadores.html"><a href="operadores.html"><i class="fa fa-check"></i><b>4</b> <strong>Operadores</strong></a></li>
+<li class="chapter" data-level="5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html"><i class="fa fa-check"></i><b>5</b> <strong>Estructuras de datos.</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#vectores"><i class="fa fa-check"></i><b>5.1</b> <strong>Vectores</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#coerción"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Coerción</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#matrices"><i class="fa fa-check"></i><b>5.2</b> <strong>Matrices</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#data-frames"><i class="fa fa-check"></i><b>5.3</b> <strong>Data Frames</strong></a></li>
+<li class="chapter" data-level="5.4" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#listas"><i class="fa fa-check"></i><b>5.4</b> <strong>Listas</strong></a></li>
+<li class="chapter" data-level="5.5" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#factores"><i class="fa fa-check"></i><b>5.5</b> <strong>Factores</strong></a></li>
+<li class="chapter" data-level="5.6" data-path="estructuras-de-datos-.html"><a href="estructuras-de-datos-.html#valores-ausentes"><i class="fa fa-check"></i><b>5.6</b> <strong>Valores ausentes</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>6</b> <strong>Subsetting</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="subsetting.html"><a href="subsetting.html#subsetting-vectores"><i class="fa fa-check"></i><b>6.1</b> <strong>Subsetting vectores</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="subsetting.html"><a href="subsetting.html#subsetting-matrices"><i class="fa fa-check"></i><b>6.2</b> <strong>Subsetting matrices</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="subsetting.html"><a href="subsetting.html#subsetting-data-frames"><i class="fa fa-check"></i><b>6.3</b> <strong>Subsetting data frames</strong></a></li>
+<li class="chapter" data-level="6.4" data-path="subsetting.html"><a href="subsetting.html#subsetting-listas"><i class="fa fa-check"></i><b>6.4</b> <strong>Subsetting listas</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="operaciones-vectorizadas-.html"><a href="operaciones-vectorizadas-.html"><i class="fa fa-check"></i><b>7</b> <strong>Operaciones vectorizadas.</strong></a></li>
+<li class="chapter" data-level="8" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html"><i class="fa fa-check"></i><b>8</b> <strong>Estructuras de control en R</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#if-else"><i class="fa fa-check"></i><b>8.1</b> <strong>if-else</strong>:</a></li>
+<li class="chapter" data-level="8.2" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#for-loop"><i class="fa fa-check"></i><b>8.2</b> <strong>for loop</strong></a></li>
+<li class="chapter" data-level="8.3" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#while-loop"><i class="fa fa-check"></i><b>8.3</b> <strong>while loop</strong></a></li>
+<li class="chapter" data-level="8.4" data-path="estructuras-de-control-en-r.html"><a href="estructuras-de-control-en-r.html#repeat-next-break"><i class="fa fa-check"></i><b>8.4</b> <strong>repeat, next, break</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>9</b> <strong>Funciones</strong></a></li>
+<li class="chapter" data-level="10" data-path="importación-de-datos.html"><a href="importación-de-datos.html"><i class="fa fa-check"></i><b>10</b> <strong>Importación de datos</strong></a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.table"><i class="fa fa-check"></i><b>10.0.1</b> <strong>read.table</strong></a></li>
+<li class="chapter" data-level="10.0.2" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read.csv"><i class="fa fa-check"></i><b>10.0.2</b> <strong>read.csv</strong></a></li>
+<li class="chapter" data-level="10.0.3" data-path="importación-de-datos.html"><a href="importación-de-datos.html#read_excel"><i class="fa fa-check"></i><b>10.0.3</b> <strong>read_excel</strong></a></li>
+<li class="chapter" data-level="10.0.4" data-path="importación-de-datos.html"><a href="importación-de-datos.html#calculando-requisitos-de-memoria."><i class="fa fa-check"></i><b>10.0.4</b> <strong>Calculando requisitos de memoria</strong>.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html"><i class="fa fa-check"></i><b>11</b> <strong>Análisis exploratorio</strong></a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#información-general."><i class="fa fa-check"></i><b>11.0.1</b> <strong>Información general</strong>.</a></li>
+<li class="chapter" data-level="11.0.2" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#exploración-del-contenido."><i class="fa fa-check"></i><b>11.0.2</b> <strong>Exploración del contenido</strong>.</a></li>
+<li class="chapter" data-level="11.0.3" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#funciones-básicas."><i class="fa fa-check"></i><b>11.0.3</b> <strong>Funciones básicas</strong>.</a></li>
+<li class="chapter" data-level="11.0.4" data-path="análisis-exploratorio.html"><a href="análisis-exploratorio.html#aplicación-a-estructuras-complejas."><i class="fa fa-check"></i><b>11.0.4</b> <strong>Aplicación a estructuras complejas</strong>.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html"><i class="fa fa-check"></i><b>12</b> <strong>Data Frames con el paquete dplyr.</strong></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#paquete-dplyr"><i class="fa fa-check"></i><b>12.1</b> <strong>Paquete dplyr</strong>:</a></li>
+<li class="chapter" data-level="12.2" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#select"><i class="fa fa-check"></i><b>12.2</b> <strong>select()</strong>:</a></li>
+<li class="chapter" data-level="12.3" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#filter"><i class="fa fa-check"></i><b>12.3</b> <strong>filter()</strong>:</a></li>
+<li class="chapter" data-level="12.4" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#arrange"><i class="fa fa-check"></i><b>12.4</b> <strong>arrange()</strong>:</a></li>
+<li class="chapter" data-level="12.5" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#rename"><i class="fa fa-check"></i><b>12.5</b> <strong>rename()</strong>:</a></li>
+<li class="chapter" data-level="12.6" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#mutate"><i class="fa fa-check"></i><b>12.6</b> <strong>mutate()</strong>:</a></li>
+<li class="chapter" data-level="12.7" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#group_by"><i class="fa fa-check"></i><b>12.7</b> <strong>group_by()</strong>:</a></li>
+<li class="chapter" data-level="12.8" data-path="data-frames-con-el-paquete-dplyr-.html"><a href="data-frames-con-el-paquete-dplyr-.html#operador-pipe"><i class="fa fa-check"></i><b>12.8</b> <strong>Operador pipe %&gt;%</strong>:</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="visualización-paquete-ggplot2.html"><a href="visualización-paquete-ggplot2.html"><i class="fa fa-check"></i><b>13</b> <strong>Visualización: Paquete ggplot2</strong></a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="visualización-paquete-ggplot2.html"><a href="visualización-paquete-ggplot2.html#gramática-de-los-gráficos"><i class="fa fa-check"></i><b>13.1</b> <strong>Gramática de los gráficos</strong></a></li>
+<li class="chapter" data-level="13.2" data-path="visualización-paquete-ggplot2.html"><a href="visualización-paquete-ggplot2.html#histogramas"><i class="fa fa-check"></i><b>13.2</b> <strong>Histogramas</strong></a></li>
+<li class="chapter" data-level="13.3" data-path="visualización-paquete-ggplot2.html"><a href="visualización-paquete-ggplot2.html#gráficos-de-dispersión"><i class="fa fa-check"></i><b>13.3</b> <strong>Gráficos de dispersión</strong></a></li>
+<li class="chapter" data-level="13.4" data-path="visualización-paquete-ggplot2.html"><a href="visualización-paquete-ggplot2.html#gráficos-de-cajas"><i class="fa fa-check"></i><b>13.4</b> <strong>Gráficos de cajas</strong></a></li>
+<li class="chapter" data-level="13.5" data-path="visualización-paquete-ggplot2.html"><a href="visualización-paquete-ggplot2.html#gráficos-de-barras"><i class="fa fa-check"></i><b>13.5</b> <strong>Gráficos de barras</strong></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas Curso Básico R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualización-paquete-ggplot2" class="section level1" number="13">
+<h1><span class="header-section-number">Capítulo 13</span> <strong>Visualización: Paquete ggplot2</strong></h1>
+<p>En el proceso de análisis de datos la visualización de datos está presente en varias de sus etapas entre las principales están: la exploración de los datos y la presentación de los resultados, los gráficos permiten, de forma intuitiva, encontrar y entender patrones, grupos o valores atípicos que puedan existir en los datos, una vez terminado el proceso de exploración o predicción los gráficos nos permiten comunicar los resultados a nuestra audiencia sin importar si esta tiene o no conocimientos en técnicos.</p>
+<div id="gramática-de-los-gráficos" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> <strong>Gramática de los gráficos</strong></h2>
+<p>Un gráfico realizado con ggplot2 presenta, al menos, tres elementos:</p>
+<ol style="list-style-type: decimal">
+<li><p>Datos (Data) que queremos representar (que serán un data frame).</p></li>
+<li><p>Características estéticas (aesthetic mappings) que describen cómo queremos que los datos se vean en el gráfico. Como se ve más adelante, se introducen con la función aes() y se refieren a:</p></li>
+</ol>
+<ul>
+<li>posición (en los ejes)</li>
+<li>color exterior (color) y de relleno (fill)</li>
+<li>forma de puntos (shape)</li>
+<li>tipo de línea (linetype)</li>
+<li>tamaño (size)</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Objetos geométricos (Geom) representan lo que vemos en un gráficos (puntos, líneas, etc.). Todo gráfico tiene, como mínimo, una geometría. La geometría determina el tipo de gráfico:</li>
+</ol>
+<ul>
+<li>geom_point (para puntos)</li>
+<li>geom_lines (para lineas)</li>
+<li>geom_histogram (para histograma)</li>
+<li>geom_boxplot (para boxplot)</li>
+<li>geom_bar (para barras)</li>
+<li>geom_smooth (líneas suavizadas)</li>
+<li>geom_polygons (para polígonos en un mapa)</li>
+</ul>
+<p>Por tanto, para construir un gráfico con ggplot2 comenzamos con la siguiente estructura de código:</p>
+<p>** ggplot(datos, aes()) + geom_tipo() **</p>
+<p>A partir de esta estructura básica puede mejorarse la presentación de los gráficos introduciendo, por ejemplo, características estéticas en los objetos geométricos, agregando títulos a los gráficos, etc.</p>
+<p>Otros elementos que conviene tener presente en un gráfico de ggplot2 son:</p>
+<ul>
+<li><p>Stat (Stat), transformaciones estadísticas para, generalmente, resumir datos (por ejemplo: contar frecuencias, número de intervalos en los histogramas, etc.).</p></li>
+<li><p>Escalas (Scale). Las escalas, por ejemplo, convierten datos en características estéticas (colores, etc.), crean leyendas… . - Coordenadas (coord): sistema de coordenadas cartesianas, polares, proyecciones, etc.</p></li>
+<li><p>Faceting (Faceting), permite representar gráficos separados para subconjuntos de los datos originales.</p></li>
+</ul>
+<p>Para a realizar algunos gráficos con ggplot primero cargamos la librería ggplot2. Si no está instalado el paquete lo instalamos.</p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="visualización-paquete-ggplot2.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;ggplot2&quot;)</span></span>
+<span id="cb336-2"><a href="visualización-paquete-ggplot2.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>En los ejemplos que siguen tratamos de ir introduciendo poco a poco distintos elementos y argumentos para mejorar la apariencia de los gráficos.</p>
+</div>
+<div id="histogramas" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> <strong>Histogramas</strong></h2>
+<p>Vamos a comenzar haciendo un histograma muy sencillo de os instrumentos del portafolio del banco. Para esto, recordemos que la instrucción comienza con la función ggplot(), en la que incluimos los datos y la estética con la que queremos que se presenten en el gráfico. Seguidamente le añadimos (+) la geometría (tipo histograma) con la función geom_histogram().</p>
+<p>Muy importante: con ggplot2 añadimos capas (layers) con el símbolo +.</p>
+<p>El histograma es el siguiente:</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="visualización-paquete-ggplot2.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb337-2"><a href="visualización-paquete-ggplot2.html#cb337-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-138-1.svg" width="100%" style="display: block; margin: auto;" />
+Dos cosas a considerar del histograma anterior:</p>
+<ul>
+<li>Por defecto, el número de intervalos es de 30. Es posible establecer el número de intervalos (bins), la amplitud del intervalo (binwidth) o fijar los puntos de corte de los intervalos (breaks).</li>
+<li>El eje Y corresponde al número de observaciones (frecuencias absolutas). Si estamos interesados en representar un histogramas de forma que el área del mismo sume 1, entonces tenemos que cambiar la estética de la siguiente forma:</li>
+</ul>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="visualización-paquete-ggplot2.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb338-2"><a href="visualización-paquete-ggplot2.html#cb338-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-139-1.svg" width="100%" style="display: block; margin: auto;" />
+A partir de esta estructura básica, podemos ir añadiendo elementos para mejorar la presentación.</p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="visualización-paquete-ggplot2.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma con 20 intervalos</span></span>
+<span id="cb339-2"><a href="visualización-paquete-ggplot2.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb339-3"><a href="visualización-paquete-ggplot2.html#cb339-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-140-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<p>Ahora vamos a insertar un título al gráfico y también rotularemos los ejes. Para modificar las etiquetas de los ejes se utilizan las funciones xlab() y ylab(). Si, por ejemplo, quisiéramos omitir la etiqueta del eje Y agregamos: ylab(NULL).</p>
+<p>También se pueden modificar los límites de los ejes, para esto se utilizan las funciones xlim() y ylim().</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="visualización-paquete-ggplot2.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb340-2"><a href="visualización-paquete-ggplot2.html#cb340-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb340-3"><a href="visualización-paquete-ggplot2.html#cb340-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribución del ingreso neto &quot;</span>) <span class="sc">+</span></span>
+<span id="cb340-4"><a href="visualización-paquete-ggplot2.html#cb340-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Salario&quot;</span>) <span class="sc">+</span></span>
+<span id="cb340-5"><a href="visualización-paquete-ggplot2.html#cb340-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de clientes&quot;</span>)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-141-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="visualización-paquete-ggplot2.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Una alternativa al anterior sería:</span></span>
+<span id="cb341-2"><a href="visualización-paquete-ggplot2.html#cb341-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-3"><a href="visualización-paquete-ggplot2.html#cb341-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb341-4"><a href="visualización-paquete-ggplot2.html#cb341-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb341-5"><a href="visualización-paquete-ggplot2.html#cb341-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución del ingreso neto&quot;</span>,</span>
+<span id="cb341-6"><a href="visualización-paquete-ggplot2.html#cb341-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Ingreso&quot;</span>,</span>
+<span id="cb341-7"><a href="visualización-paquete-ggplot2.html#cb341-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Número de clientes&quot;</span>) <span class="sc">+</span></span>
+<span id="cb341-8"><a href="visualización-paquete-ggplot2.html#cb341-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">250</span>))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-142-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<p>Para tratar de observar las diferencias en la distribución del salario según distintos grupo, por ejemplo, el género podemos:</p>
+<p>Visualizar cada subconjunto de datos (ingreso neto para asalariados e independientes ) en distintos paneles. Para ello, utilizamos el elemento facet.</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="visualización-paquete-ggplot2.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb342-2"><a href="visualización-paquete-ggplot2.html#cb342-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb342-3"><a href="visualización-paquete-ggplot2.html#cb342-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(tipo_empleado <span class="sc">~</span> .)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-143-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="visualización-paquete-ggplot2.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb343-2"><a href="visualización-paquete-ggplot2.html#cb343-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb343-3"><a href="visualización-paquete-ggplot2.html#cb343-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>tipo_empleado)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-144-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<p>Hacemos el histograma pero usamos el tipo_empleado de cliente para colorear las partes que de cada intervalo corresponden a asalariados, independientes y a pensionados.</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="visualización-paquete-ggplot2.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc, <span class="at">fill =</span> tipo_empleado)) <span class="sc">+</span></span>
+<span id="cb344-2"><a href="visualización-paquete-ggplot2.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb344-3"><a href="visualización-paquete-ggplot2.html#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">250</span>))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-145-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="visualización-paquete-ggplot2.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb345-2"><a href="visualización-paquete-ggplot2.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>, <span class="fu">aes</span>(<span class="at">fill =</span> tipo_empleado), <span class="at">position =</span> <span class="st">&quot;fill&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb345-3"><a href="visualización-paquete-ggplot2.html#cb345-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Ingreso neto&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Clientes&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;tipo_empleado&quot;</span>) <span class="sc">+</span>  <span class="co"># títulos de ejes y leyenda</span></span>
+<span id="cb345-4"><a href="visualización-paquete-ggplot2.html#cb345-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>))     <span class="co"># títulos claves leyenda</span></span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-146-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="gráficos-de-dispersión" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> <strong>Gráficos de dispersión</strong></h2>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="visualización-paquete-ggplot2.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Opción 1</span></span>
+<span id="cb346-2"><a href="visualización-paquete-ggplot2.html#cb346-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(monto_ingreso_bruto_crc, monto_ingreso_neto_crc, <span class="at">color =</span> tipo_empleado)) <span class="sc">+</span></span>
+<span id="cb346-3"><a href="visualización-paquete-ggplot2.html#cb346-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb346-4"><a href="visualización-paquete-ggplot2.html#cb346-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de dispersión&quot;</span>,</span>
+<span id="cb346-5"><a href="visualización-paquete-ggplot2.html#cb346-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;ScatterPlot&quot;</span>,</span>
+<span id="cb346-6"><a href="visualización-paquete-ggplot2.html#cb346-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Fuente: DGR&quot;</span>,</span>
+<span id="cb346-7"><a href="visualización-paquete-ggplot2.html#cb346-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Ingreso bruto&quot;</span>,</span>
+<span id="cb346-8"><a href="visualización-paquete-ggplot2.html#cb346-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Ingreso neto&quot;</span>) <span class="sc">+</span></span>
+<span id="cb346-9"><a href="visualización-paquete-ggplot2.html#cb346-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;tipo_empleado&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-147-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="visualización-paquete-ggplot2.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(monto_ingreso_bruto_crc, monto_ingreso_neto_crc, <span class="at">color =</span> tipo_empleado)) <span class="sc">+</span></span>
+<span id="cb347-2"><a href="visualización-paquete-ggplot2.html#cb347-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb347-3"><a href="visualización-paquete-ggplot2.html#cb347-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb347-4"><a href="visualización-paquete-ggplot2.html#cb347-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de dispersión&quot;</span>,</span>
+<span id="cb347-5"><a href="visualización-paquete-ggplot2.html#cb347-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;ScatterPlot&quot;</span>,</span>
+<span id="cb347-6"><a href="visualización-paquete-ggplot2.html#cb347-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Fuente: DGR&quot;</span>,</span>
+<span id="cb347-7"><a href="visualización-paquete-ggplot2.html#cb347-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Ingreso bruto&quot;</span>,</span>
+<span id="cb347-8"><a href="visualización-paquete-ggplot2.html#cb347-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Ingreso neto&quot;</span>) <span class="sc">+</span></span>
+<span id="cb347-9"><a href="visualización-paquete-ggplot2.html#cb347-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;tipo_empleado&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-148-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="visualización-paquete-ggplot2.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(monto_ingreso_bruto_crc, monto_ingreso_neto_crc, <span class="at">color =</span> tipo_empleado)) <span class="sc">+</span></span>
+<span id="cb348-2"><a href="visualización-paquete-ggplot2.html#cb348-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb348-3"><a href="visualización-paquete-ggplot2.html#cb348-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb348-4"><a href="visualización-paquete-ggplot2.html#cb348-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de dispersión&quot;</span>,</span>
+<span id="cb348-5"><a href="visualización-paquete-ggplot2.html#cb348-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;ScatterPlot&quot;</span>,</span>
+<span id="cb348-6"><a href="visualización-paquete-ggplot2.html#cb348-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Fuente: DGR&quot;</span>,</span>
+<span id="cb348-7"><a href="visualización-paquete-ggplot2.html#cb348-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Ingreso bruto&quot;</span>,</span>
+<span id="cb348-8"><a href="visualización-paquete-ggplot2.html#cb348-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Ingreso neto&quot;</span>) <span class="sc">+</span></span>
+<span id="cb348-9"><a href="visualización-paquete-ggplot2.html#cb348-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;tipo_empleado&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-149-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="gráficos-de-cajas" class="section level2" number="13.4">
+<h2><span class="header-section-number">13.4</span> <strong>Gráficos de cajas</strong></h2>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="visualización-paquete-ggplot2.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">y =</span> monto_ingreso_neto_crc)) <span class="sc">+</span></span>
+<span id="cb349-2"><a href="visualización-paquete-ggplot2.html#cb349-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-150-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="visualización-paquete-ggplot2.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagrama de caja con color de relleno</span></span>
+<span id="cb350-2"><a href="visualización-paquete-ggplot2.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">y =</span> monto_ingreso_neto_crc, <span class="at">fill =</span> tipo_empleado))  <span class="sc">+</span></span>
+<span id="cb350-3"><a href="visualización-paquete-ggplot2.html#cb350-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb350-4"><a href="visualización-paquete-ggplot2.html#cb350-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo de cliente&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Ingreso&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;tipo_empleado&quot;</span>) <span class="sc">+</span>   <span class="co"># titulo ejes y leyenda</span></span>
+<span id="cb350-5"><a href="visualización-paquete-ggplot2.html#cb350-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span>   <span class="co"># etiquetas del eje x</span></span>
+<span id="cb350-6"><a href="visualización-paquete-ggplot2.html#cb350-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>))  <span class="co"># etiquetas claves leyenda</span></span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-151-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="visualización-paquete-ggplot2.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagrama de caja sin leyenda por considerar redundante la información</span></span>
+<span id="cb351-2"><a href="visualización-paquete-ggplot2.html#cb351-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-3"><a href="visualización-paquete-ggplot2.html#cb351-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">y =</span> monto_ingreso_neto_crc, <span class="at">fill =</span> tipo_empleado))   <span class="sc">+</span></span>
+<span id="cb351-4"><a href="visualización-paquete-ggplot2.html#cb351-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.colour =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span>             <span class="co"># color de los outliers</span></span>
+<span id="cb351-5"><a href="visualización-paquete-ggplot2.html#cb351-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Ingreso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb351-6"><a href="visualización-paquete-ggplot2.html#cb351-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb351-7"><a href="visualización-paquete-ggplot2.html#cb351-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-152-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="visualización-paquete-ggplot2.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="co"># eliminamos la leyenda</span></span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="visualización-paquete-ggplot2.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">y =</span> monto_ingreso_neto_crc, <span class="at">fill =</span> tipo_empleado))  <span class="sc">+</span></span>
+<span id="cb353-2"><a href="visualización-paquete-ggplot2.html#cb353-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.colour =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb353-3"><a href="visualización-paquete-ggplot2.html#cb353-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Ingreso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb353-4"><a href="visualización-paquete-ggplot2.html#cb353-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb353-5"><a href="visualización-paquete-ggplot2.html#cb353-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb353-6"><a href="visualización-paquete-ggplot2.html#cb353-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()                       <span class="co"># cambio dirección de las cajas</span></span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-153-1.svg" width="100%" style="display: block; margin: auto;" />
+Puede resultar interesante localizar la media de cada grupo en los diagramas de caja. Para ello, hacemos uso del elemento stat (transformación estadística). Se puede añadir stat, básicamente, de dos formas:</p>
+<ol style="list-style-type: decimal">
+<li>Añadir directamente una función stat_() y de esa forma anular su valor por defecto en la geometría.</li>
+<li>Añadir una función geom_() e introducir el elemento stat para anular el valor por defecto.</li>
+</ol>
+<p>Veamos las dos formas comentadas de añadir.</p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="visualización-paquete-ggplot2.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Añadimos la media utilizando la función geom_() y modificando el elemento stat</span></span>
+<span id="cb354-2"><a href="visualización-paquete-ggplot2.html#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">y =</span> monto_ingreso_neto_crc, <span class="at">fill =</span> tipo_empleado)) <span class="sc">+</span></span>
+<span id="cb354-3"><a href="visualización-paquete-ggplot2.html#cb354-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">outlier.colour =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb354-4"><a href="visualización-paquete-ggplot2.html#cb354-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Género&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Salario&quot;</span>) <span class="sc">+</span></span>
+<span id="cb354-5"><a href="visualización-paquete-ggplot2.html#cb354-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb354-6"><a href="visualización-paquete-ggplot2.html#cb354-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb354-7"><a href="visualización-paquete-ggplot2.html#cb354-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb354-8"><a href="visualización-paquete-ggplot2.html#cb354-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="at">fun.y =</span> mean, <span class="at">shape =</span> <span class="dv">16</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-154-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="gráficos-de-barras" class="section level2" number="13.5">
+<h2><span class="header-section-number">13.5</span> <strong>Gráficos de barras</strong></h2>
+<p>Los gráficos de barras, se utilizan comúnmente para representar variables categóricas (atributos u ordinales) y variables cuantitativas discretas.</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="visualización-paquete-ggplot2.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(tipo_empleado)) <span class="sc">+</span></span>
+<span id="cb355-2"><a href="visualización-paquete-ggplot2.html#cb355-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-155-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="visualización-paquete-ggplot2.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(tipo_empleado)) <span class="sc">+</span></span>
+<span id="cb356-2"><a href="visualización-paquete-ggplot2.html#cb356-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb356-3"><a href="visualización-paquete-ggplot2.html#cb356-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de barras&quot;</span>,</span>
+<span id="cb356-4"><a href="visualización-paquete-ggplot2.html#cb356-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>,</span>
+<span id="cb356-5"><a href="visualización-paquete-ggplot2.html#cb356-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cantidad&quot;</span>)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-156-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="visualización-paquete-ggplot2.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(tipo_empleado, <span class="at">fill =</span> sector_empleo)) <span class="sc">+</span></span>
+<span id="cb357-2"><a href="visualización-paquete-ggplot2.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb357-3"><a href="visualización-paquete-ggplot2.html#cb357-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico de barras&quot;</span>,</span>
+<span id="cb357-4"><a href="visualización-paquete-ggplot2.html#cb357-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>,</span>
+<span id="cb357-5"><a href="visualización-paquete-ggplot2.html#cb357-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Cantidad&quot;</span>)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-157-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="visualización-paquete-ggplot2.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">fill =</span> sector_empleo))  <span class="sc">+</span></span>
+<span id="cb358-2"><a href="visualización-paquete-ggplot2.html#cb358-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb358-3"><a href="visualización-paquete-ggplot2.html#cb358-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cantidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb358-4"><a href="visualización-paquete-ggplot2.html#cb358-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb358-5"><a href="visualización-paquete-ggplot2.html#cb358-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="st">&quot;Tipo empleado&quot;</span>,</span>
+<span id="cb358-6"><a href="visualización-paquete-ggplot2.html#cb358-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Público&quot;</span>, <span class="st">&quot;Privado&quot;</span>))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-158-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="visualización-paquete-ggplot2.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">fill =</span> sector_empleo))  <span class="sc">+</span></span>
+<span id="cb359-2"><a href="visualización-paquete-ggplot2.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb359-3"><a href="visualización-paquete-ggplot2.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cantidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb359-4"><a href="visualización-paquete-ggplot2.html#cb359-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb359-5"><a href="visualización-paquete-ggplot2.html#cb359-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="st">&quot;Tipo empleado&quot;</span>,</span>
+<span id="cb359-6"><a href="visualización-paquete-ggplot2.html#cb359-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Público&quot;</span>, <span class="st">&quot;Privado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb359-7"><a href="visualización-paquete-ggplot2.html#cb359-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..count..),</span>
+<span id="cb359-8"><a href="visualización-paquete-ggplot2.html#cb359-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;stack&quot;</span>,</span>
+<span id="cb359-9"><a href="visualización-paquete-ggplot2.html#cb359-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span>,</span>
+<span id="cb359-10"><a href="visualización-paquete-ggplot2.html#cb359-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">2</span>,</span>
+<span id="cb359-11"><a href="visualización-paquete-ggplot2.html#cb359-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-159-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="visualización-paquete-ggplot2.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">fill =</span> sector_empleo))  <span class="sc">+</span></span>
+<span id="cb360-2"><a href="visualización-paquete-ggplot2.html#cb360-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb360-3"><a href="visualización-paquete-ggplot2.html#cb360-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cantidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb360-4"><a href="visualización-paquete-ggplot2.html#cb360-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb360-5"><a href="visualización-paquete-ggplot2.html#cb360-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="st">&quot;Tipo empleado&quot;</span>,</span>
+<span id="cb360-6"><a href="visualización-paquete-ggplot2.html#cb360-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Público&quot;</span>, <span class="st">&quot;Privado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb360-7"><a href="visualización-paquete-ggplot2.html#cb360-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>,</span>
+<span id="cb360-8"><a href="visualización-paquete-ggplot2.html#cb360-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">round</span>((..count..) <span class="sc">/</span> <span class="fu">sum</span>(..count..) <span class="sc">*</span> <span class="dv">100</span>), <span class="st">&quot;%&quot;</span>)),</span>
+<span id="cb360-9"><a href="visualización-paquete-ggplot2.html#cb360-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;stack&quot;</span>,</span>
+<span id="cb360-10"><a href="visualización-paquete-ggplot2.html#cb360-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span>,</span>
+<span id="cb360-11"><a href="visualización-paquete-ggplot2.html#cb360-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">2</span>,</span>
+<span id="cb360-12"><a href="visualización-paquete-ggplot2.html#cb360-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-160-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="visualización-paquete-ggplot2.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">fill =</span> sector_empleo))  <span class="sc">+</span></span>
+<span id="cb361-2"><a href="visualización-paquete-ggplot2.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="sc">+</span></span>
+<span id="cb361-3"><a href="visualización-paquete-ggplot2.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cantidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb361-4"><a href="visualización-paquete-ggplot2.html#cb361-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb361-5"><a href="visualización-paquete-ggplot2.html#cb361-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="st">&quot;Tipo empleado&quot;</span>,</span>
+<span id="cb361-6"><a href="visualización-paquete-ggplot2.html#cb361-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Público&quot;</span>, <span class="st">&quot;Privado&quot;</span>))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-161-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="visualización-paquete-ggplot2.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos.ingresos, <span class="fu">aes</span>(<span class="at">x =</span> tipo_empleado, <span class="at">fill =</span> sector_empleo))  <span class="sc">+</span></span>
+<span id="cb362-2"><a href="visualización-paquete-ggplot2.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb362-3"><a href="visualización-paquete-ggplot2.html#cb362-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo cliente&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cantidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb362-4"><a href="visualización-paquete-ggplot2.html#cb362-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Asalariado&quot;</span>, <span class="st">&quot;Independiente&quot;</span>, <span class="st">&quot;Pensionado&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb362-5"><a href="visualización-paquete-ggplot2.html#cb362-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="st">&quot;Tipo empleado&quot;</span>,</span>
+<span id="cb362-6"><a href="visualización-paquete-ggplot2.html#cb362-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Público&quot;</span>, <span class="st">&quot;Privado&quot;</span>))</span></code></pre></div>
+<p><img src="Notas-Curso-Basico-R_files/figure-html/notas-curso-162-1.svg" width="100%" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-frames-con-el-paquete-dplyr-.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/edit/master/11-visualizacion-paquete-ggplot2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/tobias-chc/curso-programacion-basico-r/blob/master/11-visualizacion-paquete-ggplot2.Rmd",
+"text": null
+},
+"download": ["Notas-Curso-Basico-R.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -24,7 +24,7 @@ setwd('/Users/tchavarria/Documents/GitHub/curso-basico-r-bn')
 
 
 ```{r notas-curso, include=FALSE}
-datos.credito <- read.csv("data/DeudaCredito.csv",sep= ";", dec=",", stringsAsFactors = T)
+datos.credito <- read.csv("data/DeudaCredito.csv",sep= ";", dec=".", stringsAsFactors = T)
 ```
 
 
@@ -37,7 +37,7 @@ str(datos.credito)
 
 ```
 
-### **Exploración del contenido 33**.
+### **Exploración del contenido**.
 
 Aunque la función **str()** facilita una muestra del contenido de cada variable, en
 general dicha información es insuficiente. Podemos recurrir a funciones
